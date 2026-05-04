@@ -1,0 +1,26 @@
+{
+	"name": "turretActives",
+	"plugin-id": "Sprite",
+	"sid": 996131761964315,
+	"instanceVariables": [
+		{
+			"name": "turretBaseUID",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 362140504817518
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Pin",
+			"name": "Pin2",
+			"sid": 897151404093773
+		}
+	],
+	"effectTypes": [],
+	"members": [
+		"turretGun",
+		"turretRepairer"
+	]
+}

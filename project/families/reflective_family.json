@@ -1,0 +1,17 @@
+{
+	"name": "reflective_family",
+	"plugin-id": "Sprite",
+	"sid": 673926071645313,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"members": [
+		"playerCharacter",
+		"enemyTest",
+		"bullet",
+		"turretBase",
+		"turretGun",
+		"wall",
+		"tree"
+	]
+}

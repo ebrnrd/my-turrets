@@ -1,0 +1,23 @@
+{
+	"name": "shadow_9patch",
+	"plugin-id": "NinePatch",
+	"sid": 584234861138521,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"image": {
+		"width": 18,
+		"height": 7,
+		"originX": 0.5,
+		"originY": 0.5,
+		"originalSource": "",
+		"exportFormat": "lossless",
+		"exportQuality": 0.8,
+		"fileType": "image/png",
+		"imageSpriteId": 6019278,
+		"useCollisionPoly": true,
+		"tag": ""
+	}
+}

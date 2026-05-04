@@ -1,0 +1,105 @@
+{
+	"name": "shadows",
+	"events": [
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-created",
+					"objectClass": "shadowed_family",
+					"sid": 545687662424767
+				}
+			],
+			"actions": [
+				{
+					"id": "create-object",
+					"objectClass": "System",
+					"sid": 244500255818591,
+					"parameters": {
+						"object-to-create": "shadow_9patch",
+						"layer": "\"shadows\"",
+						"x": "shadowed_family.X",
+						"y": "shadowed_family.Y + shadowed_family.height_from_ground",
+						"create-hierarchy": false,
+						"template-name": "\"\""
+					}
+				}
+			],
+			"sid": 247038188445351,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "shadow_sprite_ratio",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 388896975599032
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 233473374966090,
+							"parameters": {
+								"variable": "shadow_sprite_ratio",
+								"value": "shadow_9patch.Height / shadow_9patch.Width"
+							}
+						},
+						{
+							"id": "set-width",
+							"objectClass": "shadow_9patch",
+							"sid": 238514318588287,
+							"parameters": {
+								"width": "shadowed_family.shadow_width"
+							}
+						},
+						{
+							"id": "set-height",
+							"objectClass": "shadow_9patch",
+							"sid": 192710885358268,
+							"parameters": {
+								"height": "shadow_9patch.Width * shadow_sprite_ratio"
+							}
+						}
+					],
+					"sid": 428970758904475
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "add-child",
+							"objectClass": "shadowed_family",
+							"sid": 803527652575194,
+							"parameters": {
+								"child": "shadow_9patch",
+								"transform-x": true,
+								"transform-y": true,
+								"transform-z-elevation": false,
+								"transform-w": false,
+								"transform-h": false,
+								"transform-a": false,
+								"transform-o": false,
+								"transform-visibility": false,
+								"destroy-with-parent": true
+							}
+						},
+						{
+							"id": "move-to-bottom",
+							"objectClass": "shadow",
+							"sid": 122285301153436
+						}
+					],
+					"sid": 603087585084398
+				}
+			]
+		}
+	],
+	"sid": 926418827616831
+}

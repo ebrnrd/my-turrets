@@ -1,0 +1,30 @@
+{
+	"name": "enemies",
+	"plugin-id": "Sprite",
+	"sid": 708185085196910,
+	"instanceVariables": [
+		{
+			"name": "health",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 255897564144493
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Timer",
+			"name": "Timer2",
+			"sid": 464416943219278
+		}
+	],
+	"effectTypes": [
+		{
+			"effectId": "brightness",
+			"name": "Brightness"
+		}
+	],
+	"members": [
+		"enemyTest"
+	]
+}

@@ -1,0 +1,283 @@
+{
+	"name": "player_controller",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "camera_offset",
+			"type": "number",
+			"initialValue": "400",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 849165458959151
+		},
+		{
+			"eventType": "variable",
+			"name": "camera_speed",
+			"type": "number",
+			"initialValue": "0.5",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 572567851880998
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "is-moving",
+					"objectClass": "playerCharacter",
+					"sid": 902578766325220,
+					"behaviorType": "8Direction"
+				}
+			],
+			"actions": [],
+			"sid": 456445372231692,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 530818074281587,
+							"parameters": {
+								"first-value": "playerCharacter.8Direction.VectorY",
+								"comparison": 2,
+								"second-value": "0"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 118353938514027,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-animation-playing",
+									"objectClass": "playerCharacter",
+									"sid": 256398348001192,
+									"parameters": {
+										"animation": "\"walk_back\""
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation",
+									"objectClass": "playerCharacter",
+									"sid": 424563493396293,
+									"parameters": {
+										"animation": "\"walk_back\"",
+										"from": "beginning"
+									}
+								}
+							],
+							"sid": 267842904661620
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 151956215617729
+						}
+					],
+					"actions": [],
+					"sid": 465910556776595,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-animation-playing",
+									"objectClass": "playerCharacter",
+									"sid": 939005996064973,
+									"parameters": {
+										"animation": "\"walk\""
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation",
+									"objectClass": "playerCharacter",
+									"sid": 144202186871072,
+									"parameters": {
+										"animation": "\"walk\"",
+										"from": "beginning"
+									}
+								}
+							],
+							"sid": 747101911004959
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "else",
+					"objectClass": "System",
+					"sid": 553289290709123
+				}
+			],
+			"actions": [
+				{
+					"id": "set-animation",
+					"objectClass": "playerCharacter",
+					"sid": 246007923695806,
+					"parameters": {
+						"animation": "\"idle\"",
+						"from": "beginning"
+					}
+				}
+			],
+			"sid": 510751518196187
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-key-pressed",
+					"objectClass": "Keyboard",
+					"sid": 232393617432585,
+					"parameters": {
+						"key": 107
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-layout-scale",
+					"objectClass": "System",
+					"sid": 279654432681357,
+					"parameters": {
+						"scale": "LayoutScale + 0.5"
+					}
+				}
+			],
+			"sid": 389410407949967
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-key-pressed",
+					"objectClass": "Keyboard",
+					"sid": 827666101257457,
+					"parameters": {
+						"key": 109
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-layout-scale",
+					"objectClass": "System",
+					"sid": 341684326748786,
+					"parameters": {
+						"scale": "LayoutScale - 0.5"
+					}
+				}
+			],
+			"sid": 758393633425171
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "every-tick",
+					"objectClass": "System",
+					"sid": 817282165878616
+				}
+			],
+			"actions": [],
+			"sid": 249075297956329,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "player_moving_angle",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 884211260411882
+				},
+				{
+					"eventType": "variable",
+					"name": "target_x",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 711243753817490
+				},
+				{
+					"eventType": "variable",
+					"name": "target_y",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 752753751652646
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 461634316944521,
+							"parameters": {
+								"variable": "player_moving_angle",
+								"value": "playerCharacter.8Direction.MovingAngle"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 581207374735830,
+							"parameters": {
+								"variable": "target_x",
+								"value": "playerCharacter.X + (cos(player_moving_angle) * camera_offset) * (playerCharacter.8Direction.Speed / playerCharacter.8Direction.MaxSpeed)"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 606320906220332,
+							"parameters": {
+								"variable": "target_y",
+								"value": "playerCharacter.Y + (sin(player_moving_angle) * camera_offset) * (playerCharacter.8Direction.Speed / playerCharacter.8Direction.MaxSpeed)"
+							}
+						},
+						{
+							"id": "set-position",
+							"objectClass": "camera",
+							"sid": 397356050838838,
+							"parameters": {
+								"x": "lerp(Self.X, target_x, camera_speed * dt)",
+								"y": "lerp(Self.Y, target_y, camera_speed * dt)"
+							}
+						}
+					],
+					"sid": 795090612808847
+				}
+			]
+		}
+	],
+	"sid": 135398769691869
+}

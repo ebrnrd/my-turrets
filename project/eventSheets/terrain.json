@@ -1,0 +1,243 @@
+{
+	"name": "terrain",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "grass_amount",
+			"type": "number",
+			"initialValue": "2000",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 119842919078368
+		},
+		{
+			"eventType": "variable",
+			"name": "trees_amount",
+			"type": "number",
+			"initialValue": "100",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 562180614604242
+		},
+		{
+			"eventType": "variable",
+			"name": "water_amount",
+			"type": "number",
+			"initialValue": "10",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 163411196691168
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 501898940244040
+				}
+			],
+			"actions": [],
+			"sid": 739512759342763,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "repeat",
+							"objectClass": "System",
+							"sid": 713626641867986,
+							"parameters": {
+								"count": "grass_amount"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 395086598321968,
+							"parameters": {
+								"object-to-create": "grass",
+								"layer": "\"grass\"",
+								"x": "random(0, LayoutWidth)",
+								"y": "random(0, LayoutHeight)",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-animation-frame",
+							"objectClass": "grass",
+							"sid": 850189967673800,
+							"parameters": {
+								"frame-number": "round(random(0,4))"
+							}
+						}
+					],
+					"sid": 631285107868185
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "repeat",
+							"objectClass": "System",
+							"sid": 934210099379444,
+							"parameters": {
+								"count": "water_amount"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 402603912158682,
+							"parameters": {
+								"object-to-create": "water",
+								"layer": "\"reflection\"",
+								"x": "random(0, LayoutWidth)",
+								"y": "random(0, LayoutHeight)",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-scale",
+							"objectClass": "water",
+							"sid": 772627321808823,
+							"parameters": {
+								"scale": "random(4,6)"
+							}
+						}
+					],
+					"sid": 348462052025438,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 211467097611024,
+									"parameters": {
+										"first-value": "random(1)",
+										"comparison": 3,
+										"second-value": "0.5"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-mirrored",
+									"objectClass": "water",
+									"sid": 894153677114437,
+									"parameters": {
+										"state": "mirrored"
+									}
+								}
+							],
+							"sid": 220975301125661
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 390874954109867,
+									"parameters": {
+										"first-value": "random(1)",
+										"comparison": 3,
+										"second-value": "0.5"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-flipped",
+									"objectClass": "water",
+									"sid": 628309117577107,
+									"parameters": {
+										"state": "flipped"
+									}
+								}
+							],
+							"sid": 367315003795841
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "repeat",
+							"objectClass": "System",
+							"sid": 416085968981410,
+							"parameters": {
+								"count": "trees_amount"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 281933710497574,
+							"parameters": {
+								"object-to-create": "tree",
+								"layer": "\"grass\"",
+								"x": "random(0, LayoutWidth)",
+								"y": "random(0, LayoutHeight)",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-scale",
+							"objectClass": "tree",
+							"sid": 658031768301886,
+							"parameters": {
+								"scale": "random(3,5)"
+							}
+						}
+					],
+					"sid": 353585184738556,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 723050533941135,
+									"parameters": {
+										"first-value": "random(1)",
+										"comparison": 3,
+										"second-value": "0.5"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-mirrored",
+									"objectClass": "tree",
+									"sid": 790572057529283,
+									"parameters": {
+										"state": "mirrored"
+									}
+								}
+							],
+							"sid": 400640964122119
+						}
+					]
+				}
+			]
+		}
+	],
+	"sid": 656041028651824
+}

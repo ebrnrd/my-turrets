@@ -1,0 +1,24 @@
+{
+	"name": "zOrder",
+	"plugin-id": "Sprite",
+	"sid": 269045254989572,
+	"instanceVariables": [
+		{
+			"name": "order",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 967483314965216
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"members": [
+		"enemyTest",
+		"playerCharacter",
+		"turretBase",
+		"wall",
+		"tree",
+		"bullet"
+	]
+}

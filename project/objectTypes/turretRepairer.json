@@ -1,0 +1,58 @@
+{
+	"name": "turretRepairer",
+	"plugin-id": "Sprite",
+	"sid": 309682755624911,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "LOS",
+			"name": "LineOfSight",
+			"sid": 646808962916342
+		}
+	],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 15,
+						"height": 15,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 3653647,
+						"collisionPoly": {
+							"points": [
+								0.9900990099009901,
+								0.029411764705882353,
+								0.9900990099009901,
+								0.9705882352941176,
+								0.00990099009900991,
+								0.9705882352941176,
+								0.00990099009900991,
+								0.029411764705882353
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 450431236201722,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

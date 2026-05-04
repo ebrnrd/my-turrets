@@ -1,0 +1,46 @@
+{
+	"name": "looting",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "collected_scrap",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 929952007008166
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-collision-with-another-object",
+					"objectClass": "playerCharacter",
+					"sid": 172729503656231,
+					"parameters": {
+						"object": "scrap"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "add-to-eventvar",
+					"objectClass": "System",
+					"sid": 770888828134432,
+					"parameters": {
+						"variable": "collected_scrap",
+						"value": "1"
+					}
+				},
+				{
+					"id": "destroy",
+					"objectClass": "scrap",
+					"sid": 809927002438025
+				}
+			],
+			"sid": 873820895507722
+		}
+	],
+	"sid": 626145685517208
+}

@@ -1,0 +1,30 @@
+{
+	"name": "shadowed_family",
+	"plugin-id": "Sprite",
+	"sid": 237927255422633,
+	"instanceVariables": [
+		{
+			"name": "height_from_ground",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 283085900197864
+		},
+		{
+			"name": "shadow_width",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 330655186664652
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"members": [
+		"enemyTest",
+		"bullet",
+		"turretBase",
+		"playerCharacter",
+		"tree"
+	]
+}

@@ -1,0 +1,26 @@
+{
+	"name": "bullet_family",
+	"plugin-id": "Sprite",
+	"sid": 678083746085512,
+	"instanceVariables": [
+		{
+			"name": "knockback",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 172710910477773
+		},
+		{
+			"name": "damage",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 407224787901400
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"members": [
+		"bullet"
+	]
+}

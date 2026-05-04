@@ -1,0 +1,496 @@
+{
+	"name": "turretBase",
+	"plugin-id": "Sprite",
+	"sid": 542636279451728,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [
+		{
+			"name": "turretIndex",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 530380736420485
+		},
+		{
+			"name": "turretHealth",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 190456603156182
+		},
+		{
+			"name": "turretActiveObject",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 548690557993071
+		},
+		{
+			"name": "patrol_x",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 722563753780276
+		},
+		{
+			"name": "patrol_y",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 835882741578855
+		},
+		{
+			"name": "is_reloading",
+			"type": "boolean",
+			"desc": "",
+			"show": true,
+			"sid": 615129301547360
+		},
+		{
+			"name": "state",
+			"type": "string",
+			"desc": "",
+			"show": true,
+			"sid": 946406327972978
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Pathfinding",
+			"name": "Pathfinding",
+			"sid": 473825954039416
+		},
+		{
+			"behaviorId": "Timer",
+			"name": "Timer",
+			"sid": 189233280984298
+		},
+		{
+			"behaviorId": "MoveTo",
+			"name": "MoveTo",
+			"sid": 927192693830513
+		},
+		{
+			"behaviorId": "Physics",
+			"name": "Physics",
+			"sid": 561994611693415
+		}
+	],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 18,
+						"height": 15,
+						"originX": 0.5,
+						"originY": 0.8666666666666667,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 268918,
+						"collisionPoly": {
+							"points": [
+								1,
+								0,
+								1,
+								1,
+								0,
+								1,
+								0,
+								0
+							]
+						},
+						"useCollisionPoly": true,
+						"imagePoints": [
+							{
+								"name": "healthBar",
+								"x": 0.5,
+								"y": -0.40625
+							},
+							{
+								"name": "gadget",
+								"x": 0.5,
+								"y": 0.13333333333333333
+							}
+						],
+						"duration": 1,
+						"tag": ""
+					},
+					{
+						"width": 18,
+						"height": 15,
+						"originX": 0.5,
+						"originY": 0.8666666666666667,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 5559368,
+						"collisionPoly": {
+							"points": [
+								0.2777777777777778,
+								0.13333333333333333,
+								0.7222222222222222,
+								0.13333333333333333,
+								0.7777777777777778,
+								0.2,
+								0.8333333333333334,
+								0.5333333333333333,
+								0.8333333333333334,
+								0.8666666666666667,
+								0.6666666666666666,
+								0.9333333333333333,
+								0.6111111111111112,
+								0.9333333333333333,
+								0.16666666666666666,
+								0.8666666666666667,
+								0.16666666666666666,
+								0.5333333333333333,
+								0.2222222222222222,
+								0.2
+							]
+						},
+						"useCollisionPoly": true,
+						"imagePoints": [
+							{
+								"name": "healthBar",
+								"x": 0.5,
+								"y": -0.40625
+							},
+							{
+								"name": "gadget",
+								"x": 0.5,
+								"y": 0.13333333333333333
+							}
+						],
+						"duration": 1,
+						"tag": ""
+					},
+					{
+						"width": 18,
+						"height": 15,
+						"originX": 0.5,
+						"originY": 0.8666666666666667,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 9737236,
+						"collisionPoly": {
+							"points": [
+								0.2777777777777778,
+								0.13333333333333333,
+								0.7222222222222222,
+								0.13333333333333333,
+								0.7777777777777778,
+								0.2,
+								0.8333333333333334,
+								0.5333333333333333,
+								0.8333333333333334,
+								0.8666666666666667,
+								0.3888888888888889,
+								0.9333333333333333,
+								0.3333333333333333,
+								0.9333333333333333,
+								0.16666666666666666,
+								0.8666666666666667,
+								0.16666666666666666,
+								0.5333333333333333,
+								0.2222222222222222,
+								0.2
+							]
+						},
+						"useCollisionPoly": true,
+						"imagePoints": [
+							{
+								"name": "healthBar",
+								"x": 0.5,
+								"y": -0.40625
+							},
+							{
+								"name": "gadget",
+								"x": 0.5,
+								"y": 0.13333333333333333
+							}
+						],
+						"duration": 1,
+						"tag": ""
+					},
+					{
+						"width": 18,
+						"height": 15,
+						"originX": 0.5,
+						"originY": 0.8666666666666667,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 8559786,
+						"collisionPoly": {
+							"points": [
+								0.2777777777777778,
+								0.13333333333333333,
+								0.7222222222222222,
+								0.13333333333333333,
+								0.7777777777777778,
+								0.2,
+								0.8333333333333334,
+								0.5333333333333333,
+								0.8333333333333334,
+								0.8666666666666667,
+								0.6666666666666666,
+								0.9333333333333333,
+								0.3333333333333333,
+								0.9333333333333333,
+								0.16666666666666666,
+								0.7333333333333333,
+								0.16666666666666666,
+								0.4,
+								0.2222222222222222,
+								0.2
+							]
+						},
+						"useCollisionPoly": true,
+						"imagePoints": [
+							{
+								"name": "healthBar",
+								"x": 0.5,
+								"y": -0.40625
+							},
+							{
+								"name": "gadget",
+								"x": 0.5,
+								"y": 0.13333333333333333
+							}
+						],
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 416191594710371,
+				"name": "walk",
+				"isLooping": true,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 12
+			},
+			{
+				"frames": [
+					{
+						"width": 18,
+						"height": 15,
+						"originX": 0.5,
+						"originY": 0.8666666666666667,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 4992680,
+						"collisionPoly": {
+							"points": [
+								0.21428571428571427,
+								0.07142857142857142,
+								0.7857142857142857,
+								0.07142857142857142,
+								0.8571428571428571,
+								0.14285714285714285,
+								0.9285714285714286,
+								0.5,
+								0.9285714285714286,
+								0.8571428571428571,
+								0.7142857142857143,
+								0.9285714285714286,
+								0.2857142857142857,
+								0.9285714285714286,
+								0.07142857142857142,
+								0.8571428571428571,
+								0.07142857142857142,
+								0.5,
+								0.14285714285714285,
+								0.14285714285714285
+							]
+						},
+						"useCollisionPoly": true,
+						"imagePoints": [
+							{
+								"name": "healthBar",
+								"x": 0.5,
+								"y": -0.40625
+							},
+							{
+								"name": "gadget",
+								"x": 0.5,
+								"y": 0.13333333333333333
+							}
+						],
+						"duration": 1,
+						"tag": ""
+					},
+					{
+						"width": 18,
+						"height": 15,
+						"originX": 0.5,
+						"originY": 0.8666666666666667,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 9993450,
+						"collisionPoly": {
+							"points": [
+								0.2777777777777778,
+								0.2,
+								0.7222222222222222,
+								0.2,
+								0.7777777777777778,
+								0.26666666666666666,
+								0.8333333333333334,
+								0.5333333333333333,
+								0.8333333333333334,
+								0.8666666666666667,
+								0.6666666666666666,
+								0.9333333333333333,
+								0.3333333333333333,
+								0.9333333333333333,
+								0.16666666666666666,
+								0.8666666666666667,
+								0.16666666666666666,
+								0.5333333333333333,
+								0.2222222222222222,
+								0.26666666666666666
+							]
+						},
+						"useCollisionPoly": true,
+						"imagePoints": [
+							{
+								"name": "healthBar",
+								"x": 0.5,
+								"y": -0.40625
+							},
+							{
+								"name": "gadget",
+								"x": 0.5,
+								"y": 0.2
+							}
+						],
+						"duration": 1,
+						"tag": ""
+					},
+					{
+						"width": 18,
+						"height": 15,
+						"originX": 0.5,
+						"originY": 0.8666666666666667,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 9101647,
+						"collisionPoly": {
+							"points": [
+								0.2777777777777778,
+								0.13333333333333333,
+								0.7222222222222222,
+								0.13333333333333333,
+								0.7777777777777778,
+								0.2,
+								0.8333333333333334,
+								0.5333333333333333,
+								0.8333333333333334,
+								0.8666666666666667,
+								0.6666666666666666,
+								0.9333333333333333,
+								0.3333333333333333,
+								0.9333333333333333,
+								0.16666666666666666,
+								0.8666666666666667,
+								0.16666666666666666,
+								0.5333333333333333,
+								0.2222222222222222,
+								0.2
+							]
+						},
+						"useCollisionPoly": true,
+						"imagePoints": [
+							{
+								"name": "healthBar",
+								"x": 0.5,
+								"y": -0.40625
+							},
+							{
+								"name": "gadget",
+								"x": 0.5,
+								"y": 0.13333333333333333
+							}
+						],
+						"duration": 1,
+						"tag": ""
+					},
+					{
+						"width": 18,
+						"height": 15,
+						"originX": 0.5,
+						"originY": 0.8666666666666667,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 169149,
+						"collisionPoly": {
+							"points": [
+								0.2777777777777778,
+								0.2,
+								0.7222222222222222,
+								0.2,
+								0.7777777777777778,
+								0.26666666666666666,
+								0.8333333333333334,
+								0.5333333333333333,
+								0.8333333333333334,
+								0.8666666666666667,
+								0.6666666666666666,
+								0.9333333333333333,
+								0.3333333333333333,
+								0.9333333333333333,
+								0.16666666666666666,
+								0.8666666666666667,
+								0.16666666666666666,
+								0.5333333333333333,
+								0.2222222222222222,
+								0.26666666666666666
+							]
+						},
+						"useCollisionPoly": true,
+						"imagePoints": [
+							{
+								"name": "healthBar",
+								"x": 0.5,
+								"y": -0.40625
+							},
+							{
+								"name": "gadget",
+								"x": 0.5,
+								"y": 0.2
+							}
+						],
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 547267427507498,
+				"name": "idle",
+				"isLooping": true,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 4
+			}
+		],
+		"subfolders": []
+	}
+}

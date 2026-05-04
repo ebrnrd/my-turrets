@@ -1,0 +1,939 @@
+{
+	"name": "turret_controls",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "turret_targets_angle",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 764493225631673
+		},
+		{
+			"eventType": "variable",
+			"name": "turret_targets_offset",
+			"type": "number",
+			"initialValue": "400",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 526033547865828
+		},
+		{
+			"eventType": "variable",
+			"name": "turret_rotation_speed",
+			"type": "number",
+			"initialValue": "45",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 575958926209373
+		},
+		{
+			"eventType": "variable",
+			"name": "follow_player",
+			"type": "boolean",
+			"initialValue": "true",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 698389470851328
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-key-pressed",
+					"objectClass": "Keyboard",
+					"sid": 722448600045338,
+					"parameters": {
+						"key": 39
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "add-to-eventvar",
+					"objectClass": "System",
+					"sid": 153042904657320,
+					"parameters": {
+						"variable": "turret_targets_angle",
+						"value": "90"
+					}
+				}
+			],
+			"sid": 142923078457539
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-key-pressed",
+					"objectClass": "Keyboard",
+					"sid": 892739179887041,
+					"parameters": {
+						"key": 37
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "subtract-from-eventvar",
+					"objectClass": "System",
+					"sid": 256943934659064,
+					"parameters": {
+						"variable": "turret_targets_angle",
+						"value": "90"
+					}
+				}
+			],
+			"sid": 298220854406595
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "key-is-down",
+					"objectClass": "Keyboard",
+					"sid": 432134577984284,
+					"parameters": {
+						"key": 39
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "add-to-eventvar",
+					"objectClass": "System",
+					"sid": 283175465824697,
+					"parameters": {
+						"variable": "turret_targets_angle",
+						"value": "turret_rotation_speed * dt"
+					}
+				}
+			],
+			"sid": 535509908464374,
+			"disabled": true
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "key-is-down",
+					"objectClass": "Keyboard",
+					"sid": 797672137567898,
+					"parameters": {
+						"key": 37
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "subtract-from-eventvar",
+					"objectClass": "System",
+					"sid": 658560354750628,
+					"parameters": {
+						"variable": "turret_targets_angle",
+						"value": "turret_rotation_speed * dt"
+					}
+				}
+			],
+			"sid": 294182714912412,
+			"disabled": true
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "for-each",
+					"objectClass": "System",
+					"sid": 768551631713444,
+					"parameters": {
+						"object": "player_turret_position"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 151846897860573,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "target_angle",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 926083768608161
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 867985027107515,
+							"parameters": {
+								"variable": "target_angle",
+								"value": "player_turret_position.angle_offset + turret_targets_angle"
+							}
+						},
+						{
+							"id": "set-angle",
+							"objectClass": "player_turret_position",
+							"sid": 804152868662920,
+							"parameters": {
+								"angle": "anglelerp(Self.Angle, target_angle, 10 * dt)"
+							}
+						}
+					],
+					"sid": 840898481814858
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "for-each",
+					"objectClass": "System",
+					"sid": 895793533729697,
+					"parameters": {
+						"object": "turretBase"
+					}
+				},
+				{
+					"id": "pick-by-evaluate",
+					"objectClass": "System",
+					"sid": 180540484282518,
+					"parameters": {
+						"object": "turretGun",
+						"expression": "turretGun.turretBaseUID = turretBase.UID"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 767599518368303,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "turretBase",
+							"sid": 508094959269591,
+							"parameters": {
+								"instance-variable": "turretHealth",
+								"comparison": 3,
+								"value": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-enabled",
+							"objectClass": "turretGun",
+							"sid": 955829345181737,
+							"behaviorType": "Turret",
+							"parameters": {
+								"state": "disabled"
+							}
+						}
+					],
+					"sid": 753947194882617,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-timer-running",
+									"objectClass": "turretBase",
+									"sid": 133067768152302,
+									"behaviorType": "Timer",
+									"parameters": {
+										"tag": "\"reload\""
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "start-timer",
+									"objectClass": "turretBase",
+									"sid": 686989675652217,
+									"behaviorType": "Timer",
+									"parameters": {
+										"duration": "turretGun.reload_speed",
+										"type": "once",
+										"tag": "\"reload\""
+									}
+								}
+							],
+							"sid": 751446872024019
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 772734286998307
+						}
+					],
+					"actions": [
+						{
+							"id": "set-enabled",
+							"objectClass": "turretGun",
+							"sid": 167011538485489,
+							"behaviorType": "Turret",
+							"parameters": {
+								"state": "enabled"
+							}
+						}
+					],
+					"sid": 879655475706036
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-timer",
+					"objectClass": "turretBase",
+					"sid": 980973492244636,
+					"behaviorType": "Timer",
+					"parameters": {
+						"tag": "\"reload\""
+					}
+				}
+			],
+			"actions": [],
+			"sid": 497914033446438,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-evaluate",
+							"objectClass": "System",
+							"sid": 986793098712619,
+							"parameters": {
+								"object": "turretGun",
+								"expression": "turretGun.turretBaseUID = turretBase.UID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-instvar-value",
+							"objectClass": "turretBase",
+							"sid": 642591062724682,
+							"parameters": {
+								"instance-variable": "turretHealth",
+								"value": "turretGun.mag_size"
+							}
+						}
+					],
+					"sid": 980005594322126
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "for-each",
+					"objectClass": "System",
+					"sid": 720755562159844,
+					"parameters": {
+						"object": "turretBase"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 730935514069965,
+			"disabled": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-children",
+							"objectClass": "turretBase",
+							"sid": 404053917311088,
+							"parameters": {
+								"child": "turret_proximity_collision",
+								"which": "own"
+							}
+						},
+						{
+							"id": "is-overlapping-another-object",
+							"objectClass": "turret_proximity_collision",
+							"sid": 522750058740279,
+							"parameters": {
+								"object": "enemies"
+							}
+						},
+						{
+							"id": "pick-nearestfurthest",
+							"objectClass": "enemies",
+							"sid": 707109017894577,
+							"parameters": {
+								"which": "nearest",
+								"x": "turretBase.X",
+								"y": "turretBase.Y",
+								"pick-all-tied": false
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "apply-force-at-angle",
+							"objectClass": "turretBase",
+							"sid": 573868069793407,
+							"behaviorType": "Physics",
+							"parameters": {
+								"force": "turret_follow_force",
+								"angle": "angle(turretBase.X, turretBase.Y, enemies.X, enemies.Y) + 180",
+								"image-point": "0"
+							}
+						}
+					],
+					"sid": 507156585858649,
+					"disabled": true
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-collision-with-another-object",
+					"objectClass": "turret_proximity_collision",
+					"sid": 128791233897342,
+					"disabled": true,
+					"parameters": {
+						"object": "enemies"
+					}
+				},
+				{
+					"id": "for-each",
+					"objectClass": "System",
+					"sid": 997848402849851,
+					"parameters": {
+						"object": "turretBase"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "stop",
+					"objectClass": "turretBase",
+					"sid": 127534708418475,
+					"disabled": true,
+					"behaviorType": "Pathfinding"
+				}
+			],
+			"sid": 999041624211241,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "offset",
+					"type": "number",
+					"initialValue": "200",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 663655946011499
+				},
+				{
+					"eventType": "variable",
+					"name": "this_angle",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 957966992840344
+				},
+				{
+					"eventType": "variable",
+					"name": "target_x",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 915605752875102
+				},
+				{
+					"eventType": "variable",
+					"name": "target_y",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 235125442314919
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-moving-along-path",
+							"objectClass": "turretBase",
+							"sid": 832410643985956,
+							"behaviorType": "Pathfinding",
+							"isInverted": true
+						},
+						{
+							"id": "is-calculating-path",
+							"objectClass": "turretBase",
+							"sid": 935854512606859,
+							"behaviorType": "Pathfinding",
+							"isInverted": true
+						},
+						{
+							"id": "pick-children",
+							"objectClass": "turretBase",
+							"sid": 714041331374467,
+							"parameters": {
+								"child": "turret_proximity_collision",
+								"which": "own"
+							}
+						},
+						{
+							"id": "is-overlapping-another-object",
+							"objectClass": "turret_proximity_collision",
+							"sid": 882547967298368,
+							"parameters": {
+								"object": "enemies"
+							}
+						},
+						{
+							"id": "pick-nearestfurthest",
+							"objectClass": "enemies",
+							"sid": 502108252080166,
+							"parameters": {
+								"which": "nearest",
+								"x": "turretBase.X",
+								"y": "turretBase.Y",
+								"pick-all-tied": false
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 429161375549214,
+							"parameters": {
+								"variable": "this_angle",
+								"value": "angle(turretBase.X, turretBase.Y, enemies.X, enemies.Y) + 180"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 448505982098423,
+							"parameters": {
+								"variable": "target_x",
+								"value": "turretBase.X + cos(this_angle) * offset"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 283658333685934,
+							"parameters": {
+								"variable": "target_y",
+								"value": "turretBase.Y + sin(this_angle) * offset"
+							}
+						},
+						{
+							"id": "find-path",
+							"objectClass": "turretBase",
+							"sid": 965623387423409,
+							"behaviorType": "Pathfinding",
+							"parameters": {
+								"x": "target_x",
+								"y": "target_y"
+							}
+						}
+					],
+					"sid": 358810049908509
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-key-pressed",
+					"objectClass": "Keyboard",
+					"sid": 333749733839666,
+					"parameters": {
+						"key": 40
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 931104168892412,
+					"parameters": {
+						"variable": "follow_player",
+						"value": "false"
+					}
+				}
+			],
+			"sid": 365598081174218
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-key-pressed",
+					"objectClass": "Keyboard",
+					"sid": 257774304350701,
+					"parameters": {
+						"key": 38
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 446178025784931,
+					"parameters": {
+						"variable": "follow_player",
+						"value": "true"
+					}
+				}
+			],
+			"sid": 108804484907004
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "every-tick",
+					"objectClass": "System",
+					"sid": 686368761556434
+				},
+				{
+					"id": "for-each",
+					"objectClass": "System",
+					"sid": 983237421031068,
+					"parameters": {
+						"object": "player_turret_position"
+					}
+				},
+				{
+					"id": "compare-boolean-eventvar",
+					"objectClass": "System",
+					"sid": 924183236828130,
+					"parameters": {
+						"variable": "follow_player"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 816682153858382,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "player_moving_angle",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 893228474934771
+				},
+				{
+					"eventType": "variable",
+					"name": "target_x",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 641986746966764
+				},
+				{
+					"eventType": "variable",
+					"name": "target_y",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 821447165915583
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 220547626879639,
+							"parameters": {
+								"variable": "player_moving_angle",
+								"value": "playerCharacter.8Direction.MovingAngle"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 228686094769479,
+							"parameters": {
+								"variable": "target_x",
+								"value": "playerCharacter.X + (cos(player_moving_angle) * turret_targets_offset) * (playerCharacter.8Direction.Speed / playerCharacter.8Direction.MaxSpeed)"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 447076368336172,
+							"parameters": {
+								"variable": "target_y",
+								"value": "playerCharacter.Y + (sin(player_moving_angle) * turret_targets_offset) * (playerCharacter.8Direction.Speed / playerCharacter.8Direction.MaxSpeed)"
+							}
+						},
+						{
+							"id": "set-position",
+							"objectClass": "player_turret_position",
+							"sid": 706200911320577,
+							"parameters": {
+								"x": "lerp(Self.X, target_x, 2 * dt)",
+								"y": "lerp(Self.Y, target_y, 2 * dt)"
+							}
+						}
+					],
+					"sid": 990996149745767
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-path-found",
+					"objectClass": "turretBase",
+					"sid": 750675550069941,
+					"behaviorType": "Pathfinding"
+				}
+			],
+			"actions": [],
+			"sid": 445635218530168,
+			"disabled": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for",
+							"objectClass": "System",
+							"sid": 457888511890440,
+							"parameters": {
+								"name": "\"\"",
+								"start-index": "0",
+								"end-index": "turretBase.Pathfinding.NodeCount - 1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 128010315856918,
+							"parameters": {
+								"object-to-create": "path_debug",
+								"layer": "\"main\"",
+								"x": "turretBase.Pathfinding.NodeXAt(loopindex)",
+								"y": "turretBase.Pathfinding.NodeYAt(loopindex)",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						}
+					],
+					"sid": 665124555637685,
+					"disabled": true
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "for-each",
+					"objectClass": "System",
+					"sid": 580586751594938,
+					"parameters": {
+						"object": "turretBase"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 276368005407071,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-moving-along-path",
+							"objectClass": "turretBase",
+							"sid": 612126549529598,
+							"behaviorType": "Pathfinding"
+						},
+						{
+							"id": "compare-speed",
+							"objectClass": "turretBase",
+							"sid": 857836375969595,
+							"behaviorType": "Pathfinding",
+							"parameters": {
+								"comparison": 4,
+								"speed": "0.1"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 185503436458898,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-animation-playing",
+									"objectClass": "turretBase",
+									"sid": 593330287837466,
+									"parameters": {
+										"animation": "\"walk\""
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation",
+									"objectClass": "turretBase",
+									"sid": 281725212849354,
+									"parameters": {
+										"animation": "\"walk\"",
+										"from": "beginning"
+									}
+								}
+							],
+							"sid": 190573385634580
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 622789093937174
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation-speed",
+									"objectClass": "turretBase",
+									"sid": 205912602932634,
+									"parameters": {
+										"speed": "clamp(round((turretBase.Pathfinding.Speed / turretBase.Pathfinding.MaxSpeed) * 20), 8, 30)"
+									}
+								}
+							],
+							"sid": 616123826737807
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 805714456519535
+						}
+					],
+					"actions": [],
+					"sid": 107468866546097,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-animation-playing",
+									"objectClass": "turretBase",
+									"sid": 558344185905879,
+									"parameters": {
+										"animation": "\"idle\""
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation",
+									"objectClass": "turretBase",
+									"sid": 479629564808643,
+									"parameters": {
+										"animation": "\"idle\"",
+										"from": "beginning"
+									}
+								},
+								{
+									"id": "set-animation-speed",
+									"objectClass": "turretBase",
+									"sid": 986105156564821,
+									"parameters": {
+										"speed": "4"
+									}
+								}
+							],
+							"sid": 706201861226340
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-animation-finished",
+					"objectClass": "turretGun",
+					"sid": 631335347196959,
+					"parameters": {
+						"animation": "\"shoot\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-animation",
+					"objectClass": "turretGun",
+					"sid": 945271075698577,
+					"parameters": {
+						"animation": "\"idle\"",
+						"from": "beginning"
+					}
+				}
+			],
+			"sid": 499705229447640
+		}
+	],
+	"sid": 182913111176321
+}

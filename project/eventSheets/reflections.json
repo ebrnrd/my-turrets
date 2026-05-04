@@ -1,0 +1,107 @@
+{
+	"name": "reflections",
+	"events": [
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "every-tick",
+					"objectClass": "System",
+					"sid": 808364014216200
+				}
+			],
+			"actions": [
+				{
+					"id": "clear-canvas",
+					"objectClass": "reflection_canvas",
+					"sid": 155769919230032,
+					"parameters": {
+						"color": "rgba(0, 0, 0, 0)"
+					}
+				},
+				{
+					"id": "move-to-top",
+					"objectClass": "reflection_canvas",
+					"sid": 813082769918170
+				}
+			],
+			"sid": 712289692408047,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 790485055305556,
+							"parameters": {
+								"object": "reflective_family"
+							}
+						},
+						{
+							"id": "is-on-screen",
+							"objectClass": "reflective_family",
+							"sid": 996535623605824,
+							"disabled": true
+						}
+					],
+					"actions": [
+						{
+							"id": "set-flipped",
+							"objectClass": "reflective_family",
+							"sid": 943817129444711,
+							"parameters": {
+								"state": "flipped"
+							}
+						},
+						{
+							"id": "paste-object",
+							"objectClass": "reflection_canvas",
+							"sid": 963809351065054,
+							"parameters": {
+								"object": "reflective_family",
+								"effects": "with-effects"
+							}
+						},
+						{
+							"id": "set-flipped",
+							"objectClass": "reflective_family",
+							"sid": 823915710376715,
+							"parameters": {
+								"state": "not-flipped"
+							}
+						}
+					],
+					"sid": 743945031550699
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-key-pressed",
+					"objectClass": "Keyboard",
+					"sid": 386427120491450,
+					"parameters": {
+						"key": 73
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-layer-angle",
+					"objectClass": "System",
+					"sid": 109698477319383,
+					"parameters": {
+						"layer": "\"reflection\"",
+						"angle": "180"
+					}
+				}
+			],
+			"sid": 279867617788012,
+			"disabled": true
+		}
+	],
+	"sid": 196331308513223
+}
