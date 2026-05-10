@@ -176,6 +176,13 @@
 		},
 		{
 			"type": "effect",
+			"id": "setcolor",
+			"name": "Set color",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "effect",
 			"id": "skymen_BetterOutline",
 			"name": "Better Outline",
 			"author": "skymen",
@@ -215,7 +222,10 @@
 			"shadow_9patch",
 			"reflection_canvas",
 			"water",
-			"water_ripple"
+			"water_ripple",
+			"player_weapon",
+			"player_weapon_attack",
+			"player_melee_hit"
 		],
 		"subfolders": []
 	},
@@ -265,7 +275,8 @@
 			"looting",
 			"shadows",
 			"terrain",
-			"reflections"
+			"reflections",
+			"ZOrder"
 		],
 		"subfolders": []
 	},
@@ -430,5 +441,5 @@
 	},
 	"viewportWidth": 1920,
 	"viewportHeight": 1080,
-	"firstLayout": "level_1_test"
+	"firstLayout": "survivor_level_test"
 }

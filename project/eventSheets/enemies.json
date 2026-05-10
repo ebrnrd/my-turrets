@@ -268,10 +268,29 @@
 			],
 			"actions": [
 				{
+					"id": "set-world-gravity",
+					"objectClass": "enemyTest",
+					"sid": 162305924468883,
+					"behaviorType": "Physics",
+					"parameters": {
+						"gravity": "0"
+					}
+				},
+				{
+					"id": "enabledisable-collisions",
+					"objectClass": "enemies",
+					"sid": 873343754171232,
+					"behaviorType": "Physics",
+					"parameters": {
+						"object": "scrap",
+						"state": "disable"
+					}
+				},
+				{
 					"id": "start-timer",
 					"objectClass": "enemyTest",
 					"sid": 304801935567822,
-					"behaviorType": "Timer",
+					"behaviorType": "Timer3",
 					"parameters": {
 						"duration": "random(1,2)",
 						"type": "regular",
@@ -282,7 +301,7 @@
 					"id": "start-timer",
 					"objectClass": "enemyTest",
 					"sid": 374645123098175,
-					"behaviorType": "Timer",
+					"behaviorType": "Timer3",
 					"parameters": {
 						"duration": "0.2",
 						"type": "regular",
@@ -292,11 +311,22 @@
 				{
 					"id": "pause-resume-timer",
 					"objectClass": "enemyTest",
-					"sid": 168412087601011,
-					"behaviorType": "Timer",
+					"sid": 579771130811370,
+					"behaviorType": "Timer3",
 					"parameters": {
 						"tag": "\"enemyFollowPlayerTimer\"",
 						"state": "paused"
+					}
+				},
+				{
+					"id": "start-timer",
+					"objectClass": "enemyTest",
+					"sid": 192391861057255,
+					"behaviorType": "Timer3",
+					"parameters": {
+						"duration": "Self.damage_seconds",
+						"type": "regular",
+						"tag": "\"attack\""
 					}
 				}
 			],
@@ -309,7 +339,7 @@
 					"id": "on-timer",
 					"objectClass": "enemyTest",
 					"sid": 770471072750674,
-					"behaviorType": "Timer",
+					"behaviorType": "Timer3",
 					"parameters": {
 						"tag": "\"enemyPatrollingTimer\""
 					}
@@ -337,7 +367,7 @@
 					"id": "on-timer",
 					"objectClass": "enemyTest",
 					"sid": 924487976204274,
-					"behaviorType": "Timer",
+					"behaviorType": "Timer3",
 					"parameters": {
 						"tag": "\"enemyFollowPlayerTimer\""
 					}
@@ -377,7 +407,7 @@
 					"id": "pause-resume-timer",
 					"objectClass": "enemyTest",
 					"sid": 322824029315463,
-					"behaviorType": "Timer",
+					"behaviorType": "Timer3",
 					"parameters": {
 						"tag": "\"enemyFollowPlayerTimer\"",
 						"state": "resumed"
@@ -387,7 +417,7 @@
 					"id": "pause-resume-timer",
 					"objectClass": "enemyTest",
 					"sid": 871821252940738,
-					"behaviorType": "Timer",
+					"behaviorType": "Timer3",
 					"parameters": {
 						"tag": "\"enemyPatrollingTimer\"",
 						"state": "paused"
@@ -417,7 +447,7 @@
 					"id": "pause-resume-timer",
 					"objectClass": "enemyTest",
 					"sid": 324018222907507,
-					"behaviorType": "Timer",
+					"behaviorType": "Timer3",
 					"parameters": {
 						"tag": "\"enemyFollowPlayerTimer\"",
 						"state": "paused"
@@ -427,7 +457,7 @@
 					"id": "pause-resume-timer",
 					"objectClass": "enemyTest",
 					"sid": 498429705574078,
-					"behaviorType": "Timer",
+					"behaviorType": "Timer3",
 					"parameters": {
 						"tag": "\"enemyPatrollingTimer\"",
 						"state": "resumed"
@@ -470,20 +500,109 @@
 					}
 				}
 			],
-			"actions": [
+			"actions": [],
+			"sid": 310953589152886,
+			"children": [
 				{
-					"id": "move-to-object",
-					"objectClass": "enemyTest",
-					"sid": 610858256528703,
-					"behaviorType": "MoveTo",
-					"parameters": {
-						"object": "playerCharacter",
-						"image-point": "0",
-						"mode": "direct"
-					}
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-nearestfurthest",
+							"objectClass": "turretBase",
+							"sid": 467499865608906,
+							"parameters": {
+								"which": "nearest",
+								"x": "enemyTest.X",
+								"y": "enemyTest.Y",
+								"pick-all-tied": false
+							}
+						}
+					],
+					"actions": [],
+					"sid": 336648443671354,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 985202334462518,
+									"parameters": {
+										"first-value": "distance(enemyTest.X, enemyTest.Y, turretBase.X, turretBase.Y)",
+										"comparison": 2,
+										"second-value": "distance(enemyTest.X, enemyTest.Y, playerCharacter.X, playerCharacter.Y)"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "move-to-object",
+									"objectClass": "enemyTest",
+									"sid": 134632160772016,
+									"disabled": true,
+									"behaviorType": "MoveTo",
+									"parameters": {
+										"object": "turretBase",
+										"image-point": "0",
+										"mode": "direct"
+									}
+								},
+								{
+									"id": "apply-force-towards-position",
+									"objectClass": "enemyTest",
+									"sid": 340655823103854,
+									"behaviorType": "Physics",
+									"parameters": {
+										"force": "Self.move_speed",
+										"x": "turretBase.X",
+										"y": "turretBase.Y",
+										"image-point": "0"
+									}
+								}
+							],
+							"sid": 207956948097804
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 595674267935742
+								}
+							],
+							"actions": [
+								{
+									"id": "move-to-object",
+									"objectClass": "enemyTest",
+									"sid": 951999518615921,
+									"disabled": true,
+									"behaviorType": "MoveTo",
+									"parameters": {
+										"object": "playerCharacter",
+										"image-point": "0",
+										"mode": "direct"
+									}
+								},
+								{
+									"id": "apply-force-towards-position",
+									"objectClass": "enemyTest",
+									"sid": 268596151871714,
+									"behaviorType": "Physics",
+									"parameters": {
+										"force": "Self.move_speed",
+										"x": "playerCharacter.X",
+										"y": "playerCharacter.Y",
+										"image-point": "0"
+									}
+								}
+							],
+							"sid": 379905838190608
+						}
+					]
 				}
-			],
-			"sid": 310953589152886
+			]
 		},
 		{
 			"eventType": "block",
@@ -521,6 +640,15 @@
 								"y": "enemyTest.Y + random(-10,10)",
 								"create-hierarchy": false,
 								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-world-gravity",
+							"objectClass": "scrap",
+							"sid": 228544872059920,
+							"behaviorType": "Physics",
+							"parameters": {
+								"gravity": "0"
 							}
 						},
 						{
@@ -569,7 +697,7 @@
 					"id": "start-timer",
 					"objectClass": "enemies",
 					"sid": 321327637428958,
-					"behaviorType": "Timer2",
+					"behaviorType": "Timer",
 					"parameters": {
 						"duration": "0.04",
 						"type": "once",
@@ -586,7 +714,7 @@
 					"id": "on-timer",
 					"objectClass": "enemies",
 					"sid": 412365939765643,
-					"behaviorType": "Timer2",
+					"behaviorType": "Timer",
 					"parameters": {
 						"tag": "\"damaged\""
 					}
@@ -605,6 +733,122 @@
 				}
 			],
 			"sid": 162741920778961
+		},
+		{
+			"aceType": "action",
+			"aceName": "ReceiveDamage",
+			"objectClass": "enemies",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "amount",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 791276562176409
+				}
+			],
+			"eventType": "custom-ace-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-instvar-value",
+					"objectClass": "enemies",
+					"sid": 938248045883027,
+					"parameters": {
+						"instance-variable": "health",
+						"value": "enemies.health - amount"
+					}
+				},
+				{
+					"customAction": "damaged_fx",
+					"objectClass": "enemies",
+					"sid": 547044432389884
+				}
+			],
+			"sid": 429606028598047,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "enemies",
+							"sid": 504348753859309,
+							"parameters": {
+								"instance-variable": "health",
+								"comparison": 3,
+								"value": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "destroy",
+							"objectClass": "enemies",
+							"sid": 763219232130576
+						}
+					],
+					"sid": 711289097199506
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-timer",
+					"objectClass": "enemyTest",
+					"sid": 526525255984453,
+					"behaviorType": "Timer3",
+					"parameters": {
+						"tag": "\"attack\""
+					}
+				}
+			],
+			"actions": [],
+			"sid": 495714397614479,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-overlapping-another-object",
+							"objectClass": "enemyTest",
+							"sid": 528924361694494,
+							"parameters": {
+								"object": "turretBase"
+							}
+						},
+						{
+							"id": "pick-nearestfurthest",
+							"objectClass": "turretBase",
+							"sid": 363549129514143,
+							"parameters": {
+								"which": "nearest",
+								"x": "enemyTest.X",
+								"y": "enemyTest.Y",
+								"pick-all-tied": false
+							}
+						}
+					],
+					"actions": [
+						{
+							"customAction": "ReceiveDamage",
+							"objectClass": "turretBase",
+							"sid": 724629477461626,
+							"parameters": [
+								"enemyTest.damage"
+							]
+						}
+					],
+					"sid": 443122417301590
+				}
+			]
 		}
 	],
 	"sid": 183405312286839

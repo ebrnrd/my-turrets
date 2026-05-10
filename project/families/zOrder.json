@@ -19,6 +19,7 @@
 		"turretBase",
 		"wall",
 		"tree",
-		"bullet"
+		"bullet",
+		"player_weapon"
 	]
 }

@@ -11,6 +11,20 @@
 			"desc": "",
 			"show": true,
 			"sid": 526263552990991
+		},
+		{
+			"name": "damage",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 203622942289863
+		},
+		{
+			"name": "damage_seconds",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 230848044164011
 		}
 	],
 	"behaviorTypes": [
@@ -21,7 +35,7 @@
 		},
 		{
 			"behaviorId": "Timer",
-			"name": "Timer",
+			"name": "Timer3",
 			"sid": 549387067729366
 		},
 		{

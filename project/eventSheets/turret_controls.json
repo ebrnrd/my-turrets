@@ -16,7 +16,7 @@
 			"name": "turret_targets_offset",
 			"type": "number",
 			"initialValue": "400",
-			"comment": "",
+			"comment": "how far from the player the target position of the turrets is depending on the player moving direction",
 			"isStatic": false,
 			"isConstant": false,
 			"sid": 526033547865828
@@ -223,10 +223,10 @@
 					"conditions": [
 						{
 							"id": "compare-instance-variable",
-							"objectClass": "turretBase",
-							"sid": 508094959269591,
+							"objectClass": "turretGun",
+							"sid": 888049507318507,
 							"parameters": {
-								"instance-variable": "turretHealth",
+								"instance-variable": "mag_current",
 								"comparison": 3,
 								"value": "0"
 							}
@@ -250,7 +250,7 @@
 							"conditions": [
 								{
 									"id": "is-timer-running",
-									"objectClass": "turretBase",
+									"objectClass": "turretGun",
 									"sid": 133067768152302,
 									"behaviorType": "Timer",
 									"parameters": {
@@ -262,7 +262,7 @@
 							"actions": [
 								{
 									"id": "start-timer",
-									"objectClass": "turretBase",
+									"objectClass": "turretGun",
 									"sid": 686989675652217,
 									"behaviorType": "Timer",
 									"parameters": {
@@ -305,7 +305,7 @@
 			"conditions": [
 				{
 					"id": "on-timer",
-					"objectClass": "turretBase",
+					"objectClass": "turretGun",
 					"sid": 980973492244636,
 					"behaviorType": "Timer",
 					"parameters": {
@@ -313,36 +313,18 @@
 					}
 				}
 			],
-			"actions": [],
-			"sid": 497914033446438,
-			"children": [
+			"actions": [
 				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "pick-by-evaluate",
-							"objectClass": "System",
-							"sid": 986793098712619,
-							"parameters": {
-								"object": "turretGun",
-								"expression": "turretGun.turretBaseUID = turretBase.UID"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "set-instvar-value",
-							"objectClass": "turretBase",
-							"sid": 642591062724682,
-							"parameters": {
-								"instance-variable": "turretHealth",
-								"value": "turretGun.mag_size"
-							}
-						}
-					],
-					"sid": 980005594322126
+					"id": "set-instvar-value",
+					"objectClass": "turretGun",
+					"sid": 214348808955053,
+					"parameters": {
+						"instance-variable": "mag_current",
+						"value": "turretGun.mag_size"
+					}
 				}
-			]
+			],
+			"sid": 497914033446438
 		},
 		{
 			"eventType": "block",
@@ -897,9 +879,9 @@
 								{
 									"id": "set-animation-speed",
 									"objectClass": "turretBase",
-									"sid": 986105156564821,
+									"sid": 635189548958591,
 									"parameters": {
-										"speed": "4"
+										"speed": "8"
 									}
 								}
 							],
@@ -933,6 +915,245 @@
 				}
 			],
 			"sid": 499705229447640
+		},
+		{
+			"aceType": "action",
+			"aceName": "Repair",
+			"objectClass": "turretBase",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "amount",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 157820316077279
+				}
+			],
+			"eventType": "custom-ace-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 328183187651128,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-instvar-value",
+							"objectClass": "turretBase",
+							"sid": 908967333556260,
+							"parameters": {
+								"instance-variable": "turretHealth",
+								"value": "clamp(Self.turretHealth + amount, 0, Self.turretHealthMax)"
+							}
+						},
+						{
+							"customAction": "repaired_fx",
+							"objectClass": "turretBase",
+							"sid": 587925712906027
+						}
+					],
+					"sid": 875656388821125
+				}
+			]
+		},
+		{
+			"aceType": "action",
+			"aceName": "ReceiveDamage",
+			"objectClass": "turretBase",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "amount",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 640434852953985
+				}
+			],
+			"eventType": "custom-ace-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 251229344017499,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-instvar-value",
+							"objectClass": "turretBase",
+							"sid": 984471518356310,
+							"parameters": {
+								"instance-variable": "turretHealth",
+								"value": "Self.turretHealth - amount"
+							}
+						},
+						{
+							"customAction": "damaged_fx",
+							"objectClass": "turretBase",
+							"sid": 826237587995796
+						}
+					],
+					"sid": 361654262505997
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "turretBase",
+							"sid": 941345391257539,
+							"parameters": {
+								"instance-variable": "turretHealth",
+								"comparison": 3,
+								"value": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "destroy",
+							"objectClass": "turretBase",
+							"sid": 745306064059611
+						}
+					],
+					"sid": 353823341044921
+				}
+			]
+		},
+		{
+			"aceType": "action",
+			"aceName": "damaged_fx",
+			"objectClass": "turretBase",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "custom-ace-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-effect-enabled",
+					"objectClass": "turretBase",
+					"sid": 728061149421148,
+					"parameters": {
+						"mode": "enable",
+						"effect": "\"SetColor\""
+					}
+				},
+				{
+					"id": "start-timer",
+					"objectClass": "turretBase",
+					"sid": 344276487320872,
+					"behaviorType": "Timer",
+					"parameters": {
+						"duration": "0.06",
+						"type": "once",
+						"tag": "\"damaged\""
+					}
+				}
+			],
+			"sid": 550220217666964
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-timer",
+					"objectClass": "turretBase",
+					"sid": 340138919230926,
+					"behaviorType": "Timer",
+					"parameters": {
+						"tag": "\"damaged\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-effect-enabled",
+					"objectClass": "turretBase",
+					"sid": 580040222263598,
+					"parameters": {
+						"mode": "disable",
+						"effect": "\"SetColor\""
+					}
+				}
+			],
+			"sid": 588261972322914
+		},
+		{
+			"aceType": "action",
+			"aceName": "repaired_fx",
+			"objectClass": "turretBase",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "custom-ace-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-effect-enabled",
+					"objectClass": "turretBase",
+					"sid": 440266828770098,
+					"parameters": {
+						"mode": "enable",
+						"effect": "\"Brightness\""
+					}
+				},
+				{
+					"id": "start-timer",
+					"objectClass": "turretBase",
+					"sid": 573521492205610,
+					"behaviorType": "Timer",
+					"parameters": {
+						"duration": "0.08",
+						"type": "once",
+						"tag": "\"damaged\""
+					}
+				}
+			],
+			"sid": 645282689414901
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-timer",
+					"objectClass": "turretBase",
+					"sid": 483807716916305,
+					"behaviorType": "Timer",
+					"parameters": {
+						"tag": "\"damaged\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-effect-enabled",
+					"objectClass": "turretBase",
+					"sid": 460569234748222,
+					"parameters": {
+						"mode": "disable",
+						"effect": "\"Brightness\""
+					}
+				}
+			],
+			"sid": 821424755419538
 		}
 	],
 	"sid": 182913111176321

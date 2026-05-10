@@ -15,7 +15,7 @@
 			"eventType": "variable",
 			"name": "trees_amount",
 			"type": "number",
-			"initialValue": "100",
+			"initialValue": "10",
 			"comment": "",
 			"isStatic": false,
 			"isConstant": false,
@@ -200,9 +200,9 @@
 						{
 							"id": "set-scale",
 							"objectClass": "tree",
-							"sid": 658031768301886,
+							"sid": 669335414630307,
 							"parameters": {
-								"scale": "random(3,5)"
+								"scale": "random(8,10)"
 							}
 						}
 					],

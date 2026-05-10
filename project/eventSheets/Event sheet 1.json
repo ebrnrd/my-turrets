@@ -30,6 +30,10 @@
 			"includeSheet": "reflections"
 		},
 		{
+			"eventType": "include",
+			"includeSheet": "ZOrder"
+		},
+		{
 			"eventType": "variable",
 			"name": "currentSelectedTurretIndex",
 			"type": "number",
@@ -78,6 +82,16 @@
 			"isStatic": false,
 			"isConstant": false,
 			"sid": 905550504240210
+		},
+		{
+			"eventType": "variable",
+			"name": "stop_move_near_player_distance",
+			"type": "number",
+			"initialValue": "150",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 499579745890741
 		},
 		{
 			"eventType": "block",
@@ -477,6 +491,16 @@
 							"eventType": "block",
 							"conditions": [
 								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 258113943808079,
+									"parameters": {
+										"first-value": "distance(turretBase.X, turretBase.Y, playerCharacter.X, playerCharacter.Y)",
+										"comparison": 4,
+										"second-value": "stop_move_near_player_distance"
+									}
+								},
+								{
 									"id": "compare-instance-variable",
 									"objectClass": "turretBase",
 									"sid": 933251997907123,
@@ -619,6 +643,16 @@
 							"objectClass": "turretBase",
 							"sid": 416540244153172,
 							"behaviorType": "Pathfinding"
+						},
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 830341780706906,
+							"parameters": {
+								"first-value": "distance(turretBase.X, turretBase.Y, playerCharacter.X, playerCharacter.Y)",
+								"comparison": 4,
+								"second-value": "stop_move_near_player_distance"
+							}
 						}
 					],
 					"actions": [
@@ -657,6 +691,26 @@
 							"behaviorType": "Physics",
 							"parameters": {
 								"object": "turretBase",
+								"state": "disable"
+							}
+						},
+						{
+							"id": "enabledisable-collisions",
+							"objectClass": "turretBase",
+							"sid": 366163702380122,
+							"behaviorType": "Physics",
+							"parameters": {
+								"object": "enemies",
+								"state": "disable"
+							}
+						},
+						{
+							"id": "enabledisable-collisions",
+							"objectClass": "turretBase",
+							"sid": 616939076623401,
+							"behaviorType": "Physics",
+							"parameters": {
+								"object": "scrap",
 								"state": "disable"
 							}
 						},
@@ -787,9 +841,9 @@
 						{
 							"id": "set-width",
 							"objectClass": "turretHealthBar",
-							"sid": 841605621197265,
+							"sid": 350768036068788,
 							"parameters": {
-								"width": "(turretBase.turretHealth/100)*53"
+								"width": "(turretBase.turretHealth/turretBase.turretHealthMax)*53"
 							}
 						}
 					],
@@ -1107,12 +1161,12 @@
 					],
 					"actions": [
 						{
-							"id": "set-instvar-value",
-							"objectClass": "turretBase",
-							"sid": 304442039255240,
+							"id": "subtract-from-instvar",
+							"objectClass": "turretGun",
+							"sid": 468176059982859,
 							"parameters": {
-								"instance-variable": "turretHealth",
-								"value": "turretBase.turretHealth - 1"
+								"instance-variable": "mag_current",
+								"value": "1"
 							}
 						}
 					],
@@ -1257,13 +1311,12 @@
 					],
 					"actions": [
 						{
-							"id": "set-instvar-value",
+							"customAction": "ReceiveDamage",
 							"objectClass": "enemies",
-							"sid": 876887293638588,
-							"parameters": {
-								"instance-variable": "health",
-								"value": "enemies.health - bullet.damage"
-							}
+							"sid": 220937322485603,
+							"parameters": [
+								"bullet.damage"
+							]
 						},
 						{
 							"id": "destroy",
@@ -1278,39 +1331,9 @@
 								"angle": "bullet.Angle",
 								"distance": "bullet.knockback"
 							}
-						},
-						{
-							"customAction": "damaged_fx",
-							"objectClass": "enemies",
-							"sid": 547044432389884
 						}
 					],
-					"sid": 758251086147628,
-					"children": [
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "compare-instance-variable",
-									"objectClass": "enemies",
-									"sid": 504348753859309,
-									"parameters": {
-										"instance-variable": "health",
-										"comparison": 3,
-										"value": "0"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "destroy",
-									"objectClass": "enemies",
-									"sid": 763219232130576
-								}
-							],
-							"sid": 711289097199506
-						}
-					]
+					"sid": 758251086147628
 				},
 				{
 					"eventType": "block",
@@ -1543,123 +1566,6 @@
 			"description": "",
 			"isActiveOnStart": true,
 			"children": [
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "key-is-down",
-							"objectClass": "Keyboard",
-							"sid": 646348160008854,
-							"parameters": {
-								"key": 65
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "simulate-control",
-							"objectClass": "playerCharacter",
-							"sid": 415008350988478,
-							"behaviorType": "8Direction",
-							"parameters": {
-								"control": "left"
-							}
-						},
-						{
-							"id": "set-mirrored",
-							"objectClass": "playerCharacter",
-							"sid": 708490514968182,
-							"parameters": {
-								"state": "mirrored"
-							}
-						}
-					],
-					"sid": 270403518840069,
-					"isOrBlock": true
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "key-is-down",
-							"objectClass": "Keyboard",
-							"sid": 916909629530964,
-							"parameters": {
-								"key": 87
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "simulate-control",
-							"objectClass": "playerCharacter",
-							"sid": 575431338435388,
-							"behaviorType": "8Direction",
-							"parameters": {
-								"control": "up"
-							}
-						}
-					],
-					"sid": 393160054806245
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "key-is-down",
-							"objectClass": "Keyboard",
-							"sid": 743707562536080,
-							"parameters": {
-								"key": 68
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "simulate-control",
-							"objectClass": "playerCharacter",
-							"sid": 263772415411061,
-							"behaviorType": "8Direction",
-							"parameters": {
-								"control": "right"
-							}
-						},
-						{
-							"id": "set-mirrored",
-							"objectClass": "playerCharacter",
-							"sid": 775791463923078,
-							"parameters": {
-								"state": "not-mirrored"
-							}
-						}
-					],
-					"sid": 588661256483695
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "key-is-down",
-							"objectClass": "Keyboard",
-							"sid": 538897372187280,
-							"parameters": {
-								"key": 83
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "simulate-control",
-							"objectClass": "playerCharacter",
-							"sid": 635962293318510,
-							"behaviorType": "8Direction",
-							"parameters": {
-								"control": "down"
-							}
-						}
-					],
-					"sid": 258580279138000
-				},
 				{
 					"eventType": "block",
 					"conditions": [
@@ -2350,6 +2256,15 @@
 									"parameters": {
 										"projectile-speed": "Self.bullet_speed"
 									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "turretGun",
+									"sid": 489627532864028,
+									"parameters": {
+										"instance-variable": "mag_current",
+										"value": "Self.mag_size"
+									}
 								}
 							],
 							"sid": 633319053897079
@@ -2429,84 +2344,6 @@
 								}
 							],
 							"sid": 195902781376831
-						}
-					]
-				}
-			]
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "every-tick",
-					"objectClass": "System",
-					"sid": 926921786825970
-				}
-			],
-			"actions": [
-				{
-					"id": "set-instvar-value",
-					"objectClass": "zOrder",
-					"sid": 356275654605450,
-					"parameters": {
-						"instance-variable": "order",
-						"value": "int(Self.Y)"
-					}
-				},
-				{
-					"id": "sort-z-order",
-					"objectClass": "System",
-					"sid": 967076067200531,
-					"parameters": {
-						"object": "zOrder",
-						"instance-variable": {
-							"name": "order",
-							"objectClass": "zOrder"
-						}
-					}
-				}
-			],
-			"sid": 591028433101461,
-			"children": [
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "for-each",
-							"objectClass": "System",
-							"sid": 232652134277034,
-							"parameters": {
-								"object": "turretGun"
-							}
-						}
-					],
-					"actions": [],
-					"sid": 988999010844644,
-					"children": [
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "pick-by-unique-id",
-									"objectClass": "turretBase",
-									"sid": 253847776514542,
-									"parameters": {
-										"unique-id": "turretGun.turretBaseUID"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "move-to-object",
-									"objectClass": "turretGun",
-									"sid": 306681864688335,
-									"parameters": {
-										"where": "in-front",
-										"object": "turretBase"
-									}
-								}
-							],
-							"sid": 409888568400578
 						}
 					]
 				}

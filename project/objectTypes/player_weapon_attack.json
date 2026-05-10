@@ -1,0 +1,64 @@
+{
+	"name": "player_weapon_attack",
+	"plugin-id": "Sprite",
+	"sid": 494059008327292,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 17,
+						"height": 14,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 2876304,
+						"collisionPoly": {
+							"points": [
+								0.5882352941176471,
+								0.14285714285714285,
+								0.8235294117647058,
+								0.14285714285714285,
+								0.9411764705882353,
+								0.2857142857142857,
+								0.9411764705882353,
+								0.7142857142857143,
+								0.8235294117647058,
+								0.8571428571428571,
+								0.5882352941176471,
+								0.8571428571428571,
+								0.11764705882352941,
+								0.6428571428571429,
+								0.058823529411764705,
+								0.5714285714285714,
+								0.058823529411764705,
+								0.42857142857142855,
+								0.11764705882352941,
+								0.35714285714285715
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 652699157998124,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

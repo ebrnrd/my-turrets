@@ -20,6 +20,13 @@
 			"sid": 190456603156182
 		},
 		{
+			"name": "turretHealthMax",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 936828288910197
+		},
+		{
 			"name": "turretActiveObject",
 			"type": "number",
 			"desc": "",
@@ -77,7 +84,16 @@
 			"sid": 561994611693415
 		}
 	],
-	"effectTypes": [],
+	"effectTypes": [
+		{
+			"effectId": "brightness",
+			"name": "Brightness"
+		},
+		{
+			"effectId": "setcolor",
+			"name": "SetColor"
+		}
+	],
 	"animations": {
 		"items": [
 			{
@@ -488,7 +504,7 @@
 				"isPingPong": false,
 				"repeatCount": 1,
 				"repeatTo": 0,
-				"speed": 4
+				"speed": 8
 			}
 		],
 		"subfolders": []

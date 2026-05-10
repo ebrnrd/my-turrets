@@ -1117,7 +1117,10 @@
 					"instanceVariables": {
 						"order": 0,
 						"height_from_ground": 0,
-						"shadow_width": 60
+						"shadow_width": 60,
+						"is_attacking": false,
+						"default_walk_speed": 250,
+						"attack_walk_speed": 50
 					},
 					"behaviors": {
 						"8Direction": {

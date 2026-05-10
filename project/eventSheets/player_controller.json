@@ -22,60 +22,324 @@
 			"sid": 572567851880998
 		},
 		{
+			"eventType": "variable",
+			"name": "player_melee_damage",
+			"type": "number",
+			"initialValue": "10",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 114318154168768
+		},
+		{
 			"eventType": "block",
 			"conditions": [
 				{
-					"id": "is-moving",
+					"id": "is-boolean-instance-variable-set",
 					"objectClass": "playerCharacter",
-					"sid": 902578766325220,
-					"behaviorType": "8Direction"
+					"sid": 962600594872946,
+					"parameters": {
+						"instance-variable": "is_attacking"
+					},
+					"isInverted": true
 				}
 			],
 			"actions": [],
-			"sid": 456445372231692,
+			"sid": 420951487277210,
 			"children": [
 				{
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "compare-two-values",
-							"objectClass": "System",
-							"sid": 530818074281587,
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 505082671572387,
 							"parameters": {
-								"first-value": "playerCharacter.8Direction.VectorY",
-								"comparison": 2,
-								"second-value": "0"
+								"key": 65
+							}
+						},
+						{
+							"id": "compare-axis",
+							"objectClass": "Gamepad",
+							"sid": 747490524058770,
+							"parameters": {
+								"gamepad": "0",
+								"axis": "left-analog-x-axis",
+								"comparison": 3,
+								"value": "- 20"
 							}
 						}
 					],
+					"actions": [
+						{
+							"id": "simulate-control",
+							"objectClass": "playerCharacter",
+							"sid": 760151094027515,
+							"behaviorType": "8Direction",
+							"parameters": {
+								"control": "left"
+							}
+						},
+						{
+							"id": "set-mirrored",
+							"objectClass": "playerCharacter",
+							"sid": 646157686333136,
+							"parameters": {
+								"state": "mirrored"
+							}
+						},
+						{
+							"id": "set-mirrored",
+							"objectClass": "player_weapon",
+							"sid": 162340609238551,
+							"parameters": {
+								"state": "mirrored"
+							}
+						}
+					],
+					"sid": 268638651205539,
+					"isOrBlock": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 490462214001456,
+							"parameters": {
+								"key": 87
+							}
+						},
+						{
+							"id": "compare-axis",
+							"objectClass": "Gamepad",
+							"sid": 797049921748099,
+							"parameters": {
+								"gamepad": "0",
+								"axis": "left-analog-y-axis",
+								"comparison": 3,
+								"value": "- 20"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "simulate-control",
+							"objectClass": "playerCharacter",
+							"sid": 169317983727462,
+							"behaviorType": "8Direction",
+							"parameters": {
+								"control": "up"
+							}
+						}
+					],
+					"sid": 748926312152565,
+					"isOrBlock": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 462609108410431,
+							"parameters": {
+								"key": 68
+							}
+						},
+						{
+							"id": "compare-axis",
+							"objectClass": "Gamepad",
+							"sid": 917943492263364,
+							"parameters": {
+								"gamepad": "0",
+								"axis": "left-analog-x-axis",
+								"comparison": 5,
+								"value": "20"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "simulate-control",
+							"objectClass": "playerCharacter",
+							"sid": 899418713157608,
+							"behaviorType": "8Direction",
+							"parameters": {
+								"control": "right"
+							}
+						},
+						{
+							"id": "set-mirrored",
+							"objectClass": "playerCharacter",
+							"sid": 600780902691321,
+							"parameters": {
+								"state": "not-mirrored"
+							}
+						},
+						{
+							"id": "set-mirrored",
+							"objectClass": "player_weapon",
+							"sid": 433841263537918,
+							"parameters": {
+								"state": "not-mirrored"
+							}
+						}
+					],
+					"sid": 796045114493492,
+					"isOrBlock": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 191834840091182,
+							"parameters": {
+								"key": 83
+							}
+						},
+						{
+							"id": "compare-axis",
+							"objectClass": "Gamepad",
+							"sid": 829499453774924,
+							"parameters": {
+								"gamepad": "0",
+								"axis": "left-analog-y-axis",
+								"comparison": 5,
+								"value": "20"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "simulate-control",
+							"objectClass": "playerCharacter",
+							"sid": 499485569002989,
+							"behaviorType": "8Direction",
+							"parameters": {
+								"control": "down"
+							}
+						}
+					],
+					"sid": 937813530284634,
+					"isOrBlock": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-moving",
+							"objectClass": "playerCharacter",
+							"sid": 136432341466589,
+							"behaviorType": "8Direction"
+						}
+					],
 					"actions": [],
-					"sid": 118353938514027,
+					"sid": 926030306358568,
 					"children": [
 						{
 							"eventType": "block",
 							"conditions": [
 								{
-									"id": "is-animation-playing",
-									"objectClass": "playerCharacter",
-									"sid": 256398348001192,
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 708066794424894,
 									"parameters": {
-										"animation": "\"walk_back\""
-									},
-									"isInverted": true
-								}
-							],
-							"actions": [
-								{
-									"id": "set-animation",
-									"objectClass": "playerCharacter",
-									"sid": 424563493396293,
-									"parameters": {
-										"animation": "\"walk_back\"",
-										"from": "beginning"
+										"first-value": "playerCharacter.8Direction.VectorY",
+										"comparison": 2,
+										"second-value": "0"
 									}
 								}
 							],
-							"sid": 267842904661620
+							"actions": [],
+							"sid": 416937887955595,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-animation-playing",
+											"objectClass": "playerCharacter",
+											"sid": 429116964443745,
+											"parameters": {
+												"animation": "\"walk_back\""
+											},
+											"isInverted": true
+										}
+									],
+									"actions": [
+										{
+											"id": "set-animation",
+											"objectClass": "playerCharacter",
+											"sid": 141832252873288,
+											"parameters": {
+												"animation": "\"walk_back\"",
+												"from": "beginning"
+											}
+										},
+										{
+											"id": "signal",
+											"objectClass": "System",
+											"sid": 107802043924891,
+											"parameters": {
+												"tag": "\"walk_back\""
+											}
+										}
+									],
+									"sid": 204455991402257
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 419014776470555
+								}
+							],
+							"actions": [],
+							"sid": 291635206704332,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-animation-playing",
+											"objectClass": "playerCharacter",
+											"sid": 192007929455497,
+											"parameters": {
+												"animation": "\"walk\""
+											},
+											"isInverted": true
+										}
+									],
+									"actions": [
+										{
+											"id": "set-animation",
+											"objectClass": "playerCharacter",
+											"sid": 147057331702323,
+											"parameters": {
+												"animation": "\"walk\"",
+												"from": "beginning"
+											}
+										},
+										{
+											"id": "signal",
+											"objectClass": "System",
+											"sid": 297695438231458,
+											"parameters": {
+												"tag": "\"walk_front\""
+											}
+										}
+									],
+									"sid": 486336450311739
+								}
+							]
 						}
 					]
 				},
@@ -85,63 +349,23 @@
 						{
 							"id": "else",
 							"objectClass": "System",
-							"sid": 151956215617729
+							"sid": 410319654400152
 						}
 					],
-					"actions": [],
-					"sid": 465910556776595,
-					"children": [
+					"actions": [
 						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "is-animation-playing",
-									"objectClass": "playerCharacter",
-									"sid": 939005996064973,
-									"parameters": {
-										"animation": "\"walk\""
-									},
-									"isInverted": true
-								}
-							],
-							"actions": [
-								{
-									"id": "set-animation",
-									"objectClass": "playerCharacter",
-									"sid": 144202186871072,
-									"parameters": {
-										"animation": "\"walk\"",
-										"from": "beginning"
-									}
-								}
-							],
-							"sid": 747101911004959
+							"id": "set-animation",
+							"objectClass": "playerCharacter",
+							"sid": 870797610462080,
+							"parameters": {
+								"animation": "\"idle\"",
+								"from": "beginning"
+							}
 						}
-					]
+					],
+					"sid": 640529998219186
 				}
 			]
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "else",
-					"objectClass": "System",
-					"sid": 553289290709123
-				}
-			],
-			"actions": [
-				{
-					"id": "set-animation",
-					"objectClass": "playerCharacter",
-					"sid": 246007923695806,
-					"parameters": {
-						"animation": "\"idle\"",
-						"from": "beginning"
-					}
-				}
-			],
-			"sid": 510751518196187
 		},
 		{
 			"eventType": "block",
@@ -275,6 +499,463 @@
 						}
 					],
 					"sid": 795090612808847
+				}
+			]
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "PlayerWeapon",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-created",
+							"objectClass": "playerCharacter",
+							"sid": 304344278553749
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 166856344549525,
+							"parameters": {
+								"object-to-create": "player_weapon",
+								"layer": "playerCharacter.LayerName",
+								"x": "playerCharacter.X",
+								"y": "playerCharacter.Y",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "pin-to-object-imagepoint",
+							"objectClass": "player_weapon",
+							"sid": 314821806768976,
+							"behaviorType": "Pin",
+							"parameters": {
+								"pin-to": "playerCharacter",
+								"image-point": "\"Weapon\"",
+								"angle": true,
+								"width-type": "no",
+								"height-type": "no",
+								"z": true
+							}
+						},
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 410664406400421,
+							"parameters": {
+								"object-to-create": "player_melee_hit",
+								"layer": "playerCharacter.LayerName",
+								"x": "playerCharacter.X",
+								"y": "playerCharacter.Y",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "add-child",
+							"objectClass": "playerCharacter",
+							"sid": 154621368533685,
+							"parameters": {
+								"child": "player_melee_hit",
+								"transform-x": true,
+								"transform-y": true,
+								"transform-z-elevation": true,
+								"transform-w": true,
+								"transform-h": true,
+								"transform-a": true,
+								"transform-o": false,
+								"transform-visibility": false,
+								"destroy-with-parent": true
+							}
+						}
+					],
+					"sid": 691165177944881
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-signal",
+							"objectClass": "System",
+							"sid": 900138514999510,
+							"parameters": {
+								"tag": "\"walk_back\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "move-to-object",
+							"objectClass": "player_weapon",
+							"sid": 746680069773321,
+							"parameters": {
+								"where": "behind",
+								"object": "playerCharacter"
+							}
+						}
+					],
+					"sid": 962520034525089,
+					"disabled": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-signal",
+							"objectClass": "System",
+							"sid": 742702798471308,
+							"parameters": {
+								"tag": "\"walk_front\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "move-to-object",
+							"objectClass": "player_weapon",
+							"sid": 235287452770405,
+							"parameters": {
+								"where": "in-front",
+								"object": "playerCharacter"
+							}
+						}
+					],
+					"sid": 558500483920614,
+					"disabled": true
+				}
+			],
+			"sid": 967586760616031
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-key-pressed",
+					"objectClass": "Keyboard",
+					"sid": 608526150407392,
+					"parameters": {
+						"key": 32
+					}
+				},
+				{
+					"id": "on-button-pressed",
+					"objectClass": "Gamepad",
+					"sid": 961577836988065,
+					"parameters": {
+						"gamepad": "0",
+						"button": "button-x"
+					}
+				}
+			],
+			"actions": [
+				{
+					"customAction": "AttackMelee",
+					"objectClass": "playerCharacter",
+					"sid": 413528564730604
+				}
+			],
+			"sid": 393041746029180,
+			"isOrBlock": true
+		},
+		{
+			"aceType": "action",
+			"aceName": "AttackMelee",
+			"objectClass": "playerCharacter",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "custom-ace-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 229241546331206,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "playerCharacter",
+							"sid": 634488722015482,
+							"parameters": {
+								"instance-variable": "is_attacking"
+							},
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "set-visible",
+							"objectClass": "player_weapon",
+							"sid": 886691472962530,
+							"parameters": {
+								"visibility": "invisible"
+							}
+						},
+						{
+							"id": "set-animation",
+							"objectClass": "playerCharacter",
+							"sid": 630821292423279,
+							"parameters": {
+								"animation": "\"attack\"",
+								"from": "beginning"
+							}
+						},
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "playerCharacter",
+							"sid": 565414824917041,
+							"parameters": {
+								"instance-variable": "is_attacking",
+								"value": "true"
+							}
+						},
+						{
+							"id": "stop",
+							"objectClass": "playerCharacter",
+							"sid": 648834535884963,
+							"disabled": true,
+							"behaviorType": "8Direction"
+						},
+						{
+							"id": "set-max-speed",
+							"objectClass": "playerCharacter",
+							"sid": 693641990497967,
+							"disabled": true,
+							"behaviorType": "8Direction",
+							"parameters": {
+								"max-speed": "Self.attack_walk_speed"
+							}
+						}
+					],
+					"sid": 502212196004012
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-animation-finished",
+					"objectClass": "playerCharacter",
+					"sid": 166091353952985,
+					"parameters": {
+						"animation": "\"attack\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-boolean-instvar",
+					"objectClass": "playerCharacter",
+					"sid": 791653992461526,
+					"parameters": {
+						"instance-variable": "is_attacking",
+						"value": "false"
+					}
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "player_weapon",
+					"sid": 140553328382467,
+					"parameters": {
+						"visibility": "visible"
+					}
+				},
+				{
+					"id": "set-max-speed",
+					"objectClass": "playerCharacter",
+					"sid": 867889522937138,
+					"disabled": true,
+					"behaviorType": "8Direction",
+					"parameters": {
+						"max-speed": "Self.default_walk_speed"
+					}
+				}
+			],
+			"sid": 492405141409720,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 445043195587235,
+							"parameters": {
+								"key": 32
+							}
+						},
+						{
+							"id": "is-button-down",
+							"objectClass": "Gamepad",
+							"sid": 496959326677997,
+							"parameters": {
+								"gamepad": "0",
+								"button": "button-x"
+							}
+						}
+					],
+					"actions": [
+						{
+							"customAction": "AttackMelee",
+							"objectClass": "playerCharacter",
+							"sid": 475363841026254
+						}
+					],
+					"sid": 493636731427912,
+					"isOrBlock": true
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "is-animation-playing",
+					"objectClass": "playerCharacter",
+					"sid": 647744779793459,
+					"parameters": {
+						"animation": "\"attack\""
+					}
+				},
+				{
+					"id": "compare-animation-frame",
+					"objectClass": "playerCharacter",
+					"sid": 969236149922257,
+					"parameters": {
+						"comparison": 0,
+						"number": "6"
+					}
+				},
+				{
+					"id": "trigger-once-while-true",
+					"objectClass": "System",
+					"sid": 593009809390597
+				}
+			],
+			"actions": [
+				{
+					"id": "signal",
+					"objectClass": "System",
+					"sid": 614295596067714,
+					"parameters": {
+						"tag": "\"player_hit_frame\""
+					}
+				}
+			],
+			"sid": 630842724788950
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-signal",
+					"objectClass": "System",
+					"sid": 317812677263694,
+					"parameters": {
+						"tag": "\"player_hit_frame\""
+					}
+				}
+			],
+			"actions": [],
+			"sid": 403540460297101,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-overlapping-another-object",
+							"objectClass": "player_melee_hit",
+							"sid": 301561210065707,
+							"parameters": {
+								"object": "turretBase"
+							}
+						},
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 748603789690180,
+							"parameters": {
+								"object": "turretBase"
+							}
+						}
+					],
+					"actions": [
+						{
+							"customAction": "Repair",
+							"objectClass": "turretBase",
+							"sid": 617066259018219,
+							"parameters": [
+								"player_melee_damage"
+							]
+						},
+						{
+							"id": "apply-impulse-at-angle",
+							"objectClass": "turretBase",
+							"sid": 425915623291413,
+							"behaviorType": "Physics",
+							"parameters": {
+								"impulse": "random(2,5)",
+								"angle": "angle(turretBase.X, turretBase.Y, playerCharacter.X, playerCharacter.Y) + 180",
+								"image-point": "0"
+							}
+						}
+					],
+					"sid": 167551522819030
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-overlapping-another-object",
+							"objectClass": "player_melee_hit",
+							"sid": 443572937508727,
+							"parameters": {
+								"object": "enemies"
+							}
+						},
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 614257297167924,
+							"parameters": {
+								"object": "enemies"
+							}
+						}
+					],
+					"actions": [
+						{
+							"customAction": "ReceiveDamage",
+							"objectClass": "enemies",
+							"sid": 490675722451137,
+							"parameters": [
+								"player_melee_damage"
+							]
+						},
+						{
+							"id": "apply-impulse-at-angle",
+							"objectClass": "enemies",
+							"sid": 823275107973901,
+							"behaviorType": "Physics",
+							"parameters": {
+								"impulse": "random(2,3)",
+								"angle": "angle(enemies.X, enemies.Y, playerCharacter.X, playerCharacter.Y) + 180",
+								"image-point": "0"
+							}
+						}
+					],
+					"sid": 339306302399573
 				}
 			]
 		}

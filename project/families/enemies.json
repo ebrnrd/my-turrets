@@ -9,13 +9,25 @@
 			"desc": "",
 			"show": true,
 			"sid": 255897564144493
+		},
+		{
+			"name": "move_speed",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 972077827667570
 		}
 	],
 	"behaviorTypes": [
 		{
 			"behaviorId": "Timer",
-			"name": "Timer2",
+			"name": "Timer",
 			"sid": 464416943219278
+		},
+		{
+			"behaviorId": "Physics",
+			"name": "Physics",
+			"sid": 859759591549541
 		}
 	],
 	"effectTypes": [

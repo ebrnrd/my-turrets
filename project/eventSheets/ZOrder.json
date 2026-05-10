@@ -1,0 +1,133 @@
+{
+	"name": "ZOrder",
+	"events": [
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "every-tick",
+					"objectClass": "System",
+					"sid": 926921786825970
+				}
+			],
+			"actions": [
+				{
+					"id": "set-instvar-value",
+					"objectClass": "zOrder",
+					"sid": 356275654605450,
+					"parameters": {
+						"instance-variable": "order",
+						"value": "int(Self.Y)"
+					}
+				},
+				{
+					"id": "sort-z-order",
+					"objectClass": "System",
+					"sid": 967076067200531,
+					"parameters": {
+						"object": "zOrder",
+						"instance-variable": {
+							"name": "order",
+							"objectClass": "zOrder"
+						}
+					}
+				}
+			],
+			"sid": 591028433101461,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 232652134277034,
+							"parameters": {
+								"object": "turretGun"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 988999010844644,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "turretBase",
+									"sid": 253847776514542,
+									"parameters": {
+										"unique-id": "turretGun.turretBaseUID"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "move-to-object",
+									"objectClass": "turretGun",
+									"sid": 306681864688335,
+									"parameters": {
+										"where": "in-front",
+										"object": "turretBase"
+									}
+								}
+							],
+							"sid": 409888568400578
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 830590997701603,
+							"parameters": {
+								"first-value": "playerCharacter.8Direction.VectorY",
+								"comparison": 2,
+								"second-value": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "move-to-object",
+							"objectClass": "player_weapon",
+							"sid": 207690186533413,
+							"parameters": {
+								"where": "behind",
+								"object": "playerCharacter"
+							}
+						}
+					],
+					"sid": 873185588404012
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 886789193931024
+						}
+					],
+					"actions": [
+						{
+							"id": "move-to-object",
+							"objectClass": "player_weapon",
+							"sid": 558903992197238,
+							"parameters": {
+								"where": "in-front",
+								"object": "playerCharacter"
+							}
+						}
+					],
+					"sid": 795356439483608
+				}
+			]
+		}
+	],
+	"sid": 608947890721361
+}

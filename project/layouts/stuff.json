@@ -239,7 +239,8 @@
 						"reload_speed": 5,
 						"mag_size": 200,
 						"bullet_distance": 1000,
-						"bullet_knockback": 2
+						"bullet_knockback": 2,
+						"mag_current": 0
 					},
 					"behaviors": {
 						"Pin2": {
@@ -253,7 +254,7 @@
 								"rate-of-fire": 1,
 								"rotate": true,
 								"rotate-speed": 270,
-								"target-mode": "nearest",
+								"target-mode": "first-in-range",
 								"predictive-aim": true,
 								"projectile-speed": 2000,
 								"use-collision-cells": true,
@@ -267,6 +268,9 @@
 								"cone-of-view": 360,
 								"use-collision-cells": true
 							}
+						},
+						"Timer": {
+							"properties": {}
 						}
 					},
 					"showing": true,
@@ -303,13 +307,32 @@
 					"instanceVariables": {
 						"order": 0,
 						"health": 20,
+						"move_speed": 2,
 						"height_from_ground": 0,
 						"shadow_width": 50,
-						"healthold": 20
+						"healthold": 20,
+						"damage": 5,
+						"damage_seconds": 1
 					},
 					"behaviors": {
-						"Timer2": {
+						"Timer": {
 							"properties": {}
+						},
+						"Physics": {
+							"properties": {
+								"immovable": false,
+								"collision-mask": "circle",
+								"collision-filter-tags": "",
+								"collision-filter-mode": "exclusive",
+								"prevent-rotation": true,
+								"density": 1,
+								"friction": 0.5,
+								"elasticity": 0.2,
+								"linear-damping": 5,
+								"angular-damping": 0.01,
+								"bullet": false,
+								"enabled": true
+							}
 						},
 						"Pathfinding": {
 							"properties": {
@@ -326,7 +349,7 @@
 								"enabled": false
 							}
 						},
-						"Timer": {
+						"Timer3": {
 							"properties": {}
 						},
 						"LineOfSight": {
@@ -482,6 +505,7 @@
 						"shadow_width": 70,
 						"turretIndex": 0,
 						"turretHealth": 100,
+						"turretHealthMax": 100,
 						"turretActiveObject": 0,
 						"patrol_x": 0,
 						"patrol_y": 0,
@@ -494,7 +518,7 @@
 								"cell-size": 32,
 								"cell-border": 12,
 								"obstacles": "solids",
-								"max-speed": 500,
+								"max-speed": 400,
 								"acceleration": 2000,
 								"deceleration": 1000,
 								"rotate-speed": 135,
@@ -531,7 +555,26 @@
 								"linear-damping": 10,
 								"angular-damping": 0.01,
 								"bullet": false,
-								"enabled": false
+								"enabled": true
+							}
+						}
+					},
+					"effects": {
+						"Brightness": {
+							"isEnabled": false,
+							"parameters": {
+								"brightness": 2
+							}
+						},
+						"SetColor": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									0.9019607843137255,
+									0.23137254901960785,
+									0.1568627450980392,
+									1
+								]
 							}
 						}
 					},
@@ -717,7 +760,7 @@
 								"density": 2,
 								"friction": 0.5,
 								"elasticity": 0.2,
-								"linear-damping": 0,
+								"linear-damping": 2,
 								"angular-damping": 10,
 								"bullet": false,
 								"enabled": true
@@ -977,6 +1020,150 @@
 						"height": 304,
 						"originX": 0.5,
 						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"z": 0,
+						"angle": 0
+					}
+				},
+				{
+					"type": "player_weapon",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 64,
+					"sid": 361899116906780,
+					"tags": "",
+					"instanceVariables": {
+						"order": 0
+					},
+					"behaviors": {
+						"Pin": {
+							"properties": {
+								"destroy": false
+							}
+						}
+					},
+					"instanceFolderItem": {
+						"sid": 361899116906780,
+						"expanded": true
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 232,
+						"y": 796,
+						"width": 76,
+						"height": 56,
+						"originX": 0.8421052631578947,
+						"originY": 0.7142857142857143,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"z": 0,
+						"angle": 0
+					}
+				},
+				{
+					"type": "playerCharacter",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "attack",
+						"initial-frame": 6,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 65,
+					"sid": 115329207195716,
+					"tags": "",
+					"instanceVariables": {
+						"order": 0,
+						"height_from_ground": 0,
+						"shadow_width": 60,
+						"is_attacking": false,
+						"default_walk_speed": 250,
+						"attack_walk_speed": 100
+					},
+					"behaviors": {
+						"8Direction": {
+							"properties": {
+								"max-speed": 250,
+								"acceleration": 800,
+								"deceleration": 1000,
+								"directions": "dir-8",
+								"set-angle": "no",
+								"allow-sliding": true,
+								"default-controls": false,
+								"enabled": true
+							}
+						},
+						"ScrollTo": {
+							"properties": {
+								"enabled": false
+							}
+						}
+					},
+					"instanceFolderItem": {
+						"sid": 115329207195716,
+						"expanded": true
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 154,
+						"y": 933,
+						"width": 128,
+						"height": 128,
+						"originX": 0.5,
+						"originY": 1,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"z": 0,
+						"angle": 0
+					}
+				},
+				{
+					"type": "player_melee_hit",
+					"properties": {
+						"initially-visible": false,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 66,
+					"sid": 708987848403828,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {},
+					"instanceFolderItem": {
+						"sid": 708987848403828,
+						"expanded": true
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 154.9382673071392,
+						"y": 933,
+						"width": 76.44694958566828,
+						"height": 101.92802261013941,
+						"originX": 0,
+						"originY": 0.92,
 						"color": [
 							1,
 							1,

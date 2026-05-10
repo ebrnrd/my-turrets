@@ -67,6 +67,13 @@
 			"desc": "",
 			"show": true,
 			"sid": 266945616319589
+		},
+		{
+			"name": "mag_current",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 572310413529020
 		}
 	],
 	"behaviorTypes": [
@@ -79,6 +86,11 @@
 			"behaviorId": "LOS",
 			"name": "LineOfSight",
 			"sid": 653589867817725
+		},
+		{
+			"behaviorId": "Timer",
+			"name": "Timer",
+			"sid": 743945024468766
 		}
 	],
 	"effectTypes": [],
