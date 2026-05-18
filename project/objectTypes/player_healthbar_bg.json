@@ -1,0 +1,37 @@
+{
+	"name": "player_healthbar_bg",
+	"plugin-id": "NinePatch",
+	"sid": 218868311862537,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [
+		{
+			"name": "y_origin",
+			"type": "number",
+			"desc": "",
+			"show": false,
+			"sid": 628630184650668
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Timer",
+			"name": "Timer",
+			"sid": 137522468392734
+		}
+	],
+	"effectTypes": [],
+	"image": {
+		"width": 37,
+		"height": 10,
+		"originX": 0.5,
+		"originY": 0.5,
+		"originalSource": "",
+		"exportFormat": "lossless",
+		"exportQuality": 0.8,
+		"fileType": "image/png",
+		"imageSpriteId": 5836251,
+		"useCollisionPoly": true,
+		"tag": ""
+	}
+}

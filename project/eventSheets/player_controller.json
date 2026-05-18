@@ -958,6 +958,73 @@
 					"sid": 339306302399573
 				}
 			]
+		},
+		{
+			"aceType": "action",
+			"aceName": "ReceiveDamage",
+			"objectClass": "playerCharacter",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "amount",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 568542632230634
+				}
+			],
+			"eventType": "custom-ace-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "signal",
+					"objectClass": "System",
+					"sid": 860001950007449,
+					"parameters": {
+						"tag": "\"player_damaged\""
+					}
+				},
+				{
+					"id": "set-instvar-value",
+					"objectClass": "playerCharacter",
+					"sid": 135275647155454,
+					"parameters": {
+						"instance-variable": "health",
+						"value": "playerCharacter.health - amount"
+					}
+				}
+			],
+			"sid": 643219311952778,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "playerCharacter",
+							"sid": 909813933023055,
+							"parameters": {
+								"instance-variable": "health",
+								"comparison": 3,
+								"value": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "destroy",
+							"objectClass": "playerCharacter",
+							"sid": 200144195356510,
+							"disabled": true
+						}
+					],
+					"sid": 306988065535661
+				}
+			]
 		}
 	],
 	"sid": 135398769691869

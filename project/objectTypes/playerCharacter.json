@@ -25,6 +25,20 @@
 			"desc": "",
 			"show": true,
 			"sid": 657579987758311
+		},
+		{
+			"name": "health",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 460278019950809
+		},
+		{
+			"name": "max_health",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 844450081702370
 		}
 	],
 	"behaviorTypes": [

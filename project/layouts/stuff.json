@@ -1093,7 +1093,9 @@
 						"shadow_width": 60,
 						"is_attacking": false,
 						"default_walk_speed": 250,
-						"attack_walk_speed": 100
+						"attack_walk_speed": 100,
+						"health": 0,
+						"max_health": 0
 					},
 					"behaviors": {
 						"8Direction": {

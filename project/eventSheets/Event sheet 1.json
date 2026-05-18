@@ -34,6 +34,10 @@
 			"includeSheet": "ZOrder"
 		},
 		{
+			"eventType": "include",
+			"includeSheet": "ui"
+		},
+		{
 			"eventType": "variable",
 			"name": "currentSelectedTurretIndex",
 			"type": "number",

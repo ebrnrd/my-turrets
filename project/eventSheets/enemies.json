@@ -261,6 +261,224 @@
 			"eventType": "block",
 			"conditions": [
 				{
+					"id": "on-signal",
+					"objectClass": "System",
+					"sid": 593139256001741,
+					"parameters": {
+						"tag": "\"spawn_wave\""
+					}
+				}
+			],
+			"actions": [],
+			"sid": 963137704091954,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "spawn_x",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 281200232404295
+				},
+				{
+					"eventType": "variable",
+					"name": "spawn_y",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 343312714944227
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "repeat",
+							"objectClass": "System",
+							"sid": 919225458153017,
+							"parameters": {
+								"count": "100"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 502850484922705,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 590359534890063,
+									"parameters": {
+										"first-value": "spawn_side",
+										"comparison": 0,
+										"second-value": "\"top\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 232531266536566,
+									"parameters": {
+										"variable": "spawn_x",
+										"value": "random(playerCharacter.X - spawn_distance_from_player/2, playerCharacter.X + spawn_distance_from_player/2)"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 722646022535415,
+									"parameters": {
+										"variable": "spawn_y",
+										"value": "playerCharacter.Y - spawn_distance_from_player"
+									}
+								}
+							],
+							"sid": 790972191832371
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 114741733959129,
+									"parameters": {
+										"first-value": "spawn_side",
+										"comparison": 0,
+										"second-value": "\"bottom\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 293690012796635,
+									"parameters": {
+										"variable": "spawn_x",
+										"value": "random(playerCharacter.X - spawn_distance_from_player/2, playerCharacter.X + spawn_distance_from_player/2)"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 710677721941345,
+									"parameters": {
+										"variable": "spawn_y",
+										"value": "playerCharacter.Y + spawn_distance_from_player"
+									}
+								}
+							],
+							"sid": 889691384992385
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 700909296741084,
+									"parameters": {
+										"first-value": "spawn_side",
+										"comparison": 0,
+										"second-value": "\"left\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 826894889075970,
+									"parameters": {
+										"variable": "spawn_x",
+										"value": "playerCharacter.X - spawn_distance_from_player"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 288801695072077,
+									"parameters": {
+										"variable": "spawn_y",
+										"value": "random(playerCharacter.Y - spawn_distance_from_player/2, playerCharacter.Y + spawn_distance_from_player/2)"
+									}
+								}
+							],
+							"sid": 899771660288994
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 540200349444769,
+									"parameters": {
+										"first-value": "spawn_side",
+										"comparison": 0,
+										"second-value": "\"right\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 670243866186763,
+									"parameters": {
+										"variable": "spawn_x",
+										"value": "playerCharacter.X + spawn_distance_from_player"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 940617161719266,
+									"parameters": {
+										"variable": "spawn_y",
+										"value": "random(playerCharacter.Y - spawn_distance_from_player/2, playerCharacter.Y + spawn_distance_from_player/2)"
+									}
+								}
+							],
+							"sid": 922385284615660
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 245543243257634,
+									"parameters": {
+										"object-to-create": "enemyTest",
+										"layer": "\"main\"",
+										"x": "spawn_x",
+										"y": "spawn_y",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								}
+							],
+							"sid": 246025691003856
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
 					"id": "on-created",
 					"objectClass": "enemyTest",
 					"sid": 262802797932627
@@ -500,7 +718,20 @@
 					}
 				}
 			],
-			"actions": [],
+			"actions": [
+				{
+					"id": "apply-force-towards-position",
+					"objectClass": "enemyTest",
+					"sid": 280396051942035,
+					"behaviorType": "Physics",
+					"parameters": {
+						"force": "Self.move_speed",
+						"x": "playerCharacter.X",
+						"y": "playerCharacter.Y",
+						"image-point": "0"
+					}
+				}
+			],
 			"sid": 310953589152886,
 			"children": [
 				{
@@ -520,6 +751,7 @@
 					],
 					"actions": [],
 					"sid": 336648443671354,
+					"disabled": true,
 					"children": [
 						{
 							"eventType": "block",
@@ -528,6 +760,7 @@
 									"id": "compare-two-values",
 									"objectClass": "System",
 									"sid": 985202334462518,
+									"disabled": true,
 									"parameters": {
 										"first-value": "distance(enemyTest.X, enemyTest.Y, turretBase.X, turretBase.Y)",
 										"comparison": 2,
@@ -552,6 +785,7 @@
 									"id": "apply-force-towards-position",
 									"objectClass": "enemyTest",
 									"sid": 340655823103854,
+									"disabled": true,
 									"behaviorType": "Physics",
 									"parameters": {
 										"force": "Self.move_speed",
@@ -561,7 +795,8 @@
 									}
 								}
 							],
-							"sid": 207956948097804
+							"sid": 207956948097804,
+							"disabled": true
 						},
 						{
 							"eventType": "block",
@@ -598,7 +833,8 @@
 									}
 								}
 							],
-							"sid": 379905838190608
+							"sid": 379905838190608,
+							"disabled": true
 						}
 					]
 				}
@@ -847,8 +1083,56 @@
 						}
 					],
 					"sid": 443122417301590
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-overlapping-another-object",
+							"objectClass": "enemyTest",
+							"sid": 464697019777693,
+							"parameters": {
+								"object": "playerCharacter"
+							}
+						}
+					],
+					"actions": [
+						{
+							"customAction": "ReceiveDamage",
+							"objectClass": "playerCharacter",
+							"sid": 428951217721960,
+							"parameters": [
+								"enemyTest.damage"
+							]
+						}
+					],
+					"sid": 177740341685870
 				}
 			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-key-pressed",
+					"objectClass": "Keyboard",
+					"sid": 993933005619175,
+					"parameters": {
+						"key": 49
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "signal",
+					"objectClass": "System",
+					"sid": 940062020896718,
+					"parameters": {
+						"tag": "\"spawn_wave\""
+					}
+				}
+			],
+			"sid": 456687359398089
 		}
 	],
 	"sid": 183405312286839

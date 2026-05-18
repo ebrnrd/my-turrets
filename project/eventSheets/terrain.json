@@ -15,7 +15,7 @@
 			"eventType": "variable",
 			"name": "trees_amount",
 			"type": "number",
-			"initialValue": "10",
+			"initialValue": "100",
 			"comment": "",
 			"isStatic": false,
 			"isConstant": false,
@@ -187,10 +187,10 @@
 						{
 							"id": "create-object",
 							"objectClass": "System",
-							"sid": 281933710497574,
+							"sid": 799915717782284,
 							"parameters": {
 								"object-to-create": "tree",
-								"layer": "\"grass\"",
+								"layer": "\"trees\"",
 								"x": "random(0, LayoutWidth)",
 								"y": "random(0, LayoutHeight)",
 								"create-hierarchy": false,
@@ -200,9 +200,9 @@
 						{
 							"id": "set-scale",
 							"objectClass": "tree",
-							"sid": 669335414630307,
+							"sid": 844544709116560,
 							"parameters": {
-								"scale": "random(8,10)"
+								"scale": "random(2,3)"
 							}
 						}
 					],

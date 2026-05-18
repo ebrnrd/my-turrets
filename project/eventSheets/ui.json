@@ -1,0 +1,300 @@
+{
+	"name": "ui",
+	"events": [
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-created",
+					"objectClass": "healthbar",
+					"sid": 787032779711266
+				}
+			],
+			"actions": [
+				{
+					"id": "set-instvar-value",
+					"objectClass": "healthbar",
+					"sid": 941594931148674,
+					"parameters": {
+						"instance-variable": "bar_width",
+						"value": "Self.Width"
+					}
+				}
+			],
+			"sid": 958083179449706
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-created",
+					"objectClass": "player_healthbar_bg",
+					"sid": 422451578166365
+				}
+			],
+			"actions": [
+				{
+					"id": "set-instvar-value",
+					"objectClass": "player_healthbar_bg",
+					"sid": 308430125180721,
+					"parameters": {
+						"instance-variable": "y_origin",
+						"value": "Self.Y"
+					}
+				}
+			],
+			"sid": 582522460992819
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-signal",
+					"objectClass": "System",
+					"sid": 556070431037986,
+					"parameters": {
+						"tag": "\"player_damaged\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"customAction": "ReceiveDamageFx",
+					"objectClass": "player_healthbar_bg",
+					"sid": 407441031463276
+				}
+			],
+			"sid": 700263309277660
+		},
+		{
+			"aceType": "action",
+			"aceName": "ReceiveDamageFx",
+			"objectClass": "player_healthbar_bg",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "custom-ace-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 773992420150383,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "max_random_angle",
+					"type": "number",
+					"initialValue": "20",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 118412672344744
+				},
+				{
+					"eventType": "variable",
+					"name": "min_random_y_offset",
+					"type": "number",
+					"initialValue": "20",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 969181836602691
+				},
+				{
+					"eventType": "variable",
+					"name": "max_random_y_offset",
+					"type": "number",
+					"initialValue": "40",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 350386420752336
+				},
+				{
+					"eventType": "variable",
+					"name": "random_angle",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 386008967186471
+				},
+				{
+					"eventType": "variable",
+					"name": "random_y_offset",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 966136721894712
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "stop-timer",
+							"objectClass": "player_healthbar_bg",
+							"sid": 605511874572036,
+							"disabled": true,
+							"behaviorType": "Timer",
+							"parameters": {
+								"tag": "\"damaged\""
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 292505623102302,
+							"parameters": {
+								"variable": "random_angle",
+								"value": "random(-max_random_angle, max_random_angle)"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 657530345865476,
+							"parameters": {
+								"variable": "random_y_offset",
+								"value": "random(min_random_y_offset, max_random_y_offset)"
+							}
+						},
+						{
+							"id": "set-angle",
+							"objectClass": "player_healthbar_bg",
+							"sid": 632757248325850,
+							"parameters": {
+								"angle": "random_angle"
+							}
+						},
+						{
+							"id": "set-y",
+							"objectClass": "player_healthbar_bg",
+							"sid": 646726289479531,
+							"parameters": {
+								"y": "Self.y_origin - random_y_offset"
+							}
+						},
+						{
+							"id": "start-fade",
+							"objectClass": "damage_feedback",
+							"sid": 679081665648024,
+							"behaviorType": "Fade"
+						},
+						{
+							"id": "start-timer",
+							"objectClass": "player_healthbar_bg",
+							"sid": 977371856992159,
+							"disabled": true,
+							"behaviorType": "Timer",
+							"parameters": {
+								"duration": "random(0.3, 0.5)",
+								"type": "once",
+								"tag": "\"damaged\""
+							}
+						}
+					],
+					"sid": 292977945720419
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-timer",
+					"objectClass": "player_healthbar_bg",
+					"sid": 703442093211169,
+					"behaviorType": "Timer",
+					"parameters": {
+						"tag": "\"damaged\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-y",
+					"objectClass": "player_healthbar_bg",
+					"sid": 677060915680183,
+					"parameters": {
+						"y": "Self.y_origin"
+					}
+				},
+				{
+					"id": "set-angle",
+					"objectClass": "player_healthbar_bg",
+					"sid": 684145804561666,
+					"parameters": {
+						"angle": "0"
+					}
+				}
+			],
+			"sid": 691337821694505,
+			"disabled": true
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "every-tick",
+					"objectClass": "System",
+					"sid": 524749661484967
+				}
+			],
+			"actions": [
+				{
+					"id": "set-width",
+					"objectClass": "healthbar",
+					"sid": 665788717524627,
+					"parameters": {
+						"width": "lerp(Self.Width, (playerCharacter.health / playerCharacter.max_health) * Self.bar_width, 4 * dt)"
+					}
+				},
+				{
+					"id": "set-y",
+					"objectClass": "player_healthbar_bg",
+					"sid": 171886260141931,
+					"parameters": {
+						"y": "lerp(Self.Y, Self.y_origin, 6 * dt)"
+					}
+				},
+				{
+					"id": "set-angle",
+					"objectClass": "player_healthbar_bg",
+					"sid": 682320368441215,
+					"parameters": {
+						"angle": "anglelerp(Self.Angle, 0, 6 * dt)"
+					}
+				}
+			],
+			"sid": 951760591497362
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "every-tick",
+					"objectClass": "System",
+					"sid": 830764668232962
+				}
+			],
+			"actions": [
+				{
+					"id": "set-position",
+					"objectClass": "vignette_gradient",
+					"sid": 747907116122920,
+					"parameters": {
+						"x": "playerCharacter.X",
+						"y": "playerCharacter.Y"
+					}
+				}
+			],
+			"sid": 390810670263930
+		}
+	],
+	"sid": 986417878794597
+}

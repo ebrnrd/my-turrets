@@ -1,6 +1,6 @@
 {
 	"projectFormatVersion": 1,
-	"savedWithRelease": 47603,
+	"savedWithRelease": 47604,
 	"name": "turrets_1",
 	"runtime": "c3",
 	"useWorker": "auto",
@@ -52,6 +52,13 @@
 			"type": "plugin",
 			"id": "gamepad",
 			"name": "Gamepad",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "behavior",
+			"id": "Anchor",
+			"name": "Anchor",
 			"author": "Scirra",
 			"bundled": false
 		},
@@ -120,6 +127,13 @@
 		},
 		{
 			"type": "behavior",
+			"id": "Sin",
+			"name": "Sine",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "behavior",
 			"id": "Timer",
 			"name": "Timer",
 			"author": "Scirra",
@@ -155,6 +169,28 @@
 		},
 		{
 			"type": "effect",
+			"id": "alphadither",
+			"name": "Alpha Dithering",
+			"author": "skymen, Wagner Scholl Lemos",
+			"bundled": false,
+			"version": "1.0.0.6"
+		},
+		{
+			"type": "effect",
+			"id": "blurhorizontal",
+			"name": "Blur horizontal",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "effect",
+			"id": "blurvertical",
+			"name": "Blur vertical",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "effect",
 			"id": "brightness",
 			"name": "Brightness",
 			"author": "Scirra",
@@ -171,6 +207,13 @@
 			"type": "effect",
 			"id": "replacesolidcolor",
 			"name": "Replace solid color",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "effect",
+			"id": "screen",
+			"name": "Screen",
 			"author": "Scirra",
 			"bundled": false
 		},
@@ -225,7 +268,14 @@
 			"water_ripple",
 			"player_weapon",
 			"player_weapon_attack",
-			"player_melee_hit"
+			"player_melee_hit",
+			"tilt_shift_mask",
+			"player_healthbar_bg",
+			"healthbar",
+			"damage_feedback",
+			"vignette_bg",
+			"vignette_gradient",
+			"fog_of_war_instance"
 		],
 		"subfolders": []
 	},
@@ -276,7 +326,8 @@
 			"shadows",
 			"terrain",
 			"reflections",
-			"ZOrder"
+			"ZOrder",
+			"ui"
 		],
 		"subfolders": []
 	},
@@ -396,7 +447,7 @@
 		"zAxisScale": "normalized",
 		"fov": 0.7853981633974483,
 		"useLoaderLayout": false,
-		"fullscreenMode": "scale-outer",
+		"fullscreenMode": "letterbox-scale",
 		"fullscreenQuality": "high",
 		"viewportFit": "auto",
 		"backgroundColor": [
