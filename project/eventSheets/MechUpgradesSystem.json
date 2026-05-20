@@ -1,0 +1,221 @@
+{
+	"name": "MechUpgradesSystem",
+	"events": [
+		{
+			"functionName": "GetMechStat",
+			"functionDescription": "",
+			"functionCategory": "Mechs",
+			"functionReturnType": "any",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "MechUID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 572972231055718
+				},
+				{
+					"name": "StatName",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 376967993681548
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 207902777890939,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MechData",
+							"sid": 544893631099750,
+							"parameters": {
+								"unique-id": "MechUID"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 160125673079957,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "UpgradeID",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 298264487574855
+						},
+						{
+							"eventType": "variable",
+							"name": "UpgradeDefinition",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 910001792456193
+						},
+						{
+							"eventType": "variable",
+							"name": "BaseValue",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 387269884090126
+						},
+						{
+							"eventType": "variable",
+							"name": "Multiplier",
+							"type": "number",
+							"initialValue": "1",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 488357217254615
+						},
+						{
+							"eventType": "variable",
+							"name": "Operation",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 262441048392786
+						},
+						{
+							"eventType": "variable",
+							"name": "UpgradeValue",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 674100253659583
+						},
+						{
+							"eventType": "variable",
+							"name": "NewValue",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 464106552150813
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "for",
+									"objectClass": "System",
+									"sid": 315280255424869,
+									"parameters": {
+										"name": "\"upgrades\"",
+										"start-index": "0",
+										"end-index": "MechData.ArraySize(\"applied_upgrades\") - 1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 931264854026359,
+									"parameters": {
+										"variable": "UpgradeID",
+										"value": "MechData.GetAsCompactString(\"applied_upgrades.\" & loopindex(\"upgrades\"))"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 267702665098475,
+									"parameters": {
+										"variable": "UpgradeDefinition",
+										"value": "MechDefinitions.GetAsCompactString(UpgradeID)"
+									}
+								}
+							],
+							"sid": 681841620491610,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "for",
+											"objectClass": "System",
+											"sid": 425755320440761,
+											"parameters": {
+												"name": "\"modifiers\"",
+												"start-index": "0",
+												"end-index": "UpgradeDefinitions.ArraySize(\"modifiers\") - 1"
+											}
+										},
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 359304015206707,
+											"parameters": {
+												"first-value": "UpgradeDefinitions.Get(\".modifiers.\" & loopindex(\"modifiers\") & \".stat\")",
+												"comparison": 0,
+												"second-value": "StatName"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 737836829187875,
+											"parameters": {
+												"variable": "BaseValue",
+												"value": "MechData.Get(\"base_stats.\" & StatName)"
+											}
+										},
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 972454762966963,
+											"parameters": {
+												"variable": "Operation",
+												"value": "UpgradeDefinitions.Get(\".modifiers.\" & loopindex(\"modifiers\") & \".op\")"
+											}
+										},
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 698580567235541,
+											"parameters": {
+												"variable": "UpgradeValue",
+												"value": "UpgradeDefinitions.Get(\".modifiers.\" & loopindex(\"modifiers\") & \".value\")"
+											}
+										},
+										{
+											"id": "stop-loop",
+											"objectClass": "System",
+											"sid": 331629011255427
+										}
+									],
+									"sid": 188159146611153
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"sid": 912555149312509
+}

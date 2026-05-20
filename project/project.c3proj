@@ -8,8 +8,22 @@
 	"usedAddons": [
 		{
 			"type": "plugin",
+			"id": "AJAX",
+			"name": "AJAX",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
 			"id": "DrawingCanvas",
 			"name": "Drawing canvas",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
+			"id": "Json",
+			"name": "JSON",
 			"author": "Scirra",
 			"bundled": false
 		},
@@ -29,6 +43,13 @@
 		},
 		{
 			"type": "plugin",
+			"id": "Particles",
+			"name": "Particles",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
 			"id": "Sprite",
 			"name": "Sprite",
 			"author": "Scirra",
@@ -38,6 +59,13 @@
 			"type": "plugin",
 			"id": "Text",
 			"name": "Text",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
+			"id": "TextBox",
+			"name": "Text input",
 			"author": "Scirra",
 			"bundled": false
 		},
@@ -275,9 +303,34 @@
 			"damage_feedback",
 			"vignette_bg",
 			"vignette_gradient",
-			"fog_of_war_instance"
+			"fog_of_war_instance",
+			"gun_flash",
+			"rock",
+			"HighGrass",
+			"smoke_particle",
+			"smoke_particle_object",
+			"fog_sprite",
+			"DebugInput"
 		],
-		"subfolders": []
+		"subfolders": [
+			{
+				"items": [
+					"MechDefinitions",
+					"UpgradeDefinitions",
+					"AJAX"
+				],
+				"subfolders": [],
+				"name": "DataObjects"
+			},
+			{
+				"items": [
+					"MechData",
+					"UpgradesManager"
+				],
+				"subfolders": [],
+				"name": "Mechs"
+			}
+		]
 	},
 	"functionsName": "Functions",
 	"autosaveData": null,
@@ -303,7 +356,8 @@
 			"bullet_family",
 			"enemies",
 			"shadowed_family",
-			"reflective_family"
+			"reflective_family",
+			"Damageables"
 		],
 		"subfolders": []
 	},
@@ -318,16 +372,21 @@
 	},
 	"eventSheets": {
 		"items": [
-			"Event sheet 1",
-			"turret_controls",
-			"player_controller",
+			"_main",
+			"MechLogic",
+			"PlayerController",
 			"enemies",
 			"looting",
 			"shadows",
 			"terrain",
 			"reflections",
 			"ZOrder",
-			"ui"
+			"ui",
+			"damageables",
+			"visual_fx",
+			"debug",
+			"MechUpgradesSystem",
+			"DataManager"
 		],
 		"subfolders": []
 	},
@@ -414,7 +473,24 @@
 			"subfolders": []
 		},
 		"general": {
-			"items": [],
+			"items": [
+				{
+					"name": "mech_definitions.json",
+					"type": "application/json",
+					"sid": 528298920847126,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "upgrade_definitions.json",
+					"type": "application/json",
+					"sid": 830408465147523,
+					"file-info": {
+						"purpose": "none"
+					}
+				}
+			],
 			"subfolders": []
 		}
 	},

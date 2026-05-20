@@ -1,5 +1,5 @@
 {
-	"name": "turret_controls",
+	"name": "MechLogic",
 	"events": [
 		{
 			"eventType": "variable",
@@ -917,243 +917,101 @@
 			"sid": 499705229447640
 		},
 		{
-			"aceType": "action",
-			"aceName": "Repair",
-			"objectClass": "turretBase",
+			"eventType": "comment",
+			"text": "FUNCTIONS"
+		},
+		{
+			"functionName": "SpawnMech",
 			"functionDescription": "",
-			"functionCategory": "",
+			"functionCategory": "Mechs",
 			"functionReturnType": "none",
 			"functionCopyPicked": false,
 			"functionIsAsync": false,
 			"functionParameters": [
 				{
-					"name": "amount",
-					"type": "number",
-					"initialValue": "0",
+					"name": "Type",
+					"type": "string",
+					"initialValue": "",
 					"comment": "",
-					"sid": 157820316077279
+					"sid": 585019388213042
 				}
 			],
-			"eventType": "custom-ace-block",
+			"eventType": "function-block",
 			"conditions": [],
-			"actions": [],
-			"sid": 328183187651128,
+			"actions": [
+				{
+					"id": "create-object",
+					"objectClass": "System",
+					"sid": 219497694972327,
+					"parameters": {
+						"object-to-create": "MechData",
+						"layer": "0",
+						"x": "0",
+						"y": "0",
+						"create-hierarchy": false,
+						"template-name": "\"\""
+					}
+				},
+				{
+					"id": "create-object",
+					"objectClass": "System",
+					"sid": 321994971600902,
+					"parameters": {
+						"object-to-create": "turretBase",
+						"layer": "\"main\"",
+						"x": "playerCharacter.X + random(-50,50)",
+						"y": "playerCharacter.Y + random(-50,50)",
+						"create-hierarchy": false,
+						"template-name": "\"\""
+					}
+				},
+				{
+					"id": "set-instvar-value",
+					"objectClass": "MechData",
+					"sid": 157283693289031,
+					"parameters": {
+						"instance-variable": "MechBaseUID",
+						"value": "turretBase.UID"
+					}
+				}
+			],
+			"sid": 914759461907024,
 			"children": [
 				{
 					"eventType": "block",
 					"conditions": [],
 					"actions": [
 						{
-							"id": "set-instvar-value",
-							"objectClass": "turretBase",
-							"sid": 908967333556260,
+							"id": "set-json",
+							"objectClass": "MechData",
+							"sid": 300874258613074,
 							"parameters": {
-								"instance-variable": "turretHealth",
-								"value": "clamp(Self.turretHealth + amount, 0, Self.turretHealthMax)"
+								"path": "\"base_stats\"",
+								"json": "MechDefinitions.GetAsBeautifiedString(Type & \".base_stats\")"
 							}
 						},
 						{
-							"customAction": "repaired_fx",
-							"objectClass": "turretBase",
-							"sid": 587925712906027
-						}
-					],
-					"sid": 875656388821125
-				}
-			]
-		},
-		{
-			"aceType": "action",
-			"aceName": "ReceiveDamage",
-			"objectClass": "turretBase",
-			"functionDescription": "",
-			"functionCategory": "",
-			"functionReturnType": "none",
-			"functionCopyPicked": false,
-			"functionIsAsync": false,
-			"functionParameters": [
-				{
-					"name": "amount",
-					"type": "number",
-					"initialValue": "0",
-					"comment": "",
-					"sid": 640434852953985
-				}
-			],
-			"eventType": "custom-ace-block",
-			"conditions": [],
-			"actions": [],
-			"sid": 251229344017499,
-			"children": [
-				{
-					"eventType": "block",
-					"conditions": [],
-					"actions": [
-						{
-							"id": "set-instvar-value",
-							"objectClass": "turretBase",
-							"sid": 984471518356310,
+							"id": "set-value",
+							"objectClass": "MechData",
+							"sid": 419003432528325,
 							"parameters": {
-								"instance-variable": "turretHealth",
-								"value": "Self.turretHealth - amount"
+								"path": "\"type\"",
+								"value": "Type"
 							}
 						},
 						{
-							"customAction": "damaged_fx",
-							"objectClass": "turretBase",
-							"sid": 826237587995796
-						}
-					],
-					"sid": 361654262505997
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "compare-instance-variable",
-							"objectClass": "turretBase",
-							"sid": 941345391257539,
+							"id": "set-array",
+							"objectClass": "MechData",
+							"sid": 478937257899184,
 							"parameters": {
-								"instance-variable": "turretHealth",
-								"comparison": 3,
-								"value": "0"
+								"path": "\"applied_upgrades\"",
+								"size": "0"
 							}
 						}
 					],
-					"actions": [
-						{
-							"id": "destroy",
-							"objectClass": "turretBase",
-							"sid": 745306064059611
-						}
-					],
-					"sid": 353823341044921
+					"sid": 233557915743092
 				}
 			]
-		},
-		{
-			"aceType": "action",
-			"aceName": "damaged_fx",
-			"objectClass": "turretBase",
-			"functionDescription": "",
-			"functionCategory": "",
-			"functionReturnType": "none",
-			"functionCopyPicked": false,
-			"functionIsAsync": false,
-			"functionParameters": [],
-			"eventType": "custom-ace-block",
-			"conditions": [],
-			"actions": [
-				{
-					"id": "set-effect-enabled",
-					"objectClass": "turretBase",
-					"sid": 728061149421148,
-					"parameters": {
-						"mode": "enable",
-						"effect": "\"SetColor\""
-					}
-				},
-				{
-					"id": "start-timer",
-					"objectClass": "turretBase",
-					"sid": 344276487320872,
-					"behaviorType": "Timer",
-					"parameters": {
-						"duration": "0.06",
-						"type": "once",
-						"tag": "\"damaged\""
-					}
-				}
-			],
-			"sid": 550220217666964
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-timer",
-					"objectClass": "turretBase",
-					"sid": 340138919230926,
-					"behaviorType": "Timer",
-					"parameters": {
-						"tag": "\"damaged\""
-					}
-				}
-			],
-			"actions": [
-				{
-					"id": "set-effect-enabled",
-					"objectClass": "turretBase",
-					"sid": 580040222263598,
-					"parameters": {
-						"mode": "disable",
-						"effect": "\"SetColor\""
-					}
-				}
-			],
-			"sid": 588261972322914
-		},
-		{
-			"aceType": "action",
-			"aceName": "repaired_fx",
-			"objectClass": "turretBase",
-			"functionDescription": "",
-			"functionCategory": "",
-			"functionReturnType": "none",
-			"functionCopyPicked": false,
-			"functionIsAsync": false,
-			"functionParameters": [],
-			"eventType": "custom-ace-block",
-			"conditions": [],
-			"actions": [
-				{
-					"id": "set-effect-enabled",
-					"objectClass": "turretBase",
-					"sid": 440266828770098,
-					"parameters": {
-						"mode": "enable",
-						"effect": "\"Brightness\""
-					}
-				},
-				{
-					"id": "start-timer",
-					"objectClass": "turretBase",
-					"sid": 573521492205610,
-					"behaviorType": "Timer",
-					"parameters": {
-						"duration": "0.08",
-						"type": "once",
-						"tag": "\"damaged\""
-					}
-				}
-			],
-			"sid": 645282689414901
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "on-timer",
-					"objectClass": "turretBase",
-					"sid": 483807716916305,
-					"behaviorType": "Timer",
-					"parameters": {
-						"tag": "\"damaged\""
-					}
-				}
-			],
-			"actions": [
-				{
-					"id": "set-effect-enabled",
-					"objectClass": "turretBase",
-					"sid": 460569234748222,
-					"parameters": {
-						"mode": "disable",
-						"effect": "\"Brightness\""
-					}
-				}
-			],
-			"sid": 821424755419538
 		}
 	],
 	"sid": 182913111176321

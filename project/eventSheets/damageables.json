@@ -1,0 +1,408 @@
+{
+	"name": "damageables",
+	"events": [
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-created",
+					"objectClass": "Damageables",
+					"sid": 162550966993700
+				}
+			],
+			"actions": [
+				{
+					"id": "set-instvar-value",
+					"objectClass": "Damageables",
+					"sid": 901662818518617,
+					"parameters": {
+						"instance-variable": "Health",
+						"value": "Self.MaxHealth"
+					}
+				}
+			],
+			"sid": 385400224471035
+		},
+		{
+			"functionName": "SendDamage",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "DamageableUID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 978642083503017
+				},
+				{
+					"name": "SenderUID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 515146332496707
+				},
+				{
+					"name": "Amount",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 751898471634291
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 774665994251526,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "Damageables",
+							"sid": 350575222627370,
+							"parameters": {
+								"unique-id": "DamageableUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"customAction": "ReceiveDamage",
+							"objectClass": "Damageables",
+							"sid": 970423758739828,
+							"parameters": [
+								"Amount"
+							]
+						}
+					],
+					"sid": 116978986070401,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "playerCharacter",
+									"sid": 948255509278636,
+									"parameters": {
+										"unique-id": "DamageableUID"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "signal",
+									"objectClass": "System",
+									"sid": 896267094964103,
+									"parameters": {
+										"tag": "\"player_damaged\""
+									}
+								}
+							],
+							"sid": 848410431605423
+						}
+					]
+				}
+			]
+		},
+		{
+			"functionName": "SendHeal",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "DamageableUID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 481677039658111
+				},
+				{
+					"name": "SenderUID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 647751637906270
+				},
+				{
+					"name": "Amount",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 310120486996928
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 501621855706473,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "Damageables",
+							"sid": 457343600715006,
+							"parameters": {
+								"unique-id": "DamageableUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"customAction": "ReceiveHeal",
+							"objectClass": "Damageables",
+							"sid": 593835325753837,
+							"parameters": [
+								"Amount"
+							]
+						}
+					],
+					"sid": 771442234716875
+				}
+			]
+		},
+		{
+			"aceType": "action",
+			"aceName": "ReceiveDamage",
+			"objectClass": "Damageables",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "amount",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 151156094419386
+				}
+			],
+			"eventType": "custom-ace-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-instvar-value",
+					"objectClass": "Damageables",
+					"sid": 165917586407496,
+					"parameters": {
+						"instance-variable": "Health",
+						"value": "Damageables.Health - amount"
+					}
+				}
+			],
+			"sid": 657742819867976,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "Damageables",
+							"sid": 700284802071009,
+							"parameters": {
+								"instance-variable": "Health",
+								"comparison": 3,
+								"value": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "destroy",
+							"objectClass": "Damageables",
+							"sid": 611807903151802
+						}
+					],
+					"sid": 597034469165246
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"customAction": "DamagedFx",
+							"objectClass": "Damageables",
+							"sid": 320955718292137
+						}
+					],
+					"sid": 517510296757393
+				}
+			]
+		},
+		{
+			"aceType": "action",
+			"aceName": "ReceiveHeal",
+			"objectClass": "Damageables",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "amount",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 129563548398053
+				}
+			],
+			"eventType": "custom-ace-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-instvar-value",
+					"objectClass": "Damageables",
+					"sid": 493966826799539,
+					"parameters": {
+						"instance-variable": "Health",
+						"value": "clamp(Damageables.Health + amount, 0, Damageables.MaxHealth)"
+					}
+				},
+				{
+					"customAction": "DamagedFx",
+					"objectClass": "Damageables",
+					"sid": 390870239673804
+				}
+			],
+			"sid": 476613787846298
+		},
+		{
+			"aceType": "action",
+			"aceName": "DamagedFx",
+			"objectClass": "Damageables",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "custom-ace-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-effect-enabled",
+					"objectClass": "Damageables",
+					"sid": 356736768682732,
+					"parameters": {
+						"mode": "enable",
+						"effect": "\"DamagedColor\""
+					}
+				},
+				{
+					"id": "start-timer",
+					"objectClass": "Damageables",
+					"sid": 570567168225581,
+					"behaviorType": "Timer2",
+					"parameters": {
+						"duration": "0.04",
+						"type": "once",
+						"tag": "\"damaged\""
+					}
+				}
+			],
+			"sid": 303724612065194
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-timer",
+					"objectClass": "Damageables",
+					"sid": 227640238124107,
+					"behaviorType": "Timer2",
+					"parameters": {
+						"tag": "\"damaged\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-effect-enabled",
+					"objectClass": "Damageables",
+					"sid": 340684022446258,
+					"parameters": {
+						"mode": "disable",
+						"effect": "\"DamagedColor\""
+					}
+				}
+			],
+			"sid": 569382821226503
+		},
+		{
+			"aceType": "action",
+			"aceName": "HealedFx",
+			"objectClass": "Damageables",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "custom-ace-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-effect-enabled",
+					"objectClass": "Damageables",
+					"sid": 623769096880704,
+					"parameters": {
+						"mode": "enable",
+						"effect": "\"HealedColor\""
+					}
+				},
+				{
+					"id": "start-timer",
+					"objectClass": "Damageables",
+					"sid": 958614234543738,
+					"behaviorType": "Timer2",
+					"parameters": {
+						"duration": "0.04",
+						"type": "once",
+						"tag": "\"healed\""
+					}
+				}
+			],
+			"sid": 883825548683539
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-timer",
+					"objectClass": "Damageables",
+					"sid": 588399110781052,
+					"behaviorType": "Timer2",
+					"parameters": {
+						"tag": "\"healed\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-effect-enabled",
+					"objectClass": "Damageables",
+					"sid": 614416951888916,
+					"parameters": {
+						"mode": "disable",
+						"effect": "\"HealedColor\""
+					}
+				}
+			],
+			"sid": 860362437875366
+		}
+	],
+	"sid": 539396073994805
+}

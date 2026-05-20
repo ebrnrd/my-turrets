@@ -1,0 +1,44 @@
+{
+	"name": "Damageables",
+	"plugin-id": "Sprite",
+	"sid": 226432512309652,
+	"instanceVariables": [
+		{
+			"name": "Health",
+			"type": "number",
+			"desc": "",
+			"show": false,
+			"sid": 211114369316053
+		},
+		{
+			"name": "MaxHealth",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 845186576039917
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Timer",
+			"name": "Timer2",
+			"sid": 858200220089072
+		}
+	],
+	"effectTypes": [
+		{
+			"effectId": "setcolor",
+			"name": "DamagedColor"
+		},
+		{
+			"effectId": "setcolor",
+			"name": "HealedColor"
+		}
+	],
+	"members": [
+		"turretBase",
+		"playerCharacter",
+		"enemyTest",
+		"rock"
+	]
+}

@@ -1,5 +1,5 @@
 {
-	"name": "player_controller",
+	"name": "PlayerController",
 	"events": [
 		{
 			"eventType": "variable",
@@ -872,6 +872,16 @@
 			"sid": 403540460297101,
 			"children": [
 				{
+					"eventType": "variable",
+					"name": "CanShake",
+					"type": "boolean",
+					"initialValue": "false",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 307790281034917
+				},
+				{
 					"eventType": "block",
 					"conditions": [
 						{
@@ -893,10 +903,11 @@
 					],
 					"actions": [
 						{
-							"customAction": "Repair",
-							"objectClass": "turretBase",
-							"sid": 617066259018219,
+							"callFunction": "SendHeal",
+							"sid": 292318488518536,
 							"parameters": [
+								"turretBase.UID",
+								"playerCharacter.UID",
 								"player_melee_damage"
 							]
 						},
@@ -909,6 +920,15 @@
 								"impulse": "random(2,5)",
 								"angle": "angle(turretBase.X, turretBase.Y, playerCharacter.X, playerCharacter.Y) + 180",
 								"image-point": "0"
+							}
+						},
+						{
+							"id": "set-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 676718527366171,
+							"parameters": {
+								"variable": "CanShake",
+								"value": "true"
 							}
 						}
 					],
@@ -936,10 +956,11 @@
 					],
 					"actions": [
 						{
-							"customAction": "ReceiveDamage",
-							"objectClass": "enemies",
-							"sid": 490675722451137,
+							"callFunction": "SendDamage",
+							"sid": 487177716575671,
 							"parameters": [
+								"enemies.UID",
+								"playerCharacter.UID",
 								"player_melee_damage"
 							]
 						},
@@ -953,9 +974,90 @@
 								"angle": "angle(enemies.X, enemies.Y, playerCharacter.X, playerCharacter.Y) + 180",
 								"image-point": "0"
 							}
+						},
+						{
+							"id": "set-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 652404850205070,
+							"parameters": {
+								"variable": "CanShake",
+								"value": "true"
+							}
 						}
 					],
 					"sid": 339306302399573
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-overlapping-another-object",
+							"objectClass": "player_melee_hit",
+							"sid": 188243683680765,
+							"parameters": {
+								"object": "rock"
+							}
+						},
+						{
+							"id": "pick-nearestfurthest",
+							"objectClass": "rock",
+							"sid": 774461656384566,
+							"parameters": {
+								"which": "nearest",
+								"x": "playerCharacter.X",
+								"y": "playerCharacter.Y",
+								"pick-all-tied": false
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "SendDamage",
+							"sid": 740858558888827,
+							"parameters": [
+								"rock.UID",
+								"playerCharacter.UID",
+								"player_melee_damage"
+							]
+						},
+						{
+							"id": "set-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 145331656897921,
+							"parameters": {
+								"variable": "CanShake",
+								"value": "true"
+							}
+						}
+					],
+					"sid": 749328902822224
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 628843869432978,
+							"parameters": {
+								"variable": "CanShake"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "shake",
+							"objectClass": "camera",
+							"sid": 143351242036610,
+							"behaviorType": "ScrollTo",
+							"parameters": {
+								"magnitude": "3",
+								"duration": "0.2",
+								"mode": "reducing-magnitude"
+							}
+						}
+					],
+					"sid": 536579170593229
 				}
 			]
 		},
@@ -991,10 +1093,10 @@
 				{
 					"id": "set-instvar-value",
 					"objectClass": "playerCharacter",
-					"sid": 135275647155454,
+					"sid": 830499597838348,
 					"parameters": {
-						"instance-variable": "health",
-						"value": "playerCharacter.health - amount"
+						"instance-variable": "Health",
+						"value": "playerCharacter.Health - amount"
 					}
 				}
 			],
@@ -1006,9 +1108,9 @@
 						{
 							"id": "compare-instance-variable",
 							"objectClass": "playerCharacter",
-							"sid": 909813933023055,
+							"sid": 746456838543553,
 							"parameters": {
-								"instance-variable": "health",
+								"instance-variable": "Health",
 								"comparison": 3,
 								"value": "0"
 							}

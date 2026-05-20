@@ -1,0 +1,16 @@
+{
+	"name": "MechData",
+	"plugin-id": "Json",
+	"sid": 166426748985130,
+	"isGlobal": true,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [
+		{
+			"name": "MechBaseUID",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 226230172012062
+		}
+	]
+}

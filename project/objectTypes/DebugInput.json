@@ -1,0 +1,9 @@
+{
+	"name": "DebugInput",
+	"plugin-id": "TextBox",
+	"sid": 349848137571836,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": []
+}

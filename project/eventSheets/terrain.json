@@ -5,7 +5,7 @@
 			"eventType": "variable",
 			"name": "grass_amount",
 			"type": "number",
-			"initialValue": "2000",
+			"initialValue": "9000",
 			"comment": "",
 			"isStatic": false,
 			"isConstant": false,
@@ -15,11 +15,21 @@
 			"eventType": "variable",
 			"name": "trees_amount",
 			"type": "number",
-			"initialValue": "100",
+			"initialValue": "500",
 			"comment": "",
 			"isStatic": false,
 			"isConstant": false,
 			"sid": 562180614604242
+		},
+		{
+			"eventType": "variable",
+			"name": "rocks_amount",
+			"type": "number",
+			"initialValue": "20",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 978423584731762
 		},
 		{
 			"eventType": "variable",
@@ -235,6 +245,251 @@
 							"sid": 400640964122119
 						}
 					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "repeat",
+							"objectClass": "System",
+							"sid": 841504740415351,
+							"parameters": {
+								"count": "rocks_amount"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 687581264865558,
+							"parameters": {
+								"object-to-create": "rock",
+								"layer": "\"trees\"",
+								"x": "random(0, LayoutWidth)",
+								"y": "random(0, LayoutHeight)",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-scale",
+							"objectClass": "rock",
+							"sid": 769859711711653,
+							"parameters": {
+								"scale": "4"
+							}
+						}
+					],
+					"sid": 862352119517575,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 582729445933558,
+									"parameters": {
+										"first-value": "random(1)",
+										"comparison": 3,
+										"second-value": "0.5"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-mirrored",
+									"objectClass": "rock",
+									"sid": 200029066315387,
+									"parameters": {
+										"state": "mirrored"
+									}
+								}
+							],
+							"sid": 209631014884487
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 374937441057748,
+									"parameters": {
+										"first-value": "random(1)",
+										"comparison": 3,
+										"second-value": "0.5"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation-frame",
+									"objectClass": "rock",
+									"sid": 598757983463300,
+									"parameters": {
+										"frame-number": "0"
+									}
+								}
+							],
+							"sid": 184332137525991
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 467618767154166
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation-frame",
+									"objectClass": "rock",
+									"sid": 787489713794133,
+									"parameters": {
+										"frame-number": "1"
+									}
+								}
+							],
+							"sid": 812795006305128
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "for-each",
+					"objectClass": "System",
+					"sid": 426325716193130,
+					"parameters": {
+						"object": "tree"
+					}
+				},
+				{
+					"id": "is-on-screen",
+					"objectClass": "tree",
+					"sid": 855340531095860
+				}
+			],
+			"actions": [],
+			"sid": 850378293363260,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-overlapping-another-object",
+							"objectClass": "Damageables",
+							"sid": 420323629485992,
+							"parameters": {
+								"object": "tree"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-angle",
+							"objectClass": "tree",
+							"sid": 937187699349638,
+							"parameters": {
+								"angle": "anglelerp(Self.Angle, (tree.X - Damageables.X) * 0.002 * abs(Damageables.Width), 10 * dt)"
+							}
+						}
+					],
+					"sid": 267105153131037
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 607817624295216
+						}
+					],
+					"actions": [
+						{
+							"id": "set-angle",
+							"objectClass": "tree",
+							"sid": 613062249097819,
+							"parameters": {
+								"angle": "anglelerp(Self.Angle, 0, 4 * dt)"
+							}
+						}
+					],
+					"sid": 636463603234796
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-destroyed",
+					"objectClass": "rock",
+					"sid": 708877682537639
+				}
+			],
+			"actions": [],
+			"sid": 965505331497640,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "repeat",
+							"objectClass": "System",
+							"sid": 562400081419075,
+							"parameters": {
+								"count": "round(random(5,8))"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 766044653390720,
+							"parameters": {
+								"object-to-create": "scrap",
+								"layer": "\"main\"",
+								"x": "rock.X + random(-10,10)",
+								"y": "rock.Y + random(-10,10)",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-world-gravity",
+							"objectClass": "scrap",
+							"sid": 266879142613310,
+							"behaviorType": "Physics",
+							"parameters": {
+								"gravity": "0"
+							}
+						},
+						{
+							"id": "set-animation",
+							"objectClass": "scrap",
+							"sid": 431034464630219,
+							"parameters": {
+								"animation": "choose(\"1\",\"2\")",
+								"from": "beginning"
+							}
+						},
+						{
+							"id": "move-to-bottom",
+							"objectClass": "scrap",
+							"sid": 974884704603747
+						}
+					],
+					"sid": 266878923576281
 				}
 			]
 		}

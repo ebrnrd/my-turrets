@@ -1,0 +1,8 @@
+{
+	"name": "UpgradesManager",
+	"plugin-id": "Json",
+	"sid": 971662695863261,
+	"isGlobal": true,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": []
+}

@@ -1118,13 +1118,16 @@
 						"order": 0,
 						"height_from_ground": 0,
 						"shadow_width": 60,
+						"Health": 100,
+						"MaxHealth": 100,
 						"is_attacking": false,
 						"default_walk_speed": 250,
-						"attack_walk_speed": 50,
-						"health": 0,
-						"max_health": 0
+						"attack_walk_speed": 50
 					},
 					"behaviors": {
+						"Timer2": {
+							"properties": {}
+						},
 						"8Direction": {
 							"properties": {
 								"max-speed": 200,
@@ -1140,6 +1143,30 @@
 						"ScrollTo": {
 							"properties": {
 								"enabled": true
+							}
+						}
+					},
+					"effects": {
+						"DamagedColor": {
+							"isEnabled": true,
+							"parameters": {
+								"color": [
+									1,
+									0,
+									0,
+									1
+								]
+							}
+						},
+						"HealedColor": {
+							"isEnabled": true,
+							"parameters": {
+								"color": [
+									1,
+									0,
+									0,
+									1
+								]
 							}
 						}
 					},
@@ -1362,7 +1389,42 @@
 		"subfolders": []
 	},
 	"sid": 321425915906044,
-	"nonworld-instances": [],
+	"nonworld-instances": [
+		{
+			"type": "MechDefinitions",
+			"properties": {},
+			"uid": 81,
+			"sid": 465896384174534,
+			"tags": "",
+			"instanceVariables": {}
+		},
+		{
+			"type": "UpgradeDefinitions",
+			"properties": {},
+			"uid": 82,
+			"sid": 779647586374900,
+			"tags": "",
+			"instanceVariables": {}
+		},
+		{
+			"type": "MechData",
+			"properties": {},
+			"uid": 83,
+			"sid": 315289895206282,
+			"tags": "",
+			"instanceVariables": {
+				"MechBaseUID": 0
+			}
+		},
+		{
+			"type": "UpgradesManager",
+			"properties": {},
+			"uid": 84,
+			"sid": 223920278177867,
+			"tags": "",
+			"instanceVariables": {}
+		}
+	],
 	"effectTypes": [],
 	"width": 3840,
 	"height": 2160,
@@ -1371,5 +1433,5 @@
 	"vpX": 0.5,
 	"vpY": 0.5,
 	"projection": "perspective",
-	"eventSheet": "Event sheet 1"
+	"eventSheet": "_main"
 }

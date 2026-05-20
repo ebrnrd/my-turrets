@@ -1,0 +1,8 @@
+{
+	"name": "MechDefinitions",
+	"plugin-id": "Json",
+	"sid": 965125663457455,
+	"isGlobal": true,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": []
+}

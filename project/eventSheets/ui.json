@@ -62,6 +62,17 @@
 					"customAction": "ReceiveDamageFx",
 					"objectClass": "player_healthbar_bg",
 					"sid": 407441031463276
+				},
+				{
+					"id": "shake",
+					"objectClass": "camera",
+					"sid": 196893290117827,
+					"behaviorType": "ScrollTo",
+					"parameters": {
+						"magnitude": "4",
+						"duration": "0.2",
+						"mode": "reducing-magnitude"
+					}
 				}
 			],
 			"sid": 700263309277660
@@ -249,9 +260,9 @@
 				{
 					"id": "set-width",
 					"objectClass": "healthbar",
-					"sid": 665788717524627,
+					"sid": 766718548195842,
 					"parameters": {
-						"width": "lerp(Self.Width, (playerCharacter.health / playerCharacter.max_health) * Self.bar_width, 4 * dt)"
+						"width": "lerp(Self.Width, (playerCharacter.Health/ playerCharacter.MaxHealth) * Self.bar_width, 4 * dt)"
 					}
 				},
 				{

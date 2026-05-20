@@ -941,7 +941,8 @@
 					}
 				}
 			],
-			"sid": 787873254267992
+			"sid": 787873254267992,
+			"disabled": true
 		},
 		{
 			"eventType": "block",
@@ -968,7 +969,8 @@
 					}
 				}
 			],
-			"sid": 162741920778961
+			"sid": 162741920778961,
+			"disabled": true
 		},
 		{
 			"aceType": "action",
@@ -992,36 +994,17 @@
 			"conditions": [],
 			"actions": [
 				{
-					"id": "set-instvar-value",
-					"objectClass": "enemies",
-					"sid": 938248045883027,
-					"parameters": {
-						"instance-variable": "health",
-						"value": "enemies.health - amount"
-					}
-				},
-				{
 					"customAction": "damaged_fx",
 					"objectClass": "enemies",
 					"sid": 547044432389884
 				}
 			],
 			"sid": 429606028598047,
+			"disabled": true,
 			"children": [
 				{
 					"eventType": "block",
-					"conditions": [
-						{
-							"id": "compare-instance-variable",
-							"objectClass": "enemies",
-							"sid": 504348753859309,
-							"parameters": {
-								"instance-variable": "health",
-								"comparison": 3,
-								"value": "0"
-							}
-						}
-					],
+					"conditions": [],
 					"actions": [
 						{
 							"id": "destroy",
@@ -1029,7 +1012,8 @@
 							"sid": 763219232130576
 						}
 					],
-					"sid": 711289097199506
+					"sid": 711289097199506,
+					"disabled": true
 				}
 			]
 		},
@@ -1076,8 +1060,19 @@
 						{
 							"customAction": "ReceiveDamage",
 							"objectClass": "turretBase",
+							"customActionObjectClass": "Damageables",
 							"sid": 724629477461626,
+							"disabled": true,
 							"parameters": [
+								"0"
+							]
+						},
+						{
+							"callFunction": "SendDamage",
+							"sid": 870254442085088,
+							"parameters": [
+								"turretBase.UID",
+								"enemyTest.UID",
 								"enemyTest.damage"
 							]
 						}
@@ -1102,6 +1097,15 @@
 							"objectClass": "playerCharacter",
 							"sid": 428951217721960,
 							"parameters": [
+								"enemyTest.damage"
+							]
+						},
+						{
+							"callFunction": "SendDamage",
+							"sid": 455700964884153,
+							"parameters": [
+								"playerCharacter.UID",
+								"enemyTest.UID",
 								"enemyTest.damage"
 							]
 						}

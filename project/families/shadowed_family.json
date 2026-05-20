@@ -25,6 +25,8 @@
 		"bullet",
 		"turretBase",
 		"playerCharacter",
-		"tree"
+		"tree",
+		"rock",
+		"HighGrass"
 	]
 }

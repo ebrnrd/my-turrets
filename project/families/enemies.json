@@ -4,13 +4,6 @@
 	"sid": 708185085196910,
 	"instanceVariables": [
 		{
-			"name": "health",
-			"type": "number",
-			"desc": "",
-			"show": true,
-			"sid": 255897564144493
-		},
-		{
 			"name": "move_speed",
 			"type": "number",
 			"desc": "",

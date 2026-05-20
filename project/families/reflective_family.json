@@ -12,6 +12,8 @@
 		"turretBase",
 		"turretGun",
 		"wall",
-		"tree"
+		"tree",
+		"rock",
+		"HighGrass"
 	]
 }

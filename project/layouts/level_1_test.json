@@ -312,13 +312,16 @@
 						"order": 0,
 						"height_from_ground": 0,
 						"shadow_width": 60,
+						"Health": 100,
+						"MaxHealth": 100,
 						"is_attacking": false,
 						"default_walk_speed": 250,
-						"attack_walk_speed": 50,
-						"health": 0,
-						"max_health": 0
+						"attack_walk_speed": 50
 					},
 					"behaviors": {
+						"Timer2": {
+							"properties": {}
+						},
 						"8Direction": {
 							"properties": {
 								"max-speed": 400,
@@ -334,6 +337,30 @@
 						"ScrollTo": {
 							"properties": {
 								"enabled": false
+							}
+						}
+					},
+					"effects": {
+						"DamagedColor": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									0.8745098039215686,
+									0.2627450980392157,
+									0.2627450980392157,
+									1
+								]
+							}
+						},
+						"HealedColor": {
+							"isEnabled": true,
+							"parameters": {
+								"color": [
+									1,
+									0,
+									0,
+									1
+								]
 							}
 						}
 					},

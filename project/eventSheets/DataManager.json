@@ -1,0 +1,94 @@
+{
+	"name": "DataManager",
+	"events": [
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 132872697034211
+				}
+			],
+			"actions": [
+				{
+					"id": "request-project-file",
+					"objectClass": "AJAX",
+					"sid": 747847225481253,
+					"parameters": {
+						"tag": "\"mech_definitions\"",
+						"file": {
+							"path": "mech_definitions.json"
+						}
+					}
+				},
+				{
+					"id": "wait-for-previous-actions",
+					"objectClass": "System",
+					"sid": 307487709040614
+				},
+				{
+					"id": "request-project-file",
+					"objectClass": "AJAX",
+					"sid": 744105095437346,
+					"parameters": {
+						"tag": "\"upgrade_definitions\"",
+						"file": {
+							"path": "upgrade_definitions.json"
+						}
+					}
+				}
+			],
+			"sid": 465641204770641
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-completed",
+					"objectClass": "AJAX",
+					"sid": 625891577638579,
+					"parameters": {
+						"tag": "\"mech_definitions\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "parse",
+					"objectClass": "MechDefinitions",
+					"sid": 617164913123871,
+					"parameters": {
+						"data": "AJAX.LastData"
+					}
+				}
+			],
+			"sid": 662582477895875
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-completed",
+					"objectClass": "AJAX",
+					"sid": 129754260533709,
+					"parameters": {
+						"tag": "\"upgrade_definitions\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "parse",
+					"objectClass": "UpgradeDefinitions",
+					"sid": 192203716965584,
+					"parameters": {
+						"data": "AJAX.LastData"
+					}
+				}
+			],
+			"sid": 554189080044071
+		}
+	],
+	"sid": 363367969661520
+}

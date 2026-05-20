@@ -1,0 +1,53 @@
+{
+	"name": "visual_fx",
+	"events": [
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-created",
+					"objectClass": "smoke_particle",
+					"sid": 230838480308568
+				}
+			],
+			"actions": [
+				{
+					"id": "move-to-layer",
+					"objectClass": "smoke_particle",
+					"sid": 763346278331344,
+					"parameters": {
+						"layer": "\"smoke\""
+					}
+				}
+			],
+			"sid": 511351667348666,
+			"disabled": true
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "for-each",
+					"objectClass": "System",
+					"sid": 136787788045588,
+					"parameters": {
+						"object": "smoke_particle_object"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-z-elevation",
+					"objectClass": "smoke_particle_object",
+					"sid": 866980506224880,
+					"parameters": {
+						"z": "Self.Z + 10 * dt"
+					}
+				}
+			],
+			"sid": 722401002172209,
+			"disabled": true
+		}
+	],
+	"sid": 864475757024676
+}

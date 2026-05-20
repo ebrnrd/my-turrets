@@ -105,8 +105,8 @@
 					"showing": true,
 					"locked": false,
 					"world": {
-						"x": 3026,
-						"y": 2486,
+						"x": 3028,
+						"y": 2505,
 						"width": 5944,
 						"height": 5000,
 						"originX": 0.5,
@@ -499,13 +499,16 @@
 						"order": 0,
 						"height_from_ground": 0,
 						"shadow_width": 60,
+						"Health": 100,
+						"MaxHealth": 100,
 						"is_attacking": false,
-						"default_walk_speed": 250,
-						"attack_walk_speed": 100,
-						"health": 100,
-						"max_health": 100
+						"default_walk_speed": 200,
+						"attack_walk_speed": 100
 					},
 					"behaviors": {
+						"Timer2": {
+							"properties": {}
+						},
 						"8Direction": {
 							"properties": {
 								"max-speed": 250,
@@ -521,6 +524,30 @@
 						"ScrollTo": {
 							"properties": {
 								"enabled": false
+							}
+						}
+					},
+					"effects": {
+						"DamagedColor": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									0.9137254901960784,
+									0.24705882352941178,
+									0.24705882352941178,
+									1
+								]
+							}
+						},
+						"HealedColor": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									1,
+									1,
+									1,
+									1
+								]
 							}
 						}
 					},
@@ -810,6 +837,123 @@
 			"global": false
 		},
 		{
+			"name": "fog",
+			"overriden": 0,
+			"subLayers": [],
+			"instances": [],
+			"sid": 958629254138570,
+			"effectTypes": [],
+			"isInitiallyVisible": true,
+			"isInitiallyInteractive": true,
+			"isHTMLElementsLayer": false,
+			"color": [
+				1,
+				1,
+				1,
+				1
+			],
+			"backgroundColor": [
+				0.3686274509803922,
+				0.3686274509803922,
+				0.3686274509803922,
+				1
+			],
+			"isTransparent": true,
+			"sampling": "auto",
+			"parallaxX": 1,
+			"parallaxY": 1,
+			"scaleRate": 1,
+			"forceOwnTexture": false,
+			"renderingMode": "3d",
+			"drawOrder": "z-order",
+			"useRenderCells": false,
+			"blendMode": "normal",
+			"zElevation": 0,
+			"global": false
+		},
+		{
+			"name": "smoke",
+			"overriden": 0,
+			"subLayers": [],
+			"instances": [],
+			"sid": 991482387299811,
+			"effectTypes": [
+				{
+					"effectId": "alphadither",
+					"name": "AlphaDithering",
+					"instance": {
+						"isEnabled": true,
+						"parameters": {
+							"alphaDither": 0.4,
+							"scale": 2
+						}
+					}
+				}
+			],
+			"isInitiallyVisible": true,
+			"isInitiallyInteractive": true,
+			"isHTMLElementsLayer": false,
+			"color": [
+				1,
+				1,
+				1,
+				1
+			],
+			"backgroundColor": [
+				0.3686274509803922,
+				0.3686274509803922,
+				0.3686274509803922,
+				1
+			],
+			"isTransparent": true,
+			"sampling": "auto",
+			"parallaxX": 1,
+			"parallaxY": 1,
+			"scaleRate": 1,
+			"forceOwnTexture": false,
+			"renderingMode": "3d",
+			"drawOrder": "z-order",
+			"useRenderCells": false,
+			"blendMode": "normal",
+			"zElevation": 0,
+			"global": false
+		},
+		{
+			"name": "fx",
+			"overriden": 0,
+			"subLayers": [],
+			"instances": [],
+			"sid": 767924896883994,
+			"effectTypes": [],
+			"isInitiallyVisible": true,
+			"isInitiallyInteractive": true,
+			"isHTMLElementsLayer": false,
+			"color": [
+				1,
+				1,
+				1,
+				1
+			],
+			"backgroundColor": [
+				0.3686274509803922,
+				0.3686274509803922,
+				0.3686274509803922,
+				1
+			],
+			"isTransparent": true,
+			"sampling": "auto",
+			"parallaxX": 1,
+			"parallaxY": 1,
+			"scaleRate": 1,
+			"forceOwnTexture": false,
+			"renderingMode": "3d",
+			"drawOrder": "z-order",
+			"useRenderCells": false,
+			"blendMode": "normal",
+			"zElevation": 0,
+			"global": false
+		},
+		{
 			"name": "tilt-shift-top",
 			"overriden": 0,
 			"subLayers": [],
@@ -866,7 +1010,7 @@
 						"x": 0,
 						"y": 0,
 						"width": 1920,
-						"height": 264,
+						"height": 317.79999999999995,
 						"originX": 0,
 						"originY": 0,
 						"color": [
@@ -931,7 +1075,7 @@
 						"x": 0,
 						"y": 0,
 						"width": 1920,
-						"height": 264,
+						"height": 317.79999999999995,
 						"originX": 0,
 						"originY": 0,
 						"color": [
@@ -1032,7 +1176,7 @@
 						"x": 1920,
 						"y": 1080,
 						"width": 1920,
-						"height": 227.00000000000003,
+						"height": 317.79999999999995,
 						"originX": 0,
 						"originY": 0,
 						"color": [
@@ -1097,7 +1241,7 @@
 						"x": 1920,
 						"y": 1080,
 						"width": 1920,
-						"height": 227.00000000000003,
+						"height": 317.79999999999995,
 						"originX": 0,
 						"originY": 0,
 						"color": [
@@ -1398,9 +1542,9 @@
 						"originX": 0,
 						"originY": 0,
 						"color": [
-							0,
-							0,
-							0,
+							0.9137254901960784,
+							0.24705882352941178,
+							0.24705882352941178,
 							1
 						],
 						"z": 0,
@@ -1413,6 +1557,83 @@
 			"isInitiallyVisible": true,
 			"isInitiallyInteractive": true,
 			"isHTMLElementsLayer": false,
+			"color": [
+				1,
+				1,
+				1,
+				1
+			],
+			"backgroundColor": [
+				0.3686274509803922,
+				0.3686274509803922,
+				0.3686274509803922,
+				1
+			],
+			"isTransparent": true,
+			"sampling": "auto",
+			"parallaxX": 0,
+			"parallaxY": 0,
+			"scaleRate": 1,
+			"forceOwnTexture": false,
+			"renderingMode": "3d",
+			"drawOrder": "z-order",
+			"useRenderCells": false,
+			"blendMode": "normal",
+			"zElevation": 0,
+			"global": false
+		},
+		{
+			"name": "debug_ui",
+			"overriden": 0,
+			"subLayers": [],
+			"instances": [
+				{
+					"type": "DebugInput",
+					"properties": {
+						"text": "",
+						"placeholder": "",
+						"tooltip": "",
+						"initially-visible": true,
+						"enabled": true,
+						"read-only": false,
+						"spell-check": false,
+						"type": "text",
+						"auto-font-size": true,
+						"id": "",
+						"class": ""
+					},
+					"uid": 79,
+					"sid": 377314580482662,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {},
+					"instanceFolderItem": {
+						"sid": 377314580482662,
+						"expanded": true
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 155,
+						"y": 72,
+						"width": 150,
+						"height": 22,
+						"originX": 0,
+						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						]
+					}
+				}
+			],
+			"sid": 126834841434413,
+			"effectTypes": [],
+			"isInitiallyVisible": true,
+			"isInitiallyInteractive": true,
+			"isHTMLElementsLayer": true,
 			"color": [
 				1,
 				1,

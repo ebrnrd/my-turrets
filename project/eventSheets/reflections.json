@@ -41,38 +41,80 @@
 						{
 							"id": "is-on-screen",
 							"objectClass": "reflective_family",
-							"sid": 996535623605824,
-							"disabled": true
+							"sid": 996535623605824
 						}
 					],
-					"actions": [
+					"actions": [],
+					"sid": 743945031550699,
+					"children": [
 						{
-							"id": "set-flipped",
-							"objectClass": "reflective_family",
-							"sid": 943817129444711,
-							"parameters": {
-								"state": "flipped"
-							}
+							"eventType": "variable",
+							"name": "old_angle",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 393152020519451
 						},
 						{
-							"id": "paste-object",
-							"objectClass": "reflection_canvas",
-							"sid": 963809351065054,
-							"parameters": {
-								"object": "reflective_family",
-								"effects": "with-effects"
-							}
-						},
-						{
-							"id": "set-flipped",
-							"objectClass": "reflective_family",
-							"sid": 823915710376715,
-							"parameters": {
-								"state": "not-flipped"
-							}
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 295280750426720,
+									"parameters": {
+										"variable": "old_angle",
+										"value": "reflective_family.Angle"
+									}
+								},
+								{
+									"id": "set-flipped",
+									"objectClass": "reflective_family",
+									"sid": 645782687941120,
+									"parameters": {
+										"state": "flipped"
+									}
+								},
+								{
+									"id": "set-angle",
+									"objectClass": "reflective_family",
+									"sid": 486402658431580,
+									"parameters": {
+										"angle": "-old_angle"
+									}
+								},
+								{
+									"id": "paste-object",
+									"objectClass": "reflection_canvas",
+									"sid": 789983768105752,
+									"parameters": {
+										"object": "reflective_family",
+										"effects": "with-effects"
+									}
+								},
+								{
+									"id": "set-flipped",
+									"objectClass": "reflective_family",
+									"sid": 884001956600914,
+									"parameters": {
+										"state": "not-flipped"
+									}
+								},
+								{
+									"id": "set-angle",
+									"objectClass": "reflective_family",
+									"sid": 400522713435709,
+									"parameters": {
+										"angle": "old_angle"
+									}
+								}
+							],
+							"sid": 134021541021855
 						}
-					],
-					"sid": 743945031550699
+					]
 				}
 			]
 		},

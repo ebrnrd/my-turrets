@@ -1,0 +1,106 @@
+{
+	"name": "rock",
+	"plugin-id": "Sprite",
+	"sid": 591604035410041,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": [
+		{
+			"behaviorId": "solid",
+			"name": "Solid",
+			"sid": 775921426289105
+		}
+	],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 22,
+						"height": 16,
+						"originX": 0.5,
+						"originY": 1,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 7815657,
+						"collisionPoly": {
+							"points": [
+								0.46590909090909105,
+								0.1328124701976776,
+								1,
+								0.5625,
+								1,
+								0.8125,
+								0.8181818181818182,
+								1,
+								0.22727272727272727,
+								1,
+								0.045454545454545456,
+								0.875,
+								0,
+								0.75,
+								0,
+								0.625,
+								0.045454545454545456,
+								0.5
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					},
+					{
+						"width": 25,
+						"height": 20,
+						"originX": 0.5,
+						"originY": 1,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 5853872,
+						"collisionPoly": {
+							"points": [
+								0.9224998474121094,
+								0.3187499523162842,
+								0.9980000305175781,
+								0.7375000000000002,
+								0.8560000610351562,
+								0.8875,
+								0.72,
+								1,
+								0.2,
+								1,
+								0.09699996948242184,
+								0.8974999904632568,
+								0.027999992370605475,
+								0.8012499809265137,
+								0,
+								0.75,
+								0,
+								0.55,
+								0.26750015258789067,
+								0.29062509536743164
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 602302353867738,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 0
+			}
+		],
+		"subfolders": []
+	}
+}

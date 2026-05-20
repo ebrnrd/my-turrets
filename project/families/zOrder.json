@@ -20,6 +20,10 @@
 		"wall",
 		"tree",
 		"bullet",
-		"player_weapon"
+		"player_weapon",
+		"rock",
+		"HighGrass",
+		"smoke_particle_object",
+		"fog_sprite"
 	]
 }

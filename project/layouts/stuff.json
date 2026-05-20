@@ -39,8 +39,8 @@
 							"transformX": 0,
 							"transformY": 0,
 							"transformZ": 0,
-							"transformW": 0,
-							"transformH": 0,
+							"transformW": 2.220446049250313e-16,
+							"transformH": 2.220446049250313e-16,
 							"transformA": 0,
 							"transformSX": 0,
 							"transformSY": 0,
@@ -253,8 +253,8 @@
 								"range": 500,
 								"rate-of-fire": 1,
 								"rotate": true,
-								"rotate-speed": 270,
-								"target-mode": "first-in-range",
+								"rotate-speed": 720,
+								"target-mode": "nearest",
 								"predictive-aim": true,
 								"projectile-speed": 2000,
 								"use-collision-cells": true,
@@ -306,10 +306,11 @@
 					"tags": "",
 					"instanceVariables": {
 						"order": 0,
-						"health": 20,
 						"move_speed": 2,
 						"height_from_ground": 0,
 						"shadow_width": 50,
+						"Health": 100,
+						"MaxHealth": 50,
 						"healthold": 20,
 						"damage": 5,
 						"damage_seconds": 1
@@ -333,6 +334,9 @@
 								"bullet": false,
 								"enabled": true
 							}
+						},
+						"Timer2": {
+							"properties": {}
 						},
 						"Pathfinding": {
 							"properties": {
@@ -378,6 +382,28 @@
 							"parameters": {
 								"brightness": 1
 							}
+						},
+						"DamagedColor": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									0.8392156862745098,
+									0.2627450980392157,
+									0.2627450980392157,
+									1
+								]
+							}
+						},
+						"HealedColor": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									0.08235294117647059,
+									0.8352941176470589,
+									0.30980392156862746,
+									1
+								]
+							}
 						}
 					},
 					"showing": true,
@@ -390,9 +416,9 @@
 						"originX": 0.5,
 						"originY": 1,
 						"color": [
-							1,
-							1,
-							1,
+							0,
+							0,
+							0,
 							1
 						],
 						"z": 0,
@@ -503,9 +529,9 @@
 						"order": 0,
 						"height_from_ground": 0,
 						"shadow_width": 70,
+						"Health": 100,
+						"MaxHealth": 100,
 						"turretIndex": 0,
-						"turretHealth": 100,
-						"turretHealthMax": 100,
 						"turretActiveObject": 0,
 						"patrol_x": 0,
 						"patrol_y": 0,
@@ -513,6 +539,9 @@
 						"state": "default"
 					},
 					"behaviors": {
+						"Timer2": {
+							"properties": {}
+						},
 						"Pathfinding": {
 							"properties": {
 								"cell-size": 32,
@@ -560,6 +589,28 @@
 						}
 					},
 					"effects": {
+						"DamagedColor": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									0.8392156862745098,
+									0.2627450980392157,
+									0.2627450980392157,
+									1
+								]
+							}
+						},
+						"HealedColor": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									0.08235294117647059,
+									0.8352941176470589,
+									0.30980392156862746,
+									1
+								]
+							}
+						},
 						"Brightness": {
 							"isEnabled": false,
 							"parameters": {
@@ -921,7 +972,7 @@
 					"behaviors": {
 						"Solid": {
 							"properties": {
-								"enabled": true,
+								"enabled": false,
 								"use-instance-tags": true,
 								"tags": ""
 							}
@@ -1091,13 +1142,16 @@
 						"order": 0,
 						"height_from_ground": 0,
 						"shadow_width": 60,
+						"Health": 100,
+						"MaxHealth": 100,
 						"is_attacking": false,
 						"default_walk_speed": 250,
-						"attack_walk_speed": 100,
-						"health": 0,
-						"max_health": 0
+						"attack_walk_speed": 100
 					},
 					"behaviors": {
+						"Timer2": {
+							"properties": {}
+						},
 						"8Direction": {
 							"properties": {
 								"max-speed": 250,
@@ -1116,6 +1170,30 @@
 							}
 						}
 					},
+					"effects": {
+						"DamagedColor": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									0.8392156862745098,
+									0.2627450980392157,
+									0.2627450980392157,
+									1
+								]
+							}
+						},
+						"HealedColor": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									0.08235294117647059,
+									0.8352941176470589,
+									0.30980392156862746,
+									1
+								]
+							}
+						}
+					},
 					"instanceFolderItem": {
 						"sid": 115329207195716,
 						"expanded": true
@@ -1123,8 +1201,8 @@
 					"showing": true,
 					"locked": false,
 					"world": {
-						"x": 154,
-						"y": 933,
+						"x": 166,
+						"y": 369,
 						"width": 128,
 						"height": 128,
 						"originX": 0.5,
@@ -1175,6 +1253,181 @@
 						"z": 0,
 						"angle": 0
 					}
+				},
+				{
+					"type": "gun_flash",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 74,
+					"sid": 754187770567095,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {
+						"Fade": {
+							"properties": {
+								"fade-in-time": 0,
+								"wait-time": 0,
+								"fade-out-time": 0.1,
+								"destroy": true,
+								"enabled": true,
+								"live-preview": false
+							}
+						}
+					},
+					"instanceFolderItem": {
+						"sid": 754187770567095,
+						"expanded": true
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 797,
+						"y": 611,
+						"width": 241.81487754855095,
+						"height": 241.81487754855095,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							0.3
+						],
+						"z": 0,
+						"angle": 0
+					}
+				},
+				{
+					"type": "rock",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 75,
+					"sid": 165942981912866,
+					"tags": "",
+					"instanceVariables": {
+						"order": 0,
+						"height_from_ground": -10,
+						"shadow_width": 100,
+						"Health": 100,
+						"MaxHealth": 50
+					},
+					"behaviors": {
+						"Timer2": {
+							"properties": {}
+						},
+						"Solid": {
+							"properties": {
+								"enabled": true,
+								"use-instance-tags": true,
+								"tags": ""
+							}
+						}
+					},
+					"effects": {
+						"DamagedColor": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									0.8392156862745098,
+									0.2627450980392157,
+									0.2627450980392157,
+									1
+								]
+							}
+						},
+						"HealedColor": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									0.08235294117647059,
+									0.8352941176470589,
+									0.30980392156862746,
+									1
+								]
+							}
+						}
+					},
+					"instanceFolderItem": {
+						"sid": 165942981912866,
+						"expanded": true
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 380.4399108886719,
+						"y": 544.5674438476562,
+						"width": 88,
+						"height": 64,
+						"originX": 0.5,
+						"originY": 1,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"z": 0,
+						"angle": 0
+					}
+				},
+				{
+					"type": "HighGrass",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 76,
+					"sid": 145158850762152,
+					"tags": "",
+					"instanceVariables": {
+						"order": 0,
+						"height_from_ground": 0,
+						"shadow_width": 50
+					},
+					"behaviors": {
+						"Solid": {
+							"properties": {
+								"enabled": false,
+								"use-instance-tags": true,
+								"tags": ""
+							}
+						}
+					},
+					"instanceFolderItem": {
+						"sid": 145158850762152,
+						"expanded": true
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 516.154191872571,
+						"y": 648.9315757625387,
+						"width": 8,
+						"height": 28,
+						"originX": 0.36363636363636365,
+						"originY": 0.9857142857142858,
+						"color": [
+							0,
+							0,
+							0,
+							1
+						],
+						"z": 0,
+						"angle": 0
+					}
 				}
 			],
 			"sid": 950051007913684,
@@ -1195,6 +1448,147 @@
 				1
 			],
 			"isTransparent": false,
+			"sampling": "auto",
+			"parallaxX": 1,
+			"parallaxY": 1,
+			"scaleRate": 1,
+			"forceOwnTexture": false,
+			"renderingMode": "3d",
+			"drawOrder": "z-order",
+			"useRenderCells": false,
+			"blendMode": "normal",
+			"zElevation": 0,
+			"global": false
+		},
+		{
+			"name": "smoke_test",
+			"overriden": 0,
+			"subLayers": [],
+			"instances": [
+				{
+					"type": "smoke_particle",
+					"properties": {
+						"rate": 10,
+						"spray-cone": 40,
+						"type": "continuous-spray",
+						"object": 152680221075221,
+						"initially-visible": true,
+						"live-preview": false,
+						"speed": 180,
+						"size": 40,
+						"opacity": 40,
+						"grow-rate": 100,
+						"x-randomiser": 0,
+						"y-randomiser": 0,
+						"initial-speed-randomiser": 0,
+						"size-randomiser": 0,
+						"grow-rate-randomiser": 0,
+						"acceleration": -200,
+						"gravity": 0,
+						"angle-randomiser": 0,
+						"life-speed-randomiser": 800,
+						"opacity-randomiser": 0,
+						"destroy-mode": "fade-to-invisible",
+						"timeout": 1
+					},
+					"uid": 77,
+					"sid": 170537238605453,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {},
+					"instanceFolderItem": {
+						"sid": 170537238605453,
+						"expanded": true
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 348.04293652772526,
+						"y": 866.4943282883911,
+						"width": 100,
+						"height": 100,
+						"originX": 0,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"z": 0,
+						"angle": 4.71238898038469
+					}
+				},
+				{
+					"type": "smoke_particle_object",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 78,
+					"sid": 713731483193310,
+					"tags": "",
+					"instanceVariables": {
+						"order": 0
+					},
+					"behaviors": {},
+					"instanceFolderItem": {
+						"sid": 713731483193310,
+						"expanded": true
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 342.26719049076564,
+						"y": 674.2656854093232,
+						"width": 188,
+						"height": 188,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							0.6
+						],
+						"z": 0,
+						"angle": 0
+					}
+				}
+			],
+			"sid": 431437652023269,
+			"effectTypes": [
+				{
+					"effectId": "alphadither",
+					"name": "AlphaDithering",
+					"instance": {
+						"isEnabled": false,
+						"parameters": {
+							"alphaDither": 0.4,
+							"scale": 2
+						}
+					}
+				}
+			],
+			"isInitiallyVisible": true,
+			"isInitiallyInteractive": true,
+			"isHTMLElementsLayer": false,
+			"color": [
+				1,
+				1,
+				1,
+				1
+			],
+			"backgroundColor": [
+				0.3686274509803922,
+				0.3686274509803922,
+				0.3686274509803922,
+				1
+			],
+			"isTransparent": true,
 			"sampling": "auto",
 			"parallaxX": 1,
 			"parallaxY": 1,
