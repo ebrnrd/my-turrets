@@ -11,6 +11,13 @@
 			"desc": "",
 			"show": true,
 			"sid": 226230172012062
+		},
+		{
+			"name": "MechStatsCacheUID",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 836397604498715
 		}
 	]
 }

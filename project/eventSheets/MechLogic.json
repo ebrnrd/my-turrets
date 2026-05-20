@@ -917,6 +917,258 @@
 			"sid": 499705229447640
 		},
 		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "every-x-seconds",
+					"objectClass": "System",
+					"sid": 959045326179177,
+					"parameters": {
+						"interval-seconds": "0.1"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 906678037488426,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 853041788389232,
+							"parameters": {
+								"object": "MechData"
+							}
+						}
+					],
+					"actions": [
+						{
+							"customAction": "UpdateMechBehaviourValues",
+							"objectClass": "MechData",
+							"sid": 938852422640213
+						}
+					],
+					"sid": 306752806330484
+				}
+			]
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "CombatMech",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-shoot",
+							"objectClass": "turretGun",
+							"sid": 535706115271625,
+							"behaviorType": "Turret"
+						},
+						{
+							"id": "has-los-to-object",
+							"objectClass": "turretGun",
+							"sid": 898690061529387,
+							"behaviorType": "LineOfSight",
+							"parameters": {
+								"object": "enemyTest",
+								"image-point": "0"
+							}
+						},
+						{
+							"id": "pick-by-evaluate",
+							"objectClass": "System",
+							"sid": 200889333001706,
+							"parameters": {
+								"object": "turretBase",
+								"expression": "turretGun.turretBaseUID = turretBase.UID"
+							}
+						},
+						{
+							"id": "pick-by-evaluate",
+							"objectClass": "System",
+							"sid": 413154154009695,
+							"parameters": {
+								"object": "MechData",
+								"expression": "MechData.MechBaseUID = turretBase.UID"
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MechStatsCache",
+							"sid": 531626704336869,
+							"parameters": {
+								"unique-id": "MechData.MechStatsCacheUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "subtract-from-instvar",
+							"objectClass": "turretGun",
+							"sid": 906373303548071,
+							"parameters": {
+								"instance-variable": "mag_current",
+								"value": "1"
+							}
+						}
+					],
+					"sid": 190921907747904,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "repeat",
+									"objectClass": "System",
+									"sid": 361806891073085,
+									"parameters": {
+										"count": "MechStatsCache.Get(\"bullet_count\")"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "spawn-another-object",
+									"objectClass": "turretGun",
+									"sid": 252420945825938,
+									"parameters": {
+										"object": "bullet",
+										"layer": "\"main\"",
+										"image-point": "1",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "bullet",
+									"sid": 419019807929059,
+									"parameters": {
+										"instance-variable": "damage",
+										"value": "MechStatsCache.Get(\"bullet_damage\")"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "bullet",
+									"sid": 983114112311122,
+									"parameters": {
+										"instance-variable": "knockback",
+										"value": "MechStatsCache.Get(\"bullet_knockback\")"
+									}
+								},
+								{
+									"id": "set-speed",
+									"objectClass": "bullet",
+									"sid": 855374316543921,
+									"behaviorType": "Bullet",
+									"parameters": {
+										"speed": "MechStatsCache.Get(\"bullet_speed\")"
+									}
+								},
+								{
+									"id": "set-angle",
+									"objectClass": "bullet",
+									"sid": 374299222143541,
+									"parameters": {
+										"angle": "turretGun.Angle + random(-MechStatsCache.Get(\"bullet_spread\"), MechStatsCache.Get(\"bullet_spread\"))"
+									}
+								},
+								{
+									"id": "set-angle-of-motion",
+									"objectClass": "bullet",
+									"sid": 883595149807787,
+									"behaviorType": "Bullet",
+									"parameters": {
+										"angle": "bullet.Angle"
+									}
+								},
+								{
+									"id": "apply-impulse-at-angle",
+									"objectClass": "turretBase",
+									"sid": 498931916017783,
+									"behaviorType": "Physics",
+									"parameters": {
+										"impulse": "random(0.7, 0.9)",
+										"angle": "turretGun.Angle + 180",
+										"image-point": "0"
+									}
+								},
+								{
+									"id": "set-wait-time",
+									"objectClass": "bullet",
+									"sid": 551453841798770,
+									"behaviorType": "Fade",
+									"parameters": {
+										"wait-time": "MechStatsCache.Get(\"range\") / MechStatsCache.Get(\"bullet_speed\")"
+									}
+								},
+								{
+									"id": "restart-fade",
+									"objectClass": "bullet",
+									"sid": 217251417377442,
+									"behaviorType": "Fade"
+								},
+								{
+									"id": "set-animation",
+									"objectClass": "turretGun",
+									"sid": 220189348734959,
+									"parameters": {
+										"animation": "\"shoot\"",
+										"from": "beginning"
+									}
+								},
+								{
+									"id": "set-animation-speed",
+									"objectClass": "turretGun",
+									"sid": 762830874604073,
+									"parameters": {
+										"speed": "round(clamp(turretGun.fire_rate * 3, 12, 40))"
+									}
+								},
+								{
+									"id": "set-animation-frame",
+									"objectClass": "turretGun",
+									"sid": 243086424145102,
+									"parameters": {
+										"frame-number": "0"
+									}
+								}
+							],
+							"sid": 156149017441381
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 753566791657814,
+									"parameters": {
+										"object-to-create": "gun_flash",
+										"layer": "\"fx\"",
+										"x": "turretGun.ImagePointX(1)",
+										"y": "turretGun.ImagePointY(1)",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								}
+							],
+							"sid": 946483471356021
+						}
+					]
+				}
+			],
+			"sid": 874505846310406
+		},
+		{
 			"eventType": "comment",
 			"text": "FUNCTIONS"
 		},
@@ -955,6 +1207,28 @@
 				{
 					"id": "create-object",
 					"objectClass": "System",
+					"sid": 275998000739880,
+					"parameters": {
+						"object-to-create": "MechStatsCache",
+						"layer": "0",
+						"x": "0",
+						"y": "0",
+						"create-hierarchy": false,
+						"template-name": "\"\""
+					}
+				},
+				{
+					"id": "set-instvar-value",
+					"objectClass": "MechData",
+					"sid": 369884858781017,
+					"parameters": {
+						"instance-variable": "MechStatsCacheUID",
+						"value": "MechStatsCache.UID"
+					}
+				},
+				{
+					"id": "create-object",
+					"objectClass": "System",
 					"sid": 321994971600902,
 					"parameters": {
 						"object-to-create": "turretBase",
@@ -984,9 +1258,9 @@
 						{
 							"id": "set-json",
 							"objectClass": "MechData",
-							"sid": 300874258613074,
+							"sid": 206781541452673,
 							"parameters": {
-								"path": "\"base_stats\"",
+								"path": "\"stats\"",
 								"json": "MechDefinitions.GetAsBeautifiedString(Type & \".base_stats\")"
 							}
 						},
@@ -1010,6 +1284,318 @@
 						}
 					],
 					"sid": 233557915743092
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"callFunction": "AddUpgradeToMech",
+							"sid": 948598617179948,
+							"parameters": [
+								"\"rapid_fire\"",
+								"MechData.UID"
+							]
+						},
+						{
+							"callFunction": "AddUpgradeToMech",
+							"sid": 533556910729757,
+							"parameters": [
+								"\"rapid_fire\"",
+								"MechData.UID"
+							]
+						},
+						{
+							"callFunction": "AddUpgradeToMech",
+							"sid": 576177824920346,
+							"parameters": [
+								"\"rapid_fire\"",
+								"MechData.UID"
+							]
+						},
+						{
+							"callFunction": "AddUpgradeToMech",
+							"sid": 997998371894957,
+							"parameters": [
+								"\"giant_bullet\"",
+								"MechData.UID"
+							]
+						},
+						{
+							"callFunction": "AddUpgradeToMech",
+							"sid": 653213972669872,
+							"parameters": [
+								"\"giant_bullet\"",
+								"MechData.UID"
+							]
+						},
+						{
+							"callFunction": "AddUpgradeToMech",
+							"sid": 620788785580059,
+							"parameters": [
+								"\"giant_bullet\"",
+								"MechData.UID"
+							]
+						},
+						{
+							"callFunction": "AddUpgradeToMech",
+							"sid": 373949402558398,
+							"parameters": [
+								"\"giant_bullet\"",
+								"MechData.UID"
+							]
+						},
+						{
+							"customAction": "UpdateMechStatsCache",
+							"objectClass": "MechData",
+							"sid": 468360933990505
+						}
+					],
+					"sid": 445221130566889
+				}
+			]
+		},
+		{
+			"eventType": "comment",
+			"text": "CUSTOM ACTIONS"
+		},
+		{
+			"aceType": "action",
+			"aceName": "UpdateMechBehaviourValues",
+			"objectClass": "MechData",
+			"functionDescription": "Updates all the values to the Mech's behaviours like Turret behaviour (fire rate, ecc)",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "custom-ace-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 651024791958719,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 753580638297265,
+							"parameters": {
+								"first-value": "MechData.Get(\"type\")",
+								"comparison": 0,
+								"second-value": "\"combat\""
+							}
+						}
+					],
+					"actions": [],
+					"sid": 858571266041007,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "MechStatsCache",
+									"sid": 274137201233466,
+									"parameters": {
+										"unique-id": "MechData.MechStatsCacheUID"
+									}
+								},
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "turretBase",
+									"sid": 217537479192315,
+									"parameters": {
+										"unique-id": "MechData.MechBaseUID"
+									}
+								},
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 377371481744253,
+									"parameters": {
+										"object": "turretGun",
+										"expression": "turretGun.turretBaseUID = MechData.MechBaseUID"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-range",
+									"objectClass": "turretGun",
+									"sid": 161830757224409,
+									"behaviorType": "Turret",
+									"parameters": {
+										"range": "MechStatsCache.Get(\"range\")"
+									}
+								},
+								{
+									"id": "set-projectile-speed",
+									"objectClass": "turretGun",
+									"sid": 869466066740124,
+									"behaviorType": "Turret",
+									"parameters": {
+										"projectile-speed": "MechStatsCache.Get(\"bullet_speed\")"
+									}
+								},
+								{
+									"id": "set-rate-of-fire",
+									"objectClass": "turretGun",
+									"sid": 878428573730935,
+									"behaviorType": "Turret",
+									"parameters": {
+										"rate-of-fire": "1 / MechStatsCache.Get(\"fire_rate\")"
+									}
+								}
+							],
+							"sid": 515337835596822
+						}
+					]
+				}
+			]
+		},
+		{
+			"aceType": "action",
+			"aceName": "UpdateMechStatsCache",
+			"objectClass": "MechData",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "custom-ace-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 708702182678443,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MechStatsCache",
+							"sid": 250465959963835,
+							"parameters": {
+								"unique-id": "MechData.MechStatsCacheUID"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 424562827326872,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "for-each",
+									"objectClass": "MechData",
+									"sid": 234283379420774,
+									"parameters": {
+										"path": "\"stats\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "add-key",
+									"objectClass": "MechStatsCache",
+									"sid": 563417457940360,
+									"parameters": {
+										"key": "MechData.CurrentKey",
+										"value": "Functions.GetMechStat(MechData.UID, MechData.CurrentKey)"
+									}
+								}
+							],
+							"sid": 186728661388047
+						},
+						{
+							"eventType": "variable",
+							"name": "UpgradeID",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 117045076647786
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "for",
+									"objectClass": "System",
+									"sid": 190170428358483,
+									"parameters": {
+										"name": "\"upgrades\"",
+										"start-index": "0",
+										"end-index": "MechData.ArraySize(\"applied_upgrades\") - 1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 931974638243082,
+									"parameters": {
+										"variable": "UpgradeID",
+										"value": "MechData.Get(\"applied_upgrades.\" & loopindex(\"upgrades\"))"
+									}
+								}
+							],
+							"sid": 865085318409637,
+							"children": [
+								{
+									"eventType": "variable",
+									"name": "StatName",
+									"type": "string",
+									"initialValue": "",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 612498692879621
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "for",
+											"objectClass": "System",
+											"sid": 966116749658630,
+											"parameters": {
+												"name": "\"modifiers\"",
+												"start-index": "0",
+												"end-index": "UpgradeDefinitions.ArraySize(\"modifiers\") - 1"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 819517271730240,
+											"parameters": {
+												"variable": "StatName",
+												"value": "UpgradeDefinitions.Get(UpgradeID & \".modifiers.\" & loopindex(\"modifiers\") & \".stat\")"
+											}
+										},
+										{
+											"id": "add-key",
+											"objectClass": "MechStatsCache",
+											"sid": 844089559130190,
+											"parameters": {
+												"key": "StatName",
+												"value": "Functions.GetMechStat(MechData.UID, StatName)"
+											}
+										}
+									],
+									"sid": 990541237589332
+								}
+							]
+						}
+					]
 				}
 			]
 		}

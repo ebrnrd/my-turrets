@@ -15,6 +15,20 @@
 		},
 		{
 			"type": "plugin",
+			"id": "Browser",
+			"name": "Browser",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
+			"id": "Dictionary",
+			"name": "Dictionary",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
 			"id": "DrawingCanvas",
 			"name": "Drawing canvas",
 			"author": "Scirra",
@@ -310,7 +324,8 @@
 			"smoke_particle",
 			"smoke_particle_object",
 			"fog_sprite",
-			"DebugInput"
+			"DebugInput",
+			"Browser"
 		],
 		"subfolders": [
 			{
@@ -325,7 +340,8 @@
 			{
 				"items": [
 					"MechData",
-					"UpgradesManager"
+					"UpgradesManager",
+					"MechStatsCache"
 				],
 				"subfolders": [],
 				"name": "Mechs"

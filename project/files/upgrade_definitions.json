@@ -6,7 +6,8 @@
       { "stat": "fire_rate", "op": "multiply", "value": 1.3 }
     ],
     "behavior_tags": [],
-    "hooks": {}
+    "hooks": {},
+    "mech_type": ["combat"]
   },
   "giant_bullet": {
     "label": "Giant Bullet",
@@ -17,7 +18,8 @@
     "behavior_tags": ["can_giant_bullet"],
     "hooks": {
       "on_shoot": "giant_bullet_handler"
-    }
+    },
+    "mech_type": ["combat"]
   },
   "overcharge_heal": {
     "label": "Overcharge",
@@ -27,6 +29,7 @@
       { "stat": "heal_rate",   "op": "add",      "value": -1 }
     ],
     "behavior_tags": ["overcharged"],
-    "hooks": {}
+    "hooks": {},
+    "mech_type": ["healer"]
   }
 }

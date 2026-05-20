@@ -50,6 +50,10 @@
 			"includeSheet": "visual_fx"
 		},
 		{
+			"eventType": "include",
+			"includeSheet": "MechUpgradesSystem"
+		},
+		{
 			"eventType": "variable",
 			"name": "currentSelectedTurretIndex",
 			"type": "number",
@@ -1150,193 +1154,6 @@
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "on-shoot",
-							"objectClass": "turretGun",
-							"sid": 164837189932501,
-							"behaviorType": "Turret"
-						},
-						{
-							"id": "has-los-to-object",
-							"objectClass": "turretGun",
-							"sid": 665848574733955,
-							"behaviorType": "LineOfSight",
-							"parameters": {
-								"object": "enemyTest",
-								"image-point": "0"
-							}
-						},
-						{
-							"id": "pick-by-evaluate",
-							"objectClass": "System",
-							"sid": 476680600391391,
-							"parameters": {
-								"object": "turretBase",
-								"expression": "turretGun.turretBaseUID = turretBase.UID"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "subtract-from-instvar",
-							"objectClass": "turretGun",
-							"sid": 468176059982859,
-							"parameters": {
-								"instance-variable": "mag_current",
-								"value": "1"
-							}
-						}
-					],
-					"sid": 647148960909393,
-					"children": [
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "repeat",
-									"objectClass": "System",
-									"sid": 525916811143047,
-									"parameters": {
-										"count": "turretGun.bullet_count"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "spawn-another-object",
-									"objectClass": "turretGun",
-									"sid": 643361164861097,
-									"parameters": {
-										"object": "bullet",
-										"layer": "\"main\"",
-										"image-point": "1",
-										"create-hierarchy": false,
-										"template-name": "\"\""
-									}
-								},
-								{
-									"id": "set-instvar-value",
-									"objectClass": "bullet",
-									"sid": 118954244433742,
-									"parameters": {
-										"instance-variable": "damage",
-										"value": "turretGun.base_damage"
-									}
-								},
-								{
-									"id": "set-instvar-value",
-									"objectClass": "bullet",
-									"sid": 155511979473136,
-									"parameters": {
-										"instance-variable": "knockback",
-										"value": "turretGun.bullet_knockback"
-									}
-								},
-								{
-									"id": "set-speed",
-									"objectClass": "bullet",
-									"sid": 923053808950418,
-									"behaviorType": "Bullet",
-									"parameters": {
-										"speed": "turretGun.bullet_speed"
-									}
-								},
-								{
-									"id": "set-angle",
-									"objectClass": "bullet",
-									"sid": 524620694366834,
-									"parameters": {
-										"angle": "turretGun.Angle + random(-turretGun.spread, turretGun.spread)"
-									}
-								},
-								{
-									"id": "set-angle-of-motion",
-									"objectClass": "bullet",
-									"sid": 151909491967635,
-									"behaviorType": "Bullet",
-									"parameters": {
-										"angle": "bullet.Angle"
-									}
-								},
-								{
-									"id": "apply-impulse-at-angle",
-									"objectClass": "turretBase",
-									"sid": 746586280796426,
-									"behaviorType": "Physics",
-									"parameters": {
-										"impulse": "random(0.7, 0.9)",
-										"angle": "turretGun.Angle + 180",
-										"image-point": "0"
-									}
-								},
-								{
-									"id": "set-wait-time",
-									"objectClass": "bullet",
-									"sid": 154159935599896,
-									"behaviorType": "Fade",
-									"parameters": {
-										"wait-time": "turretGun.bullet_distance / turretGun.bullet_speed"
-									}
-								},
-								{
-									"id": "restart-fade",
-									"objectClass": "bullet",
-									"sid": 424612246595974,
-									"behaviorType": "Fade"
-								},
-								{
-									"id": "set-animation",
-									"objectClass": "turretGun",
-									"sid": 240403602727912,
-									"parameters": {
-										"animation": "\"shoot\"",
-										"from": "beginning"
-									}
-								},
-								{
-									"id": "set-animation-speed",
-									"objectClass": "turretGun",
-									"sid": 706806413640234,
-									"parameters": {
-										"speed": "round(clamp(turretGun.fire_rate * 3, 12, 40))"
-									}
-								},
-								{
-									"id": "set-animation-frame",
-									"objectClass": "turretGun",
-									"sid": 623037870543812,
-									"parameters": {
-										"frame-number": "0"
-									}
-								}
-							],
-							"sid": 836133496627839
-						},
-						{
-							"eventType": "block",
-							"conditions": [],
-							"actions": [
-								{
-									"id": "create-object",
-									"objectClass": "System",
-									"sid": 909575831709786,
-									"parameters": {
-										"object-to-create": "gun_flash",
-										"layer": "\"fx\"",
-										"x": "turretGun.ImagePointX(1)",
-										"y": "turretGun.ImagePointY(1)",
-										"create-hierarchy": false,
-										"template-name": "\"\""
-									}
-								}
-							],
-							"sid": 458292033112067
-						}
-					]
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
 							"id": "on-collision-with-another-object",
 							"objectClass": "bullet",
 							"sid": 757718003392896,
@@ -1938,9 +1755,9 @@
 						},
 						{
 							"callFunction": "SpawnMech",
-							"sid": 900195320316624,
+							"sid": 604780765488450,
 							"parameters": [
-								"\"combat_mech\""
+								"\"combat\""
 							]
 						}
 					],
