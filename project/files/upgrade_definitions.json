@@ -7,7 +7,7 @@
     ],
     "behavior_tags": [],
     "hooks": {},
-    "mech_type": ["combat"]
+    "mech_types": ["combat"]
   },
   "giant_bullet": {
     "label": "Giant Bullet",
@@ -15,11 +15,11 @@
     "modifiers": [
       { "stat": "giant_bullet_chance", "op": "add", "value": 0.1 }
     ],
-    "behavior_tags": ["can_giant_bullet"],
+    "behavior_tags": [],
     "hooks": {
       "on_shoot": "giant_bullet_handler"
     },
-    "mech_type": ["combat"]
+    "mech_types": ["combat"]
   },
   "overcharge_heal": {
     "label": "Overcharge",
@@ -30,6 +30,6 @@
     ],
     "behavior_tags": ["overcharged"],
     "hooks": {},
-    "mech_type": ["healer"]
+    "mech_types": ["healer"]
   }
 }

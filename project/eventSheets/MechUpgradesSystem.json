@@ -463,6 +463,140 @@
 					"sid": 660441203320889
 				}
 			]
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Hooks",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"functionName": "Hook_OnShoot",
+					"functionDescription": "Upgrades",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "MechUID",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 103003222643072
+						},
+						{
+							"name": "BulletUID",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 201859984066236
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 529570778717221,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "MechData",
+									"sid": 620200675174925,
+									"parameters": {
+										"unique-id": "MechUID"
+									}
+								},
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "bullet",
+									"sid": 894006249402554,
+									"parameters": {
+										"unique-id": "BulletUID"
+									}
+								},
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "MechStatsCache",
+									"sid": 597053422311132,
+									"parameters": {
+										"unique-id": "MechData.MechStatsCacheUID"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 379749467858616,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "has-key",
+											"objectClass": "MechStatsCache",
+											"sid": 705399372127455,
+											"parameters": {
+												"key": "\"giant_bullet_chance\""
+											}
+										}
+									],
+									"actions": [],
+									"sid": 638343937109600,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-two-values",
+													"objectClass": "System",
+													"sid": 378219825221042,
+													"parameters": {
+														"first-value": "random(0,1)",
+														"comparison": 3,
+														"second-value": "MechStatsCache.Get(\"giant_bullet_chance\")"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-scale",
+													"objectClass": "bullet",
+													"sid": 771126976114138,
+													"parameters": {
+														"scale": "5"
+													}
+												},
+												{
+													"id": "change-tags",
+													"objectClass": "bullet",
+													"sid": 110580590348409,
+													"parameters": {
+														"action": "add",
+														"tags": "\"giant\""
+													}
+												},
+												{
+													"id": "set-speed",
+													"objectClass": "bullet",
+													"sid": 958096670676661,
+													"behaviorType": "Bullet",
+													"parameters": {
+														"speed": "Self.Bullet.Speed / 2"
+													}
+												}
+											],
+											"sid": 249803194355418
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			],
+			"sid": 730775293075389
 		}
 	],
 	"sid": 912555149312509

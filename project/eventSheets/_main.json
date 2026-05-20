@@ -1182,11 +1182,6 @@
 							]
 						},
 						{
-							"id": "destroy",
-							"objectClass": "bullet",
-							"sid": 141493089517575
-						},
-						{
 							"id": "move-at-angle",
 							"objectClass": "enemies",
 							"sid": 891349110135948,
@@ -1196,7 +1191,31 @@
 							}
 						}
 					],
-					"sid": 758251086147628
+					"sid": 758251086147628,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "has-tags",
+									"objectClass": "bullet",
+									"sid": 365541836948656,
+									"parameters": {
+										"tags": "\"giant\""
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "bullet",
+									"sid": 467854671633797
+								}
+							],
+							"sid": 610638169722810
+						}
+					]
 				},
 				{
 					"eventType": "block",

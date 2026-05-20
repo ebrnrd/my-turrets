@@ -1141,7 +1141,24 @@
 									}
 								}
 							],
-							"sid": 156149017441381
+							"sid": 156149017441381,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"callFunction": "Hook_OnShoot",
+											"sid": 879865869713717,
+											"parameters": [
+												"MechData.UID",
+												"bullet.UID"
+											]
+										}
+									],
+									"sid": 660608952207050
+								}
+							]
 						},
 						{
 							"eventType": "block",
@@ -1482,7 +1499,13 @@
 							}
 						}
 					],
-					"actions": [],
+					"actions": [
+						{
+							"id": "clear",
+							"objectClass": "MechStatsCache",
+							"sid": 250695526260777
+						}
+					],
 					"sid": 424562827326872,
 					"children": [
 						{
