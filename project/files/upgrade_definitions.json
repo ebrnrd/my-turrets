@@ -9,6 +9,35 @@
     "hooks": {},
     "mech_types": ["combat"]
   },
+
+  "damage_increase": {
+    "label": "Rapid Fire",
+    "description": "+30% fire rate",
+    "modifiers": [
+      { "stat": "bullet_damage", "op": "multiply", "value": 1.2 },
+      { "stat": "bullet_knockback", "op": "multiply", "value": 1.25 },
+      { "stat": "fire_rate", "op": "multiply", "value": 0.9 }
+    ],
+    "behavior_tags": [],
+    "hooks": {},
+    "mech_types": ["combat"]
+  },
+
+  "long_barrel": {
+    "label": "Long Barrel",
+    "description": "+30% fire rate",
+    "modifiers": [
+      { "stat": "range", "op": "add", "value": 100 },
+      { "stat": "bullet_knockback", "op": "multiply", "value": 1.2 },
+      { "stat": "fire_rate", "op": "multiply", "value": 0.8 },
+      { "stat": "bullet_spread", "op": "multiply", "value": 0.6 }
+    ],
+    "behavior_tags": [],
+    "hooks": {},
+    "mech_types": ["combat"]
+  },
+
+
   "giant_bullet": {
     "label": "Giant Bullet",
     "description": "10% chance to fire a massive piercing round",
@@ -21,6 +50,18 @@
     },
     "mech_types": ["combat"]
   },
+
+  "ricochet": {
+    "label": "Giant Bullet",
+    "description": "10% chance to fire a massive piercing round",
+    "modifiers": [
+      { "stat": "ricochet_chance", "op": "add", "value": 0.1 },
+      { "stat": "bullet_damage", "op": "multiply", "value": 0.5 }
+    ],
+    "behavior_tags": [],
+    "mech_types": ["combat"]
+  },
+
   "overcharge_heal": {
     "label": "Overcharge",
     "description": "Doubles heal but adds cooldown",

@@ -166,6 +166,7 @@
 						"order": 0,
 						"knockback": 0,
 						"damage": 0,
+						"MechUID": 0,
 						"height_from_ground": 16,
 						"shadow_width": 30,
 						"bulletDamage": 0
@@ -191,9 +192,9 @@
 							"properties": {
 								"fade-in-time": 0,
 								"wait-time": 0,
-								"fade-out-time": 0.2,
+								"fade-out-time": 0.05,
 								"destroy": true,
-								"enabled": true,
+								"enabled": false,
 								"live-preview": false
 							}
 						}

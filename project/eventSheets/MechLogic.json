@@ -1116,6 +1116,15 @@
 									"behaviorType": "Fade"
 								},
 								{
+									"id": "set-instvar-value",
+									"objectClass": "bullet",
+									"sid": 858778880956773,
+									"parameters": {
+										"instance-variable": "MechUID",
+										"value": "MechData.UID"
+									}
+								},
+								{
 									"id": "set-animation",
 									"objectClass": "turretGun",
 									"sid": 220189348734959,
@@ -1127,9 +1136,9 @@
 								{
 									"id": "set-animation-speed",
 									"objectClass": "turretGun",
-									"sid": 762830874604073,
+									"sid": 545421046995251,
 									"parameters": {
-										"speed": "round(clamp(turretGun.fire_rate * 3, 12, 40))"
+										"speed": "round(clamp(MechStatsCache.Get(\"fire_rate\") * 3, 12, 40))"
 									}
 								},
 								{
@@ -1148,7 +1157,7 @@
 									"conditions": [],
 									"actions": [
 										{
-											"callFunction": "Hook_OnShoot",
+											"callFunction": "Hook_OnBulletShoot",
 											"sid": 879865869713717,
 											"parameters": [
 												"MechData.UID",
@@ -1308,7 +1317,56 @@
 					"actions": [
 						{
 							"callFunction": "AddUpgradeToMech",
-							"sid": 948598617179948,
+							"sid": 327793070994888,
+							"parameters": [
+								"\"ricochet\"",
+								"MechData.UID"
+							]
+						},
+						{
+							"callFunction": "AddUpgradeToMech",
+							"sid": 830985608824649,
+							"parameters": [
+								"\"ricochet\"",
+								"MechData.UID"
+							]
+						},
+						{
+							"callFunction": "AddUpgradeToMech",
+							"sid": 712255361672827,
+							"parameters": [
+								"\"ricochet\"",
+								"MechData.UID"
+							]
+						},
+						{
+							"callFunction": "AddUpgradeToMech",
+							"sid": 979612440731770,
+							"parameters": [
+								"\"ricochet\"",
+								"MechData.UID"
+							]
+						},
+						{
+							"callFunction": "AddUpgradeToMech",
+							"sid": 274726971372224,
+							"parameters": [
+								"\"ricochet\"",
+								"MechData.UID"
+							]
+						},
+						{
+							"callFunction": "AddUpgradeToMech",
+							"sid": 567184235564062,
+							"disabled": true,
+							"parameters": [
+								"\"giant_bullet\"",
+								"MechData.UID"
+							]
+						},
+						{
+							"callFunction": "AddUpgradeToMech",
+							"sid": 669173755588292,
 							"parameters": [
 								"\"rapid_fire\"",
 								"MechData.UID"
@@ -1316,7 +1374,7 @@
 						},
 						{
 							"callFunction": "AddUpgradeToMech",
-							"sid": 533556910729757,
+							"sid": 231280974813574,
 							"parameters": [
 								"\"rapid_fire\"",
 								"MechData.UID"
@@ -1324,7 +1382,7 @@
 						},
 						{
 							"callFunction": "AddUpgradeToMech",
-							"sid": 576177824920346,
+							"sid": 243902887458392,
 							"parameters": [
 								"\"rapid_fire\"",
 								"MechData.UID"
@@ -1332,33 +1390,27 @@
 						},
 						{
 							"callFunction": "AddUpgradeToMech",
-							"sid": 997998371894957,
+							"sid": 292319532492663,
 							"parameters": [
-								"\"giant_bullet\"",
+								"\"rapid_fire\"",
 								"MechData.UID"
 							]
 						},
 						{
 							"callFunction": "AddUpgradeToMech",
-							"sid": 653213972669872,
+							"sid": 377308297366913,
+							"disabled": true,
 							"parameters": [
-								"\"giant_bullet\"",
+								"\"damage_increase\"",
 								"MechData.UID"
 							]
 						},
 						{
 							"callFunction": "AddUpgradeToMech",
-							"sid": 620788785580059,
+							"sid": 641866641915214,
+							"disabled": true,
 							"parameters": [
-								"\"giant_bullet\"",
-								"MechData.UID"
-							]
-						},
-						{
-							"callFunction": "AddUpgradeToMech",
-							"sid": 373949402558398,
-							"parameters": [
-								"\"giant_bullet\"",
+								"\"long_barrel\"",
 								"MechData.UID"
 							]
 						},
@@ -1484,7 +1536,18 @@
 			"functionParameters": [],
 			"eventType": "custom-ace-block",
 			"conditions": [],
-			"actions": [],
+			"actions": [
+				{
+					"id": "log",
+					"objectClass": "Browser",
+					"sid": 188678869576369,
+					"disabled": true,
+					"parameters": {
+						"type": "log",
+						"message": "\"------- Updating Mech \" & MechData.UID & \" Stats -------\""
+					}
+				}
+			],
 			"sid": 708702182678443,
 			"children": [
 				{
@@ -1529,6 +1592,16 @@
 										"key": "MechData.CurrentKey",
 										"value": "Functions.GetMechStat(MechData.UID, MechData.CurrentKey)"
 									}
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 397073312845080,
+									"disabled": true,
+									"parameters": {
+										"type": "log",
+										"message": "\"Added new base stat: \" & MechData.CurrentKey"
+									}
 								}
 							],
 							"sid": 186728661388047
@@ -1566,6 +1639,16 @@
 										"variable": "UpgradeID",
 										"value": "MechData.Get(\"applied_upgrades.\" & loopindex(\"upgrades\"))"
 									}
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 127595933845957,
+									"disabled": true,
+									"parameters": {
+										"type": "log",
+										"message": "\"Deriving stats from Upgrade \" & UpgradeID"
+									}
 								}
 							],
 							"sid": 865085318409637,
@@ -1586,11 +1669,11 @@
 										{
 											"id": "for",
 											"objectClass": "System",
-											"sid": 966116749658630,
+											"sid": 977865458099057,
 											"parameters": {
 												"name": "\"modifiers\"",
 												"start-index": "0",
-												"end-index": "UpgradeDefinitions.ArraySize(\"modifiers\") - 1"
+												"end-index": "UpgradeDefinitions.ArraySize(UpgradeID & \".modifiers\") - 1"
 											}
 										}
 									],
@@ -1611,6 +1694,36 @@
 											"parameters": {
 												"key": "StatName",
 												"value": "Functions.GetMechStat(MechData.UID, StatName)"
+											}
+										},
+										{
+											"id": "log",
+											"objectClass": "Browser",
+											"sid": 739955965045693,
+											"disabled": true,
+											"parameters": {
+												"type": "log",
+												"message": "\"Modifiers count \" & UpgradeDefinitions.ArraySize(UpgradeID & \".modifiers\")"
+											}
+										},
+										{
+											"id": "log",
+											"objectClass": "Browser",
+											"sid": 620323680411447,
+											"disabled": true,
+											"parameters": {
+												"type": "log",
+												"message": "\"Current stat index \" & loopindex(\"modifiers\")"
+											}
+										},
+										{
+											"id": "log",
+											"objectClass": "Browser",
+											"sid": 645179356358515,
+											"disabled": true,
+											"parameters": {
+												"type": "log",
+												"message": "\"Added stat \" & StatName"
 											}
 										}
 									],

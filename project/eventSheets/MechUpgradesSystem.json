@@ -208,11 +208,11 @@
 										{
 											"id": "for",
 											"objectClass": "System",
-											"sid": 331337375320018,
+											"sid": 248975778102181,
 											"parameters": {
 												"name": "\"modifiers\"",
 												"start-index": "0",
-												"end-index": "UpgradeDefinitions.ArraySize(\"modifiers\") - 1"
+												"end-index": "UpgradeDefinitions.ArraySize(UpgradeID & \".modifiers\") - 1"
 											}
 										}
 									],
@@ -282,7 +282,8 @@
 												{
 													"id": "stop-loop",
 													"objectClass": "System",
-													"sid": 808150517978105
+													"sid": 808150517978105,
+													"disabled": true
 												}
 											],
 											"sid": 558720194641350
@@ -472,7 +473,7 @@
 			"isActiveOnStart": true,
 			"children": [
 				{
-					"functionName": "Hook_OnShoot",
+					"functionName": "Hook_OnBulletShoot",
 					"functionDescription": "Upgrades",
 					"functionCategory": "",
 					"functionReturnType": "none",
@@ -563,9 +564,9 @@
 												{
 													"id": "set-scale",
 													"objectClass": "bullet",
-													"sid": 771126976114138,
+													"sid": 743869603427265,
 													"parameters": {
-														"scale": "5"
+														"scale": "8"
 													}
 												},
 												{
@@ -588,6 +589,194 @@
 												}
 											],
 											"sid": 249803194355418
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"functionName": "Hook_OnBulletHit",
+					"functionDescription": "Upgrades",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "MechUID",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 807023716569405
+						},
+						{
+							"name": "BulletUID",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 146684343478437
+						},
+						{
+							"name": "EnemyUID",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 351395382942748
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 532918127930393,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "MechData",
+									"sid": 130870072467003,
+									"parameters": {
+										"unique-id": "MechUID"
+									}
+								},
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "bullet",
+									"sid": 253124431878759,
+									"parameters": {
+										"unique-id": "BulletUID"
+									}
+								},
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "MechStatsCache",
+									"sid": 995197720002004,
+									"parameters": {
+										"unique-id": "MechData.MechStatsCacheUID"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 702657558364265,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "has-key",
+											"objectClass": "MechStatsCache",
+											"sid": 833543037146803,
+											"parameters": {
+												"key": "\"ricochet_chance\""
+											}
+										}
+									],
+									"actions": [],
+									"sid": 377976052318712,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-two-values",
+													"objectClass": "System",
+													"sid": 396743296578498,
+													"parameters": {
+														"first-value": "random(0,1)",
+														"comparison": 3,
+														"second-value": "MechStatsCache.Get(\"ricochet_chance\")"
+													}
+												}
+											],
+											"actions": [],
+											"sid": 220232991740019,
+											"children": [
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "is-overlapping-another-object",
+															"objectClass": "enemies",
+															"sid": 700223585833948,
+															"parameters": {
+																"object": "bullet"
+															},
+															"isInverted": true
+														},
+														{
+															"id": "pick-nearestfurthest",
+															"objectClass": "enemies",
+															"sid": 868443445322540,
+															"parameters": {
+																"which": "nearest",
+																"x": "bullet.X",
+																"y": "bullet.Y",
+																"pick-all-tied": false
+															}
+														}
+													],
+													"actions": [
+														{
+															"id": "set-angle",
+															"objectClass": "bullet",
+															"sid": 775203812149671,
+															"parameters": {
+																"angle": "angle(Self.X, Self.Y, enemies.X, enemies.Y)"
+															}
+														},
+														{
+															"id": "set-angle-of-motion",
+															"objectClass": "bullet",
+															"sid": 677040826238654,
+															"behaviorType": "Bullet",
+															"parameters": {
+																"angle": "bullet.Angle"
+															}
+														},
+														{
+															"id": "change-tags",
+															"objectClass": "bullet",
+															"sid": 192266092847731,
+															"parameters": {
+																"action": "add",
+																"tags": "\"ricochet_triggered\""
+															}
+														},
+														{
+															"id": "restart-fade",
+															"objectClass": "bullet",
+															"sid": 721677789564886,
+															"behaviorType": "Fade"
+														}
+													],
+													"sid": 220549404692015
+												}
+											]
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "else",
+													"objectClass": "System",
+													"sid": 564062296300095
+												}
+											],
+											"actions": [
+												{
+													"id": "change-tags",
+													"objectClass": "bullet",
+													"sid": 160395729924035,
+													"parameters": {
+														"action": "remove",
+														"tags": "\"ricochet_triggered\""
+													}
+												}
+											],
+											"sid": 234888467483302
 										}
 									]
 								}

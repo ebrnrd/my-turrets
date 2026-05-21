@@ -1160,16 +1160,32 @@
 							"parameters": {
 								"object": "enemies"
 							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MechData",
+							"sid": 804243899752814,
+							"parameters": {
+								"unique-id": "bullet.MechUID"
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MechStatsCache",
+							"sid": 479264357542522,
+							"parameters": {
+								"unique-id": "MechData.MechStatsCacheUID"
+							}
 						}
 					],
 					"actions": [
 						{
-							"callFunction": "SendDamage",
-							"sid": 175974836753414,
+							"callFunction": "Hook_OnBulletHit",
+							"sid": 376193142166547,
 							"parameters": [
-								"enemies.UID",
-								"playerCharacter.UID",
-								"bullet.damage"
+								"bullet.MechUID",
+								"bullet.UID",
+								"enemies.UID"
 							]
 						},
 						{
@@ -1180,19 +1196,65 @@
 							"parameters": [
 								"bullet.damage"
 							]
-						},
-						{
-							"id": "move-at-angle",
-							"objectClass": "enemies",
-							"sid": 891349110135948,
-							"parameters": {
-								"angle": "bullet.Angle",
-								"distance": "bullet.knockback"
-							}
 						}
 					],
 					"sid": 758251086147628,
 					"children": [
+						{
+							"eventType": "variable",
+							"name": "Knockback",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 551725368245915
+						},
+						{
+							"eventType": "variable",
+							"name": "Damage",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 603396645270480
+						},
+						{
+							"eventType": "variable",
+							"name": "DestroyBullet",
+							"type": "boolean",
+							"initialValue": "true",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 839656630444015
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 354681496777145,
+									"parameters": {
+										"variable": "Damage",
+										"value": "MechStatsCache.Get(\"bullet_damage\")"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 283581524682898,
+									"parameters": {
+										"variable": "Knockback",
+										"value": "MechStatsCache.Get(\"bullet_knockback\")"
+									}
+								}
+							],
+							"sid": 612367963701884
+						},
 						{
 							"eventType": "block",
 							"conditions": [
@@ -1202,18 +1264,103 @@
 									"sid": 365541836948656,
 									"parameters": {
 										"tags": "\"giant\""
-									},
-									"isInverted": true
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 293851831895929,
+									"parameters": {
+										"variable": "DestroyBullet",
+										"value": "false"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 118300248862718,
+									"parameters": {
+										"variable": "Knockback",
+										"value": "Knockback * 2"
+									}
+								}
+							],
+							"sid": 610638169722810
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "has-tags",
+									"objectClass": "bullet",
+									"sid": 666761539190494,
+									"parameters": {
+										"tags": "\"ricochet_triggered\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 566189428938722,
+									"parameters": {
+										"variable": "DestroyBullet",
+										"value": "false"
+									}
+								}
+							],
+							"sid": 278255199626154
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 718328416930066,
+									"parameters": {
+										"variable": "DestroyBullet"
+									}
 								}
 							],
 							"actions": [
 								{
 									"id": "destroy",
 									"objectClass": "bullet",
-									"sid": 467854671633797
+									"sid": 523444184449360
 								}
 							],
-							"sid": 610638169722810
+							"sid": 209383724249061
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"callFunction": "SendDamage",
+									"sid": 490510712035185,
+									"parameters": [
+										"enemies.UID",
+										"playerCharacter.UID",
+										"Damage"
+									]
+								},
+								{
+									"id": "apply-impulse-at-angle",
+									"objectClass": "enemies",
+									"sid": 298368524811093,
+									"behaviorType": "Physics",
+									"parameters": {
+										"impulse": "Knockback",
+										"angle": "bullet.Angle",
+										"image-point": "0"
+									}
+								}
+							],
+							"sid": 651816402965739
 						}
 					]
 				},
@@ -1263,7 +1410,8 @@
 							"sid": 830332450540132
 						}
 					],
-					"sid": 445548194734366
+					"sid": 445548194734366,
+					"disabled": true
 				},
 				{
 					"eventType": "block",

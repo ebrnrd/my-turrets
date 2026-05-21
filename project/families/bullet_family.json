@@ -16,6 +16,13 @@
 			"desc": "",
 			"show": true,
 			"sid": 407224787901400
+		},
+		{
+			"name": "MechUID",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 641947573021445
 		}
 	],
 	"behaviorTypes": [],

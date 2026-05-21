@@ -9,7 +9,7 @@
       "bullet_speed": 800,
       "mag_size": 200,
       "reload_speed": 5,
-      "bullet_knockback": 2
+      "bullet_knockback": 0.1
     },
     "behavior_type": "combat"
   },
