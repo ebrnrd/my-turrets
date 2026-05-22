@@ -54,6 +54,10 @@
 			"includeSheet": "MechUpgradesSystem"
 		},
 		{
+			"eventType": "include",
+			"includeSheet": "GameCamera"
+		},
+		{
 			"eventType": "variable",
 			"name": "currentSelectedTurretIndex",
 			"type": "number",

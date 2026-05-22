@@ -1398,107 +1398,19 @@
 					"conditions": [],
 					"actions": [
 						{
-							"callFunction": "AddUpgradeToMech",
-							"sid": 327793070994888,
+							"customAction": "AddUpgradeToMech",
+							"objectClass": "UpgradesManager",
+							"sid": 371540666139702,
 							"parameters": [
 								"\"ricochet\"",
-								"MechData.UID"
-							]
-						},
-						{
-							"callFunction": "AddUpgradeToMech",
-							"sid": 830985608824649,
-							"parameters": [
-								"\"ricochet\"",
-								"MechData.UID"
-							]
-						},
-						{
-							"callFunction": "AddUpgradeToMech",
-							"sid": 712255361672827,
-							"parameters": [
-								"\"ricochet\"",
-								"MechData.UID"
-							]
-						},
-						{
-							"callFunction": "AddUpgradeToMech",
-							"sid": 979612440731770,
-							"parameters": [
-								"\"ricochet\"",
-								"MechData.UID"
-							]
-						},
-						{
-							"callFunction": "AddUpgradeToMech",
-							"sid": 274726971372224,
-							"parameters": [
-								"\"ricochet\"",
-								"MechData.UID"
-							]
-						},
-						{
-							"callFunction": "AddUpgradeToMech",
-							"sid": 567184235564062,
-							"parameters": [
-								"\"giant_bullet\"",
-								"MechData.UID"
-							]
-						},
-						{
-							"callFunction": "AddUpgradeToMech",
-							"sid": 669173755588292,
-							"parameters": [
-								"\"rapid_fire\"",
-								"MechData.UID"
-							]
-						},
-						{
-							"callFunction": "AddUpgradeToMech",
-							"sid": 231280974813574,
-							"parameters": [
-								"\"rapid_fire\"",
-								"MechData.UID"
-							]
-						},
-						{
-							"callFunction": "AddUpgradeToMech",
-							"sid": 243902887458392,
-							"parameters": [
-								"\"rapid_fire\"",
-								"MechData.UID"
-							]
-						},
-						{
-							"callFunction": "AddUpgradeToMech",
-							"sid": 292319532492663,
-							"parameters": [
-								"\"rapid_fire\"",
-								"MechData.UID"
-							]
-						},
-						{
-							"callFunction": "AddUpgradeToMech",
-							"sid": 377308297366913,
-							"disabled": true,
-							"parameters": [
-								"\"damage_increase\"",
-								"MechData.UID"
-							]
-						},
-						{
-							"callFunction": "AddUpgradeToMech",
-							"sid": 641866641915214,
-							"disabled": true,
-							"parameters": [
-								"\"long_barrel\"",
 								"MechData.UID"
 							]
 						},
 						{
 							"customAction": "UpdateMechStatsCache",
 							"objectClass": "MechData",
-							"sid": 468360933990505
+							"sid": 468360933990505,
+							"disabled": true
 						}
 					],
 					"sid": 445221130566889

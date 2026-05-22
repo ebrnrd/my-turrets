@@ -1423,7 +1423,10 @@
 			"uid": 84,
 			"sid": 223920278177867,
 			"tags": "",
-			"instanceVariables": {}
+			"instanceVariables": {
+				"IsUpgradingMech": false,
+				"SelectedMechUID": 0
+			}
 		},
 		{
 			"type": "MechStatsCache",

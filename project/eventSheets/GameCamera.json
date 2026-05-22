@@ -1,0 +1,389 @@
+{
+	"name": "GameCamera",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "camera_follow_player_offset",
+			"type": "number",
+			"initialValue": "400",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 599600291770032
+		},
+		{
+			"eventType": "variable",
+			"name": "camera_speed",
+			"type": "number",
+			"initialValue": "0.5",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 424560412451852
+		},
+		{
+			"eventType": "variable",
+			"name": "camera_zoom_speed",
+			"type": "number",
+			"initialValue": "2",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 133260705002996
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 539344795725683
+				}
+			],
+			"actions": [
+				{
+					"id": "set-object-time-scale",
+					"objectClass": "System",
+					"sid": 293093455223312,
+					"parameters": {
+						"object": "GameCamera",
+						"time-scale": "1.0"
+					}
+				},
+				{
+					"id": "set-object-time-scale",
+					"objectClass": "System",
+					"sid": 227763663106720,
+					"parameters": {
+						"object": "tilt_shift_mask",
+						"time-scale": "1.0"
+					}
+				},
+				{
+					"id": "set-object-time-scale",
+					"objectClass": "System",
+					"sid": 130823733046861,
+					"parameters": {
+						"object": "FlameParticles",
+						"time-scale": "0.3"
+					}
+				},
+				{
+					"id": "set-instvar-value",
+					"objectClass": "GameCamera",
+					"sid": 551631125752541,
+					"parameters": {
+						"instance-variable": "CurrentState",
+						"value": "\"follow_player\""
+					}
+				},
+				{
+					"id": "set-instvar-value",
+					"objectClass": "tilt_shift_mask",
+					"sid": 101380654589731,
+					"parameters": {
+						"instance-variable": "TargetHeight",
+						"value": "Self.DefaultHeight"
+					}
+				}
+			],
+			"sid": 641252591814512
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "compare-instance-variable",
+					"objectClass": "GameCamera",
+					"sid": 543702449308436,
+					"parameters": {
+						"instance-variable": "CurrentState",
+						"comparison": 0,
+						"value": "\"follow_player\""
+					}
+				}
+			],
+			"actions": [],
+			"sid": 249075297956329,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "player_moving_angle",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 884211260411882
+				},
+				{
+					"eventType": "variable",
+					"name": "target_x",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 711243753817490
+				},
+				{
+					"eventType": "variable",
+					"name": "target_y",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 752753751652646
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 461634316944521,
+							"parameters": {
+								"variable": "player_moving_angle",
+								"value": "playerCharacter.8Direction.MovingAngle"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 581207374735830,
+							"parameters": {
+								"variable": "target_x",
+								"value": "playerCharacter.X + (cos(player_moving_angle) * camera_follow_player_offset) * (playerCharacter.8Direction.Speed / playerCharacter.8Direction.MaxSpeed)"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 606320906220332,
+							"parameters": {
+								"variable": "target_y",
+								"value": "playerCharacter.Y + (sin(player_moving_angle) * camera_follow_player_offset) * (playerCharacter.8Direction.Speed / playerCharacter.8Direction.MaxSpeed)"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "GameCamera",
+							"sid": 787671125879444,
+							"parameters": {
+								"instance-variable": "TargetZoom",
+								"value": "1"
+							}
+						},
+						{
+							"id": "set-position",
+							"objectClass": "GameCamera",
+							"sid": 213352757267381,
+							"parameters": {
+								"x": "lerp(Self.X, target_x, camera_speed * dt)",
+								"y": "lerp(Self.Y, target_y, camera_speed * dt)"
+							}
+						},
+						{
+							"id": "set-layout-scale",
+							"objectClass": "System",
+							"sid": 227593103280456,
+							"parameters": {
+								"scale": "GameCamera.TargetZoom"
+							}
+						}
+					],
+					"sid": 795090612808847
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "else",
+					"objectClass": "System",
+					"sid": 194976938907536
+				},
+				{
+					"id": "compare-instance-variable",
+					"objectClass": "GameCamera",
+					"sid": 358138801949817,
+					"parameters": {
+						"instance-variable": "CurrentState",
+						"comparison": 0,
+						"value": "\"follow_mech\""
+					}
+				}
+			],
+			"actions": [],
+			"sid": 678284606492157,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "UpgradesManager",
+							"sid": 725627284462100,
+							"parameters": {
+								"instance-variable": "IsUpgradingMech"
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MechData",
+							"sid": 588045365784790,
+							"parameters": {
+								"unique-id": "UpgradesManager.SelectedMechUID"
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "turretBase",
+							"sid": 567224669103749,
+							"parameters": {
+								"unique-id": "MechData.MechBaseUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-position",
+							"objectClass": "GameCamera",
+							"sid": 963286503549180,
+							"parameters": {
+								"x": "lerp(Self.X, turretBase.X, camera_speed * 10 * Self.dt)",
+								"y": "lerp(Self.Y, turretBase.Y - 20, camera_speed * 10 * Self.dt)"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "GameCamera",
+							"sid": 830339607171259,
+							"parameters": {
+								"instance-variable": "TargetZoom",
+								"value": "4"
+							}
+						},
+						{
+							"id": "set-layout-scale",
+							"objectClass": "System",
+							"sid": 467444664032008,
+							"parameters": {
+								"scale": "GameCamera.TargetZoom"
+							}
+						}
+					],
+					"sid": 462542026646913,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "for-each",
+									"objectClass": "System",
+									"sid": 149933557394167,
+									"parameters": {
+										"object": "tilt_shift_mask"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-instvar-value",
+									"objectClass": "tilt_shift_mask",
+									"sid": 947230236150911,
+									"parameters": {
+										"instance-variable": "TargetHeight",
+										"value": "Self.UpgradeHeight"
+									}
+								}
+							],
+							"sid": 758199740551726
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "comment",
+			"text": "CAMERA ZOOM"
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "every-tick",
+					"objectClass": "System",
+					"sid": 935072493511833
+				}
+			],
+			"actions": [
+				{
+					"id": "set-instvar-value",
+					"objectClass": "GameCamera",
+					"sid": 310497301075885,
+					"parameters": {
+						"instance-variable": "CurrentZoom",
+						"value": "lerp(Self.CurrentZoom, Self.TargetZoom, camera_zoom_speed * dt)"
+					}
+				},
+				{
+					"id": "set-layout-scale",
+					"objectClass": "System",
+					"sid": 981664616832212,
+					"parameters": {
+						"scale": "GameCamera.CurrentZoom"
+					}
+				}
+			],
+			"sid": 233513592020517,
+			"disabled": true
+		},
+		{
+			"eventType": "comment",
+			"text": "TILT SHIFT"
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "every-tick",
+					"objectClass": "System",
+					"sid": 385745342802754
+				}
+			],
+			"actions": [],
+			"sid": 288271354276843,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 895036816197721,
+							"parameters": {
+								"object": "tilt_shift_mask"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-height",
+							"objectClass": "tilt_shift_mask",
+							"sid": 648968622126741,
+							"parameters": {
+								"height": "lerp(Self.Height, Self.TargetHeight, camera_zoom_speed * Self.dt)"
+							}
+						}
+					],
+					"sid": 316185200460547
+				}
+			]
+		}
+	],
+	"sid": 742171322243561
+}

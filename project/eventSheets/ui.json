@@ -65,7 +65,7 @@
 				},
 				{
 					"id": "shake",
-					"objectClass": "camera",
+					"objectClass": "GameCamera",
 					"sid": 196893290117827,
 					"behaviorType": "ScrollTo",
 					"parameters": {

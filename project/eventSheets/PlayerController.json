@@ -3,26 +3,6 @@
 	"events": [
 		{
 			"eventType": "variable",
-			"name": "camera_offset",
-			"type": "number",
-			"initialValue": "400",
-			"comment": "",
-			"isStatic": false,
-			"isConstant": false,
-			"sid": 849165458959151
-		},
-		{
-			"eventType": "variable",
-			"name": "camera_speed",
-			"type": "number",
-			"initialValue": "0.5",
-			"comment": "",
-			"isStatic": false,
-			"isConstant": false,
-			"sid": 572567851880998
-		},
-		{
-			"eventType": "variable",
 			"name": "player_melee_damage",
 			"type": "number",
 			"initialValue": "10",
@@ -414,93 +394,6 @@
 				}
 			],
 			"sid": 758393633425171
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
-					"id": "every-tick",
-					"objectClass": "System",
-					"sid": 817282165878616
-				}
-			],
-			"actions": [],
-			"sid": 249075297956329,
-			"children": [
-				{
-					"eventType": "variable",
-					"name": "player_moving_angle",
-					"type": "number",
-					"initialValue": "0",
-					"comment": "",
-					"isStatic": false,
-					"isConstant": false,
-					"sid": 884211260411882
-				},
-				{
-					"eventType": "variable",
-					"name": "target_x",
-					"type": "number",
-					"initialValue": "0",
-					"comment": "",
-					"isStatic": false,
-					"isConstant": false,
-					"sid": 711243753817490
-				},
-				{
-					"eventType": "variable",
-					"name": "target_y",
-					"type": "number",
-					"initialValue": "0",
-					"comment": "",
-					"isStatic": false,
-					"isConstant": false,
-					"sid": 752753751652646
-				},
-				{
-					"eventType": "block",
-					"conditions": [],
-					"actions": [
-						{
-							"id": "set-eventvar-value",
-							"objectClass": "System",
-							"sid": 461634316944521,
-							"parameters": {
-								"variable": "player_moving_angle",
-								"value": "playerCharacter.8Direction.MovingAngle"
-							}
-						},
-						{
-							"id": "set-eventvar-value",
-							"objectClass": "System",
-							"sid": 581207374735830,
-							"parameters": {
-								"variable": "target_x",
-								"value": "playerCharacter.X + (cos(player_moving_angle) * camera_offset) * (playerCharacter.8Direction.Speed / playerCharacter.8Direction.MaxSpeed)"
-							}
-						},
-						{
-							"id": "set-eventvar-value",
-							"objectClass": "System",
-							"sid": 606320906220332,
-							"parameters": {
-								"variable": "target_y",
-								"value": "playerCharacter.Y + (sin(player_moving_angle) * camera_offset) * (playerCharacter.8Direction.Speed / playerCharacter.8Direction.MaxSpeed)"
-							}
-						},
-						{
-							"id": "set-position",
-							"objectClass": "camera",
-							"sid": 397356050838838,
-							"parameters": {
-								"x": "lerp(Self.X, target_x, camera_speed * dt)",
-								"y": "lerp(Self.Y, target_y, camera_speed * dt)"
-							}
-						}
-					],
-					"sid": 795090612808847
-				}
-			]
 		},
 		{
 			"eventType": "group",
@@ -1047,7 +940,7 @@
 					"actions": [
 						{
 							"id": "shake",
-							"objectClass": "camera",
+							"objectClass": "GameCamera",
 							"sid": 143351242036610,
 							"behaviorType": "ScrollTo",
 							"parameters": {

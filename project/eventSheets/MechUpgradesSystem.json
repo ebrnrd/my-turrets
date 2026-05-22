@@ -869,6 +869,176 @@
 				}
 			],
 			"sid": 730775293075389
+		},
+		{
+			"aceType": "action",
+			"aceName": "AddUpgradeToMech",
+			"objectClass": "UpgradesManager",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "UpgradeID",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 914404719837621
+				},
+				{
+					"name": "MechUID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 551434030752451
+				}
+			],
+			"eventType": "custom-ace-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 355041407420663,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MechData",
+							"sid": 265971118845947,
+							"parameters": {
+								"unique-id": "MechUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "push-value",
+							"objectClass": "MechData",
+							"sid": 801831473156834,
+							"parameters": {
+								"where": "back",
+								"path": "\"applied_upgrades\"",
+								"value": "UpgradeID"
+							}
+						},
+						{
+							"customAction": "UpdateMechStatsCache",
+							"objectClass": "MechData",
+							"sid": 723805417661310
+						}
+					],
+					"sid": 424024404592489
+				}
+			]
+		},
+		{
+			"aceType": "action",
+			"aceName": "BeginUpgradeShopSequence",
+			"objectClass": "UpgradesManager",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "custom-ace-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 636179377096696,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-last-created",
+							"objectClass": "System",
+							"sid": 275790435798908,
+							"parameters": {
+								"object": "MechData"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-instvar-value",
+							"objectClass": "UpgradesManager",
+							"sid": 987675974867788,
+							"parameters": {
+								"instance-variable": "SelectedMechUID",
+								"value": "MechData.UID"
+							}
+						},
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "UpgradesManager",
+							"sid": 212881355268622,
+							"parameters": {
+								"instance-variable": "IsUpgradingMech",
+								"value": "true"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "GameCamera",
+							"sid": 462135851293863,
+							"parameters": {
+								"instance-variable": "CurrentState",
+								"value": "\"follow_mech\""
+							}
+						},
+						{
+							"id": "set-layer-visible",
+							"objectClass": "System",
+							"sid": 793379264276516,
+							"parameters": {
+								"layer": "\"UpgradeUI\"",
+								"visibility": "visible"
+							}
+						},
+						{
+							"id": "set-layer-interactive",
+							"objectClass": "System",
+							"sid": 169018005807787,
+							"parameters": {
+								"layer": "\"UpgradeUI\"",
+								"interactive": true
+							}
+						},
+						{
+							"id": "set-time-scale",
+							"objectClass": "System",
+							"sid": 612791728416158,
+							"parameters": {
+								"time-scale": "0"
+							}
+						}
+					],
+					"sid": 322601538362366
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-key-pressed",
+					"objectClass": "Keyboard",
+					"sid": 472714994667842,
+					"parameters": {
+						"key": 85
+					}
+				}
+			],
+			"actions": [
+				{
+					"customAction": "BeginUpgradeShopSequence",
+					"objectClass": "UpgradesManager",
+					"sid": 462039127776120
+				}
+			],
+			"sid": 974783336285622
 		}
 	],
 	"sid": 912555149312509

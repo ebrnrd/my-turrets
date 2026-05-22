@@ -328,7 +328,7 @@
 			"turret_proximity_collision",
 			"path_debug",
 			"shadow",
-			"camera",
+			"GameCamera",
 			"light",
 			"grass",
 			"tree",
@@ -363,7 +363,9 @@
 			"CardCanvas",
 			"UpgradeCardBg",
 			"CardReflectionFx",
-			"UpgradeCardDepth"
+			"UpgradeCardDepth",
+			"TextUI",
+			"FlameParticles"
 		],
 		"subfolders": [
 			{
@@ -447,7 +449,8 @@
 			"visual_fx",
 			"debug",
 			"MechUpgradesSystem",
-			"DataManager"
+			"DataManager",
+			"GameCamera"
 		],
 		"subfolders": []
 	},
@@ -618,7 +621,7 @@
 		"fov": 0.7853981633974483,
 		"useLoaderLayout": false,
 		"fullscreenMode": "letterbox-scale",
-		"fullscreenQuality": "high",
+		"fullscreenQuality": "low",
 		"viewportFit": "auto",
 		"backgroundColor": [
 			0,

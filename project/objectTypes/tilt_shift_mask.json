@@ -4,7 +4,29 @@
 	"sid": 922786708786161,
 	"isGlobal": false,
 	"editorNewInstanceIsReplica": true,
-	"instanceVariables": [],
+	"instanceVariables": [
+		{
+			"name": "UpgradeHeight",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 657779133828279
+		},
+		{
+			"name": "DefaultHeight",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 818513483700351
+		},
+		{
+			"name": "TargetHeight",
+			"type": "number",
+			"desc": "",
+			"show": false,
+			"sid": 728993154201478
+		}
+	],
 	"behaviorTypes": [
 		{
 			"behaviorId": "Anchor",
@@ -61,6 +83,45 @@
 				],
 				"sid": 169960767997043,
 				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			},
+			{
+				"frames": [
+					{
+						"width": 1920,
+						"height": 227,
+						"originX": 0,
+						"originY": 0,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 5015727,
+						"collisionPoly": {
+							"points": [
+								0,
+								0,
+								1,
+								0,
+								1,
+								0.7490234375,
+								0.53515625,
+								0.7509765625,
+								0,
+								0.7451171875
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 874448904954848,
+				"name": "Animation 2",
 				"isLooping": false,
 				"isPingPong": false,
 				"repeatCount": 1,
