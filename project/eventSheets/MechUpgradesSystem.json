@@ -26,7 +26,17 @@
 			],
 			"eventType": "function-block",
 			"conditions": [],
-			"actions": [],
+			"actions": [
+				{
+					"id": "log",
+					"objectClass": "Browser",
+					"sid": 682600334338054,
+					"parameters": {
+						"type": "log",
+						"message": "\"--- GETTING MECH STAT ---\""
+					}
+				}
+			],
 			"sid": 207902777890939,
 			"children": [
 				{
@@ -120,10 +130,10 @@
 								{
 									"id": "log",
 									"objectClass": "Browser",
-									"sid": 655087607582674,
+									"sid": 604482971387647,
 									"parameters": {
 										"type": "log",
-										"message": "BaseValue"
+										"message": "\"stat name :\" & StatName"
 									}
 								},
 								{
@@ -134,9 +144,28 @@
 										"variable": "NewValue",
 										"value": "BaseValue"
 									}
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 766894522970419,
+									"parameters": {
+										"type": "log",
+										"message": "\"base value :\" & BaseValue"
+									}
 								}
 							],
 							"sid": 228262762223947
+						},
+						{
+							"eventType": "variable",
+							"name": "HasFoundStat",
+							"type": "boolean",
+							"initialValue": "false",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 259998075821216
 						},
 						{
 							"eventType": "block",
@@ -154,21 +183,21 @@
 							],
 							"actions": [
 								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 744882510524355,
+									"parameters": {
+										"variable": "HasFoundStat",
+										"value": "false"
+									}
+								},
+								{
 									"id": "set-eventvar-value",
 									"objectClass": "System",
 									"sid": 298188602931034,
 									"parameters": {
 										"variable": "UpgradeID",
 										"value": "MechData.Get(\"applied_upgrades.\" & loopindex(\"upgrades\"))"
-									}
-								},
-								{
-									"id": "log",
-									"objectClass": "Browser",
-									"sid": 746089568204329,
-									"parameters": {
-										"type": "log",
-										"message": "\"UpgradeID:\" & UpgradeID"
 									}
 								},
 								{
@@ -179,29 +208,10 @@
 										"variable": "UpgradeDefinition",
 										"value": "UpgradeDefinitions.GetAsCompactString(UpgradeID)"
 									}
-								},
-								{
-									"id": "log",
-									"objectClass": "Browser",
-									"sid": 345663072676605,
-									"parameters": {
-										"type": "log",
-										"message": "\"Upgrade Definition: \" & UpgradeDefinition"
-									}
 								}
 							],
 							"sid": 681841620491610,
 							"children": [
-								{
-									"eventType": "variable",
-									"name": "HasFoundStat",
-									"type": "boolean",
-									"initialValue": "false",
-									"comment": "",
-									"isStatic": false,
-									"isConstant": false,
-									"sid": 330263596039108
-								},
 								{
 									"eventType": "block",
 									"conditions": [
@@ -216,7 +226,17 @@
 											}
 										}
 									],
-									"actions": [],
+									"actions": [
+										{
+											"id": "set-boolean-eventvar",
+											"objectClass": "System",
+											"sid": 833715009217894,
+											"parameters": {
+												"variable": "HasFoundStat",
+												"value": "false"
+											}
+										}
+									],
 									"sid": 188159146611153,
 									"children": [
 										{
@@ -231,9 +251,27 @@
 														"comparison": 0,
 														"second-value": "StatName"
 													}
+												},
+												{
+													"id": "compare-boolean-eventvar",
+													"objectClass": "System",
+													"sid": 670220130328126,
+													"parameters": {
+														"variable": "HasFoundStat"
+													},
+													"isInverted": true
 												}
 											],
 											"actions": [
+												{
+													"id": "log",
+													"objectClass": "Browser",
+													"sid": 206518301232496,
+													"parameters": {
+														"type": "log",
+														"message": "\"Found Modifier Match in \" & UpgradeID"
+													}
+												},
 												{
 													"id": "set-eventvar-value",
 													"objectClass": "System",
@@ -326,6 +364,24 @@
 																"variable": "NewValue",
 																"value": "NewValue + UpgradeValue"
 															}
+														},
+														{
+															"id": "log",
+															"objectClass": "Browser",
+															"sid": 616378317479287,
+															"parameters": {
+																"type": "log",
+																"message": "\"Add Operation performed. New Value: \" & NewValue"
+															}
+														},
+														{
+															"id": "log",
+															"objectClass": "Browser",
+															"sid": 401474334048030,
+															"parameters": {
+																"type": "log",
+																"message": "\"upgrades index: \" & loopindex(\"upgrades\") & \" | \" & \"modifiers index: \" & loopindex(\"modifiers\")"
+															}
 														}
 													],
 													"sid": 842198337360616
@@ -352,6 +408,15 @@
 															"parameters": {
 																"variable": "NewValue",
 																"value": "NewValue * UpgradeValue"
+															}
+														},
+														{
+															"id": "log",
+															"objectClass": "Browser",
+															"sid": 469326612311950,
+															"parameters": {
+																"type": "log",
+																"message": "\"Multiply Operation performed. New Value: \" & NewValue"
 															}
 														}
 													],
@@ -380,6 +445,15 @@
 																"variable": "NewValue",
 																"value": "UpgradeValue"
 															}
+														},
+														{
+															"id": "log",
+															"objectClass": "Browser",
+															"sid": 723285586586336,
+															"parameters": {
+																"type": "log",
+																"message": "\"Set Operation performed. New Value: \" & NewValue"
+															}
 														}
 													],
 													"sid": 770365569824030
@@ -394,6 +468,15 @@
 							"eventType": "block",
 							"conditions": [],
 							"actions": [
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 453112125427895,
+									"parameters": {
+										"type": "log",
+										"message": "\"Modified Value: \" & NewValue"
+									}
+								},
 								{
 									"id": "set-function-return-value",
 									"objectClass": "Functions",

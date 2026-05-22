@@ -1431,7 +1431,10 @@
 			"uid": 85,
 			"sid": 886237105274279,
 			"tags": "",
-			"instanceVariables": {}
+			"instanceVariables": {
+				"MechBaseUID": 0,
+				"MechUID": 0
+			}
 		}
 	],
 	"effectTypes": [],

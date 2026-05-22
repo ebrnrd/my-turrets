@@ -1,0 +1,10 @@
+{
+	"name": "UpgradeCardText",
+	"plugin-id": "Text",
+	"sid": 129669131131668,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": []
+}

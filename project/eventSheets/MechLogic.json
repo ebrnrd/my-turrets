@@ -213,6 +213,15 @@
 						"object": "turretGun",
 						"expression": "turretGun.turretBaseUID = turretBase.UID"
 					}
+				},
+				{
+					"id": "pick-by-evaluate",
+					"objectClass": "System",
+					"sid": 742122611409747,
+					"parameters": {
+						"object": "MechStatsCache",
+						"expression": "MechStatsCache.MechBaseUID = turretBase.UID"
+					}
 				}
 			],
 			"actions": [],
@@ -297,6 +306,61 @@
 						}
 					],
 					"sid": 879655475706036
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "has-target",
+							"objectClass": "turretGun",
+							"sid": 220350159781136,
+							"behaviorType": "Turret"
+						},
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 334887265137752,
+							"parameters": {
+								"first-value": "turretGun.mag_current",
+								"comparison": 4,
+								"second-value": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-max-speed",
+							"objectClass": "turretBase",
+							"sid": 781438134275692,
+							"behaviorType": "Pathfinding",
+							"parameters": {
+								"speed": "MechStatsCache.Get(\"shoot_move_speed\")"
+							}
+						}
+					],
+					"sid": 175766944212178
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 695823357858098
+						}
+					],
+					"actions": [
+						{
+							"id": "set-max-speed",
+							"objectClass": "turretBase",
+							"sid": 829183771600731,
+							"behaviorType": "Pathfinding",
+							"parameters": {
+								"speed": "MechStatsCache.Get(\"move_speed\")"
+							}
+						}
+					],
+					"sid": 243602168618943
 				}
 			]
 		},
@@ -1244,18 +1308,9 @@
 					}
 				},
 				{
-					"id": "set-instvar-value",
-					"objectClass": "MechData",
-					"sid": 369884858781017,
-					"parameters": {
-						"instance-variable": "MechStatsCacheUID",
-						"value": "MechStatsCache.UID"
-					}
-				},
-				{
 					"id": "create-object",
 					"objectClass": "System",
-					"sid": 321994971600902,
+					"sid": 522554109244831,
 					"parameters": {
 						"object-to-create": "turretBase",
 						"layer": "\"main\"",
@@ -1268,7 +1323,34 @@
 				{
 					"id": "set-instvar-value",
 					"objectClass": "MechData",
+					"sid": 369884858781017,
+					"parameters": {
+						"instance-variable": "MechStatsCacheUID",
+						"value": "MechStatsCache.UID"
+					}
+				},
+				{
+					"id": "set-instvar-value",
+					"objectClass": "MechData",
 					"sid": 157283693289031,
+					"parameters": {
+						"instance-variable": "MechBaseUID",
+						"value": "turretBase.UID"
+					}
+				},
+				{
+					"id": "set-instvar-value",
+					"objectClass": "MechStatsCache",
+					"sid": 328980929274761,
+					"parameters": {
+						"instance-variable": "MechUID",
+						"value": "MechData.UID"
+					}
+				},
+				{
+					"id": "set-instvar-value",
+					"objectClass": "MechStatsCache",
+					"sid": 701615700309370,
 					"parameters": {
 						"instance-variable": "MechBaseUID",
 						"value": "turretBase.UID"
@@ -1358,7 +1440,6 @@
 						{
 							"callFunction": "AddUpgradeToMech",
 							"sid": 567184235564062,
-							"disabled": true,
 							"parameters": [
 								"\"giant_bullet\"",
 								"MechData.UID"

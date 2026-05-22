@@ -553,6 +553,15 @@
 											"isInverted": true
 										},
 										{
+											"id": "is-overlapping-another-object",
+											"objectClass": "player_turret_position",
+											"sid": 350480433725722,
+											"parameters": {
+												"object": "enemies"
+											},
+											"isInverted": true
+										},
+										{
 											"id": "pick-random-instance",
 											"objectClass": "System",
 											"sid": 157837743591689,

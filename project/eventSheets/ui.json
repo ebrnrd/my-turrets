@@ -305,6 +305,308 @@
 				}
 			],
 			"sid": 390810670263930
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "UpgradesUI",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 498934615776290,
+							"parameters": {
+								"object": "CardCanvas"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 717014439058879,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "x_offset",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 477799396370300
+						},
+						{
+							"eventType": "variable",
+							"name": "y_offset",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 301980480015439
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "cursor-is-over-object",
+									"objectClass": "Mouse",
+									"sid": 657572553704379,
+									"parameters": {
+										"object": "CardCanvas"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 170484380196405,
+									"parameters": {
+										"variable": "x_offset",
+										"value": "((Mouse.X - scrollx + (ViewportWidth(0)/2)) - CardCanvas.X) / (400 / 2)"
+									}
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 698923197440632,
+									"parameters": {
+										"type": "log",
+										"message": "\"Canvas X offset: \" & x_offset"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 901856222348129,
+									"parameters": {
+										"variable": "y_offset",
+										"value": "((Mouse.Y - scrolly + (ViewportHeight(0)/2)) - CardCanvas.Y) / (600 / 2)"
+									}
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 887553131869685,
+									"parameters": {
+										"type": "log",
+										"message": "\"Canvas Y offset: \" & y_offset"
+									}
+								}
+							],
+							"sid": 341320734070417
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-size",
+									"objectClass": "CardCanvas",
+									"sid": 865387300799833,
+									"disabled": true,
+									"parameters": {
+										"width": "lerp(Self.Width, 400 - (100 * abs(x_offset)), 4 * dt)",
+										"height": "lerp(Self.Height, 600 - (200 * abs(y_offset)), 4 * dt)"
+									}
+								},
+								{
+									"id": "set-mesh-point",
+									"objectClass": "CardCanvas",
+									"sid": 169543312903490,
+									"parameters": {
+										"col": "0",
+										"row": "0",
+										"mode": "relative",
+										"posx": "abs(x_offset * 0.1)",
+										"posy": "abs(y_offset * 0.2)",
+										"z-elevation": "0",
+										"texx": "0",
+										"texy": "0"
+									}
+								},
+								{
+									"id": "set-mesh-point",
+									"objectClass": "CardCanvas",
+									"sid": 753652043497485,
+									"parameters": {
+										"col": "1",
+										"row": "0",
+										"mode": "relative",
+										"posx": "-abs(x_offset * 0.1)",
+										"posy": "abs(y_offset * 0.2)",
+										"z-elevation": "0",
+										"texx": "0",
+										"texy": "0"
+									}
+								},
+								{
+									"id": "set-mesh-point",
+									"objectClass": "CardCanvas",
+									"sid": 560057767164574,
+									"parameters": {
+										"col": "0",
+										"row": "1",
+										"mode": "relative",
+										"posx": "abs(x_offset * 0.1)",
+										"posy": "-abs(y_offset * 0.2)",
+										"z-elevation": "0",
+										"texx": "0",
+										"texy": "0"
+									}
+								},
+								{
+									"id": "set-mesh-point",
+									"objectClass": "CardCanvas",
+									"sid": 705698217395603,
+									"parameters": {
+										"col": "1",
+										"row": "1",
+										"mode": "relative",
+										"posx": "-abs(x_offset * 0.1)",
+										"posy": "-abs(y_offset * 0.2)",
+										"z-elevation": "0",
+										"texx": "0",
+										"texy": "0"
+									}
+								},
+								{
+									"id": "set-mesh-point",
+									"objectClass": "CardCanvas",
+									"sid": 409880014941913,
+									"disabled": true,
+									"parameters": {
+										"col": "1",
+										"row": "0",
+										"mode": "relative",
+										"posx": "-x_offset * 10",
+										"posy": "y_offset * 10",
+										"z-elevation": "Self.Z",
+										"texx": "-1",
+										"texy": "-1"
+									}
+								}
+							],
+							"sid": 536550141413236
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-created",
+							"objectClass": "UpgradeCardTransform",
+							"sid": 829524321712095
+						}
+					],
+					"actions": [
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 261181258596982,
+							"parameters": {
+								"seconds": "0.1",
+								"use-timescale": true
+							}
+						}
+					],
+					"sid": 725983905813339,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-children",
+									"objectClass": "UpgradeCardTransform",
+									"sid": 468673667845967,
+									"parameters": {
+										"child": "upgrade_card_bg",
+										"which": "own"
+									}
+								},
+								{
+									"id": "pick-children",
+									"objectClass": "UpgradeCardTransform",
+									"sid": 207134315347962,
+									"parameters": {
+										"child": "UpgradeCardThumb",
+										"which": "own"
+									}
+								},
+								{
+									"id": "pick-children",
+									"objectClass": "UpgradeCardTransform",
+									"sid": 856566183493555,
+									"parameters": {
+										"child": "UpgradeCardText",
+										"which": "own"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "paste-object",
+									"objectClass": "CardCanvas",
+									"sid": 627980380021879,
+									"parameters": {
+										"object": "upgrade_card_bg",
+										"effects": "with-effects"
+									}
+								},
+								{
+									"id": "paste-object",
+									"objectClass": "CardCanvas",
+									"sid": 776555835708456,
+									"parameters": {
+										"object": "UpgradeCardThumb",
+										"effects": "with-effects"
+									}
+								},
+								{
+									"id": "paste-object",
+									"objectClass": "CardCanvas",
+									"sid": 268723956647718,
+									"parameters": {
+										"object": "UpgradeCardText",
+										"effects": "with-effects"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "upgrade_card_bg",
+									"sid": 504181767091360,
+									"parameters": {
+										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "UpgradeCardThumb",
+									"sid": 838082936933512,
+									"parameters": {
+										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "UpgradeCardText",
+									"sid": 255840416426446,
+									"parameters": {
+										"visibility": "invisible"
+									}
+								}
+							],
+							"sid": 604375765857713
+						}
+					]
+				}
+			],
+			"sid": 525677511620691
 		}
 	],
 	"sid": 986417878794597

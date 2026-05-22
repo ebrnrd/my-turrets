@@ -50,6 +50,13 @@
 		},
 		{
 			"type": "plugin",
+			"id": "Mouse",
+			"name": "Mouse",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
 			"id": "NinePatch",
 			"name": "9-patch",
 			"author": "Scirra",
@@ -211,6 +218,13 @@
 		},
 		{
 			"type": "effect",
+			"id": "alphaclamp2",
+			"name": "Alpha clamp",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "effect",
 			"id": "alphadither",
 			"name": "Alpha Dithering",
 			"author": "skymen, Wagner Scholl Lemos",
@@ -273,6 +287,13 @@
 			"author": "skymen",
 			"bundled": false,
 			"version": "2.1.0.1"
+		},
+		{
+			"type": "effect",
+			"id": "water",
+			"name": "Water",
+			"author": "Viktor Korsun",
+			"bundled": false
 		}
 	],
 	"uniqueId": "kke81oeg3bm",
@@ -325,7 +346,14 @@
 			"smoke_particle_object",
 			"fog_sprite",
 			"DebugInput",
-			"Browser"
+			"Browser",
+			"upgrade_card_bg",
+			"UpgradeCardText",
+			"UpgradeCardThumb",
+			"CardGlow",
+			"UpgradeCardTransform",
+			"Mouse",
+			"CardCanvas"
 		],
 		"subfolders": [
 			{
@@ -345,6 +373,13 @@
 				],
 				"subfolders": [],
 				"name": "Mechs"
+			},
+			{
+				"items": [
+					"BackgroundBlur"
+				],
+				"subfolders": [],
+				"name": "UI"
 			}
 		]
 	},
@@ -424,7 +459,40 @@
 			"subfolders": []
 		},
 		"font": {
-			"items": [],
+			"items": [
+				{
+					"name": "DigitalDisco-Thin.ttf",
+					"type": "application/font-sfnt",
+					"sid": 897863952911228,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "DigitalDisco.ttf",
+					"type": "application/font-sfnt",
+					"sid": 701144273355313,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "Jersey10-Regular.ttf",
+					"type": "application/font-sfnt",
+					"sid": 229649763561529,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "Micro5-Regular.ttf",
+					"type": "application/font-sfnt",
+					"sid": 193875841960790,
+					"file-info": {
+						"purpose": "none"
+					}
+				}
+			],
 			"subfolders": []
 		},
 		"icon": {

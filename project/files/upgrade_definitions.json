@@ -3,7 +3,8 @@
     "label": "Rapid Fire",
     "description": "+30% fire rate",
     "modifiers": [
-      { "stat": "fire_rate", "op": "multiply", "value": 1.3 }
+      { "stat": "fire_rate", "op": "multiply", "value": 1.3 },
+      { "stat": "bullet_spread", "op": "add", "value": 8 }
     ],
     "behavior_tags": [],
     "hooks": {},
@@ -37,7 +38,6 @@
     "mech_types": ["combat"]
   },
 
-
   "giant_bullet": {
     "label": "Giant Bullet",
     "description": "10% chance to fire a massive piercing round",
@@ -56,7 +56,7 @@
     "description": "10% chance to fire a massive piercing round",
     "modifiers": [
       { "stat": "ricochet_chance", "op": "add", "value": 0.1 },
-      { "stat": "bullet_damage", "op": "multiply", "value": 0.5 }
+      { "stat": "bullet_damage", "op": "multiply", "value": 0.8 }
     ],
     "behavior_tags": [],
     "mech_types": ["combat"]
