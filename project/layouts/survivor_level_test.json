@@ -1528,6 +1528,12 @@
 							"parameters": {
 								"intensity": 1
 							}
+						},
+						"Pixellate": {
+							"isEnabled": false,
+							"parameters": {
+								"size": 16
+							}
 						}
 					},
 					"instanceFolderItem": {
@@ -1544,219 +1550,6 @@
 						"originX": 0.5,
 						"originY": 0.5,
 						"color": [
-							0.6509803921568628,
-							0.6509803921568628,
-							0.6509803921568628,
-							1
-						],
-						"z": 0,
-						"angle": 0
-					}
-				},
-				{
-					"type": "CardGlow",
-					"properties": {
-						"initially-visible": true,
-						"initial-animation": "Animation 1",
-						"initial-frame": 0,
-						"enable-collisions": true,
-						"live-preview": false
-					},
-					"uid": 100,
-					"sid": 684944190475612,
-					"tags": "",
-					"instanceVariables": {},
-					"behaviors": {},
-					"effects": {
-						"Water": {
-							"isEnabled": true,
-							"parameters": {
-								"speed": 0.05,
-								"x-speed": 0.1,
-								"y-speed": 0.1,
-								"intensity": 1,
-								"frequency": 4,
-								"angle": 6,
-								"delta": 20,
-								"reflectivity": 300,
-								"emboss": 0.3
-							}
-						},
-						"AlphaClamp": {
-							"isEnabled": true,
-							"parameters": {
-								"threshold": 0.3,
-								"lower-clamp": 0,
-								"upper-clamp": 0.2
-							}
-						}
-					},
-					"instanceFolderItem": {
-						"sid": 684944190475612,
-						"expanded": true
-					},
-					"showing": true,
-					"locked": false,
-					"world": {
-						"x": 631,
-						"y": 504,
-						"width": 579.1963247747055,
-						"height": 781.7178379998244,
-						"originX": 0.5,
-						"originY": 0.5,
-						"color": [
-							0,
-							0,
-							0,
-							1
-						],
-						"z": 0,
-						"angle": 0
-					}
-				},
-				{
-					"type": "upgrade_card_bg",
-					"properties": {
-						"left-margin": 6,
-						"right-margin": 6,
-						"top-margin": 6,
-						"bottom-margin": 6,
-						"edges": "stretch",
-						"fill": "stretch",
-						"image-scale-x": 4,
-						"image-scale-y": 4,
-						"initially-visible": true,
-						"origin": "center",
-						"seams": "overlap"
-					},
-					"uid": 96,
-					"sid": 965529762455792,
-					"tags": "",
-					"instanceVariables": {},
-					"behaviors": {},
-					"sceneGraphData": {
-						"parent-uid": 101,
-						"uid": 96,
-						"flags": {
-							"x": true,
-							"y": true,
-							"z": true,
-							"w": true,
-							"h": true,
-							"a": true,
-							"o": false,
-							"v": false,
-							"d": true,
-							"sm": "normal"
-						},
-						"preview": {
-							"transformX": 0,
-							"transformY": 0,
-							"transformZ": 0,
-							"transformW": 0,
-							"transformH": 0,
-							"transformA": 0,
-							"transformSX": 0,
-							"transformSY": 0,
-							"transformO": 0,
-							"previewSceneGraph": false
-						}
-					},
-					"instanceFolderItem": {
-						"sid": 965529762455792,
-						"expanded": true
-					},
-					"showing": true,
-					"locked": false,
-					"world": {
-						"x": 1202,
-						"y": 514,
-						"width": 340,
-						"height": 460,
-						"originX": 0.5,
-						"originY": 0.5,
-						"color": [
-							0.9686274509803922,
-							0.7568627450980392,
-							0.16862745098039217,
-							1
-						],
-						"z": 0,
-						"angle": 0
-					}
-				},
-				{
-					"type": "UpgradeCardText",
-					"properties": {
-						"text": "Upgrade Name",
-						"enable-bbcode": true,
-						"font": "Jersey10-Regular",
-						"size": 32,
-						"line-height": 0,
-						"bold": false,
-						"italic": false,
-						"color": [
-							0,
-							0,
-							0,
-							1
-						],
-						"horizontal-alignment": "left",
-						"vertical-alignment": "center",
-						"wrapping": "word",
-						"text-direction": "ltr",
-						"icon-set": -1,
-						"initially-visible": true,
-						"origin": "top",
-						"read-aloud": false
-					},
-					"uid": 97,
-					"sid": 203206484996619,
-					"tags": "name",
-					"instanceVariables": {},
-					"behaviors": {},
-					"sceneGraphData": {
-						"parent-uid": 101,
-						"uid": 97,
-						"flags": {
-							"x": true,
-							"y": true,
-							"z": true,
-							"w": true,
-							"h": true,
-							"a": true,
-							"o": false,
-							"v": false,
-							"d": true,
-							"sm": "normal"
-						},
-						"preview": {
-							"transformX": 0,
-							"transformY": 0,
-							"transformZ": 0,
-							"transformW": 0,
-							"transformH": 0,
-							"transformA": 0,
-							"transformSX": 0,
-							"transformSY": 0,
-							"transformO": 0,
-							"previewSceneGraph": false
-						}
-					},
-					"instanceFolderItem": {
-						"sid": 203206484996619,
-						"expanded": true
-					},
-					"showing": true,
-					"locked": false,
-					"world": {
-						"x": 1202,
-						"y": 303,
-						"width": 278,
-						"height": 64.75489863736738,
-						"originX": 0.5,
-						"originY": 0,
-						"color": [
 							1,
 							1,
 							1,
@@ -1765,9 +1558,45 @@
 						"z": 0,
 						"angle": 0
 					}
-				},
+				}
+			],
+			"sid": 328590899408388,
+			"effectTypes": [],
+			"isInitiallyVisible": true,
+			"isInitiallyInteractive": true,
+			"isHTMLElementsLayer": false,
+			"color": [
+				1,
+				1,
+				1,
+				1
+			],
+			"backgroundColor": [
+				0.3686274509803922,
+				0.3686274509803922,
+				0.3686274509803922,
+				1
+			],
+			"isTransparent": true,
+			"sampling": "auto",
+			"parallaxX": 0,
+			"parallaxY": 0,
+			"scaleRate": 1,
+			"forceOwnTexture": false,
+			"renderingMode": "3d",
+			"drawOrder": "z-order",
+			"useRenderCells": false,
+			"blendMode": "normal",
+			"zElevation": 0,
+			"global": false
+		},
+		{
+			"name": "card_1",
+			"overriden": 0,
+			"subLayers": [],
+			"instances": [
 				{
-					"type": "UpgradeCardThumb",
+					"type": "UpgradeCardDepth",
 					"properties": {
 						"initially-visible": true,
 						"initial-animation": "Animation 1",
@@ -1776,12 +1605,12 @@
 						"live-preview": false
 					},
 					"uid": 98,
-					"sid": 871326104690004,
+					"sid": 525498255896498,
 					"tags": "",
 					"instanceVariables": {},
 					"behaviors": {},
 					"sceneGraphData": {
-						"parent-uid": 101,
+						"parent-uid": 103,
 						"uid": 98,
 						"flags": {
 							"x": true,
@@ -1809,18 +1638,18 @@
 						}
 					},
 					"instanceFolderItem": {
-						"sid": 871326104690004,
+						"sid": 525498255896498,
 						"expanded": true
 					},
 					"showing": true,
 					"locked": false,
 					"world": {
 						"x": 1202,
-						"y": 452,
-						"width": 329.30797823110333,
-						"height": 126.65765974494528,
+						"y": 514,
+						"width": 335,
+						"height": 415,
 						"originX": 0.5,
-						"originY": 0.49666666666666665,
+						"originY": 0.5,
 						"color": [
 							1,
 							1,
@@ -1828,24 +1657,394 @@
 							1
 						],
 						"z": 0,
+						"angle": 0
+					}
+				},
+				{
+					"type": "CardCanvas",
+					"properties": {
+						"resolution-mode": "auto",
+						"initially-visible": true,
+						"origin": "center",
+						"antialiasing": "off"
+					},
+					"uid": 103,
+					"sid": 622425665967553,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {},
+					"sceneGraphData": {
+						"parent-uid": null,
+						"uid": 103,
+						"children": [
+							{
+								"uid": 98,
+								"flags": {
+									"x": true,
+									"y": true,
+									"z": true,
+									"w": true,
+									"h": true,
+									"a": true,
+									"o": false,
+									"v": false,
+									"d": true,
+									"sm": "normal"
+								}
+							},
+							{
+								"uid": 96,
+								"flags": {
+									"x": true,
+									"y": true,
+									"z": true,
+									"w": true,
+									"h": true,
+									"a": true,
+									"o": false,
+									"v": false,
+									"d": true,
+									"sm": "normal"
+								}
+							}
+						],
+						"flags": {
+							"x": true,
+							"y": true,
+							"z": true,
+							"w": true,
+							"h": true,
+							"a": true,
+							"o": false,
+							"v": false,
+							"d": true,
+							"sm": "normal"
+						},
+						"preview": {
+							"transformX": 0,
+							"transformY": 0,
+							"transformZ": 0,
+							"transformW": 0,
+							"transformH": 0,
+							"transformA": 0,
+							"transformSX": 0,
+							"transformSY": 0,
+							"transformO": 0,
+							"previewSceneGraph": false
+						}
+					},
+					"instanceFolderItem": {
+						"sid": 622425665967553,
+						"expanded": true
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 1202,
+						"y": 514,
+						"width": 400,
+						"height": 518,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"z": 0,
+						"angle": 0
+					}
+				},
+				{
+					"type": "CardReflectionFx",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 96,
+					"sid": 726619555321507,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {},
+					"effects": {
+						"BlurHorizontal": {
+							"isEnabled": true,
+							"parameters": {
+								"intensity": 1
+							}
+						},
+						"BlurVertical": {
+							"isEnabled": true,
+							"parameters": {
+								"intensity": 1
+							}
+						},
+						"BlurHorizontal2": {
+							"isEnabled": true,
+							"parameters": {
+								"intensity": 1
+							}
+						},
+						"BlurVertical2": {
+							"isEnabled": true,
+							"parameters": {
+								"intensity": 1
+							}
+						},
+						"Pixellate": {
+							"isEnabled": true,
+							"parameters": {
+								"size": 16
+							}
+						}
+					},
+					"sceneGraphData": {
+						"parent-uid": 103,
+						"uid": 96,
+						"flags": {
+							"x": true,
+							"y": true,
+							"z": true,
+							"w": true,
+							"h": true,
+							"a": true,
+							"o": false,
+							"v": false,
+							"d": true,
+							"sm": "normal"
+						},
+						"preview": {
+							"transformX": 0,
+							"transformY": 0,
+							"transformZ": 0,
+							"transformW": 0,
+							"transformH": 0,
+							"transformA": 0,
+							"transformSX": 0,
+							"transformSY": 0,
+							"transformO": 0,
+							"previewSceneGraph": false
+						}
+					},
+					"instanceFolderItem": {
+						"sid": 726619555321507,
+						"expanded": true
+					},
+					"showing": false,
+					"locked": false,
+					"world": {
+						"x": 1200,
+						"y": 513,
+						"width": 720,
+						"height": 720,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							0.1
+						],
+						"z": 0,
 						"angle": 0,
-						"blendMode": "multiply"
+						"blendMode": "source-atop"
+					}
+				},
+				{
+					"type": "UpgradeCardTransform",
+					"properties": {
+						"initially-visible": false,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 101,
+					"sid": 625142566716481,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {},
+					"sceneGraphData": {
+						"parent-uid": null,
+						"uid": 101,
+						"children": [
+							{
+								"uid": 99,
+								"flags": {
+									"x": true,
+									"y": true,
+									"z": true,
+									"w": true,
+									"h": true,
+									"a": true,
+									"o": false,
+									"v": false,
+									"d": true,
+									"sm": "normal"
+								}
+							},
+							{
+								"uid": 97,
+								"flags": {
+									"x": true,
+									"y": true,
+									"z": true,
+									"w": true,
+									"h": true,
+									"a": true,
+									"o": false,
+									"v": false,
+									"d": true,
+									"sm": "normal"
+								}
+							},
+							{
+								"uid": 104,
+								"flags": {
+									"x": true,
+									"y": true,
+									"z": true,
+									"w": true,
+									"h": true,
+									"a": true,
+									"o": false,
+									"v": false,
+									"d": true,
+									"sm": "normal"
+								}
+							}
+						],
+						"flags": {
+							"x": true,
+							"y": true,
+							"z": true,
+							"w": true,
+							"h": true,
+							"a": true,
+							"o": false,
+							"v": false,
+							"d": true,
+							"sm": "normal"
+						},
+						"preview": {
+							"transformX": 0,
+							"transformY": 0,
+							"transformZ": 0,
+							"transformW": 0,
+							"transformH": 0,
+							"transformA": 0,
+							"transformSX": 0,
+							"transformSY": 0,
+							"transformO": 0,
+							"previewSceneGraph": false
+						}
+					},
+					"instanceFolderItem": {
+						"sid": 625142566716481,
+						"expanded": true
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 1202,
+						"y": 514,
+						"width": 376,
+						"height": 456,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"z": 0,
+						"angle": 0
+					}
+				},
+				{
+					"type": "UpgradeCardBg",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 104,
+					"sid": 314315435005752,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {},
+					"sceneGraphData": {
+						"parent-uid": 101,
+						"uid": 104,
+						"flags": {
+							"x": true,
+							"y": true,
+							"z": true,
+							"w": true,
+							"h": true,
+							"a": true,
+							"o": false,
+							"v": false,
+							"d": true,
+							"sm": "normal"
+						},
+						"preview": {
+							"transformX": 0,
+							"transformY": 0,
+							"transformZ": 0,
+							"transformW": 0,
+							"transformH": 0,
+							"transformA": 0,
+							"transformSX": 0,
+							"transformSY": 0,
+							"transformO": 0,
+							"previewSceneGraph": false
+						}
+					},
+					"instanceFolderItem": {
+						"sid": 314315435005752,
+						"expanded": true
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 1202,
+						"y": 514,
+						"width": 335,
+						"height": 415,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"z": 0,
+						"angle": 0
 					}
 				},
 				{
 					"type": "UpgradeCardText",
 					"properties": {
-						"text": "+10% CHANCE OF SHOOTING A GIANT BULLET\n\n-20% DAMAGE",
+						"text": "+10% chance of shooting a Giant Bullet\n\n-20% DAMAGE",
 						"enable-bbcode": true,
 						"font": "Micro5-Regular",
-						"size": 24,
-						"line-height": -12,
+						"size": 32,
+						"line-height": -18,
 						"bold": false,
 						"italic": false,
 						"color": [
-							0,
-							0,
-							0,
+							1,
+							1,
+							1,
 							1
 						],
 						"horizontal-alignment": "left",
@@ -1897,10 +2096,10 @@
 					"showing": true,
 					"locked": false,
 					"world": {
-						"x": 1202,
-						"y": 529,
-						"width": 278,
-						"height": 157.14444291530202,
+						"x": 1200.3762039602984,
+						"y": 467,
+						"width": 260.67970161914195,
+						"height": 265.144442915302,
 						"originX": 0.5,
 						"originY": 0,
 						"color": [
@@ -1914,84 +2113,38 @@
 					}
 				},
 				{
-					"type": "UpgradeCardTransform",
+					"type": "UpgradeCardText",
 					"properties": {
-						"initially-visible": false,
-						"initial-animation": "Animation 1",
-						"initial-frame": 0,
-						"enable-collisions": true,
-						"live-preview": false
+						"text": "UPGRADE NAME",
+						"enable-bbcode": true,
+						"font": "Micro5-Regular",
+						"size": 41.25,
+						"line-height": -24,
+						"bold": false,
+						"italic": false,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"horizontal-alignment": "left",
+						"vertical-alignment": "top",
+						"wrapping": "word",
+						"text-direction": "ltr",
+						"icon-set": -1,
+						"initially-visible": true,
+						"origin": "top",
+						"read-aloud": false
 					},
-					"uid": 101,
-					"sid": 625142566716481,
-					"tags": "",
+					"uid": 97,
+					"sid": 203206484996619,
+					"tags": "name",
 					"instanceVariables": {},
 					"behaviors": {},
 					"sceneGraphData": {
-						"parent-uid": null,
-						"uid": 101,
-						"children": [
-							{
-								"uid": 96,
-								"flags": {
-									"x": true,
-									"y": true,
-									"z": true,
-									"w": true,
-									"h": true,
-									"a": true,
-									"o": false,
-									"v": false,
-									"d": true,
-									"sm": "normal"
-								}
-							},
-							{
-								"uid": 99,
-								"flags": {
-									"x": true,
-									"y": true,
-									"z": true,
-									"w": true,
-									"h": true,
-									"a": true,
-									"o": false,
-									"v": false,
-									"d": true,
-									"sm": "normal"
-								}
-							},
-							{
-								"uid": 97,
-								"flags": {
-									"x": true,
-									"y": true,
-									"z": true,
-									"w": true,
-									"h": true,
-									"a": true,
-									"o": false,
-									"v": false,
-									"d": true,
-									"sm": "normal"
-								}
-							},
-							{
-								"uid": 98,
-								"flags": {
-									"x": true,
-									"y": true,
-									"z": true,
-									"w": true,
-									"h": true,
-									"a": true,
-									"o": false,
-									"v": false,
-									"d": true,
-									"sm": "normal"
-								}
-							}
-						],
+						"parent-uid": 101,
+						"uid": 97,
 						"flags": {
 							"x": true,
 							"y": true,
@@ -2018,92 +2171,18 @@
 						}
 					},
 					"instanceFolderItem": {
-						"sid": 625142566716481,
+						"sid": 203206484996619,
 						"expanded": true
 					},
 					"showing": true,
 					"locked": false,
 					"world": {
-						"x": 1202,
-						"y": 514,
-						"width": 250,
-						"height": 250,
+						"x": 1197.1355907165266,
+						"y": 336.2422519643965,
+						"width": 215.0433797705939,
+						"height": 115.38666414148307,
 						"originX": 0.5,
-						"originY": 0.5,
-						"color": [
-							1,
-							1,
-							1,
-							1
-						],
-						"z": 0,
-						"angle": 0
-					}
-				},
-				{
-					"type": "CardCanvas",
-					"properties": {
-						"resolution-mode": "auto",
-						"initially-visible": true,
-						"origin": "center",
-						"antialiasing": "off"
-					},
-					"uid": 103,
-					"sid": 622425665967553,
-					"tags": "",
-					"instanceVariables": {},
-					"behaviors": {},
-					"instanceFolderItem": {
-						"sid": 622425665967553,
-						"expanded": true
-					},
-					"mesh": {
-						"cols": 2,
-						"rows": 2,
-						"points": [
-							[
-								{
-									"x": 0,
-									"y": 0,
-									"z": 0,
-									"u": 0,
-									"v": 0
-								},
-								{
-									"x": 1,
-									"y": 0,
-									"z": 0,
-									"u": 1,
-									"v": 0
-								}
-							],
-							[
-								{
-									"x": 0,
-									"y": 1,
-									"z": 0,
-									"u": 0,
-									"v": 1
-								},
-								{
-									"x": 1,
-									"y": 1,
-									"z": 0,
-									"u": 1,
-									"v": 1
-								}
-							]
-						]
-					},
-					"showing": true,
-					"locked": false,
-					"world": {
-						"x": 1202,
-						"y": 514,
-						"width": 400,
-						"height": 518,
-						"originX": 0.5,
-						"originY": 0.5,
+						"originY": 0,
 						"color": [
 							1,
 							1,
@@ -2115,7 +2194,7 @@
 					}
 				}
 			],
-			"sid": 328590899408388,
+			"sid": 478906539529464,
 			"effectTypes": [],
 			"isInitiallyVisible": true,
 			"isInitiallyInteractive": true,
@@ -2137,7 +2216,7 @@
 			"parallaxX": 0,
 			"parallaxY": 0,
 			"scaleRate": 1,
-			"forceOwnTexture": false,
+			"forceOwnTexture": true,
 			"renderingMode": "3d",
 			"drawOrder": "z-order",
 			"useRenderCells": false,

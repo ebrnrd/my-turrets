@@ -261,6 +261,13 @@
 		},
 		{
 			"type": "effect",
+			"id": "pixellate",
+			"name": "Pixellate",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "effect",
 			"id": "replacesolidcolor",
 			"name": "Replace solid color",
 			"author": "Scirra",
@@ -353,7 +360,10 @@
 			"CardGlow",
 			"UpgradeCardTransform",
 			"Mouse",
-			"CardCanvas"
+			"CardCanvas",
+			"UpgradeCardBg",
+			"CardReflectionFx",
+			"UpgradeCardDepth"
 		],
 		"subfolders": [
 			{

@@ -1,16 +1,12 @@
 {
-	"name": "BackgroundBlur",
+	"name": "CardReflectionFx",
 	"plugin-id": "Sprite",
-	"sid": 368927640971727,
+	"sid": 539455618580939,
 	"isGlobal": false,
 	"editorNewInstanceIsReplica": true,
 	"instanceVariables": [],
 	"behaviorTypes": [],
 	"effectTypes": [
-		{
-			"effectId": "multiply",
-			"name": "Multiply"
-		},
 		{
 			"effectId": "blurhorizontal",
 			"name": "BlurHorizontal"
@@ -37,21 +33,37 @@
 			{
 				"frames": [
 					{
-						"width": 250,
-						"height": 250,
+						"width": 144,
+						"height": 144,
 						"originX": 0.5,
 						"originY": 0.5,
 						"originalSource": "",
 						"exportFormat": "lossless",
 						"exportQuality": 0.8,
 						"fileType": "image/png",
-						"imageSpriteId": 3377252,
+						"imageSpriteId": 2029282,
+						"collisionPoly": {
+							"points": [
+								0.7986111111111112,
+								0,
+								1,
+								0,
+								1,
+								0.2013888888888889,
+								0.2013888888888889,
+								1,
+								0,
+								1,
+								0,
+								0.7986111111111112
+							]
+						},
 						"useCollisionPoly": true,
 						"duration": 1,
 						"tag": ""
 					}
 				],
-				"sid": 367912729977211,
+				"sid": 501175888386758,
 				"name": "Animation 1",
 				"isLooping": false,
 				"isPingPong": false,

@@ -1,57 +1,52 @@
 {
-	"name": "BackgroundBlur",
+	"name": "UpgradeCardBg",
 	"plugin-id": "Sprite",
-	"sid": 368927640971727,
+	"sid": 839067274778615,
 	"isGlobal": false,
 	"editorNewInstanceIsReplica": true,
 	"instanceVariables": [],
 	"behaviorTypes": [],
-	"effectTypes": [
-		{
-			"effectId": "multiply",
-			"name": "Multiply"
-		},
-		{
-			"effectId": "blurhorizontal",
-			"name": "BlurHorizontal"
-		},
-		{
-			"effectId": "blurvertical",
-			"name": "BlurVertical"
-		},
-		{
-			"effectId": "blurhorizontal",
-			"name": "BlurHorizontal2"
-		},
-		{
-			"effectId": "blurvertical",
-			"name": "BlurVertical2"
-		},
-		{
-			"effectId": "pixellate",
-			"name": "Pixellate"
-		}
-	],
+	"effectTypes": [],
 	"animations": {
 		"items": [
 			{
 				"frames": [
 					{
-						"width": 250,
-						"height": 250,
+						"width": 67,
+						"height": 83,
 						"originX": 0.5,
 						"originY": 0.5,
 						"originalSource": "",
 						"exportFormat": "lossless",
 						"exportQuality": 0.8,
 						"fileType": "image/png",
-						"imageSpriteId": 3377252,
+						"imageSpriteId": 7870026,
+						"collisionPoly": {
+							"points": [
+								0.05970149253731343,
+								0,
+								0.9402985074626866,
+								0,
+								1,
+								0.04819277108433735,
+								1,
+								0.9518072289156626,
+								0.9402985074626866,
+								1,
+								0.05970149253731343,
+								1,
+								0,
+								0.9518072289156626,
+								0,
+								0.04819277108433735
+							]
+						},
 						"useCollisionPoly": true,
 						"duration": 1,
 						"tag": ""
 					}
 				],
-				"sid": 367912729977211,
+				"sid": 447780385222400,
 				"name": "Animation 1",
 				"isLooping": false,
 				"isPingPong": false,
