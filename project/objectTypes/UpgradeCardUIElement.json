@@ -1,0 +1,76 @@
+{
+	"name": "UpgradeCardUIElement",
+	"plugin-id": "Sprite",
+	"sid": 963685009086814,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [
+		{
+			"name": "HasSnapshot",
+			"type": "boolean",
+			"desc": "",
+			"show": true,
+			"sid": 927935628401575
+		},
+		{
+			"name": "TargetX",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 707798748140348
+		},
+		{
+			"name": "TargetY",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 682883860706738
+		},
+		{
+			"name": "OffsetX",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 473969038786371
+		},
+		{
+			"name": "OffsetY",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 450275565284803
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 250,
+						"height": 250,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 6827792,
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 793465948059181,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

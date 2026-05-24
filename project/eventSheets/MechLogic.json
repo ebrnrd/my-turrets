@@ -1395,25 +1395,84 @@
 				},
 				{
 					"eventType": "block",
-					"conditions": [],
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 767626525913787,
+							"parameters": {
+								"first-value": "random(0,1)",
+								"comparison": 3,
+								"second-value": "0.5"
+							}
+						}
+					],
 					"actions": [
 						{
 							"customAction": "AddUpgradeToMech",
 							"objectClass": "UpgradesManager",
-							"sid": 371540666139702,
+							"sid": 535138681455005,
+							"parameters": [
+								"\"giant_bullet\"",
+								"MechData.UID"
+							]
+						}
+					],
+					"sid": 763636436171883
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 594689594418819,
+							"parameters": {
+								"first-value": "random(0,1)",
+								"comparison": 3,
+								"second-value": "0.5"
+							}
+						}
+					],
+					"actions": [
+						{
+							"customAction": "AddUpgradeToMech",
+							"objectClass": "UpgradesManager",
+							"sid": 909334561745066,
+							"parameters": [
+								"\"rapid_fire\"",
+								"MechData.UID"
+							]
+						}
+					],
+					"sid": 110499373191480
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 352850224663864,
+							"parameters": {
+								"first-value": "random(0,1)",
+								"comparison": 3,
+								"second-value": "0.5"
+							}
+						}
+					],
+					"actions": [
+						{
+							"customAction": "AddUpgradeToMech",
+							"objectClass": "UpgradesManager",
+							"sid": 397010152379355,
 							"parameters": [
 								"\"ricochet\"",
 								"MechData.UID"
 							]
-						},
-						{
-							"customAction": "UpdateMechStatsCache",
-							"objectClass": "MechData",
-							"sid": 468360933990505,
-							"disabled": true
 						}
 					],
-					"sid": 445221130566889
+					"sid": 903064687708937
 				}
 			]
 		},

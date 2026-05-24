@@ -1,0 +1,13 @@
+{
+	"name": "UIElements",
+	"plugin-id": "Sprite",
+	"sid": 878170665452681,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"members": [
+		"HintElementUI",
+		"UpgradeMechPowerUpListElement",
+		"UpgradeMechInstanceUI"
+	]
+}

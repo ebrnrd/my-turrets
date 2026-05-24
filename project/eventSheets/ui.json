@@ -5,6 +5,70 @@
 			"eventType": "block",
 			"conditions": [
 				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 170128397496744
+				}
+			],
+			"actions": [
+				{
+					"id": "add-layer",
+					"objectClass": "System",
+					"sid": 285030028909857,
+					"parameters": {
+						"name": "\"Hints\"",
+						"insert-by": "\"UpgradeUI\"",
+						"where": "above"
+					}
+				},
+				{
+					"id": "set-layer-parallax",
+					"objectClass": "System",
+					"sid": 149411119143832,
+					"parameters": {
+						"layer": "\"Hints\"",
+						"parallax-x": "0",
+						"parallax-y": "0"
+					}
+				},
+				{
+					"id": "set-layer-scale-rate",
+					"objectClass": "System",
+					"sid": 244663354107252,
+					"parameters": {
+						"layer": "\"Hints\"",
+						"scale-rate": "0"
+					}
+				},
+				{
+					"id": "create-object",
+					"objectClass": "System",
+					"sid": 549417532933695,
+					"parameters": {
+						"object-to-create": "HintElementUI",
+						"layer": "\"Hints\"",
+						"x": "0",
+						"y": "0",
+						"create-hierarchy": true,
+						"template-name": "\"\""
+					}
+				},
+				{
+					"id": "set-object-time-scale",
+					"objectClass": "System",
+					"sid": 579926662585886,
+					"parameters": {
+						"object": "HintElementUI",
+						"time-scale": "1.0"
+					}
+				}
+			],
+			"sid": 785642757460683
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
 					"id": "on-created",
 					"objectClass": "healthbar",
 					"sid": 787032779711266
@@ -504,9 +568,26 @@
 						{
 							"id": "for-each",
 							"objectClass": "System",
-							"sid": 153985901185433,
+							"sid": 782122136120529,
 							"parameters": {
-								"object": "CardCanvas"
+								"object": "UpgradeCardUIElement"
+							}
+						},
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "UpgradeCardUIElement",
+							"sid": 739797772641821,
+							"parameters": {
+								"instance-variable": "HasSnapshot"
+							}
+						},
+						{
+							"id": "pick-children",
+							"objectClass": "UpgradeCardUIElement",
+							"sid": 994973270709929,
+							"parameters": {
+								"child": "CardCanvas",
+								"which": "own"
 							}
 						}
 					],
@@ -539,9 +620,9 @@
 								{
 									"id": "cursor-is-over-object",
 									"objectClass": "Mouse",
-									"sid": 921932968830526,
+									"sid": 250509749229489,
 									"parameters": {
-										"object": "CardCanvas"
+										"object": "UpgradeCardUIElement"
 									}
 								}
 							],
@@ -549,16 +630,46 @@
 								{
 									"id": "set-eventvar-value",
 									"objectClass": "System",
-									"sid": 373835690675869,
+									"sid": 733208153004784,
+									"disabled": true,
 									"parameters": {
 										"variable": "x_offset",
-										"value": "((Mouse.X - scrollx + (ViewportWidth(0)/2)) - CardCanvas.X) / (400 / 2)"
+										"value": "((Mouse.X - scrollx + (ViewportWidth(\"MechUpgrades\")/2)) - UpgradeCardUIElement.X) / (400 / 2)"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "UpgradeCardUIElement",
+									"sid": 704131078990726,
+									"parameters": {
+										"instance-variable": "OffsetX",
+										"value": "(LayerToLayerX(0, \"MechUpgrades\", Mouse.X, Mouse.Y) - UpgradeCardUIElement.X) / (UpgradeCardUIElement.Width / 2) "
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "UpgradeCardUIElement",
+									"sid": 578039150499097,
+									"parameters": {
+										"instance-variable": "OffsetY",
+										"value": "(LayerToLayerY(0, \"MechUpgrades\", Mouse.X, Mouse.Y) - UpgradeCardUIElement.Y) / (UpgradeCardUIElement.Height / 2) "
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "UpgradeCardUIElement",
+									"sid": 256697245378867,
+									"disabled": true,
+									"parameters": {
+										"instance-variable": "OffsetX",
+										"value": "CardCanvas.X - Mouse.X - scrollx + (ViewportWidth(\"MechUpgrades\")/2)"
 									}
 								},
 								{
 									"id": "log",
 									"objectClass": "Browser",
 									"sid": 384493420933654,
+									"disabled": true,
 									"parameters": {
 										"type": "log",
 										"message": "\"Canvas X offset: \" & x_offset"
@@ -567,16 +678,28 @@
 								{
 									"id": "set-eventvar-value",
 									"objectClass": "System",
-									"sid": 319029844275004,
+									"sid": 418467129120174,
+									"disabled": true,
 									"parameters": {
 										"variable": "y_offset",
-										"value": "((Mouse.Y - scrolly + (ViewportHeight(0)/2)) - CardCanvas.Y) / (600 / 2)"
+										"value": "((Mouse.Y - scrolly + (ViewportHeight(\"MechUpgrades\")/2)) - UpgradeCardUIElement.Y) / (600 / 2)"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "UpgradeCardUIElement",
+									"sid": 759560655400205,
+									"disabled": true,
+									"parameters": {
+										"instance-variable": "OffsetY",
+										"value": "((Mouse.Y - scrolly + (ViewportHeight(\"MechUpgrades\")/2)) - UpgradeCardUIElement.Y) / (UpgradeCardUIElement.Height/ 2)"
 									}
 								},
 								{
 									"id": "log",
 									"objectClass": "Browser",
 									"sid": 126604826608906,
+									"disabled": true,
 									"parameters": {
 										"type": "log",
 										"message": "\"Canvas Y offset: \" & y_offset"
@@ -596,20 +719,20 @@
 							],
 							"actions": [
 								{
-									"id": "set-eventvar-value",
-									"objectClass": "System",
-									"sid": 118702863459575,
+									"id": "set-instvar-value",
+									"objectClass": "UpgradeCardUIElement",
+									"sid": 646040753622095,
 									"parameters": {
-										"variable": "x_offset",
+										"instance-variable": "OffsetX",
 										"value": "0"
 									}
 								},
 								{
-									"id": "set-eventvar-value",
-									"objectClass": "System",
-									"sid": 728501670465536,
+									"id": "set-instvar-value",
+									"objectClass": "UpgradeCardUIElement",
+									"sid": 657844652737525,
 									"parameters": {
-										"variable": "y_offset",
+										"instance-variable": "OffsetY",
 										"value": "0"
 									}
 								}
@@ -623,17 +746,17 @@
 								{
 									"id": "set-width",
 									"objectClass": "CardCanvas",
-									"sid": 948783735154524,
+									"sid": 978161366623244,
 									"parameters": {
-										"width": "lerp(Self.Width, 400 - (100 * abs(x_offset)), 4 * dt)"
+										"width": "lerp(Self.Width, 400 - (100 * abs(UpgradeCardUIElement.OffsetX)), 4 * Self.dt)"
 									}
 								},
 								{
 									"id": "set-angle",
 									"objectClass": "CardCanvas",
-									"sid": 681185206850526,
+									"sid": 949009491653404,
 									"parameters": {
-										"angle": "anglelerp(Self.angle, (10 * (y_offset)), 4 * dt)"
+										"angle": "anglelerp(Self.angle, (10 * (UpgradeCardUIElement.OffsetY)), 4 * Self.dt)"
 									}
 								},
 								{
@@ -745,10 +868,10 @@
 										{
 											"id": "set-position",
 											"objectClass": "CardReflectionFx",
-											"sid": 864373136026163,
+											"sid": 286388916525235,
 											"parameters": {
-												"x": "lerp(Self.X, CardCanvas.X + x_offset * CardCanvas.Width, 4 * dt)",
-												"y": "lerp(Self.Y, CardCanvas.Y + x_offset * CardCanvas.Height, 4 * dt)"
+												"x": "lerp(Self.X, CardCanvas.X + UpgradeCardUIElement.OffsetX * CardCanvas.Width, 4 * Self.dt)",
+												"y": "lerp(Self.Y, CardCanvas.Y + UpgradeCardUIElement.OffsetX * CardCanvas.Height, 4 * Self.dt)"
 											}
 										}
 									],
@@ -788,12 +911,11 @@
 											}
 										},
 										{
-											"id": "set-position",
+											"id": "set-x",
 											"objectClass": "UpgradeCardDepth",
-											"sid": 798585219466170,
+											"sid": 972776976314260,
 											"parameters": {
-												"x": "lerp(Self.X, CardCanvas.X - x_offset * 20, 4 * dt)",
-												"y": "CardCanvas.Y"
+												"x": "lerp(Self.X, CardCanvas.X - UpgradeCardUIElement.OffsetX * 20, 4 * Self.dt)"
 											}
 										}
 									],
@@ -808,7 +930,7 @@
 					"conditions": [
 						{
 							"id": "on-created",
-							"objectClass": "UpgradeCardTransform",
+							"objectClass": "UpgradeCardUIElement",
 							"sid": 829524321712095
 						}
 					],
@@ -816,10 +938,10 @@
 						{
 							"id": "wait",
 							"objectClass": "System",
-							"sid": 261181258596982,
+							"sid": 424434638432160,
 							"parameters": {
-								"seconds": "0.1",
-								"use-timescale": true
+								"seconds": "0.2",
+								"use-timescale": false
 							}
 						}
 					],
@@ -830,7 +952,7 @@
 							"conditions": [
 								{
 									"id": "pick-children",
-									"objectClass": "UpgradeCardTransform",
+									"objectClass": "UpgradeCardUIElement",
 									"sid": 468673667845967,
 									"disabled": true,
 									"parameters": {
@@ -840,7 +962,7 @@
 								},
 								{
 									"id": "pick-children",
-									"objectClass": "UpgradeCardTransform",
+									"objectClass": "UpgradeCardUIElement",
 									"sid": 207134315347962,
 									"parameters": {
 										"child": "UpgradeCardBg",
@@ -849,15 +971,69 @@
 								},
 								{
 									"id": "pick-children",
-									"objectClass": "UpgradeCardTransform",
+									"objectClass": "UpgradeCardUIElement",
 									"sid": 856566183493555,
 									"parameters": {
 										"child": "UpgradeCardText",
 										"which": "own"
 									}
+								},
+								{
+									"id": "pick-children",
+									"objectClass": "UpgradeCardUIElement",
+									"sid": 729338610067520,
+									"parameters": {
+										"child": "CardCanvas",
+										"which": "own"
+									}
+								},
+								{
+									"id": "pick-children",
+									"objectClass": "CardCanvas",
+									"sid": 474805408994136,
+									"parameters": {
+										"child": "UpgradeCardDepth",
+										"which": "own"
+									}
 								}
 							],
 							"actions": [
+								{
+									"id": "set-object-time-scale",
+									"objectClass": "System",
+									"sid": 998675336072942,
+									"parameters": {
+										"object": "CardCanvas",
+										"time-scale": "1.0"
+									}
+								},
+								{
+									"id": "set-object-time-scale",
+									"objectClass": "System",
+									"sid": 382433177263729,
+									"parameters": {
+										"object": "UpgradeCardBg",
+										"time-scale": "1.0"
+									}
+								},
+								{
+									"id": "set-object-time-scale",
+									"objectClass": "System",
+									"sid": 233658237697973,
+									"parameters": {
+										"object": "CardReflectionFx",
+										"time-scale": "1.0"
+									}
+								},
+								{
+									"id": "set-object-time-scale",
+									"objectClass": "System",
+									"sid": 364857989740276,
+									"parameters": {
+										"object": "UpgradeCardDepth",
+										"time-scale": "1.0"
+									}
+								},
 								{
 									"id": "paste-object",
 									"objectClass": "CardCanvas",
@@ -912,9 +1088,86 @@
 									}
 								}
 							],
-							"sid": 604375765857713
+							"sid": 604375765857713,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"id": "wait",
+											"objectClass": "System",
+											"sid": 635469570577771,
+											"parameters": {
+												"seconds": "0.1",
+												"use-timescale": false
+											}
+										},
+										{
+											"id": "set-y",
+											"objectClass": "UpgradeCardUIElement",
+											"sid": 682773791660100,
+											"parameters": {
+												"y": "2000"
+											}
+										},
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "UpgradeCardUIElement",
+											"sid": 573632216329005,
+											"parameters": {
+												"instance-variable": "HasSnapshot",
+												"value": "true"
+											}
+										},
+										{
+											"id": "set-layer-visible",
+											"objectClass": "System",
+											"sid": 688737346999767,
+											"parameters": {
+												"layer": "\"MechUpgrades\"",
+												"visibility": "visible"
+											}
+										}
+									],
+									"sid": 742098588834868
+								}
+							]
 						}
 					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 100791104298461,
+							"parameters": {
+								"object": "UpgradeCardUIElement"
+							}
+						},
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "UpgradeCardUIElement",
+							"sid": 772160568818789,
+							"parameters": {
+								"instance-variable": "HasSnapshot"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-position",
+							"objectClass": "UpgradeCardUIElement",
+							"sid": 499749251598116,
+							"parameters": {
+								"x": "lerp(Self.X, Self.TargetX, 4 * Self.dt)",
+								"y": "lerp(Self.Y, Self.TargetY, 4 * Self.dt)"
+							}
+						}
+					],
+					"sid": 714769706157324
 				}
 			],
 			"sid": 525677511620691
@@ -981,6 +1234,242 @@
 				}
 			],
 			"sid": 181106956445201
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "pick-children",
+					"objectClass": "HintElementUI",
+					"sid": 209424745335497,
+					"parameters": {
+						"child": "TextUI",
+						"which": "own"
+					}
+				},
+				{
+					"id": "pick-children",
+					"objectClass": "HintElementUI",
+					"sid": 777569133909813,
+					"parameters": {
+						"child": "LabelRectUI",
+						"which": "own"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-visible",
+					"objectClass": "TextUI",
+					"sid": 894998662387190,
+					"parameters": {
+						"visibility": "invisible"
+					}
+				},
+				{
+					"id": "set-visible",
+					"objectClass": "LabelRectUI",
+					"sid": 851574098744633,
+					"parameters": {
+						"visibility": "invisible"
+					}
+				}
+			],
+			"sid": 325408652748177
+		},
+		{
+			"functionName": "ShowHint",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "Text",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 165982800281400
+				},
+				{
+					"name": "PosX",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 692479556407043
+				},
+				{
+					"name": "PosY",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 458118509517575
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 842727360402338,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-children",
+							"objectClass": "HintElementUI",
+							"sid": 965862981225781,
+							"parameters": {
+								"child": "TextUI",
+								"which": "own"
+							}
+						},
+						{
+							"id": "pick-children",
+							"objectClass": "HintElementUI",
+							"sid": 350253891621656,
+							"parameters": {
+								"child": "LabelRectUI",
+								"which": "own"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-text",
+							"objectClass": "TextUI",
+							"sid": 623202909292375,
+							"parameters": {
+								"text": "Text"
+							}
+						},
+						{
+							"id": "set-height",
+							"objectClass": "LabelRectUI",
+							"sid": 182610391381883,
+							"parameters": {
+								"height": "TextUI.TextHeight + 2"
+							}
+						},
+						{
+							"id": "set-visible",
+							"objectClass": "TextUI",
+							"sid": 424658257453476,
+							"parameters": {
+								"visibility": "visible"
+							}
+						},
+						{
+							"id": "set-visible",
+							"objectClass": "LabelRectUI",
+							"sid": 191219875703842,
+							"parameters": {
+								"visibility": "visible"
+							}
+						},
+						{
+							"id": "set-position",
+							"objectClass": "HintElementUI",
+							"sid": 315455456231248,
+							"parameters": {
+								"x": "PosX",
+								"y": "PosY"
+							}
+						}
+					],
+					"sid": 892467424042197
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "cursor-is-over-object",
+					"objectClass": "Mouse",
+					"sid": 898824308562078,
+					"parameters": {
+						"object": "UpgradeMechPowerUpListElement"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 976304571443533,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-children",
+							"objectClass": "UpgradeMechPowerUpListElement",
+							"sid": 726178266395681,
+							"parameters": {
+								"child": "LabelRectUI",
+								"which": "own"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "ShowHint",
+							"sid": 200269103192028,
+							"parameters": [
+								"uppercase(Functions.GetUpgradeProperty(UpgradeMechPowerUpListElement.UpgradeID, \"description\"))",
+								"LabelRectUI.BBoxRight + 20",
+								"LabelRectUI.BBoxMidY"
+							]
+						}
+					],
+					"sid": 126940439432309
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "cursor-is-over-object",
+					"objectClass": "Mouse",
+					"sid": 402808330091000,
+					"parameters": {
+						"object": "ButtonUI"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-effect-enabled",
+					"objectClass": "ButtonUI",
+					"sid": 869935344893772,
+					"parameters": {
+						"mode": "enable",
+						"effect": "\"HoverColor\""
+					}
+				}
+			],
+			"sid": 174614401874983
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "else",
+					"objectClass": "System",
+					"sid": 756852305351568
+				}
+			],
+			"actions": [
+				{
+					"id": "set-effect-enabled",
+					"objectClass": "ButtonUI",
+					"sid": 343983983216734,
+					"parameters": {
+						"mode": "disable",
+						"effect": "\"HoverColor\""
+					}
+				}
+			],
+			"sid": 505688251611932
 		}
 	],
 	"sid": 986417878794597

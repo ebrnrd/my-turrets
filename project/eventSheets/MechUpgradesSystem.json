@@ -1007,6 +1007,11 @@
 							}
 						},
 						{
+							"customAction": "DrawMechSelectionMechs",
+							"objectClass": "UpgradesManager",
+							"sid": 741592447319313
+						},
+						{
 							"id": "set-time-scale",
 							"objectClass": "System",
 							"sid": 612791728416158,
@@ -1066,6 +1071,889 @@
 				}
 			],
 			"sid": 974783336285622
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "UpgradeUI",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"aceType": "action",
+					"aceName": "DrawMechSelectionMechs",
+					"objectClass": "UpgradesManager",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "custom-ace-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 420535239010672,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "MECHS_GAP",
+							"type": "number",
+							"initialValue": "320",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 684315178145821
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "for-each",
+									"objectClass": "System",
+									"sid": 474231771633252,
+									"parameters": {
+										"object": "MechData"
+									}
+								}
+							],
+							"actions": [
+								{
+									"customAction": "DrawMechSelectionMechInstance",
+									"objectClass": "UpgradesManager",
+									"sid": 599744621153281,
+									"parameters": [
+										"300 + MECHS_GAP * loopindex",
+										"200",
+										"MechData.UID"
+									]
+								}
+							],
+							"sid": 634047233160318
+						}
+					]
+				},
+				{
+					"aceType": "action",
+					"aceName": "DrawMechSelectionMechInstance",
+					"objectClass": "UpgradesManager",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "SpawnX",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 260871546544049
+						},
+						{
+							"name": "SpawnY",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 443596117406726
+						},
+						{
+							"name": "MechUID",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 144020352945226
+						}
+					],
+					"eventType": "custom-ace-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 784632420984566,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "MECH_UPGRADES_LIST_GAP",
+							"type": "number",
+							"initialValue": "78",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 891799561452181
+						},
+						{
+							"eventType": "variable",
+							"name": "TotalElementHeight",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 212394969830552
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "MechData",
+									"sid": 417729369673047,
+									"parameters": {
+										"unique-id": "MechUID"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 359982418920908,
+									"parameters": {
+										"object-to-create": "UpgradeMechInstanceUI",
+										"layer": "\"MechSelection\"",
+										"x": "SpawnX",
+										"y": "SpawnY",
+										"create-hierarchy": true,
+										"template-name": "\"\""
+									}
+								}
+							],
+							"sid": 961951777890581,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-children",
+											"objectClass": "UpgradeMechInstanceUI",
+											"sid": 463688416210333,
+											"parameters": {
+												"child": "TextUI",
+												"which": "own"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 678790199472330,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "has-tags",
+													"objectClass": "TextUI",
+													"sid": 761028669392789,
+													"parameters": {
+														"tags": "\"mech_name\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-text",
+													"objectClass": "TextUI",
+													"sid": 911686458542710,
+													"parameters": {
+														"text": "uppercase(MechData.Get(\"type\") & \" Mech \" & MechUID)"
+													}
+												}
+											],
+											"sid": 137170211406032
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "has-tags",
+													"objectClass": "TextUI",
+													"sid": 923428142921780,
+													"parameters": {
+														"tags": "\"mech_upgrade_cost\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-text",
+													"objectClass": "TextUI",
+													"sid": 858897160438765,
+													"parameters": {
+														"text": "str(Functions.GetMechUpgradeCost(MechUID)) & \"$\""
+													}
+												}
+											],
+											"sid": 184220995205084
+										}
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-children",
+											"objectClass": "UpgradeMechInstanceUI",
+											"sid": 136920249999047,
+											"parameters": {
+												"child": "TextBoxUI",
+												"which": "own"
+											}
+										},
+										{
+											"id": "has-tags",
+											"objectClass": "TextBoxUI",
+											"sid": 845455250777257,
+											"parameters": {
+												"tags": "\"upgrades\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-height",
+											"objectClass": "TextBoxUI",
+											"sid": 763234826529614,
+											"parameters": {
+												"height": "MECH_UPGRADES_LIST_GAP * MechData.ArraySize(\"applied_upgrades\") + 18"
+											}
+										}
+									],
+									"sid": 113374265748473,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-two-values",
+													"objectClass": "System",
+													"sid": 870155419825117,
+													"parameters": {
+														"first-value": "MechData.ArraySize(\"applied_upgrades\")",
+														"comparison": 4,
+														"second-value": "0"
+													}
+												}
+											],
+											"actions": [],
+											"sid": 389461832156209,
+											"children": [
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "for",
+															"objectClass": "System",
+															"sid": 130601840511735,
+															"parameters": {
+																"name": "\"upgrades\"",
+																"start-index": "0",
+																"end-index": "MechData.ArraySize(\"applied_upgrades\") - 1"
+															}
+														}
+													],
+													"actions": [
+														{
+															"customAction": "DrawMechAppliedUpgradeUIElement",
+															"objectClass": "UpgradesManager",
+															"sid": 101345548254064,
+															"parameters": [
+																"TextBoxUI.X",
+																"TextBoxUI.Y + 10 + MECH_UPGRADES_LIST_GAP * loopindex(\"upgrades\")",
+																"MechData.Get(\"applied_upgrades.\" & loopindex(\"upgrades\"))",
+																"UpgradeMechInstanceUI.LayerName",
+																"UpgradeMechInstanceUI.UID"
+															]
+														}
+													],
+													"sid": 269891703312976
+												}
+											]
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "else",
+													"objectClass": "System",
+													"sid": 218863823965219
+												}
+											],
+											"actions": [
+												{
+													"id": "set-visible",
+													"objectClass": "TextBoxUI",
+													"sid": 981316511291275,
+													"parameters": {
+														"visibility": "invisible"
+													}
+												},
+												{
+													"id": "set-height",
+													"objectClass": "TextBoxUI",
+													"sid": 172880727662917,
+													"parameters": {
+														"height": "0"
+													}
+												}
+											],
+											"sid": 449452180712896
+										}
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-children",
+											"objectClass": "UpgradeMechInstanceUI",
+											"sid": 845451533020288,
+											"parameters": {
+												"child": "ButtonUI",
+												"which": "own"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-y",
+											"objectClass": "ButtonUI",
+											"sid": 763573157880839,
+											"parameters": {
+												"y": "TextBoxUI.BBoxBottom + 60"
+											}
+										}
+									],
+									"sid": 111908249937290
+								},
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 122839403923258,
+											"parameters": {
+												"variable": "TotalElementHeight",
+												"value": "ButtonUI.BBoxBottom - UpgradeMechInstanceUI.Y"
+											}
+										},
+										{
+											"id": "set-y",
+											"objectClass": "UpgradeMechInstanceUI",
+											"sid": 340922100938537,
+											"parameters": {
+												"y": "ViewportBottom(\"UpgradeUI\") - TotalElementHeight - 40"
+											}
+										}
+									],
+									"sid": 925975896769132
+								}
+							]
+						}
+					]
+				},
+				{
+					"aceType": "action",
+					"aceName": "DrawMechAppliedUpgradeUIElement",
+					"objectClass": "UpgradesManager",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "SpawnX",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 594529589612065
+						},
+						{
+							"name": "SpawnY",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 200486710742294
+						},
+						{
+							"name": "UpgradeID",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 268616836349901
+						},
+						{
+							"name": "LayerName",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 775791878760782
+						},
+						{
+							"name": "ParentUID",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 594743845365844
+						}
+					],
+					"eventType": "custom-ace-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 106694336769984,
+							"parameters": {
+								"object-to-create": "UpgradeMechPowerUpListElement",
+								"layer": "LayerName",
+								"x": "SpawnX",
+								"y": "SpawnY",
+								"create-hierarchy": true,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "UpgradeMechPowerUpListElement",
+							"sid": 193467693364056,
+							"parameters": {
+								"instance-variable": "UpgradeID",
+								"value": "UpgradeID"
+							}
+						}
+					],
+					"sid": 166741439505857,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-children",
+									"objectClass": "UpgradeMechPowerUpListElement",
+									"sid": 366611503054851,
+									"parameters": {
+										"child": "TextUI",
+										"which": "own"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-text",
+									"objectClass": "TextUI",
+									"sid": 118145290943056,
+									"parameters": {
+										"text": "uppercase(Functions.GetUpgradeProperty(UpgradeID, \"label\"))"
+									}
+								}
+							],
+							"sid": 618829197731242
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "UIElements",
+									"sid": 186763292373574,
+									"parameters": {
+										"unique-id": "ParentUID"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "add-child",
+									"objectClass": "UIElements",
+									"sid": 361266774114954,
+									"parameters": {
+										"child": "UpgradeMechPowerUpListElement",
+										"transform-x": true,
+										"transform-y": true,
+										"transform-z-elevation": true,
+										"transform-w": true,
+										"transform-h": true,
+										"transform-a": true,
+										"transform-o": false,
+										"transform-visibility": false,
+										"destroy-with-parent": true
+									}
+								}
+							],
+							"sid": 893983779238656
+						}
+					]
+				},
+				{
+					"aceType": "action",
+					"aceName": "DrawUpgradeCardUI",
+					"objectClass": "UpgradesManager",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "PosX",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 406515260537348
+						},
+						{
+							"name": "PosY",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 405713289785949
+						},
+						{
+							"name": "UpgradeID",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 334098864070984
+						},
+						{
+							"name": "LayerName",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 369593675773368
+						}
+					],
+					"eventType": "custom-ace-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 228735197715470,
+							"disabled": true,
+							"parameters": {
+								"object-to-create": "UpgradeCardUIElement",
+								"layer": "LayerName",
+								"x": "PosX",
+								"y": "ViewportTop(LayerName) - 500",
+								"create-hierarchy": true,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 202100056154576,
+							"parameters": {
+								"object-to-create": "UpgradeCardUIElement",
+								"layer": "LayerName",
+								"x": "PosX",
+								"y": "PosY",
+								"create-hierarchy": true,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-object-time-scale",
+							"objectClass": "System",
+							"sid": 978956794948101,
+							"parameters": {
+								"object": "UpgradeCardUIElement",
+								"time-scale": "1.0"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "UpgradeCardUIElement",
+							"sid": 499420635238994,
+							"parameters": {
+								"instance-variable": "TargetX",
+								"value": "PosX"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "UpgradeCardUIElement",
+							"sid": 270721063559899,
+							"parameters": {
+								"instance-variable": "TargetY",
+								"value": "PosY"
+							}
+						}
+					],
+					"sid": 147218746345110
+				},
+				{
+					"aceType": "action",
+					"aceName": "Create3MechUpgrades",
+					"objectClass": "UpgradesManager",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "custom-ace-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-layer-visible",
+							"objectClass": "System",
+							"sid": 322232407460498,
+							"parameters": {
+								"layer": "\"MechUpgrades\"",
+								"visibility": "invisible"
+							}
+						}
+					],
+					"sid": 543950171503330,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "for",
+									"objectClass": "System",
+									"sid": 574659666767867,
+									"parameters": {
+										"name": "\"\"",
+										"start-index": "1",
+										"end-index": "3"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "add-layer",
+									"objectClass": "System",
+									"sid": 514141518460399,
+									"parameters": {
+										"name": "\"card\" & loopindex",
+										"insert-by": "\"MechUpgrades\"",
+										"where": "add-top-sublayer"
+									}
+								},
+								{
+									"id": "set-layer-parallax",
+									"objectClass": "System",
+									"sid": 612694164369944,
+									"parameters": {
+										"layer": "\"card\" & loopindex",
+										"parallax-x": "0",
+										"parallax-y": "0"
+									}
+								},
+								{
+									"id": "set-layer-scale-rate",
+									"objectClass": "System",
+									"sid": 416771820027107,
+									"parameters": {
+										"layer": "\"card\" & loopindex",
+										"scale-rate": "0"
+									}
+								},
+								{
+									"id": "set-layer-force-own-texture",
+									"objectClass": "System",
+									"sid": 173177805134601,
+									"parameters": {
+										"layer": "\"card\" & loopindex",
+										"mode": "on"
+									}
+								},
+								{
+									"customAction": "DrawUpgradeCardUI",
+									"objectClass": "UpgradesManager",
+									"sid": 979487650950984,
+									"parameters": [
+										"ViewportMidX(\"MechUpgrades\") + 400 * (loopindex - 2)",
+										"ViewportMidY(\"MechUpgrades\")",
+										"\"\"",
+										"\"card\" & loopindex"
+									]
+								}
+							],
+							"sid": 533765143634632
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-object-clicked",
+							"objectClass": "Mouse",
+							"sid": 776488450649988,
+							"parameters": {
+								"mouse-button": "left",
+								"click-type": "clicked",
+								"object-clicked": "ButtonUI"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-layer-interactive",
+							"objectClass": "System",
+							"sid": 354148856615423,
+							"parameters": {
+								"layer": "\"MechSelection\"",
+								"interactive": false
+							}
+						},
+						{
+							"id": "set-layer-visible",
+							"objectClass": "System",
+							"sid": 114403611101961,
+							"parameters": {
+								"layer": "\"UpgradeSelectionBG\"",
+								"visibility": "visible"
+							}
+						},
+						{
+							"id": "set-layer-visible",
+							"objectClass": "System",
+							"sid": 449251428165253,
+							"parameters": {
+								"layer": "\"FlameParticles\"",
+								"visibility": "visible"
+							}
+						},
+						{
+							"customAction": "Create3MechUpgrades",
+							"objectClass": "UpgradesManager",
+							"sid": 188231588038317
+						}
+					],
+					"sid": 939644333823034
+				}
+			],
+			"sid": 263721583060269
+		},
+		{
+			"eventType": "comment",
+			"text": "GET FUNCTIONS"
+		},
+		{
+			"eventType": "variable",
+			"name": "MechUpgradeCostKoeff",
+			"type": "number",
+			"initialValue": "2",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 852689570071879
+		},
+		{
+			"functionName": "GetMechUpgradeCost",
+			"functionDescription": "",
+			"functionCategory": "Mechs",
+			"functionReturnType": "number",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "MechUID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 486137970714900
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 138220545365143,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "UpgradesCount",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 321767835151511
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MechData",
+							"sid": 964366053718920,
+							"parameters": {
+								"unique-id": "MechUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 356503196174441,
+							"parameters": {
+								"variable": "UpgradesCount",
+								"value": "MechData.ArraySize(\"applied_upgrades\") + 1"
+							}
+						},
+						{
+							"id": "set-function-return-value",
+							"objectClass": "Functions",
+							"sid": 829306358431210,
+							"parameters": {
+								"value": "UpgradesCount * MechUpgradeCostKoeff"
+							}
+						}
+					],
+					"sid": 838111833438602
+				}
+			]
+		},
+		{
+			"functionName": "GetUpgradeProperty",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "any",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "UpgradeID",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 327598710867653
+				},
+				{
+					"name": "PropertyName",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 546273446721252
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 615110968163156,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-function-return-value",
+							"objectClass": "Functions",
+							"sid": 144562899740754,
+							"parameters": {
+								"value": "UpgradeDefinitions.Get(UpgradeID & \".\" & PropertyName)"
+							}
+						}
+					],
+					"sid": 136655602779981
+				}
+			]
 		}
 	],
 	"sid": 912555149312509

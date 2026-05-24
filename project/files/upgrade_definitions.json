@@ -12,7 +12,7 @@
   },
 
   "damage_increase": {
-    "label": "Rapid Fire",
+    "label": "Strong Barrel",
     "description": "+30% fire rate",
     "modifiers": [
       { "stat": "bullet_damage", "op": "multiply", "value": 1.2 },
@@ -52,8 +52,8 @@
   },
 
   "ricochet": {
-    "label": "Giant Bullet",
-    "description": "10% chance to fire a massive piercing round",
+    "label": "Ricochet",
+    "description": "+10% chance that your bullets ricochet",
     "modifiers": [
       { "stat": "ricochet_chance", "op": "add", "value": 0.1 },
       { "stat": "bullet_damage", "op": "multiply", "value": 0.8 }

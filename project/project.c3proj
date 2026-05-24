@@ -297,6 +297,13 @@
 		},
 		{
 			"type": "effect",
+			"id": "swirl",
+			"name": "Swirl",
+			"author": "Brad Larson",
+			"bundled": false
+		},
+		{
+			"type": "effect",
 			"id": "water",
 			"name": "Water",
 			"author": "Viktor Korsun",
@@ -358,14 +365,18 @@
 			"UpgradeCardText",
 			"UpgradeCardThumb",
 			"CardGlow",
-			"UpgradeCardTransform",
+			"UpgradeCardUIElement",
 			"Mouse",
 			"CardCanvas",
 			"UpgradeCardBg",
 			"CardReflectionFx",
 			"UpgradeCardDepth",
-			"TextUI",
-			"FlameParticles"
+			"FlameParticles",
+			"UpgradeMechInstanceUI",
+			"TextBoxUI",
+			"UpgradeMechPowerUpListElement",
+			"HintElementUI",
+			"ButtonUI"
 		],
 		"subfolders": [
 			{
@@ -389,7 +400,10 @@
 			{
 				"items": [
 					"BackgroundBlur",
-					"ButtonArrow"
+					"ButtonArrow",
+					"RectUI",
+					"TextUI",
+					"LabelRectUI"
 				],
 				"subfolders": [],
 				"name": "UI"
@@ -422,7 +436,8 @@
 			"shadowed_family",
 			"reflective_family",
 			"Damageables",
-			"Buttons"
+			"Buttons",
+			"UIElements"
 		],
 		"subfolders": []
 	},
@@ -623,7 +638,7 @@
 		"fov": 0.7853981633974483,
 		"useLoaderLayout": false,
 		"fullscreenMode": "letterbox-scale",
-		"fullscreenQuality": "low",
+		"fullscreenQuality": "high",
 		"viewportFit": "auto",
 		"backgroundColor": [
 			0,

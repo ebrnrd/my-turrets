@@ -2,7 +2,7 @@
 	"name": "MechData",
 	"plugin-id": "Json",
 	"sid": 166426748985130,
-	"isGlobal": true,
+	"isGlobal": false,
 	"editorNewInstanceIsReplica": true,
 	"instanceVariables": [
 		{
