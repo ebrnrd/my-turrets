@@ -1015,7 +1015,34 @@
 							}
 						}
 					],
-					"sid": 322601538362366
+					"sid": 322601538362366,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "turretBase",
+									"sid": 878459094882193,
+									"parameters": {
+										"unique-id": "MechData.MechBaseUID"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-object-time-scale",
+									"objectClass": "System",
+									"sid": 114212850617655,
+									"parameters": {
+										"object": "turretBase",
+										"time-scale": "1.0"
+									}
+								}
+							],
+							"sid": 551390457697147
+						}
+					]
 				}
 			]
 		},

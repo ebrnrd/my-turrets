@@ -388,7 +388,8 @@
 			},
 			{
 				"items": [
-					"BackgroundBlur"
+					"BackgroundBlur",
+					"ButtonArrow"
 				],
 				"subfolders": [],
 				"name": "UI"
@@ -420,7 +421,8 @@
 			"enemies",
 			"shadowed_family",
 			"reflective_family",
-			"Damageables"
+			"Damageables",
+			"Buttons"
 		],
 		"subfolders": []
 	},

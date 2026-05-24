@@ -918,6 +918,69 @@
 				}
 			],
 			"sid": 525677511620691
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Buttons",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "cursor-is-over-object",
+							"objectClass": "Mouse",
+							"sid": 754495122594265,
+							"parameters": {
+								"object": "Buttons"
+							}
+						},
+						{
+							"id": "mouse-button-is-down",
+							"objectClass": "Mouse",
+							"sid": 884384042416239,
+							"parameters": {
+								"mouse-button": "left"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-animation-frame",
+							"objectClass": "Buttons",
+							"sid": 644297263456720,
+							"parameters": {
+								"frame-number": "1"
+							}
+						}
+					],
+					"sid": 566638154761509
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 770877166679485
+						}
+					],
+					"actions": [
+						{
+							"id": "set-animation-frame",
+							"objectClass": "Buttons",
+							"sid": 902534756243000,
+							"parameters": {
+								"frame-number": "0"
+							}
+						}
+					],
+					"sid": 366597853116769
+				}
+			],
+			"sid": 181106956445201
 		}
 	],
 	"sid": 986417878794597
