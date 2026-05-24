@@ -61,6 +61,15 @@
 						"object": "HintElementUI",
 						"time-scale": "1.0"
 					}
+				},
+				{
+					"id": "set-object-time-scale",
+					"objectClass": "System",
+					"sid": 298933629814896,
+					"parameters": {
+						"object": "DustParticles",
+						"time-scale": "1.0"
+					}
 				}
 			],
 			"sid": 785642757460683
@@ -704,6 +713,16 @@
 										"type": "log",
 										"message": "\"Canvas Y offset: \" & y_offset"
 									}
+								},
+								{
+									"id": "set-layer-effect-enabled",
+									"objectClass": "System",
+									"sid": 112375148419337,
+									"parameters": {
+										"layer": "UpgradeCardUIElement.LayerName",
+										"mode": "enable",
+										"effect": "\"BetterOutline\""
+									}
 								}
 							],
 							"sid": 755671249454562
@@ -734,6 +753,16 @@
 									"parameters": {
 										"instance-variable": "OffsetY",
 										"value": "0"
+									}
+								},
+								{
+									"id": "set-layer-effect-enabled",
+									"objectClass": "System",
+									"sid": 624650141956758,
+									"parameters": {
+										"layer": "UpgradeCardUIElement.LayerName",
+										"mode": "disable",
+										"effect": "\"BetterOutline\""
 									}
 								}
 							],
@@ -911,11 +940,12 @@
 											}
 										},
 										{
-											"id": "set-x",
+											"id": "set-position",
 											"objectClass": "UpgradeCardDepth",
-											"sid": 972776976314260,
+											"sid": 633275003079931,
 											"parameters": {
-												"x": "lerp(Self.X, CardCanvas.X - UpgradeCardUIElement.OffsetX * 20, 4 * Self.dt)"
+												"x": "lerp(Self.X, CardCanvas.X - UpgradeCardUIElement.OffsetX * 20, 4 * Self.dt)",
+												"y": "CardCanvas.Y"
 											}
 										}
 									],
@@ -1127,6 +1157,15 @@
 											"parameters": {
 												"layer": "\"MechUpgrades\"",
 												"visibility": "visible"
+											}
+										},
+										{
+											"id": "set-layer-interactive",
+											"objectClass": "System",
+											"sid": 350606710644369,
+											"parameters": {
+												"layer": "\"MechUpgrades\"",
+												"interactive": true
 											}
 										}
 									],
@@ -1470,6 +1509,30 @@
 				}
 			],
 			"sid": 505688251611932
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "has-tags",
+					"objectClass": "TextUI",
+					"sid": 152714571863249,
+					"parameters": {
+						"tags": "\"player_scrap\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-text",
+					"objectClass": "TextUI",
+					"sid": 954748115180247,
+					"parameters": {
+						"text": "PlayerScrap & \"©\""
+					}
+				}
+			],
+			"sid": 570384291299892
 		}
 	],
 	"sid": 986417878794597

@@ -42,6 +42,16 @@
 			"sid": 163411196691168
 		},
 		{
+			"eventType": "variable",
+			"name": "UpgradeAltarsAmount",
+			"type": "number",
+			"initialValue": "10",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 996949964558114
+		},
+		{
 			"eventType": "block",
 			"conditions": [
 				{
@@ -357,6 +367,35 @@
 							"sid": 812795006305128
 						}
 					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "repeat",
+							"objectClass": "System",
+							"sid": 978809948146927,
+							"parameters": {
+								"count": "UpgradeAltarsAmount"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 312729859264065,
+							"parameters": {
+								"object-to-create": "UpgradeAltar",
+								"layer": "\"main\"",
+								"x": "random(0, LayoutWidth)",
+								"y": "random(0, LayoutHeight)",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						}
+					],
+					"sid": 915093530325961
 				}
 			]
 		},

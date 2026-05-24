@@ -1,40 +1,52 @@
 {
-	"name": "UpgradeMechInstanceUI",
+	"name": "BulgeEffect",
 	"plugin-id": "Sprite",
-	"sid": 838796977566820,
+	"sid": 250855797792981,
 	"isGlobal": false,
 	"editorNewInstanceIsReplica": true,
-	"instanceVariables": [
+	"instanceVariables": [],
+	"behaviorTypes": [
 		{
-			"name": "MechUID",
-			"type": "number",
-			"desc": "",
-			"show": true,
-			"sid": 824677198791910
+			"behaviorId": "Fade",
+			"name": "Fade",
+			"sid": 143057580196852
+		},
+		{
+			"behaviorId": "Tween",
+			"name": "Tween",
+			"sid": 838594715996189
 		}
 	],
-	"behaviorTypes": [],
-	"effectTypes": [],
+	"effectTypes": [
+		{
+			"effectId": "multiply",
+			"name": "Multiply"
+		},
+		{
+			"effectId": "lens2",
+			"name": "Lens2"
+		}
+	],
 	"animations": {
 		"items": [
 			{
 				"frames": [
 					{
-						"width": 250,
-						"height": 250,
+						"width": 225,
+						"height": 225,
 						"originX": 0.5,
-						"originY": 0,
+						"originY": 0.5,
 						"originalSource": "",
 						"exportFormat": "lossless",
 						"exportQuality": 0.8,
 						"fileType": "image/png",
-						"imageSpriteId": 809914,
+						"imageSpriteId": 9298098,
 						"useCollisionPoly": true,
 						"duration": 1,
 						"tag": ""
 					}
 				],
-				"sid": 555551586156660,
+				"sid": 385173311588675,
 				"name": "Animation 1",
 				"isLooping": false,
 				"isPingPong": false,

@@ -19,10 +19,6 @@
 		},
 		{
 			"eventType": "include",
-			"includeSheet": "looting"
-		},
-		{
-			"eventType": "include",
 			"includeSheet": "shadows"
 		},
 		{
@@ -56,6 +52,14 @@
 		{
 			"eventType": "include",
 			"includeSheet": "GameCamera"
+		},
+		{
+			"eventType": "include",
+			"includeSheet": "debug"
+		},
+		{
+			"eventType": "include",
+			"includeSheet": "GameEconomy"
 		},
 		{
 			"eventType": "variable",

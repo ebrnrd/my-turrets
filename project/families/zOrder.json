@@ -24,6 +24,7 @@
 		"rock",
 		"HighGrass",
 		"smoke_particle_object",
-		"fog_sprite"
+		"fog_sprite",
+		"UpgradeAltar"
 	]
 }

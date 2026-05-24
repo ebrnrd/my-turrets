@@ -15,6 +15,13 @@
 		},
 		{
 			"type": "plugin",
+			"id": "Arr",
+			"name": "Array",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "plugin",
 			"id": "Browser",
 			"name": "Browser",
 			"author": "Scirra",
@@ -197,6 +204,13 @@
 		},
 		{
 			"type": "behavior",
+			"id": "Tween",
+			"name": "Tween",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "behavior",
 			"id": "destroy",
 			"name": "Destroy outside",
 			"author": "Scirra",
@@ -249,6 +263,27 @@
 			"type": "effect",
 			"id": "brightness",
 			"name": "Brightness",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "effect",
+			"id": "glowhorizontal",
+			"name": "Glow horizontal",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "effect",
+			"id": "glowvertical",
+			"name": "Glow vertical",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "effect",
+			"id": "lens2",
+			"name": "Lens2",
 			"author": "Scirra",
 			"bundled": false
 		},
@@ -376,14 +411,20 @@
 			"TextBoxUI",
 			"UpgradeMechPowerUpListElement",
 			"HintElementUI",
-			"ButtonUI"
+			"ButtonUI",
+			"ArrayTemp1",
+			"PlayerVacuumArea",
+			"DustParticles",
+			"UpgradeAltar",
+			"BulgeEffect"
 		],
 		"subfolders": [
 			{
 				"items": [
 					"MechDefinitions",
 					"UpgradeDefinitions",
-					"AJAX"
+					"AJAX",
+					"UpgradeKeys"
 				],
 				"subfolders": [],
 				"name": "DataObjects"
@@ -456,7 +497,6 @@
 			"MechLogic",
 			"PlayerController",
 			"enemies",
-			"looting",
 			"shadows",
 			"terrain",
 			"reflections",
@@ -467,7 +507,8 @@
 			"debug",
 			"MechUpgradesSystem",
 			"DataManager",
-			"GameCamera"
+			"GameCamera",
+			"GameEconomy"
 		],
 		"subfolders": []
 	},

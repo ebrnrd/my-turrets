@@ -1438,6 +1438,26 @@
 				"MechBaseUID": 0,
 				"MechUID": 0
 			}
+		},
+		{
+			"type": "ArrayTemp1",
+			"properties": {
+				"width": 10,
+				"height": 1,
+				"depth": 1
+			},
+			"uid": 122,
+			"sid": 510463097675086,
+			"tags": "",
+			"instanceVariables": {}
+		},
+		{
+			"type": "UpgradeKeys",
+			"properties": {},
+			"uid": 123,
+			"sid": 852802736543278,
+			"tags": "",
+			"instanceVariables": {}
 		}
 	],
 	"effectTypes": [],

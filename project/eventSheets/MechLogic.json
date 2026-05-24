@@ -1389,6 +1389,11 @@
 								"path": "\"applied_upgrades\"",
 								"size": "0"
 							}
+						},
+						{
+							"customAction": "UpdateMechStatsCache",
+							"objectClass": "MechData",
+							"sid": 998945220986416
 						}
 					],
 					"sid": 233557915743092
@@ -1418,7 +1423,8 @@
 							]
 						}
 					],
-					"sid": 763636436171883
+					"sid": 763636436171883,
+					"disabled": true
 				},
 				{
 					"eventType": "block",
@@ -1445,7 +1451,8 @@
 							]
 						}
 					],
-					"sid": 110499373191480
+					"sid": 110499373191480,
+					"disabled": true
 				},
 				{
 					"eventType": "block",
@@ -1472,7 +1479,8 @@
 							]
 						}
 					],
-					"sid": 903064687708937
+					"sid": 903064687708937,
+					"disabled": true
 				}
 			]
 		},

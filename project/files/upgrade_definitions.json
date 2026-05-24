@@ -1,7 +1,7 @@
 {
   "rapid_fire": {
     "label": "Rapid Fire",
-    "description": "+30% fire rate",
+    "description": "+30% fire rate\n+8 bullet spread",
     "modifiers": [
       { "stat": "fire_rate", "op": "multiply", "value": 1.3 },
       { "stat": "bullet_spread", "op": "add", "value": 8 }
@@ -13,7 +13,7 @@
 
   "damage_increase": {
     "label": "Strong Barrel",
-    "description": "+30% fire rate",
+    "description": "+20% damage\n+25% knockback\n-10% fire rate",
     "modifiers": [
       { "stat": "bullet_damage", "op": "multiply", "value": 1.2 },
       { "stat": "bullet_knockback", "op": "multiply", "value": 1.25 },
@@ -26,7 +26,7 @@
 
   "long_barrel": {
     "label": "Long Barrel",
-    "description": "+30% fire rate",
+    "description": "+100 range\n+20% knockback\n-20% fire rate\n-40% spread",
     "modifiers": [
       { "stat": "range", "op": "add", "value": 100 },
       { "stat": "bullet_knockback", "op": "multiply", "value": 1.2 },
@@ -38,9 +38,24 @@
     "mech_types": ["combat"]
   },
 
+  "sniper": {
+    "label": "Sniper Conversion",
+    "description": "+20 damage\n+200 range\n+100% knockback\n-80% fire rate\n-90% spread",
+    "modifiers": [
+      { "stat": "bullet_damage", "op": "add", "value": 20 },
+      { "stat": "range", "op": "add", "value": 200 },
+      { "stat": "bullet_knockback", "op": "multiply", "value": 2.0 },
+      { "stat": "fire_rate", "op": "multiply", "value": 0.2 },
+      { "stat": "bullet_spread", "op": "multiply", "value": 0.1 }
+    ],
+    "behavior_tags": [],
+    "hooks": {},
+    "mech_types": ["combat"]
+  },
+
   "giant_bullet": {
     "label": "Giant Bullet",
-    "description": "10% chance to fire a massive piercing round",
+    "description": "+10% chance to fire a massive piercing round",
     "modifiers": [
       { "stat": "giant_bullet_chance", "op": "add", "value": 0.1 }
     ],
@@ -53,24 +68,12 @@
 
   "ricochet": {
     "label": "Ricochet",
-    "description": "+10% chance that your bullets ricochet",
+    "description": "+10% chance that your bullets ricochet\n-20% damage",
     "modifiers": [
       { "stat": "ricochet_chance", "op": "add", "value": 0.1 },
       { "stat": "bullet_damage", "op": "multiply", "value": 0.8 }
     ],
     "behavior_tags": [],
     "mech_types": ["combat"]
-  },
-
-  "overcharge_heal": {
-    "label": "Overcharge",
-    "description": "Doubles heal but adds cooldown",
-    "modifiers": [
-      { "stat": "heal_rate",   "op": "multiply", "value": 2.0 },
-      { "stat": "heal_rate",   "op": "add",      "value": -1 }
-    ],
-    "behavior_tags": ["overcharged"],
-    "hooks": {},
-    "mech_types": ["healer"]
   }
 }

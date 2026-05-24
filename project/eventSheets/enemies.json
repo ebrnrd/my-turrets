@@ -722,10 +722,10 @@
 				{
 					"id": "apply-force-towards-position",
 					"objectClass": "enemyTest",
-					"sid": 280396051942035,
+					"sid": 479761618725624,
 					"behaviorType": "Physics",
 					"parameters": {
-						"force": "Self.move_speed",
+						"force": "Self.move_speed * dt",
 						"x": "playerCharacter.X",
 						"y": "playerCharacter.Y",
 						"image-point": "0"

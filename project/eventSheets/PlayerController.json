@@ -929,6 +929,125 @@
 					"eventType": "block",
 					"conditions": [
 						{
+							"id": "is-overlapping-another-object",
+							"objectClass": "player_melee_hit",
+							"sid": 760227646777351,
+							"parameters": {
+								"object": "UpgradeAltar"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "UpgradeAltar",
+							"sid": 383546320444449,
+							"parameters": {
+								"instance-variable": "IsUsed",
+								"value": "true"
+							}
+						},
+						{
+							"id": "set-animation-frame",
+							"objectClass": "UpgradeAltar",
+							"sid": 991549873720393,
+							"disabled": true,
+							"parameters": {
+								"frame-number": "1"
+							}
+						},
+						{
+							"id": "set-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 133032363447150,
+							"parameters": {
+								"variable": "CanShake",
+								"value": "true"
+							}
+						},
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 753622643456557,
+							"parameters": {
+								"object-to-create": "BulgeEffect",
+								"layer": "\"fx\"",
+								"x": "UpgradeAltar.BBoxMidX",
+								"y": "UpgradeAltar.BBoxMidY",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-object-time-scale",
+							"objectClass": "System",
+							"sid": 561356383443050,
+							"parameters": {
+								"object": "BulgeEffect",
+								"time-scale": "1.0"
+							}
+						},
+						{
+							"id": "set-size",
+							"objectClass": "BulgeEffect",
+							"sid": 514010104471389,
+							"parameters": {
+								"width": "0",
+								"height": "0"
+							}
+						},
+						{
+							"id": "tween-two-properties",
+							"objectClass": "BulgeEffect",
+							"sid": 378881095492479,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"\"",
+								"property": "size",
+								"end-x": "800",
+								"end-y": "800",
+								"time": "1",
+								"ease": "easeoutcubic",
+								"destroy-on-complete": "no",
+								"loop": "no",
+								"ping-pong": "no",
+								"repeat-count": "1"
+							}
+						},
+						{
+							"id": "set-time-scale",
+							"objectClass": "System",
+							"sid": 979933633631260,
+							"parameters": {
+								"time-scale": "0.1"
+							}
+						},
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 377228945042564,
+							"parameters": {
+								"seconds": "1.0",
+								"use-timescale": false
+							}
+						},
+						{
+							"customAction": "BeginUpgradeShopSequence",
+							"objectClass": "UpgradesManager",
+							"sid": 433283700728502
+						},
+						{
+							"id": "destroy",
+							"objectClass": "UpgradeAltar",
+							"sid": 616851632557014
+						}
+					],
+					"sid": 242544686341716
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
 							"id": "compare-boolean-eventvar",
 							"objectClass": "System",
 							"sid": 628843869432978,
@@ -1020,6 +1139,62 @@
 					"sid": 306988065535661
 				}
 			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-collision-with-another-object",
+					"objectClass": "playerCharacter",
+					"sid": 172729503656231,
+					"parameters": {
+						"object": "scrap"
+					}
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "AddPlayerScrap",
+					"sid": 610998016682920,
+					"parameters": [
+						"1"
+					]
+				},
+				{
+					"id": "destroy",
+					"objectClass": "scrap",
+					"sid": 809927002438025
+				}
+			],
+			"sid": 873820895507722
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "is-overlapping-another-object",
+					"objectClass": "PlayerVacuumArea",
+					"sid": 234238868241317,
+					"parameters": {
+						"object": "scrap"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "apply-force-towards-position",
+					"objectClass": "scrap",
+					"sid": 858647266700427,
+					"behaviorType": "Physics",
+					"parameters": {
+						"force": "20",
+						"x": "playerCharacter.X",
+						"y": "playerCharacter.Y",
+						"image-point": "0"
+					}
+				}
+			],
+			"sid": 381397535478321
 		}
 	],
 	"sid": 135398769691869

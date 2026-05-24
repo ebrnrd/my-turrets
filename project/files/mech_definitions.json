@@ -4,7 +4,7 @@
       "fire_rate": 10.0,
       "bullet_count": 1,
       "bullet_spread": 10,
-      "bullet_damage": 10,
+      "bullet_damage": 5,
       "range": 500,
       "bullet_speed": 800,
       "mag_size": 200,

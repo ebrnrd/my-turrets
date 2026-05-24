@@ -1,0 +1,47 @@
+{
+	"name": "GameEconomy",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "PlayerScrap",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 690095663357006
+		},
+		{
+			"functionName": "AddPlayerScrap",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "Amount",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 175963792584423
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "add-to-eventvar",
+					"objectClass": "System",
+					"sid": 175119168750214,
+					"parameters": {
+						"variable": "PlayerScrap",
+						"value": "Amount"
+					}
+				}
+			],
+			"sid": 494612388296851
+		}
+	],
+	"sid": 879546337790968
+}

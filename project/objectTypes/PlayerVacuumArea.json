@@ -1,18 +1,10 @@
 {
-	"name": "UpgradeMechInstanceUI",
+	"name": "PlayerVacuumArea",
 	"plugin-id": "Sprite",
-	"sid": 838796977566820,
+	"sid": 366931479300549,
 	"isGlobal": false,
 	"editorNewInstanceIsReplica": true,
-	"instanceVariables": [
-		{
-			"name": "MechUID",
-			"type": "number",
-			"desc": "",
-			"show": true,
-			"sid": 824677198791910
-		}
-	],
+	"instanceVariables": [],
 	"behaviorTypes": [],
 	"effectTypes": [],
 	"animations": {
@@ -20,21 +12,21 @@
 			{
 				"frames": [
 					{
-						"width": 250,
-						"height": 250,
+						"width": 123,
+						"height": 123,
 						"originX": 0.5,
-						"originY": 0,
+						"originY": 0.5,
 						"originalSource": "",
 						"exportFormat": "lossless",
 						"exportQuality": 0.8,
 						"fileType": "image/png",
-						"imageSpriteId": 809914,
+						"imageSpriteId": 6416509,
 						"useCollisionPoly": true,
 						"duration": 1,
 						"tag": ""
 					}
 				],
-				"sid": 555551586156660,
+				"sid": 110401905322302,
 				"name": "Animation 1",
 				"isLooping": false,
 				"isPingPong": false,

@@ -307,7 +307,7 @@
 					"tags": "",
 					"instanceVariables": {
 						"order": 0,
-						"move_speed": 2,
+						"move_speed": 200,
 						"height_from_ground": 0,
 						"shadow_width": 50,
 						"Health": 100,
@@ -1706,7 +1706,8 @@
 						"TargetX": 0,
 						"TargetY": 0,
 						"OffsetX": 0,
-						"OffsetY": 0
+						"OffsetY": 0,
+						"UpgradeID": ""
 					},
 					"behaviors": {},
 					"sceneGraphData": {
@@ -1914,7 +1915,7 @@
 					},
 					"uid": 101,
 					"sid": 470670976689167,
-					"tags": "name",
+					"tags": "description",
 					"instanceVariables": {},
 					"behaviors": {},
 					"sceneGraphData": {
@@ -2039,6 +2040,111 @@
 						"height": 115.38666414148307,
 						"originX": 0.5,
 						"originY": 0,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"z": 0,
+						"angle": 0
+					}
+				},
+				{
+					"type": "UpgradeAltar",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 131,
+					"sid": 986086383549699,
+					"tags": "",
+					"instanceVariables": {
+						"order": 0,
+						"IsUsed": false
+					},
+					"behaviors": {},
+					"instanceFolderItem": {
+						"sid": 986086383549699,
+						"expanded": true
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 456,
+						"y": 394,
+						"width": 84,
+						"height": 124,
+						"originX": 0.5,
+						"originY": 0.9193548387096774,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"z": 0,
+						"angle": 0
+					}
+				},
+				{
+					"type": "BulgeEffect",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 132,
+					"sid": 113742592150396,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {
+						"Fade": {
+							"properties": {
+								"fade-in-time": 0,
+								"wait-time": 0,
+								"fade-out-time": 1,
+								"destroy": true,
+								"enabled": true,
+								"live-preview": false
+							}
+						},
+						"Tween": {
+							"properties": {
+								"enabled": true
+							}
+						}
+					},
+					"effects": {
+						"Multiply": {
+							"isEnabled": true,
+							"parameters": {}
+						},
+						"Lens2": {
+							"isEnabled": true,
+							"parameters": {
+								"magnification": -2
+							}
+						}
+					},
+					"instanceFolderItem": {
+						"sid": 113742592150396,
+						"expanded": true
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 160,
+						"y": 636,
+						"width": 225,
+						"height": 225,
+						"originX": 0.5,
+						"originY": 0.5,
 						"color": [
 							1,
 							1,
@@ -2754,7 +2860,9 @@
 					"uid": 105,
 					"sid": 808955956131944,
 					"tags": "",
-					"instanceVariables": {},
+					"instanceVariables": {
+						"MechUID": 0
+					},
 					"behaviors": {},
 					"sceneGraphData": {
 						"parent-uid": null,
@@ -3254,7 +3362,7 @@
 					"locked": false,
 					"world": {
 						"x": 261,
-						"y": 45.17172988055733,
+						"y": 37.17172988055733,
 						"width": 254,
 						"height": 91.45562165704004,
 						"originX": 0.5,
