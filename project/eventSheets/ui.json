@@ -1451,9 +1451,9 @@
 					"actions": [
 						{
 							"callFunction": "ShowHint",
-							"sid": 200269103192028,
+							"sid": 211249942790972,
 							"parameters": [
-								"uppercase(Functions.GetUpgradeProperty(UpgradeMechPowerUpListElement.UpgradeID, \"description\"))",
+								"uppercase(Functions.GetUpgradeDescription(UpgradeMechPowerUpListElement.UpgradeID))",
 								"LabelRectUI.BBoxRight + 20",
 								"LabelRectUI.BBoxMidY"
 							]

@@ -1,7 +1,7 @@
 {
   "rapid_fire": {
     "label": "Rapid Fire",
-    "description": "+30% fire rate\n+8 bullet spread",
+    "description": "",
     "modifiers": [
       { "stat": "fire_rate", "op": "multiply", "value": 1.3 },
       { "stat": "bullet_spread", "op": "add", "value": 8 }
@@ -13,7 +13,7 @@
 
   "damage_increase": {
     "label": "Strong Barrel",
-    "description": "+20% damage\n+25% knockback\n-10% fire rate",
+    "description": "",
     "modifiers": [
       { "stat": "bullet_damage", "op": "multiply", "value": 1.2 },
       { "stat": "bullet_knockback", "op": "multiply", "value": 1.25 },
@@ -26,7 +26,7 @@
 
   "long_barrel": {
     "label": "Long Barrel",
-    "description": "+100 range\n+20% knockback\n-20% fire rate\n-40% spread",
+    "description": "",
     "modifiers": [
       { "stat": "range", "op": "add", "value": 100 },
       { "stat": "bullet_knockback", "op": "multiply", "value": 1.2 },
@@ -40,7 +40,7 @@
 
   "sniper": {
     "label": "Sniper Conversion",
-    "description": "+20 damage\n+200 range\n+100% knockback\n-80% fire rate\n-90% spread",
+    "description": "",
     "modifiers": [
       { "stat": "bullet_damage", "op": "add", "value": 20 },
       { "stat": "range", "op": "add", "value": 200 },
@@ -55,7 +55,7 @@
 
   "giant_bullet": {
     "label": "Giant Bullet",
-    "description": "+10% chance to fire a massive piercing round",
+    "description": "Chance to fire a massive piercing round",
     "modifiers": [
       { "stat": "giant_bullet_chance", "op": "add", "value": 0.1 }
     ],
@@ -68,7 +68,7 @@
 
   "ricochet": {
     "label": "Ricochet",
-    "description": "+10% chance that your bullets ricochet\n-20% damage",
+    "description": "",
     "modifiers": [
       { "stat": "ricochet_chance", "op": "add", "value": 0.1 },
       { "stat": "bullet_damage", "op": "multiply", "value": 0.8 }

@@ -856,11 +856,21 @@
 					"eventType": "block",
 					"conditions": [
 						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 595740242831605,
+							"parameters": {
+								"first-value": "random(0,1)",
+								"comparison": 3,
+								"second-value": "0.5"
+							}
+						},
+						{
 							"id": "repeat",
 							"objectClass": "System",
-							"sid": 371582112577644,
+							"sid": 692393739439922,
 							"parameters": {
-								"count": "round(random(1,3))"
+								"count": "round(random(1,2))"
 							}
 						}
 					],

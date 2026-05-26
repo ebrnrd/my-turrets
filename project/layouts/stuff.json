@@ -795,7 +795,7 @@
 						"Fade": {
 							"properties": {
 								"fade-in-time": 0,
-								"wait-time": 10,
+								"wait-time": 20,
 								"fade-out-time": 5,
 								"destroy": true,
 								"enabled": true,
@@ -1894,8 +1894,8 @@
 						"text": "+10% chance of shooting a Giant Bullet\n\n-20% DAMAGE",
 						"enable-bbcode": true,
 						"font": "Micro5-Regular",
-						"size": 32,
-						"line-height": -18,
+						"size": 28,
+						"line-height": -16,
 						"bold": false,
 						"italic": false,
 						"color": [
@@ -1953,9 +1953,9 @@
 					"showing": true,
 					"locked": false,
 					"world": {
-						"x": 131,
-						"y": -139,
-						"width": 260.67970161914195,
+						"x": 133.9080270634346,
+						"y": -158,
+						"width": 266.4957557460111,
 						"height": 265.144442915302,
 						"originX": 0.5,
 						"originY": 0,
@@ -2681,14 +2681,14 @@
 				{
 					"type": "TextBoxUI",
 					"properties": {
-						"left-margin": 4,
-						"right-margin": 5,
-						"top-margin": 5,
-						"bottom-margin": 4,
+						"left-margin": 3,
+						"right-margin": 2,
+						"top-margin": 3,
+						"bottom-margin": 2,
 						"edges": "tile",
 						"fill": "tile",
-						"image-scale-x": 4,
-						"image-scale-y": 4,
+						"image-scale-x": 8,
+						"image-scale-y": 8,
 						"initially-visible": true,
 						"origin": "top",
 						"seams": "overlap"
@@ -3058,7 +3058,7 @@
 					"locked": false,
 					"world": {
 						"x": 261,
-						"y": 131.60029902835498,
+						"y": 137.60029902835498,
 						"width": 254,
 						"height": 97.40190999575111,
 						"originX": 0.5,
@@ -3076,10 +3076,10 @@
 				{
 					"type": "TextBoxUI",
 					"properties": {
-						"left-margin": 4,
-						"right-margin": 5,
-						"top-margin": 5,
-						"bottom-margin": 4,
+						"left-margin": 3,
+						"right-margin": 2,
+						"top-margin": 3,
+						"bottom-margin": 2,
 						"edges": "tile",
 						"fill": "tile",
 						"image-scale-x": 4,
@@ -3129,7 +3129,7 @@
 					"locked": false,
 					"world": {
 						"x": 261,
-						"y": 218.11846267683148,
+						"y": 228.11846267683148,
 						"width": 255.42967372818342,
 						"height": 174.07039871650528,
 						"originX": 0.5,
@@ -3164,6 +3164,14 @@
 					"tags": "",
 					"instanceVariables": {},
 					"behaviors": {},
+					"effects": {
+						"Brightness": {
+							"isEnabled": true,
+							"parameters": {
+								"brightness": 1
+							}
+						}
+					},
 					"sceneGraphData": {
 						"parent-uid": 110,
 						"uid": 111,
@@ -3317,7 +3325,7 @@
 						"wrapping": "word",
 						"text-direction": "ltr",
 						"icon-set": -1,
-						"initially-visible": true,
+						"initially-visible": false,
 						"origin": "top",
 						"read-aloud": false
 					},
@@ -3494,6 +3502,14 @@
 					"tags": "",
 					"instanceVariables": {},
 					"behaviors": {},
+					"effects": {
+						"Brightness": {
+							"isEnabled": true,
+							"parameters": {
+								"brightness": 1
+							}
+						}
+					},
 					"sceneGraphData": {
 						"parent-uid": 114,
 						"uid": 115,

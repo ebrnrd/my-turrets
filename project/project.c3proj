@@ -416,7 +416,9 @@
 			"PlayerVacuumArea",
 			"DustParticles",
 			"UpgradeAltar",
-			"BulgeEffect"
+			"BulgeEffect",
+			"ScrapBarBg",
+			"ScrapBar"
 		],
 		"subfolders": [
 			{

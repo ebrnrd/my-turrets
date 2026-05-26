@@ -1425,7 +1425,8 @@
 			"tags": "",
 			"instanceVariables": {
 				"IsUpgradingMech": false,
-				"SelectedMechUID": 0
+				"SelectedMechUID": 0,
+				"SelectedUpgradeID": ""
 			}
 		},
 		{

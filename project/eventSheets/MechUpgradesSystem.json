@@ -934,89 +934,6 @@
 			]
 		},
 		{
-			"aceType": "action",
-			"aceName": "BeginUpgradeShopSequence",
-			"objectClass": "UpgradesManager",
-			"functionDescription": "",
-			"functionCategory": "",
-			"functionReturnType": "none",
-			"functionCopyPicked": false,
-			"functionIsAsync": false,
-			"functionParameters": [],
-			"eventType": "custom-ace-block",
-			"conditions": [],
-			"actions": [],
-			"sid": 636179377096696,
-			"children": [
-				{
-					"eventType": "block",
-					"conditions": [],
-					"actions": [
-						{
-							"id": "set-boolean-instvar",
-							"objectClass": "UpgradesManager",
-							"sid": 212881355268622,
-							"parameters": {
-								"instance-variable": "IsUpgradingMech",
-								"value": "true"
-							}
-						},
-						{
-							"id": "set-instvar-value",
-							"objectClass": "GameCamera",
-							"sid": 462135851293863,
-							"disabled": true,
-							"parameters": {
-								"instance-variable": "CurrentState",
-								"value": "\"follow_mech\""
-							}
-						},
-						{
-							"id": "set-layer-visible",
-							"objectClass": "System",
-							"sid": 793379264276516,
-							"parameters": {
-								"layer": "\"UpgradeUI\"",
-								"visibility": "visible"
-							}
-						},
-						{
-							"id": "set-layer-interactive",
-							"objectClass": "System",
-							"sid": 169018005807787,
-							"parameters": {
-								"layer": "\"UpgradeUI\"",
-								"interactive": true
-							}
-						},
-						{
-							"id": "set-layer-interactive",
-							"objectClass": "System",
-							"sid": 803720131108717,
-							"parameters": {
-								"layer": "\"MechSelection\"",
-								"interactive": true
-							}
-						},
-						{
-							"customAction": "DrawMechSelectionMechs",
-							"objectClass": "UpgradesManager",
-							"sid": 741592447319313
-						},
-						{
-							"id": "set-time-scale",
-							"objectClass": "System",
-							"sid": 612791728416158,
-							"parameters": {
-								"time-scale": "0"
-							}
-						}
-					],
-					"sid": 322601538362366
-				}
-			]
-		},
-		{
 			"eventType": "block",
 			"conditions": [
 				{
@@ -1044,6 +961,156 @@
 			"description": "",
 			"isActiveOnStart": true,
 			"children": [
+				{
+					"aceType": "action",
+					"aceName": "BeginUpgradeShopSequence",
+					"objectClass": "UpgradesManager",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "custom-ace-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 262171695470418,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "UpgradesManager",
+									"sid": 275339891953995,
+									"parameters": {
+										"instance-variable": "IsUpgradingMech",
+										"value": "true"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "GameCamera",
+									"sid": 963142588561492,
+									"disabled": true,
+									"parameters": {
+										"instance-variable": "CurrentState",
+										"value": "\"follow_mech\""
+									}
+								},
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 724215657707854,
+									"parameters": {
+										"layer": "\"UpgradeSelectionBG\"",
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 854167434389776,
+									"parameters": {
+										"layer": "\"FlameParticles\"",
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 758289906149705,
+									"parameters": {
+										"layer": "\"MechUpgrades\"",
+										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "set-layer-interactive",
+									"objectClass": "System",
+									"sid": 710976801870962,
+									"parameters": {
+										"layer": "\"MechUpgrades\"",
+										"interactive": true
+									}
+								},
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 374351224730543,
+									"parameters": {
+										"layer": "\"UpgradeUI\"",
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-layer-interactive",
+									"objectClass": "System",
+									"sid": 874317888084235,
+									"parameters": {
+										"layer": "\"UpgradeUI\"",
+										"interactive": true
+									}
+								},
+								{
+									"id": "set-layer-interactive",
+									"objectClass": "System",
+									"sid": 835452165616097,
+									"parameters": {
+										"layer": "\"MechSelection\"",
+										"interactive": false
+									}
+								},
+								{
+									"customAction": "DrawMechSelectionMechs",
+									"objectClass": "UpgradesManager",
+									"sid": 947513705039382
+								},
+								{
+									"customAction": "Create3MechUpgrades",
+									"objectClass": "UpgradesManager",
+									"sid": 965449413759351
+								},
+								{
+									"id": "set-time-scale",
+									"objectClass": "System",
+									"sid": 429281804753537,
+									"parameters": {
+										"time-scale": "0"
+									}
+								}
+							],
+							"sid": 530282636336459,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "has-tags",
+											"objectClass": "TextUI",
+											"sid": 793226030027725,
+											"parameters": {
+												"tags": "\"upgrade_text\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-text",
+											"objectClass": "TextUI",
+											"sid": 881848475534877,
+											"parameters": {
+												"text": "\"CHOOSE 1 UPGRADE\""
+											}
+										}
+									],
+									"sid": 983016431211624
+								}
+							]
+						}
+					]
+				},
 				{
 					"aceType": "action",
 					"aceName": "DrawMechSelectionMechs",
@@ -1779,9 +1846,9 @@
 										{
 											"id": "set-text",
 											"objectClass": "UpgradeCardText",
-											"sid": 309612999657790,
+											"sid": 251208304990572,
 											"parameters": {
-												"text": "uppercase(Functions.GetUpgradeProperty(UpgradeID, \"description\"))"
+												"text": "uppercase(Functions.GetUpgradeDescription(UpgradeID))"
 											}
 										}
 									],
@@ -1808,6 +1875,7 @@
 							"id": "set-layer-visible",
 							"objectClass": "System",
 							"sid": 322232407460498,
+							"disabled": true,
 							"parameters": {
 								"layer": "\"MechUpgrades\"",
 								"visibility": "invisible"
@@ -1989,6 +2057,7 @@
 									"id": "compare-two-values",
 									"objectClass": "System",
 									"sid": 860016676289849,
+									"disabled": true,
 									"parameters": {
 										"first-value": "Functions.GetMechUpgradeCost(UpgradeMechInstanceUI.MechUID)",
 										"comparison": 3,
@@ -1998,9 +2067,24 @@
 							],
 							"actions": [
 								{
+									"customAction": "AddUpgradeToMech",
+									"objectClass": "UpgradesManager",
+									"sid": 866614092130053,
+									"parameters": [
+										"UpgradesManager.SelectedUpgradeID",
+										"UpgradeMechInstanceUI.MechUID"
+									]
+								},
+								{
+									"customAction": "DrawMechSelectionMechs",
+									"objectClass": "UpgradesManager",
+									"sid": 715156346077857
+								},
+								{
 									"id": "set-layer-interactive",
 									"objectClass": "System",
 									"sid": 156364321526409,
+									"disabled": true,
 									"parameters": {
 										"layer": "\"MechSelection\"",
 										"interactive": false
@@ -2010,6 +2094,7 @@
 									"id": "set-layer-visible",
 									"objectClass": "System",
 									"sid": 387481554744001,
+									"disabled": true,
 									"parameters": {
 										"layer": "\"UpgradeSelectionBG\"",
 										"visibility": "visible"
@@ -2019,6 +2104,7 @@
 									"id": "set-layer-visible",
 									"objectClass": "System",
 									"sid": 118542190260056,
+									"disabled": true,
 									"parameters": {
 										"layer": "\"FlameParticles\"",
 										"visibility": "visible"
@@ -2028,6 +2114,7 @@
 									"id": "set-instvar-value",
 									"objectClass": "UpgradesManager",
 									"sid": 991391179254141,
+									"disabled": true,
 									"parameters": {
 										"instance-variable": "SelectedMechUID",
 										"value": "UpgradeMechInstanceUI.MechUID"
@@ -2036,14 +2123,30 @@
 								{
 									"customAction": "Create3MechUpgrades",
 									"objectClass": "UpgradesManager",
-									"sid": 954962752781537
+									"sid": 954962752781537,
+									"disabled": true
 								},
 								{
 									"callFunction": "AddPlayerScrap",
 									"sid": 648897628360221,
+									"disabled": true,
 									"parameters": [
 										"-Functions.GetMechUpgradeCost(UpgradeMechInstanceUI.MechUID)"
 									]
+								},
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 953364770161331,
+									"parameters": {
+										"seconds": "2",
+										"use-timescale": false
+									}
+								},
+								{
+									"customAction": "CloseUpgradeSequence",
+									"objectClass": "UpgradesManager",
+									"sid": 923008456708318
 								}
 							],
 							"sid": 117068763094110
@@ -2135,13 +2238,13 @@
 					],
 					"actions": [
 						{
-							"customAction": "AddUpgradeToMech",
+							"id": "set-instvar-value",
 							"objectClass": "UpgradesManager",
-							"sid": 375873169449141,
-							"parameters": [
-								"UpgradeCardUIElement.UpgradeID",
-								"UpgradesManager.SelectedMechUID"
-							]
+							"sid": 642174486153136,
+							"parameters": {
+								"instance-variable": "SelectedUpgradeID",
+								"value": "UpgradeCardUIElement.UpgradeID"
+							}
 						}
 					],
 					"sid": 882211584211294,
@@ -2180,48 +2283,150 @@
 							"conditions": [],
 							"actions": [
 								{
+									"customAction": "BeginUpgradeShopSequence",
+									"objectClass": "UpgradesManager",
+									"sid": 374717881885462,
+									"disabled": true
+								},
+								{
+									"customAction": "CloseUpgradeSequence",
+									"objectClass": "UpgradesManager",
+									"sid": 110998070026439,
+									"disabled": true
+								},
+								{
 									"id": "set-layer-visible",
 									"objectClass": "System",
-									"sid": 724305195947422,
+									"sid": 732119074123893,
+									"parameters": {
+										"layer": "\"MechUpgrades\"",
+										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 730717607240712,
 									"parameters": {
 										"layer": "\"UpgradeSelectionBG\"",
 										"visibility": "invisible"
 									}
 								},
 								{
-									"id": "set-layer-visible",
-									"objectClass": "System",
-									"sid": 736675839869154,
-									"parameters": {
-										"layer": "\"MechUpgrades\"",
-										"visibility": "invisible"
-									}
-								},
-								{
-									"id": "set-layer-visible",
-									"objectClass": "System",
-									"sid": 896302006830077,
-									"parameters": {
-										"layer": "\"FlameParticles\"",
-										"visibility": "invisible"
-									}
-								},
-								{
 									"id": "set-layer-interactive",
 									"objectClass": "System",
-									"sid": 846462484416845,
+									"sid": 562555222983614,
 									"parameters": {
 										"layer": "\"MechUpgrades\"",
 										"interactive": false
 									}
 								},
 								{
-									"customAction": "BeginUpgradeShopSequence",
-									"objectClass": "UpgradesManager",
-									"sid": 374717881885462
+									"id": "set-layer-interactive",
+									"objectClass": "System",
+									"sid": 678624110528858,
+									"parameters": {
+										"layer": "\"MechSelection\"",
+										"interactive": true
+									}
 								}
 							],
 							"sid": 537335510960695
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "has-tags",
+									"objectClass": "TextUI",
+									"sid": 143252797838098,
+									"parameters": {
+										"tags": "\"upgrade_text\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-text",
+									"objectClass": "TextUI",
+									"sid": 950151581374909,
+									"parameters": {
+										"text": "\"CHOOSE WHICH MECH TO UPGRADE\""
+									}
+								}
+							],
+							"sid": 151816407509243
+						}
+					]
+				},
+				{
+					"aceType": "action",
+					"aceName": "CloseUpgradeSequence",
+					"objectClass": "UpgradesManager",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "custom-ace-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 392881254477102,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "for-each",
+									"objectClass": "System",
+									"sid": 302124961786550,
+									"parameters": {
+										"object": "UpgradeCardUIElement"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "UpgradeCardUIElement",
+									"sid": 934860287459428
+								}
+							],
+							"sid": 358434923227756
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 577908740026866,
+									"parameters": {
+										"layer": "\"UpgradeUI\"",
+										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "set-layer-interactive",
+									"objectClass": "System",
+									"sid": 621509157639340,
+									"parameters": {
+										"layer": "\"UpgradeUI\"",
+										"interactive": false
+									}
+								},
+								{
+									"id": "set-time-scale",
+									"objectClass": "System",
+									"sid": 255582166981496,
+									"parameters": {
+										"time-scale": "1.0"
+									}
+								}
+							],
+							"sid": 127674405139364
 						}
 					]
 				}
@@ -2350,6 +2555,383 @@
 						}
 					],
 					"sid": 136655602779981
+				}
+			]
+		},
+		{
+			"functionName": "GetUpgradeDescription",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "string",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "UpgradeID",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 372016732268592
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 140264351523661,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "BuiltString",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 250323983441120
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "add-to-eventvar",
+							"objectClass": "System",
+							"sid": 341704441345434,
+							"parameters": {
+								"variable": "BuiltString",
+								"value": "Functions.GetUpgradeProperty(UpgradeID, \"description\") & newline\n"
+							}
+						}
+					],
+					"sid": 479857840822514
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for",
+							"objectClass": "System",
+							"sid": 607408030739839,
+							"parameters": {
+								"name": "\"\"",
+								"start-index": "0",
+								"end-index": "UpgradeDefinitions.ArraySize(UpgradeID & \".modifiers\") - 1"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 708888203068808,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "Operation",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 482433507057441
+						},
+						{
+							"eventType": "variable",
+							"name": "Number",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 737421252879098
+						},
+						{
+							"eventType": "variable",
+							"name": "StatName",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 115462638058303
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 720500361944608,
+									"parameters": {
+										"first-value": "loopindex",
+										"comparison": 1,
+										"second-value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "add-to-eventvar",
+									"objectClass": "System",
+									"sid": 903792958276416,
+									"parameters": {
+										"variable": "BuiltString",
+										"value": "newline"
+									}
+								}
+							],
+							"sid": 227330561800043
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 149951369445966,
+									"parameters": {
+										"variable": "Operation",
+										"value": "UpgradeDefinitions.Get(UpgradeID & \".modifiers.\" & loopindex & \".op\")"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 905734596111621,
+									"parameters": {
+										"variable": "Number",
+										"value": "UpgradeDefinitions.Get(UpgradeID & \".modifiers.\" & loopindex & \".value\")"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 892568173927602,
+									"parameters": {
+										"variable": "StatName",
+										"value": "UpgradeDefinitions.Get(UpgradeID & \".modifiers.\" & loopindex & \".stat\")"
+									}
+								}
+							],
+							"sid": 868505974717123,
+							"children": [
+								{
+									"eventType": "variable",
+									"name": "TransformedValue",
+									"type": "number",
+									"initialValue": "0",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 262720131233169
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 268211312709097,
+											"parameters": {
+												"first-value": "Operation",
+												"comparison": 0,
+												"second-value": "\"add\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 344641719965449,
+											"parameters": {
+												"variable": "TransformedValue",
+												"value": "Number"
+											}
+										}
+									],
+									"sid": 213252567966494,
+									"children": [
+										{
+											"eventType": "variable",
+											"name": "ValueSign",
+											"type": "string",
+											"initialValue": "",
+											"comment": "",
+											"isStatic": false,
+											"isConstant": false,
+											"sid": 993914216329248
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-two-values",
+													"objectClass": "System",
+													"sid": 740221644193272,
+													"parameters": {
+														"first-value": "TransformedValue",
+														"comparison": 5,
+														"second-value": "0"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 848820275860032,
+													"parameters": {
+														"variable": "ValueSign",
+														"value": "\"+\""
+													}
+												}
+											],
+											"sid": 464040722217928
+										},
+										{
+											"eventType": "block",
+											"conditions": [],
+											"actions": [
+												{
+													"id": "add-to-eventvar",
+													"objectClass": "System",
+													"sid": 996444491368805,
+													"parameters": {
+														"variable": "BuiltString",
+														"value": "ValueSign & TransformedValue & \" \" & StatName "
+													}
+												}
+											],
+											"sid": 480987173910552
+										}
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 106735629523850,
+											"parameters": {
+												"first-value": "Operation",
+												"comparison": 0,
+												"second-value": "\"multiply\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 919165160691000,
+											"parameters": {
+												"variable": "TransformedValue",
+												"value": "(Number - 1) * 100"
+											}
+										}
+									],
+									"sid": 298908676587480,
+									"children": [
+										{
+											"eventType": "variable",
+											"name": "ValueSign",
+											"type": "string",
+											"initialValue": "",
+											"comment": "",
+											"isStatic": false,
+											"isConstant": false,
+											"sid": 471234646389548
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-two-values",
+													"objectClass": "System",
+													"sid": 462694169356567,
+													"parameters": {
+														"first-value": "TransformedValue",
+														"comparison": 5,
+														"second-value": "0"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 230835232379631,
+													"parameters": {
+														"variable": "ValueSign",
+														"value": "\"+\""
+													}
+												}
+											],
+											"sid": 247731639528142
+										},
+										{
+											"eventType": "block",
+											"conditions": [],
+											"actions": [
+												{
+													"id": "add-to-eventvar",
+													"objectClass": "System",
+													"sid": 891192752108497,
+													"parameters": {
+														"variable": "BuiltString",
+														"value": "ValueSign & TransformedValue & \"% \" & StatName "
+													}
+												}
+											],
+											"sid": 861103097980892
+										}
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 532040305652840,
+											"parameters": {
+												"first-value": "Operation",
+												"comparison": 0,
+												"second-value": "\"set\""
+											}
+										}
+									],
+									"actions": [],
+									"sid": 457760613888533,
+									"disabled": true
+								}
+							]
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 361966691812068,
+							"parameters": {
+								"variable": "BuiltString",
+								"value": "replace(BuiltString, \"_\", \" \")"
+							}
+						},
+						{
+							"id": "set-function-return-value",
+							"objectClass": "Functions",
+							"sid": 929491602565168,
+							"parameters": {
+								"value": "BuiltString"
+							}
+						}
+					],
+					"sid": 295748307704333
 				}
 			]
 		}

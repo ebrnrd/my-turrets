@@ -18,6 +18,13 @@
 			"desc": "",
 			"show": true,
 			"sid": 516718819041091
+		},
+		{
+			"name": "SelectedUpgradeID",
+			"type": "string",
+			"desc": "",
+			"show": true,
+			"sid": 541746918008352
 		}
 	]
 }

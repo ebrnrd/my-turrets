@@ -12,6 +12,26 @@
 			"sid": 690095663357006
 		},
 		{
+			"eventType": "variable",
+			"name": "ScrapLevelReached",
+			"type": "number",
+			"initialValue": "1",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 452941576404210
+		},
+		{
+			"eventType": "variable",
+			"name": "ScrapLevelTargetKoeff",
+			"type": "number",
+			"initialValue": "2",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 430174030168983
+		},
+		{
 			"functionName": "AddPlayerScrap",
 			"functionDescription": "",
 			"functionCategory": "",
@@ -40,7 +60,110 @@
 					}
 				}
 			],
-			"sid": 494612388296851
+			"sid": 494612388296851,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 239267283562538,
+							"parameters": {
+								"first-value": "PlayerScrap",
+								"comparison": 5,
+								"second-value": "Functions.GetScrapTarget(ScrapLevelReached)"
+							}
+						}
+					],
+					"actions": [
+						{
+							"customAction": "BeginUpgradeShopSequence",
+							"objectClass": "UpgradesManager",
+							"sid": 236873909799368
+						},
+						{
+							"id": "add-to-eventvar",
+							"objectClass": "System",
+							"sid": 708920864148131,
+							"parameters": {
+								"variable": "ScrapLevelReached",
+								"value": "1"
+							}
+						}
+					],
+					"sid": 126035615126504
+				}
+			]
+		},
+		{
+			"functionName": "GetScrapTarget",
+			"functionDescription": "Economy",
+			"functionCategory": "",
+			"functionReturnType": "number",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "ScrapLevel",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 849746011007812
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 476073803399515,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 747299530963335,
+							"disabled": true,
+							"parameters": {
+								"type": "log",
+								"message": "\"Scrap Level Target: \" & ScrapLevelTargetKoeff ^ ScrapLevel"
+							}
+						},
+						{
+							"id": "set-function-return-value",
+							"objectClass": "Functions",
+							"sid": 954008804714906,
+							"parameters": {
+								"value": "ScrapLevelTargetKoeff * ScrapLevel"
+							}
+						}
+					],
+					"sid": 289679902471970
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "every-tick",
+					"objectClass": "System",
+					"sid": 630331335177908
+				}
+			],
+			"actions": [
+				{
+					"id": "set-width",
+					"objectClass": "ScrapBar",
+					"sid": 342659650129598,
+					"parameters": {
+						"width": "lerp(Self.Width, ViewportWidth(Self.LayerName) * ((PlayerScrap - Functions.GetScrapTarget(ScrapLevelReached - 1)) / ( Functions.GetScrapTarget(ScrapLevelReached) - Functions.GetScrapTarget(ScrapLevelReached - 1))), 4 * dt)"
+					}
+				}
+			],
+			"sid": 154883375039899
 		}
 	],
 	"sid": 879546337790968
