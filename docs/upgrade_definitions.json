@@ -1,0 +1,79 @@
+{
+  "rapid_fire": {
+    "label": "Rapid Fire",
+    "description": "",
+    "modifiers": [
+      { "stat": "fire_rate", "op": "multiply", "value": 1.3 },
+      { "stat": "bullet_spread", "op": "add", "value": 8 }
+    ],
+    "behavior_tags": [],
+    "hooks": {},
+    "mech_types": ["combat"]
+  },
+
+  "damage_increase": {
+    "label": "Strong Barrel",
+    "description": "",
+    "modifiers": [
+      { "stat": "bullet_damage", "op": "multiply", "value": 1.2 },
+      { "stat": "bullet_knockback", "op": "multiply", "value": 1.25 },
+      { "stat": "fire_rate", "op": "multiply", "value": 0.9 }
+    ],
+    "behavior_tags": [],
+    "hooks": {},
+    "mech_types": ["combat"]
+  },
+
+  "long_barrel": {
+    "label": "Long Barrel",
+    "description": "",
+    "modifiers": [
+      { "stat": "range", "op": "add", "value": 100 },
+      { "stat": "bullet_knockback", "op": "multiply", "value": 1.2 },
+      { "stat": "fire_rate", "op": "multiply", "value": 0.8 },
+      { "stat": "bullet_spread", "op": "multiply", "value": 0.6 }
+    ],
+    "behavior_tags": [],
+    "hooks": {},
+    "mech_types": ["combat"]
+  },
+
+  "sniper": {
+    "label": "Sniper Conversion",
+    "description": "",
+    "modifiers": [
+      { "stat": "bullet_damage", "op": "add", "value": 20 },
+      { "stat": "range", "op": "add", "value": 200 },
+      { "stat": "bullet_knockback", "op": "multiply", "value": 2.0 },
+      { "stat": "fire_rate", "op": "multiply", "value": 0.2 },
+      { "stat": "bullet_spread", "op": "multiply", "value": 0.1 }
+    ],
+    "behavior_tags": [],
+    "hooks": {},
+    "mech_types": ["combat"]
+  },
+
+  "giant_bullet": {
+    "label": "Giant Bullet",
+    "description": "Chance to fire a massive piercing round",
+    "modifiers": [
+      { "stat": "giant_bullet_chance", "op": "add", "value": 0.1 }
+    ],
+    "behavior_tags": [],
+    "hooks": {
+      "on_shoot": "giant_bullet_handler"
+    },
+    "mech_types": ["combat"]
+  },
+
+  "ricochet": {
+    "label": "Ricochet",
+    "description": "",
+    "modifiers": [
+      { "stat": "ricochet_chance", "op": "add", "value": 0.1 },
+      { "stat": "bullet_damage", "op": "multiply", "value": 0.8 }
+    ],
+    "behavior_tags": [],
+    "mech_types": ["combat"]
+  }
+}
