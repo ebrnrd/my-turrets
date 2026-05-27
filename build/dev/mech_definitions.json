@@ -1,0 +1,27 @@
+{
+  "combat": {
+    "base_stats": {
+      "fire_rate": 10.0,
+      "bullet_count": 1,
+      "bullet_spread": 10,
+      "bullet_damage": 5,
+      "range": 500,
+      "bullet_speed": 800,
+      "mag_size": 200,
+      "reload_speed": 5,
+      "bullet_knockback": 0.1,
+      "move_speed": 400,
+      "shoot_move_speed": 200
+    },
+    "behavior_type": "combat"
+  },
+  "healer": {
+    "base_stats": {
+      "heal_rate": 5,
+      "heal_range": 150,
+      "speed": 60,
+      "aoe_heal_chance": 0.0
+    },
+    "behavior_type": "healer"
+  }
+}
