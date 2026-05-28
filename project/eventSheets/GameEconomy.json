@@ -13,6 +13,16 @@
 		},
 		{
 			"eventType": "variable",
+			"name": "PlayerScrapInterpolated",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 759791062139470
+		},
+		{
+			"eventType": "variable",
 			"name": "ScrapLevelReached",
 			"type": "number",
 			"initialValue": "1",
@@ -60,41 +70,7 @@
 					}
 				}
 			],
-			"sid": 494612388296851,
-			"children": [
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "compare-two-values",
-							"objectClass": "System",
-							"sid": 239267283562538,
-							"parameters": {
-								"first-value": "PlayerScrap",
-								"comparison": 5,
-								"second-value": "Functions.GetScrapTarget(ScrapLevelReached)"
-							}
-						}
-					],
-					"actions": [
-						{
-							"customAction": "BeginUpgradeShopSequence",
-							"objectClass": "UpgradesManager",
-							"sid": 236873909799368
-						},
-						{
-							"id": "add-to-eventvar",
-							"objectClass": "System",
-							"sid": 708920864148131,
-							"parameters": {
-								"variable": "ScrapLevelReached",
-								"value": "1"
-							}
-						}
-					],
-					"sid": 126035615126504
-				}
-			]
+			"sid": 494612388296851
 		},
 		{
 			"functionName": "GetScrapTarget",
@@ -155,15 +131,72 @@
 			],
 			"actions": [
 				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 766594127448285,
+					"parameters": {
+						"variable": "PlayerScrapInterpolated",
+						"value": "lerp(PlayerScrapInterpolated, PlayerScrap, 10 * dt)"
+					}
+				},
+				{
 					"id": "set-width",
 					"objectClass": "ScrapBar",
 					"sid": 342659650129598,
+					"disabled": true,
 					"parameters": {
 						"width": "lerp(Self.Width, ViewportWidth(Self.LayerName) * ((PlayerScrap - Functions.GetScrapTarget(ScrapLevelReached - 1)) / ( Functions.GetScrapTarget(ScrapLevelReached) - Functions.GetScrapTarget(ScrapLevelReached - 1))), 4 * dt)"
 					}
+				},
+				{
+					"id": "set-width",
+					"objectClass": "ScrapBar",
+					"sid": 248293188140852,
+					"parameters": {
+						"width": "ViewportWidth(Self.LayerName) * ((PlayerScrapInterpolated - Functions.GetScrapTarget(ScrapLevelReached - 1)) / ( Functions.GetScrapTarget(ScrapLevelReached) - Functions.GetScrapTarget(ScrapLevelReached - 1)))"
+					}
 				}
 			],
-			"sid": 154883375039899
+			"sid": 154883375039899,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 528762977538208,
+							"parameters": {
+								"first-value": "PlayerScrapInterpolated",
+								"comparison": 5,
+								"second-value": "Functions.GetScrapTarget(ScrapLevelReached) - 0.001"
+							}
+						},
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 152159679344881
+						}
+					],
+					"actions": [
+						{
+							"customAction": "BeginUpgradeShopSequence",
+							"objectClass": "UpgradesManager",
+							"sid": 236873909799368
+						},
+						{
+							"id": "add-to-eventvar",
+							"objectClass": "System",
+							"sid": 708920864148131,
+							"parameters": {
+								"variable": "ScrapLevelReached",
+								"value": "1"
+							}
+						}
+					],
+					"sid": 126035615126504
+				}
+			]
 		}
 	],
 	"sid": 879546337790968

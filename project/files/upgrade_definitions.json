@@ -38,6 +38,33 @@
     "mech_types": ["combat"]
   },
 
+  "overpressure": {
+    "label": "Overpressure",
+    "description": "",
+    "modifiers": [
+      { "stat": "bullet_damage", "op": "multiply", "value": 1.2 },
+      { "stat": "bullet_knockback", "op": "multiply", "value": 1.25 },
+      { "stat": "fire_rate", "op": "multiply", "value": 0.9 }
+    ],
+    "behavior_tags": [],
+    "hooks": {},
+    "mech_types": ["combat"]
+  },
+
+  "active_sustain": {
+    "label": "Active Sustain",
+    "description": "On Repaired, for 5 seconds:",
+    "modifiers": [
+      { "stat": "mag_size", "op": "add", "value": 50, "on_hook": "true" },
+      { "stat": "fire_rate", "op": "multiply", "value": 1.5, "on_hook": "true" }
+    ],
+    "behavior_tags": [],
+    "hooks": [
+      { "tag": "on_repair", "duration": 5, "actions": ["activate_modifier:0", "activate_modifier:1"] }
+    ],
+    "mech_types": ["combat"]
+  },
+
   "sniper": {
     "label": "Sniper Conversion",
     "description": "",
@@ -60,9 +87,7 @@
       { "stat": "giant_bullet_chance", "op": "add", "value": 0.1 }
     ],
     "behavior_tags": [],
-    "hooks": {
-      "on_shoot": "giant_bullet_handler"
-    },
+    "hooks": {},
     "mech_types": ["combat"]
   },
 

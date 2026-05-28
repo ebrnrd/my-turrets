@@ -1,0 +1,52 @@
+{
+	"name": "ActiveUpgradeText",
+	"plugin-id": "Text",
+	"sid": 198061480765204,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [
+		{
+			"name": "TargetY",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 834214470485160
+		},
+		{
+			"name": "TargetX",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 738322217516178
+		},
+		{
+			"name": "TargetAngle",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 325575784455561
+		},
+		{
+			"name": "UpgradeFID",
+			"type": "string",
+			"desc": "",
+			"show": true,
+			"sid": 486777243544261
+		},
+		{
+			"name": "MechUID",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 443928757159756
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Fade",
+			"name": "Fade",
+			"sid": 466351974726972
+		}
+	],
+	"effectTypes": []
+}

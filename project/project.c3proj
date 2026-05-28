@@ -1,6 +1,6 @@
 {
 	"projectFormatVersion": 1,
-	"savedWithRelease": 47604,
+	"savedWithRelease": 48700,
 	"name": "turrets_1",
 	"runtime": "c3",
 	"useWorker": "auto",
@@ -418,7 +418,9 @@
 			"UpgradeAltar",
 			"BulgeEffect",
 			"ScrapBarBg",
-			"ScrapBar"
+			"ScrapBar",
+			"TimerObject",
+			"ActiveUpgradeText"
 		],
 		"subfolders": [
 			{
@@ -433,9 +435,11 @@
 			},
 			{
 				"items": [
-					"MechData",
+					"MechObject",
 					"UpgradesManager",
-					"MechStatsCache"
+					"MechStatsCache",
+					"MechObjectBehaviours",
+					"MechActiveModifiersCheck"
 				],
 				"subfolders": [],
 				"name": "Mechs"
@@ -681,7 +685,7 @@
 		"fov": 0.7853981633974483,
 		"useLoaderLayout": false,
 		"fullscreenMode": "letterbox-scale",
-		"fullscreenQuality": "high",
+		"fullscreenQuality": "low",
 		"viewportFit": "auto",
 		"backgroundColor": [
 			0,

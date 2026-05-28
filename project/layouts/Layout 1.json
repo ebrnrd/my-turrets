@@ -1384,10 +1384,6 @@
 			"global": false
 		}
 	],
-	"scene-graphs-folder-root": {
-		"items": [],
-		"subfolders": []
-	},
 	"sid": 321425915906044,
 	"nonworld-instances": [
 		{
@@ -1407,7 +1403,7 @@
 			"instanceVariables": {}
 		},
 		{
-			"type": "MechData",
+			"type": "MechObject",
 			"properties": {},
 			"uid": 83,
 			"sid": 315289895206282,
@@ -1459,6 +1455,16 @@
 			"sid": 852802736543278,
 			"tags": "",
 			"instanceVariables": {}
+		},
+		{
+			"type": "MechActiveModifiersCheck",
+			"properties": {},
+			"uid": 135,
+			"sid": 569062388036735,
+			"tags": "",
+			"instanceVariables": {
+				"MechUID": 0
+			}
 		}
 	],
 	"effectTypes": [],

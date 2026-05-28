@@ -1003,14 +1003,14 @@
 							"objectClass": "System",
 							"sid": 853041788389232,
 							"parameters": {
-								"object": "MechData"
+								"object": "MechObject"
 							}
 						}
 					],
 					"actions": [
 						{
 							"customAction": "UpdateMechBehaviourValues",
-							"objectClass": "MechData",
+							"objectClass": "MechObject",
 							"sid": 938852422640213
 						}
 					],
@@ -1058,8 +1058,8 @@
 							"objectClass": "System",
 							"sid": 413154154009695,
 							"parameters": {
-								"object": "MechData",
-								"expression": "MechData.MechBaseUID = turretBase.UID"
+								"object": "MechObject",
+								"expression": "MechObject.MechBaseUID = turretBase.UID"
 							}
 						},
 						{
@@ -1067,7 +1067,7 @@
 							"objectClass": "MechStatsCache",
 							"sid": 531626704336869,
 							"parameters": {
-								"unique-id": "MechData.MechStatsCacheUID"
+								"unique-id": "MechObject.MechStatsCacheUID"
 							}
 						}
 					],
@@ -1185,7 +1185,7 @@
 									"sid": 858778880956773,
 									"parameters": {
 										"instance-variable": "MechUID",
-										"value": "MechData.UID"
+										"value": "MechObject.UID"
 									}
 								},
 								{
@@ -1224,7 +1224,7 @@
 											"callFunction": "Hook_OnBulletShoot",
 											"sid": 879865869713717,
 											"parameters": [
-												"MechData.UID",
+												"MechObject.UID",
 												"bullet.UID"
 											]
 										}
@@ -1286,7 +1286,7 @@
 					"objectClass": "System",
 					"sid": 219497694972327,
 					"parameters": {
-						"object-to-create": "MechData",
+						"object-to-create": "MechObject",
 						"layer": "0",
 						"x": "0",
 						"y": "0",
@@ -1310,6 +1310,32 @@
 				{
 					"id": "create-object",
 					"objectClass": "System",
+					"sid": 790877165734072,
+					"parameters": {
+						"object-to-create": "MechActiveModifiersCheck",
+						"layer": "0",
+						"x": "0",
+						"y": "0",
+						"create-hierarchy": false,
+						"template-name": "\"\""
+					}
+				},
+				{
+					"id": "create-object",
+					"objectClass": "System",
+					"sid": 745482585195082,
+					"parameters": {
+						"object-to-create": "MechObjectBehaviours",
+						"layer": "0",
+						"x": "0",
+						"y": "0",
+						"create-hierarchy": false,
+						"template-name": "\"\""
+					}
+				},
+				{
+					"id": "create-object",
+					"objectClass": "System",
 					"sid": 522554109244831,
 					"parameters": {
 						"object-to-create": "turretBase",
@@ -1322,7 +1348,7 @@
 				},
 				{
 					"id": "set-instvar-value",
-					"objectClass": "MechData",
+					"objectClass": "MechObject",
 					"sid": 369884858781017,
 					"parameters": {
 						"instance-variable": "MechStatsCacheUID",
@@ -1331,7 +1357,7 @@
 				},
 				{
 					"id": "set-instvar-value",
-					"objectClass": "MechData",
+					"objectClass": "MechObject",
 					"sid": 157283693289031,
 					"parameters": {
 						"instance-variable": "MechBaseUID",
@@ -1344,7 +1370,16 @@
 					"sid": 328980929274761,
 					"parameters": {
 						"instance-variable": "MechUID",
-						"value": "MechData.UID"
+						"value": "MechObject.UID"
+					}
+				},
+				{
+					"id": "set-instvar-value",
+					"objectClass": "MechActiveModifiersCheck",
+					"sid": 495622036621224,
+					"parameters": {
+						"instance-variable": "MechUID",
+						"value": "MechObject.UID"
 					}
 				},
 				{
@@ -1354,6 +1389,15 @@
 					"parameters": {
 						"instance-variable": "MechBaseUID",
 						"value": "turretBase.UID"
+					}
+				},
+				{
+					"id": "set-instvar-value",
+					"objectClass": "MechObjectBehaviours",
+					"sid": 622355941392601,
+					"parameters": {
+						"instance-variable": "MechUID",
+						"value": "MechObject.UID"
 					}
 				}
 			],
@@ -1365,7 +1409,7 @@
 					"actions": [
 						{
 							"id": "set-json",
-							"objectClass": "MechData",
+							"objectClass": "MechObject",
 							"sid": 206781541452673,
 							"parameters": {
 								"path": "\"stats\"",
@@ -1374,7 +1418,7 @@
 						},
 						{
 							"id": "set-value",
-							"objectClass": "MechData",
+							"objectClass": "MechObject",
 							"sid": 419003432528325,
 							"parameters": {
 								"path": "\"type\"",
@@ -1383,7 +1427,7 @@
 						},
 						{
 							"id": "set-array",
-							"objectClass": "MechData",
+							"objectClass": "MechObject",
 							"sid": 478937257899184,
 							"parameters": {
 								"path": "\"applied_upgrades\"",
@@ -1391,8 +1435,17 @@
 							}
 						},
 						{
+							"customAction": "AddUpgradeToMech",
+							"objectClass": "UpgradesManager",
+							"sid": 481434144072448,
+							"parameters": [
+								"\"active_sustain\"",
+								"MechObject.UID"
+							]
+						},
+						{
 							"customAction": "UpdateMechStatsCache",
-							"objectClass": "MechData",
+							"objectClass": "MechObject",
 							"sid": 998945220986416
 						}
 					],
@@ -1412,17 +1465,7 @@
 							}
 						}
 					],
-					"actions": [
-						{
-							"customAction": "AddUpgradeToMech",
-							"objectClass": "UpgradesManager",
-							"sid": 535138681455005,
-							"parameters": [
-								"\"giant_bullet\"",
-								"MechData.UID"
-							]
-						}
-					],
+					"actions": [],
 					"sid": 763636436171883,
 					"disabled": true
 				},
@@ -1447,7 +1490,7 @@
 							"sid": 909334561745066,
 							"parameters": [
 								"\"rapid_fire\"",
-								"MechData.UID"
+								"MechObject.UID"
 							]
 						}
 					],
@@ -1475,7 +1518,7 @@
 							"sid": 397010152379355,
 							"parameters": [
 								"\"ricochet\"",
-								"MechData.UID"
+								"MechObject.UID"
 							]
 						}
 					],
@@ -1491,7 +1534,7 @@
 		{
 			"aceType": "action",
 			"aceName": "UpdateMechBehaviourValues",
-			"objectClass": "MechData",
+			"objectClass": "MechObject",
 			"functionDescription": "Updates all the values to the Mech's behaviours like Turret behaviour (fire rate, ecc)",
 			"functionCategory": "",
 			"functionReturnType": "none",
@@ -1511,7 +1554,7 @@
 							"objectClass": "System",
 							"sid": 753580638297265,
 							"parameters": {
-								"first-value": "MechData.Get(\"type\")",
+								"first-value": "MechObject.Get(\"type\")",
 								"comparison": 0,
 								"second-value": "\"combat\""
 							}
@@ -1528,7 +1571,7 @@
 									"objectClass": "MechStatsCache",
 									"sid": 274137201233466,
 									"parameters": {
-										"unique-id": "MechData.MechStatsCacheUID"
+										"unique-id": "MechObject.MechStatsCacheUID"
 									}
 								},
 								{
@@ -1536,7 +1579,7 @@
 									"objectClass": "turretBase",
 									"sid": 217537479192315,
 									"parameters": {
-										"unique-id": "MechData.MechBaseUID"
+										"unique-id": "MechObject.MechBaseUID"
 									}
 								},
 								{
@@ -1545,7 +1588,7 @@
 									"sid": 377371481744253,
 									"parameters": {
 										"object": "turretGun",
-										"expression": "turretGun.turretBaseUID = MechData.MechBaseUID"
+										"expression": "turretGun.turretBaseUID = MechObject.MechBaseUID"
 									}
 								}
 							],
@@ -1587,7 +1630,7 @@
 		{
 			"aceType": "action",
 			"aceName": "UpdateMechStatsCache",
-			"objectClass": "MechData",
+			"objectClass": "MechObject",
 			"functionDescription": "",
 			"functionCategory": "",
 			"functionReturnType": "none",
@@ -1604,7 +1647,7 @@
 					"disabled": true,
 					"parameters": {
 						"type": "log",
-						"message": "\"------- Updating Mech \" & MechData.UID & \" Stats -------\""
+						"message": "\"------- Updating Mech \" & MechObject.UID & \" Stats -------\""
 					}
 				}
 			],
@@ -1618,7 +1661,7 @@
 							"objectClass": "MechStatsCache",
 							"sid": 250465959963835,
 							"parameters": {
-								"unique-id": "MechData.MechStatsCacheUID"
+								"unique-id": "MechObject.MechStatsCacheUID"
 							}
 						}
 					],
@@ -1636,7 +1679,7 @@
 							"conditions": [
 								{
 									"id": "for-each",
-									"objectClass": "MechData",
+									"objectClass": "MechObject",
 									"sid": 234283379420774,
 									"parameters": {
 										"path": "\"stats\""
@@ -1649,8 +1692,8 @@
 									"objectClass": "MechStatsCache",
 									"sid": 563417457940360,
 									"parameters": {
-										"key": "MechData.CurrentKey",
-										"value": "Functions.GetMechStat(MechData.UID, MechData.CurrentKey)"
+										"key": "MechObject.CurrentKey",
+										"value": "Functions.GetMechStat(MechObject.UID, MechObject.CurrentKey)"
 									}
 								},
 								{
@@ -1660,7 +1703,7 @@
 									"disabled": true,
 									"parameters": {
 										"type": "log",
-										"message": "\"Added new base stat: \" & MechData.CurrentKey"
+										"message": "\"Added new base stat: \" & MechObject.CurrentKey"
 									}
 								}
 							],
@@ -1686,7 +1729,7 @@
 									"parameters": {
 										"name": "\"upgrades\"",
 										"start-index": "0",
-										"end-index": "MechData.ArraySize(\"applied_upgrades\") - 1"
+										"end-index": "MechObject.ArraySize(\"applied_upgrades\") - 1"
 									}
 								}
 							],
@@ -1697,7 +1740,7 @@
 									"sid": 931974638243082,
 									"parameters": {
 										"variable": "UpgradeID",
-										"value": "MechData.Get(\"applied_upgrades.\" & loopindex(\"upgrades\"))"
+										"value": "MechObject.Get(\"applied_upgrades.\" & loopindex(\"upgrades\"))"
 									}
 								},
 								{
@@ -1753,7 +1796,7 @@
 											"sid": 844089559130190,
 											"parameters": {
 												"key": "StatName",
-												"value": "Functions.GetMechStat(MechData.UID, StatName)"
+												"value": "Functions.GetMechStat(MechObject.UID, StatName)"
 											}
 										},
 										{

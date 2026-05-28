@@ -149,6 +149,50 @@
 					"eventType": "block",
 					"conditions": [
 						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 242296782379925,
+							"parameters": {
+								"first-value": "Damageables.Health",
+								"comparison": 2,
+								"second-value": "Damageables.MaxHealth"
+							}
+						},
+						{
+							"id": "pick-by-evaluate",
+							"objectClass": "System",
+							"sid": 621201482681749,
+							"parameters": {
+								"object": "MechObject",
+								"expression": "MechObject.MechBaseUID = DamageableUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 861921663321760,
+							"disabled": true,
+							"parameters": {
+								"seconds": "0.1",
+								"use-timescale": true
+							}
+						},
+						{
+							"callFunction": "Hook_OnRepair",
+							"sid": 705220112469202,
+							"parameters": [
+								"MechObject.UID"
+							]
+						}
+					],
+					"sid": 765022785096187
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
 							"id": "pick-by-unique-id",
 							"objectClass": "Damageables",
 							"sid": 457343600715006,
@@ -272,9 +316,9 @@
 					}
 				},
 				{
-					"customAction": "DamagedFx",
+					"customAction": "HealedFx",
 					"objectClass": "Damageables",
-					"sid": 390870239673804
+					"sid": 553788971162265
 				}
 			],
 			"sid": 476613787846298

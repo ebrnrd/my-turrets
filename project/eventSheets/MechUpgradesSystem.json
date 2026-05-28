@@ -44,7 +44,7 @@
 					"conditions": [
 						{
 							"id": "pick-by-unique-id",
-							"objectClass": "MechData",
+							"objectClass": "MechObject",
 							"sid": 544893631099750,
 							"parameters": {
 								"unique-id": "MechUID"
@@ -63,6 +63,16 @@
 							"isStatic": false,
 							"isConstant": false,
 							"sid": 298264487574855
+						},
+						{
+							"eventType": "variable",
+							"name": "UpgradeFID",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 296538222597907
 						},
 						{
 							"eventType": "variable",
@@ -124,7 +134,7 @@
 									"sid": 483566550580953,
 									"parameters": {
 										"variable": "BaseValue",
-										"value": "MechData.Get(\"stats.\" & StatName)"
+										"value": "MechObject.Get(\"stats.\" & StatName)"
 									}
 								},
 								{
@@ -177,7 +187,7 @@
 									"parameters": {
 										"name": "\"upgrades\"",
 										"start-index": "0",
-										"end-index": "MechData.ArraySize(\"applied_upgrades\") - 1"
+										"end-index": "MechObject.ArraySize(\"applied_upgrades\") - 1"
 									}
 								}
 							],
@@ -194,10 +204,19 @@
 								{
 									"id": "set-eventvar-value",
 									"objectClass": "System",
-									"sid": 298188602931034,
+									"sid": 373848204214806,
+									"parameters": {
+										"variable": "UpgradeFID",
+										"value": "MechObject.Get(\"applied_upgrades.\" & loopindex(\"upgrades\"))"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 245034496979270,
 									"parameters": {
 										"variable": "UpgradeID",
-										"value": "MechData.Get(\"applied_upgrades.\" & loopindex(\"upgrades\"))"
+										"value": "Functions.GetUpgradeIDFromFID(UpgradeFID)"
 									}
 								},
 								{
@@ -264,67 +283,209 @@
 											],
 											"actions": [
 												{
-													"id": "log",
-													"objectClass": "Browser",
-													"sid": 206518301232496,
-													"parameters": {
-														"type": "log",
-														"message": "\"Found Modifier Match in \" & UpgradeID"
-													}
-												},
-												{
-													"id": "set-eventvar-value",
-													"objectClass": "System",
-													"sid": 230730693652044,
-													"parameters": {
-														"variable": "Operation",
-														"value": "UpgradeDefinitions.Get(UpgradeID & \".modifiers.\" & loopindex(\"modifiers\") & \".op\")"
-													}
-												},
-												{
-													"id": "log",
-													"objectClass": "Browser",
-													"sid": 952467491636887,
-													"parameters": {
-														"type": "log",
-														"message": "\"Operation: \" & Operation"
-													}
-												},
-												{
-													"id": "set-eventvar-value",
-													"objectClass": "System",
-													"sid": 606177396039388,
-													"parameters": {
-														"variable": "UpgradeValue",
-														"value": "UpgradeDefinitions.Get(UpgradeID & \".modifiers.\" & loopindex(\"modifiers\") & \".value\")"
-													}
-												},
-												{
-													"id": "log",
-													"objectClass": "Browser",
-													"sid": 441964997227896,
-													"parameters": {
-														"type": "log",
-														"message": "\"Upgrade Value\" & UpgradeValue"
-													}
-												},
-												{
-													"id": "set-boolean-eventvar",
-													"objectClass": "System",
-													"sid": 334150864548965,
-													"parameters": {
-														"variable": "HasFoundStat",
-														"value": "true"
-													}
-												},
-												{
 													"id": "stop-loop",
 													"objectClass": "System",
 													"sid": 808150517978105,
 													"disabled": true
 												}
 											],
-											"sid": 558720194641350
+											"sid": 558720194641350,
+											"children": [
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "compare-two-values",
+															"objectClass": "System",
+															"sid": 482063849092198,
+															"parameters": {
+																"first-value": "UpgradeDefinitions.Get(UpgradeID & \".modifiers.\" & loopindex(\"modifiers\") & \".on_hook\")",
+																"comparison": 0,
+																"second-value": "\"true\""
+															},
+															"isInverted": true
+														}
+													],
+													"actions": [
+														{
+															"id": "log",
+															"objectClass": "Browser",
+															"sid": 687976758888850,
+															"parameters": {
+																"type": "log",
+																"message": "\"Found Modifier Match in \" & UpgradeID"
+															}
+														},
+														{
+															"id": "set-eventvar-value",
+															"objectClass": "System",
+															"sid": 792339018033018,
+															"parameters": {
+																"variable": "Operation",
+																"value": "UpgradeDefinitions.Get(UpgradeID & \".modifiers.\" & loopindex(\"modifiers\") & \".op\")"
+															}
+														},
+														{
+															"id": "log",
+															"objectClass": "Browser",
+															"sid": 567628985304878,
+															"parameters": {
+																"type": "log",
+																"message": "\"Operation: \" & Operation"
+															}
+														},
+														{
+															"id": "set-eventvar-value",
+															"objectClass": "System",
+															"sid": 733300274352012,
+															"parameters": {
+																"variable": "UpgradeValue",
+																"value": "UpgradeDefinitions.Get(UpgradeID & \".modifiers.\" & loopindex(\"modifiers\") & \".value\")"
+															}
+														},
+														{
+															"id": "log",
+															"objectClass": "Browser",
+															"sid": 494929581279637,
+															"parameters": {
+																"type": "log",
+																"message": "\"Upgrade Value\" & UpgradeValue"
+															}
+														},
+														{
+															"id": "set-boolean-eventvar",
+															"objectClass": "System",
+															"sid": 173096612947758,
+															"parameters": {
+																"variable": "HasFoundStat",
+																"value": "true"
+															}
+														}
+													],
+													"sid": 163627741564810
+												},
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "else",
+															"objectClass": "System",
+															"sid": 120835898811393
+														},
+														{
+															"id": "pick-by-evaluate",
+															"objectClass": "System",
+															"sid": 545519045337482,
+															"parameters": {
+																"object": "MechActiveModifiersCheck",
+																"expression": "MechActiveModifiersCheck.MechUID = MechUID"
+															}
+														}
+													],
+													"actions": [],
+													"sid": 822135055547026,
+													"children": [
+														{
+															"eventType": "variable",
+															"name": "ModifierIndex",
+															"type": "number",
+															"initialValue": "0",
+															"comment": "",
+															"isStatic": false,
+															"isConstant": false,
+															"sid": 154704527948571
+														},
+														{
+															"eventType": "block",
+															"conditions": [],
+															"actions": [
+																{
+																	"id": "set-eventvar-value",
+																	"objectClass": "System",
+																	"sid": 698173778233403,
+																	"parameters": {
+																		"variable": "ModifierIndex",
+																		"value": "loopindex(\"modifiers\")"
+																	}
+																}
+															],
+															"sid": 394433317444906,
+															"children": [
+																{
+																	"eventType": "block",
+																	"conditions": [
+																		{
+																			"id": "has-key",
+																			"objectClass": "MechActiveModifiersCheck",
+																			"sid": 236124282058809,
+																			"parameters": {
+																				"key": "UpgradeFID & \",\" & \"active_modifier_index\" & \",\" & ModifierIndex"
+																			}
+																		}
+																	],
+																	"actions": [
+																		{
+																			"id": "log",
+																			"objectClass": "Browser",
+																			"sid": 570970618837502,
+																			"parameters": {
+																				"type": "log",
+																				"message": "\"Found ACTIVE Modifier Match in \" & UpgradeID"
+																			}
+																		},
+																		{
+																			"id": "set-eventvar-value",
+																			"objectClass": "System",
+																			"sid": 669776108188829,
+																			"parameters": {
+																				"variable": "Operation",
+																				"value": "UpgradeDefinitions.Get(UpgradeID & \".modifiers.\" & loopindex(\"modifiers\") & \".op\")"
+																			}
+																		},
+																		{
+																			"id": "log",
+																			"objectClass": "Browser",
+																			"sid": 150065698102636,
+																			"parameters": {
+																				"type": "log",
+																				"message": "\"Operation: \" & Operation"
+																			}
+																		},
+																		{
+																			"id": "set-eventvar-value",
+																			"objectClass": "System",
+																			"sid": 402410907906424,
+																			"parameters": {
+																				"variable": "UpgradeValue",
+																				"value": "UpgradeDefinitions.Get(UpgradeID & \".modifiers.\" & loopindex(\"modifiers\") & \".value\")"
+																			}
+																		},
+																		{
+																			"id": "log",
+																			"objectClass": "Browser",
+																			"sid": 744048354894737,
+																			"parameters": {
+																				"type": "log",
+																				"message": "\"Upgrade Value\" & UpgradeValue"
+																			}
+																		},
+																		{
+																			"id": "set-boolean-eventvar",
+																			"objectClass": "System",
+																			"sid": 614066653413692,
+																			"parameters": {
+																				"variable": "HasFoundStat",
+																				"value": "true"
+																			}
+																		}
+																	],
+																	"sid": 155909637792433
+																}
+															]
+														}
+													]
+												}
+											]
 										},
 										{
 											"eventType": "block",
@@ -493,62 +654,6 @@
 			]
 		},
 		{
-			"functionName": "AddUpgradeToMech",
-			"functionDescription": "",
-			"functionCategory": "",
-			"functionReturnType": "none",
-			"functionCopyPicked": false,
-			"functionIsAsync": false,
-			"functionParameters": [
-				{
-					"name": "UpgradeID",
-					"type": "string",
-					"initialValue": "",
-					"comment": "",
-					"sid": 181254488845490
-				},
-				{
-					"name": "MechUID",
-					"type": "number",
-					"initialValue": "0",
-					"comment": "",
-					"sid": 275749972072148
-				}
-			],
-			"eventType": "function-block",
-			"conditions": [],
-			"actions": [],
-			"sid": 323986860802742,
-			"children": [
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "pick-by-unique-id",
-							"objectClass": "MechData",
-							"sid": 744621153142719,
-							"parameters": {
-								"unique-id": "MechUID"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "push-value",
-							"objectClass": "MechData",
-							"sid": 154148950919089,
-							"parameters": {
-								"where": "back",
-								"path": "\"applied_upgrades\"",
-								"value": "UpgradeID"
-							}
-						}
-					],
-					"sid": 660441203320889
-				}
-			]
-		},
-		{
 			"eventType": "group",
 			"disabled": false,
 			"title": "Hooks",
@@ -588,7 +693,7 @@
 							"conditions": [
 								{
 									"id": "pick-by-unique-id",
-									"objectClass": "MechData",
+									"objectClass": "MechObject",
 									"sid": 620200675174925,
 									"parameters": {
 										"unique-id": "MechUID"
@@ -607,7 +712,7 @@
 									"objectClass": "MechStatsCache",
 									"sid": 597053422311132,
 									"parameters": {
-										"unique-id": "MechData.MechStatsCacheUID"
+										"unique-id": "MechObject.MechStatsCacheUID"
 									}
 								}
 							],
@@ -719,7 +824,7 @@
 							"conditions": [
 								{
 									"id": "pick-by-unique-id",
-									"objectClass": "MechData",
+									"objectClass": "MechObject",
 									"sid": 130870072467003,
 									"parameters": {
 										"unique-id": "MechUID"
@@ -738,7 +843,7 @@
 									"objectClass": "MechStatsCache",
 									"sid": 995197720002004,
 									"parameters": {
-										"unique-id": "MechData.MechStatsCacheUID"
+										"unique-id": "MechObject.MechStatsCacheUID"
 									}
 								}
 							],
@@ -866,6 +971,455 @@
 							]
 						}
 					]
+				},
+				{
+					"functionName": "Action_ActivateModifier",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "UpgradeFID",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 628126396732391
+						},
+						{
+							"name": "ModifierIndex",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 243837628505083
+						},
+						{
+							"name": "MechUID",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 247590397929315
+						},
+						{
+							"name": "Duration",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 436960455367369
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 860341967130160,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 962029055698834,
+									"parameters": {
+										"object": "MechActiveModifiersCheck",
+										"expression": "MechActiveModifiersCheck.MechUID = MechUID"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "add-key",
+									"objectClass": "MechActiveModifiersCheck",
+									"sid": 190697833969646,
+									"parameters": {
+										"key": "UpgradeFID & \",\" & \"active_modifier_index\" & \",\" & ModifierIndex",
+										"value": "0"
+									}
+								}
+							],
+							"sid": 765749734340232,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-evaluate",
+											"objectClass": "System",
+											"sid": 419346022329960,
+											"parameters": {
+												"object": "TimerObject",
+												"expression": "TimerObject.TimerTag = str(MechUID & \".\" & UpgradeFID & \",\" & \"active_modifier_index\" & \",\" & ModifierIndex)"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "destroy",
+											"objectClass": "TimerObject",
+											"sid": 501243374274081
+										}
+									],
+									"sid": 732589616872951
+								},
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"id": "create-object",
+											"objectClass": "System",
+											"sid": 531545407806129,
+											"parameters": {
+												"object-to-create": "TimerObject",
+												"layer": "0",
+												"x": "0",
+												"y": "0",
+												"create-hierarchy": false,
+												"template-name": "\"\""
+											}
+										},
+										{
+											"id": "start-timer",
+											"objectClass": "TimerObject",
+											"sid": 601404418552149,
+											"behaviorType": "Timer",
+											"parameters": {
+												"duration": "Duration",
+												"type": "once",
+												"tag": "MechUID & \".\" & UpgradeFID & \",\" & \"active_modifier_index\" & \",\" & ModifierIndex"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "TimerObject",
+											"sid": 706195216766227,
+											"parameters": {
+												"instance-variable": "TimerTag",
+												"value": "MechUID & \".\" & UpgradeFID & \",\" & \"active_modifier_index\" & \",\" & ModifierIndex"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "TimerObject",
+											"sid": 912382169959866,
+											"parameters": {
+												"instance-variable": "ActionOnTimer",
+												"value": "\"RemoveModifier\""
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "TimerObject",
+											"sid": 535425787041619,
+											"parameters": {
+												"instance-variable": "Parameters",
+												"value": "MechUID & \".\" & UpgradeFID & \",\" & \"active_modifier_index\" & \",\" & ModifierIndex"
+											}
+										}
+									],
+									"sid": 610012145009802
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"callFunction": "UpgradeActiveFeedbackFx",
+									"sid": 750697152461806,
+									"parameters": [
+										"MechUID",
+										"UpgradeFID"
+									]
+								}
+							],
+							"sid": 170049533841170,
+							"disabled": true
+						}
+					]
+				},
+				{
+					"functionName": "Hook_OnRepair",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "MechUID",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 573134412498432
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 740746505275909,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "ActivatedModifiers",
+							"type": "boolean",
+							"initialValue": "false",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 693343677650528
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "MechObject",
+									"sid": 253304578601916,
+									"parameters": {
+										"unique-id": "MechUID"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 172416430902172,
+							"children": [
+								{
+									"eventType": "variable",
+									"name": "UpgradeFID",
+									"type": "string",
+									"initialValue": "",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 207688318791164
+								},
+								{
+									"eventType": "variable",
+									"name": "UpgradeID",
+									"type": "string",
+									"initialValue": "",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 971083686460530
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "for",
+											"objectClass": "System",
+											"sid": 125768171133316,
+											"parameters": {
+												"name": "\"upgrades\"",
+												"start-index": "0",
+												"end-index": "MechObject.ArraySize(\"applied_upgrades\") - 1"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 335808145191346,
+											"parameters": {
+												"variable": "UpgradeFID",
+												"value": "MechObject.Get(\"applied_upgrades\" & \".\" & loopindex(\"upgrades\"))"
+											}
+										},
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 759665062518654,
+											"parameters": {
+												"variable": "UpgradeID",
+												"value": "Functions.GetUpgradeIDFromFID(UpgradeFID)"
+											}
+										}
+									],
+									"sid": 413303184225917,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "for",
+													"objectClass": "System",
+													"sid": 572021553157900,
+													"parameters": {
+														"name": "\"hooks\"",
+														"start-index": "0",
+														"end-index": "UpgradeDefinitions.ArraySize(UpgradeID & \".hooks\") - 1"
+													}
+												}
+											],
+											"actions": [],
+											"sid": 341539626784682,
+											"children": [
+												{
+													"eventType": "variable",
+													"name": "Duration",
+													"type": "number",
+													"initialValue": "0",
+													"comment": "",
+													"isStatic": false,
+													"isConstant": false,
+													"sid": 996429993945021
+												},
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "compare-two-values",
+															"objectClass": "System",
+															"sid": 966307005509706,
+															"parameters": {
+																"first-value": "UpgradeDefinitions.Get(UpgradeID & \".hooks.\" & loopindex(\"hooks\") & \".tag\")",
+																"comparison": 0,
+																"second-value": "\"on_repair\""
+															}
+														}
+													],
+													"actions": [
+														{
+															"id": "set-eventvar-value",
+															"objectClass": "System",
+															"sid": 910585316870540,
+															"parameters": {
+																"variable": "Duration",
+																"value": "UpgradeDefinitions.Get(UpgradeID & \".hooks.\" & loopindex(\"hooks\") & \".duration\")"
+															}
+														},
+														{
+															"callFunction": "UpgradeActiveFeedbackFx",
+															"sid": 662046468130965,
+															"parameters": [
+																"MechUID",
+																"UpgradeFID"
+															]
+														}
+													],
+													"sid": 517686026662589,
+													"children": [
+														{
+															"eventType": "variable",
+															"name": "Action",
+															"type": "string",
+															"initialValue": "",
+															"comment": "",
+															"isStatic": false,
+															"isConstant": false,
+															"sid": 680113688990879
+														},
+														{
+															"eventType": "block",
+															"conditions": [
+																{
+																	"id": "for",
+																	"objectClass": "System",
+																	"sid": 813123436416791,
+																	"parameters": {
+																		"name": "\"actions\"",
+																		"start-index": "0",
+																		"end-index": "UpgradeDefinitions.ArraySize(UpgradeID & \".hooks.\" & loopindex(\"hooks\") & \".actions\") - 1"
+																	}
+																}
+															],
+															"actions": [
+																{
+																	"id": "set-eventvar-value",
+																	"objectClass": "System",
+																	"sid": 709901062281685,
+																	"parameters": {
+																		"variable": "Action",
+																		"value": "UpgradeDefinitions.Get(UpgradeID & \".hooks.\" & loopindex(\"hooks\") & \".actions.\" & loopindex(\"actions\"))"
+																	}
+																}
+															],
+															"sid": 659601555461586,
+															"children": [
+																{
+																	"eventType": "block",
+																	"conditions": [
+																		{
+																			"id": "compare-two-values",
+																			"objectClass": "System",
+																			"sid": 249527497183560,
+																			"parameters": {
+																				"first-value": "tokenat(Action, 0, \":\")",
+																				"comparison": 0,
+																				"second-value": "\"activate_modifier\""
+																			}
+																		}
+																	],
+																	"actions": [
+																		{
+																			"callFunction": "Action_ActivateModifier",
+																			"sid": 318809410890610,
+																			"parameters": [
+																				"UpgradeFID",
+																				"int(tokenat(Action, 1, \":\"))",
+																				"MechUID",
+																				"Duration"
+																			]
+																		},
+																		{
+																			"id": "set-boolean-eventvar",
+																			"objectClass": "System",
+																			"sid": 719971806816411,
+																			"parameters": {
+																				"variable": "ActivatedModifiers",
+																				"value": "true"
+																			}
+																		}
+																	],
+																	"sid": 129389695493546
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-boolean-eventvar",
+											"objectClass": "System",
+											"sid": 373016027147866,
+											"parameters": {
+												"variable": "ActivatedModifiers"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "wait",
+											"objectClass": "System",
+											"sid": 708529857847830,
+											"disabled": true,
+											"parameters": {
+												"seconds": "0.1",
+												"use-timescale": false
+											}
+										},
+										{
+											"customAction": "UpdateMechStatsCache",
+											"objectClass": "MechObject",
+											"sid": 161815649079259
+										}
+									],
+									"sid": 171996702918353
+								}
+							]
+						}
+					]
 				}
 			],
 			"sid": 730775293075389
@@ -905,7 +1459,7 @@
 					"conditions": [
 						{
 							"id": "pick-by-unique-id",
-							"objectClass": "MechData",
+							"objectClass": "MechObject",
 							"sid": 265971118845947,
 							"parameters": {
 								"unique-id": "MechUID"
@@ -915,17 +1469,17 @@
 					"actions": [
 						{
 							"id": "push-value",
-							"objectClass": "MechData",
-							"sid": 801831473156834,
+							"objectClass": "MechObject",
+							"sid": 572083269060489,
 							"parameters": {
 								"where": "back",
 								"path": "\"applied_upgrades\"",
-								"value": "UpgradeID"
+								"value": "UpgradeID & \":\" & str(MechObject.ArraySize(\"applied_upgrades\"))"
 							}
 						},
 						{
 							"customAction": "UpdateMechStatsCache",
-							"objectClass": "MechData",
+							"objectClass": "MechObject",
 							"sid": 723805417661310
 						}
 					],
@@ -1187,7 +1741,7 @@
 									"sid": 727817684555031,
 									"parameters": {
 										"variable": "MechsCount",
-										"value": "MechData.Count - 1"
+										"value": "MechObject.Count - 1"
 									}
 								}
 							],
@@ -1201,7 +1755,7 @@
 									"objectClass": "System",
 									"sid": 474231771633252,
 									"parameters": {
-										"object": "MechData"
+										"object": "MechObject"
 									}
 								}
 							],
@@ -1213,7 +1767,7 @@
 									"parameters": [
 										"ViewportMidX(\"UpgradeUI\") + MECHS_GAP * (loopindex - MechsCount/2)",
 										"200",
-										"MechData.UID"
+										"MechObject.UID"
 									]
 								}
 							],
@@ -1283,7 +1837,7 @@
 							"conditions": [
 								{
 									"id": "pick-by-unique-id",
-									"objectClass": "MechData",
+									"objectClass": "MechObject",
 									"sid": 417729369673047,
 									"parameters": {
 										"unique-id": "MechUID"
@@ -1350,7 +1904,7 @@
 													"objectClass": "TextUI",
 													"sid": 911686458542710,
 													"parameters": {
-														"text": "uppercase(MechData.Get(\"type\") & \" Mech \" & MechUID)"
+														"text": "uppercase(MechObject.Get(\"type\") & \" Mech \" & MechUID)"
 													}
 												}
 											],
@@ -1409,7 +1963,7 @@
 											"objectClass": "TextBoxUI",
 											"sid": 763234826529614,
 											"parameters": {
-												"height": "MECH_UPGRADES_LIST_GAP * MechData.ArraySize(\"applied_upgrades\") + 18"
+												"height": "MECH_UPGRADES_LIST_GAP * MechObject.ArraySize(\"applied_upgrades\") + 18"
 											}
 										}
 									],
@@ -1423,7 +1977,7 @@
 													"objectClass": "System",
 													"sid": 870155419825117,
 													"parameters": {
-														"first-value": "MechData.ArraySize(\"applied_upgrades\")",
+														"first-value": "MechObject.ArraySize(\"applied_upgrades\")",
 														"comparison": 4,
 														"second-value": "0"
 													}
@@ -1442,7 +1996,7 @@
 															"parameters": {
 																"name": "\"upgrades\"",
 																"start-index": "0",
-																"end-index": "MechData.ArraySize(\"applied_upgrades\") - 1"
+																"end-index": "MechObject.ArraySize(\"applied_upgrades\") - 1"
 															}
 														}
 													],
@@ -1454,7 +2008,7 @@
 															"parameters": [
 																"TextBoxUI.X",
 																"TextBoxUI.Y + 10 + MECH_UPGRADES_LIST_GAP * loopindex(\"upgrades\")",
-																"MechData.Get(\"applied_upgrades.\" & loopindex(\"upgrades\"))",
+																"MechObject.Get(\"applied_upgrades.\" & loopindex(\"upgrades\"))",
 																"UpgradeMechInstanceUI.LayerName",
 																"UpgradeMechInstanceUI.UID"
 															]
@@ -1573,7 +2127,7 @@
 							"sid": 200486710742294
 						},
 						{
-							"name": "UpgradeID",
+							"name": "UpgradeFID",
 							"type": "string",
 							"initialValue": "",
 							"comment": "",
@@ -1616,7 +2170,7 @@
 							"sid": 193467693364056,
 							"parameters": {
 								"instance-variable": "UpgradeID",
-								"value": "UpgradeID"
+								"value": "UpgradeFID"
 							}
 						}
 					],
@@ -1639,9 +2193,9 @@
 								{
 									"id": "set-text",
 									"objectClass": "TextUI",
-									"sid": 118145290943056,
+									"sid": 509423677209094,
 									"parameters": {
-										"text": "uppercase(Functions.GetUpgradeProperty(UpgradeID, \"label\"))"
+										"text": "uppercase(Functions.GetUpgradeProperty(Functions.GetUpgradeIDFromFID(UpgradeFID), \"label\"))"
 									}
 								}
 							],
@@ -2138,6 +2692,7 @@
 									"id": "wait",
 									"objectClass": "System",
 									"sid": 953364770161331,
+									"disabled": true,
 									"parameters": {
 										"seconds": "2",
 										"use-timescale": false
@@ -2146,7 +2701,8 @@
 								{
 									"customAction": "CloseUpgradeSequence",
 									"objectClass": "UpgradesManager",
-									"sid": 923008456708318
+									"sid": 923008456708318,
+									"disabled": true
 								}
 							],
 							"sid": 117068763094110
@@ -2434,6 +2990,159 @@
 			"sid": 263721583060269
 		},
 		{
+			"functionName": "UpgradeActiveFeedbackFx",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "MechUID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 789477138558614
+				},
+				{
+					"name": "UpgradeFID",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 733513537635965
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 386843165629442,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "turretBase",
+							"sid": 988402425611677,
+							"parameters": {
+								"unique-id": "MechObject.MechBaseUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 825793198606159,
+							"parameters": {
+								"object-to-create": "ActiveUpgradeText",
+								"layer": "\"player\"",
+								"x": "turretBase.X",
+								"y": "turretBase.Y - 50",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "ActiveUpgradeText",
+							"sid": 173594285971463,
+							"parameters": {
+								"instance-variable": "UpgradeFID",
+								"value": "UpgradeFID"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "ActiveUpgradeText",
+							"sid": 768094946009524,
+							"parameters": {
+								"instance-variable": "MechUID",
+								"value": "MechUID"
+							}
+						},
+						{
+							"id": "set-text",
+							"objectClass": "ActiveUpgradeText",
+							"sid": 165359657861459,
+							"parameters": {
+								"text": "replace(uppercase(Functions.GetUpgradeProperty(Functions.GetUpgradeIDFromFID(UpgradeFID), \"label\")), \"_\", \" \")"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "ActiveUpgradeText",
+							"sid": 190761464529143,
+							"parameters": {
+								"instance-variable": "TargetX",
+								"value": "turretBase.X + random(-20,20)"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "ActiveUpgradeText",
+							"sid": 964713145251622,
+							"parameters": {
+								"instance-variable": "TargetY",
+								"value": "turretBase.Y - 100"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "ActiveUpgradeText",
+							"sid": 725413743457208,
+							"parameters": {
+								"instance-variable": "TargetAngle",
+								"value": "random(-20,20)"
+							}
+						}
+					],
+					"sid": 520972257151233
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "for-each",
+					"objectClass": "System",
+					"sid": 816042304456662,
+					"parameters": {
+						"object": "ActiveUpgradeText"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 732517278579837,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-angle",
+							"objectClass": "ActiveUpgradeText",
+							"sid": 170704727757220,
+							"parameters": {
+								"angle": "anglelerp(Self.Angle, Self.TargetAngle, 4 * dt)"
+							}
+						},
+						{
+							"id": "set-position",
+							"objectClass": "ActiveUpgradeText",
+							"sid": 772462940920559,
+							"parameters": {
+								"x": "lerp(Self.X, Self.TargetX, 4 * dt)",
+								"y": "lerp(Self.Y, Self.TargetY, 4 * dt)"
+							}
+						}
+					],
+					"sid": 105579097548428
+				}
+			]
+		},
+		{
 			"eventType": "comment",
 			"text": "GET FUNCTIONS"
 		},
@@ -2483,7 +3192,7 @@
 					"conditions": [
 						{
 							"id": "pick-by-unique-id",
-							"objectClass": "MechData",
+							"objectClass": "MechObject",
 							"sid": 964366053718920,
 							"parameters": {
 								"unique-id": "MechUID"
@@ -2497,7 +3206,7 @@
 							"sid": 356503196174441,
 							"parameters": {
 								"variable": "UpgradesCount",
-								"value": "MechData.ArraySize(\"applied_upgrades\") + 1"
+								"value": "MechObject.ArraySize(\"applied_upgrades\") + 1"
 							}
 						},
 						{
@@ -2591,7 +3300,18 @@
 				},
 				{
 					"eventType": "block",
-					"conditions": [],
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 211722830241896,
+							"parameters": {
+								"first-value": "Functions.GetUpgradeProperty(UpgradeID, \"description\")",
+								"comparison": 1,
+								"second-value": "\"\""
+							}
+						}
+					],
 					"actions": [
 						{
 							"id": "add-to-eventvar",
@@ -2932,6 +3652,243 @@
 						}
 					],
 					"sid": 295748307704333
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "for-each",
+					"objectClass": "System",
+					"sid": 776132249559897,
+					"parameters": {
+						"object": "TimerObject"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 588139409851659,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-timer",
+							"objectClass": "TimerObject",
+							"sid": 288878289704014,
+							"behaviorType": "Timer",
+							"parameters": {
+								"tag": "Self.TimerTag"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 785495065742962,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "TimerObject",
+									"sid": 482584661428909,
+									"parameters": {
+										"instance-variable": "ActionOnTimer",
+										"comparison": 0,
+										"value": "\"RemoveModifier\""
+									}
+								}
+							],
+							"actions": [],
+							"sid": 589241272835393,
+							"children": [
+								{
+									"eventType": "variable",
+									"name": "MechUID",
+									"type": "number",
+									"initialValue": "0",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 369252523223074
+								},
+								{
+									"eventType": "variable",
+									"name": "KeyToRemove",
+									"type": "string",
+									"initialValue": "",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 146014085756831
+								},
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 181710909509117,
+											"parameters": {
+												"variable": "MechUID",
+												"value": "tokenat(TimerObject.Parameters, 0, \".\")"
+											}
+										},
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 783551993331028,
+											"parameters": {
+												"variable": "KeyToRemove",
+												"value": "tokenat(TimerObject.Parameters, 1, \".\")"
+											}
+										}
+									],
+									"sid": 952639688453716,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-by-evaluate",
+													"objectClass": "System",
+													"sid": 438866272889713,
+													"parameters": {
+														"object": "MechActiveModifiersCheck",
+														"expression": "MechActiveModifiersCheck.MechUID = MechUID"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "delete-key",
+													"objectClass": "MechActiveModifiersCheck",
+													"sid": 292527001580439,
+													"parameters": {
+														"key": "KeyToRemove"
+													}
+												}
+											],
+											"sid": 369577684487975,
+											"children": [
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "pick-by-unique-id",
+															"objectClass": "MechObject",
+															"sid": 360855009646180,
+															"parameters": {
+																"unique-id": "MechUID"
+															}
+														}
+													],
+													"actions": [
+														{
+															"customAction": "UpdateMechStatsCache",
+															"objectClass": "MechObject",
+															"sid": 731651938191041
+														}
+													],
+													"sid": 927343747709932
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "TimerObject",
+									"sid": 472330549749630
+								}
+							],
+							"sid": 520379486099905
+						}
+					]
+				}
+			]
+		},
+		{
+			"functionName": "GetUpgradeIDFromFID",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "string",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "UpgradeFID",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 445185199537331
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 337382928955672,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-function-return-value",
+							"objectClass": "Functions",
+							"sid": 536262503737370,
+							"parameters": {
+								"value": "tokenat(UpgradeFID, 0, \":\")"
+							}
+						}
+					],
+					"sid": 596170427797789
+				}
+			]
+		},
+		{
+			"functionName": "GetUpgradeInedxFromFID",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "UpgradeFID",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 708368539217017
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 876040821687286,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-function-return-value",
+							"objectClass": "Functions",
+							"sid": 311861432928632,
+							"parameters": {
+								"value": "tokenat(UpgradeFID, 1, \":\")"
+							}
+						}
+					],
+					"sid": 331008582324398
 				}
 			]
 		}

@@ -1,0 +1,68 @@
+{
+	"name": "TimerObject",
+	"plugin-id": "Sprite",
+	"sid": 438375089299492,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [
+		{
+			"name": "TimerTag",
+			"type": "string",
+			"desc": "",
+			"show": true,
+			"sid": 337427515636642
+		},
+		{
+			"name": "ActionOnTimer",
+			"type": "string",
+			"desc": "",
+			"show": true,
+			"sid": 458690641194621
+		},
+		{
+			"name": "Parameters",
+			"type": "string",
+			"desc": "",
+			"show": true,
+			"sid": 223867823625195
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Timer",
+			"name": "Timer",
+			"sid": 124575131757353
+		}
+	],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 250,
+						"height": 250,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 3211324,
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 566921727434442,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 0
+			}
+		],
+		"subfolders": []
+	}
+}

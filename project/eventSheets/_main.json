@@ -1180,7 +1180,7 @@
 						},
 						{
 							"id": "pick-by-unique-id",
-							"objectClass": "MechData",
+							"objectClass": "MechObject",
 							"sid": 804243899752814,
 							"parameters": {
 								"unique-id": "bullet.MechUID"
@@ -1191,7 +1191,7 @@
 							"objectClass": "MechStatsCache",
 							"sid": 479264357542522,
 							"parameters": {
-								"unique-id": "MechData.MechStatsCacheUID"
+								"unique-id": "MechObject.MechStatsCacheUID"
 							}
 						}
 					],

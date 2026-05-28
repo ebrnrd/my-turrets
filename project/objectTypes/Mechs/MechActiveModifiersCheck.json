@@ -1,0 +1,16 @@
+{
+	"name": "MechActiveModifiersCheck",
+	"plugin-id": "Dictionary",
+	"sid": 389565541961334,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [
+		{
+			"name": "MechUID",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 658440400522345
+		}
+	]
+}
