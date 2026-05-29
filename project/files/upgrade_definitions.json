@@ -7,7 +7,7 @@
       { "stat": "bullet_spread", "op": "add", "value": 8 }
     ],
     "behavior_tags": [],
-    "hooks": {},
+    "hooks": [],
     "mech_types": ["combat"]
   },
 
@@ -20,7 +20,7 @@
       { "stat": "fire_rate", "op": "multiply", "value": 0.9 }
     ],
     "behavior_tags": [],
-    "hooks": {},
+    "hooks": [],
     "mech_types": ["combat"]
   },
 
@@ -34,7 +34,7 @@
       { "stat": "bullet_spread", "op": "multiply", "value": 0.6 }
     ],
     "behavior_tags": [],
-    "hooks": {},
+    "hooks": [],
     "mech_types": ["combat"]
   },
 
@@ -47,7 +47,7 @@
       { "stat": "fire_rate", "op": "multiply", "value": 0.9 }
     ],
     "behavior_tags": [],
-    "hooks": {},
+    "hooks": [],
     "mech_types": ["combat"]
   },
 
@@ -87,7 +87,7 @@
       { "stat": "giant_bullet_chance", "op": "add", "value": 0.1 }
     ],
     "behavior_tags": [],
-    "hooks": {},
+    "hooks": [],
     "mech_types": ["combat"]
   },
 
@@ -99,6 +99,7 @@
       { "stat": "bullet_damage", "op": "multiply", "value": 0.8 }
     ],
     "behavior_tags": [],
+    "hooks": [],
     "mech_types": ["combat"]
   }
 }

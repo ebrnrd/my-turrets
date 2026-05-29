@@ -460,12 +460,57 @@
 			"eventType": "block",
 			"conditions": [
 				{
-					"id": "on-collision-with-another-object",
-					"objectClass": "turret_proximity_collision",
-					"sid": 128791233897342,
-					"disabled": true,
+					"id": "on-path-found",
+					"objectClass": "turretBase",
+					"sid": 284349770011788,
+					"behaviorType": "Pathfinding"
+				}
+			],
+			"actions": [],
+			"sid": 407894863342452,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for",
+							"objectClass": "System",
+							"sid": 193999507912645,
+							"parameters": {
+								"name": "\"\"",
+								"start-index": "0",
+								"end-index": "turretBase.Pathfinding.NodeCount - 1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 444122385280947,
+							"parameters": {
+								"object-to-create": "MechPathfindDebug",
+								"layer": "0",
+								"x": "turretBase.Pathfinding.NodeXAt(loopindex)",
+								"y": "turretBase.Pathfinding.NodeYAt(loopindex)",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						}
+					],
+					"sid": 173449225270615
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "every-x-seconds",
+					"objectClass": "System",
+					"sid": 378456709152128,
 					"parameters": {
-						"object": "enemies"
+						"interval-seconds": "0.1"
 					}
 				},
 				{
@@ -535,8 +580,19 @@
 							"id": "is-moving-along-path",
 							"objectClass": "turretBase",
 							"sid": 832410643985956,
+							"disabled": true,
 							"behaviorType": "Pathfinding",
 							"isInverted": true
+						},
+						{
+							"id": "compare-speed",
+							"objectClass": "turretBase",
+							"sid": 810408160280142,
+							"behaviorType": "Pathfinding",
+							"parameters": {
+								"comparison": 2,
+								"speed": "0.1"
+							}
 						},
 						{
 							"id": "is-calculating-path",
@@ -603,6 +659,13 @@
 							}
 						},
 						{
+							"id": "stop",
+							"objectClass": "turretBase",
+							"sid": 311630578674652,
+							"disabled": true,
+							"behaviorType": "Pathfinding"
+						},
+						{
 							"id": "find-path",
 							"objectClass": "turretBase",
 							"sid": 965623387423409,
@@ -610,6 +673,15 @@
 							"parameters": {
 								"x": "target_x",
 								"y": "target_y"
+							}
+						},
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 958589116790074,
+							"parameters": {
+								"type": "log",
+								"message": "\"Escaping Enemy\""
 							}
 						}
 					],
@@ -621,11 +693,57 @@
 			"eventType": "block",
 			"conditions": [
 				{
+					"id": "on-path-found",
+					"objectClass": "turretBase",
+					"sid": 682977314968345,
+					"behaviorType": "Pathfinding"
+				},
+				{
+					"id": "pick-children",
+					"objectClass": "turretBase",
+					"sid": 776625511650350,
+					"parameters": {
+						"child": "turret_proximity_collision",
+						"which": "own"
+					}
+				},
+				{
+					"id": "is-overlapping-another-object",
+					"objectClass": "turret_proximity_collision",
+					"sid": 103877662766387,
+					"parameters": {
+						"object": "enemies"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "move-along-path",
+					"objectClass": "turretBase",
+					"sid": 237864010606164,
+					"behaviorType": "Pathfinding"
+				}
+			],
+			"sid": 497014652635044
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
 					"id": "on-key-pressed",
 					"objectClass": "Keyboard",
-					"sid": 333749733839666,
+					"sid": 401046366526084,
 					"parameters": {
-						"key": 40
+						"key": 81
+					}
+				},
+				{
+					"id": "on-button-pressed",
+					"objectClass": "Gamepad",
+					"sid": 803343533748992,
+					"parameters": {
+						"gamepad": "0",
+						"button": "d-pad-down"
 					}
 				}
 			],
@@ -640,7 +758,8 @@
 					}
 				}
 			],
-			"sid": 365598081174218
+			"sid": 365598081174218,
+			"isOrBlock": true
 		},
 		{
 			"eventType": "block",
@@ -648,9 +767,18 @@
 				{
 					"id": "on-key-pressed",
 					"objectClass": "Keyboard",
-					"sid": 257774304350701,
+					"sid": 776729333484914,
 					"parameters": {
-						"key": 38
+						"key": 69
+					}
+				},
+				{
+					"id": "on-button-pressed",
+					"objectClass": "Gamepad",
+					"sid": 205561400839017,
+					"parameters": {
+						"gamepad": "0",
+						"button": "d-pad-up"
 					}
 				}
 			],
@@ -665,7 +793,8 @@
 					}
 				}
 			],
-			"sid": 108804484907004
+			"sid": 108804484907004,
+			"isOrBlock": true
 		},
 		{
 			"eventType": "block",
@@ -1336,13 +1465,13 @@
 				{
 					"id": "create-object",
 					"objectClass": "System",
-					"sid": 522554109244831,
+					"sid": 245920353720156,
 					"parameters": {
 						"object-to-create": "turretBase",
 						"layer": "\"main\"",
 						"x": "playerCharacter.X + random(-50,50)",
 						"y": "playerCharacter.Y + random(-50,50)",
-						"create-hierarchy": false,
+						"create-hierarchy": true,
 						"template-name": "\"\""
 					}
 				},
@@ -1438,6 +1567,7 @@
 							"customAction": "AddUpgradeToMech",
 							"objectClass": "UpgradesManager",
 							"sid": 481434144072448,
+							"disabled": true,
 							"parameters": [
 								"\"active_sustain\"",
 								"MechObject.UID"
@@ -1700,7 +1830,6 @@
 									"id": "log",
 									"objectClass": "Browser",
 									"sid": 397073312845080,
-									"disabled": true,
 									"parameters": {
 										"type": "log",
 										"message": "\"Added new base stat: \" & MechObject.CurrentKey"
@@ -1737,17 +1866,16 @@
 								{
 									"id": "set-eventvar-value",
 									"objectClass": "System",
-									"sid": 931974638243082,
+									"sid": 650979362157319,
 									"parameters": {
 										"variable": "UpgradeID",
-										"value": "MechObject.Get(\"applied_upgrades.\" & loopindex(\"upgrades\"))"
+										"value": "Functions.GetUpgradeIDFromFID(MechObject.Get(\"applied_upgrades.\" & loopindex(\"upgrades\")))"
 									}
 								},
 								{
 									"id": "log",
 									"objectClass": "Browser",
 									"sid": 127595933845957,
-									"disabled": true,
 									"parameters": {
 										"type": "log",
 										"message": "\"Deriving stats from Upgrade \" & UpgradeID"
@@ -1803,7 +1931,6 @@
 											"id": "log",
 											"objectClass": "Browser",
 											"sid": 739955965045693,
-											"disabled": true,
 											"parameters": {
 												"type": "log",
 												"message": "\"Modifiers count \" & UpgradeDefinitions.ArraySize(UpgradeID & \".modifiers\")"
@@ -1813,7 +1940,6 @@
 											"id": "log",
 											"objectClass": "Browser",
 											"sid": 620323680411447,
-											"disabled": true,
 											"parameters": {
 												"type": "log",
 												"message": "\"Current stat index \" & loopindex(\"modifiers\")"
@@ -1823,7 +1949,6 @@
 											"id": "log",
 											"objectClass": "Browser",
 											"sid": 645179356358515,
-											"disabled": true,
 											"parameters": {
 												"type": "log",
 												"message": "\"Added stat \" & StatName"

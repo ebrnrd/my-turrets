@@ -25,7 +25,7 @@
 			"eventType": "variable",
 			"name": "ScrapLevelReached",
 			"type": "number",
-			"initialValue": "1",
+			"initialValue": "0",
 			"comment": "",
 			"isStatic": false,
 			"isConstant": false,
@@ -94,25 +94,45 @@
 			"sid": 476073803399515,
 			"children": [
 				{
+					"eventType": "variable",
+					"name": "ExponentMult",
+					"type": "number",
+					"initialValue": "2",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 704380826576031
+				},
+				{
+					"eventType": "variable",
+					"name": "LinearMult",
+					"type": "number",
+					"initialValue": "10",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 766473710175024
+				},
+				{
+					"eventType": "variable",
+					"name": "Base",
+					"type": "number",
+					"initialValue": "4",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 112646958007231
+				},
+				{
 					"eventType": "block",
 					"conditions": [],
 					"actions": [
 						{
-							"id": "log",
-							"objectClass": "Browser",
-							"sid": 747299530963335,
-							"disabled": true,
-							"parameters": {
-								"type": "log",
-								"message": "\"Scrap Level Target: \" & ScrapLevelTargetKoeff ^ ScrapLevel"
-							}
-						},
-						{
 							"id": "set-function-return-value",
 							"objectClass": "Functions",
-							"sid": 954008804714906,
+							"sid": 472480097474689,
 							"parameters": {
-								"value": "ScrapLevelTargetKoeff * ScrapLevel"
+								"value": "ExponentMult * (ScrapLevel * ScrapLevel) + (LinearMult * ScrapLevel) + Base"
 							}
 						}
 					],
@@ -195,6 +215,32 @@
 						}
 					],
 					"sid": 126035615126504
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 187362433343156,
+							"parameters": {
+								"type": "log",
+								"message": "\"Scrap prev target\" & Functions.GetScrapTarget(ScrapLevelReached - 1)"
+							}
+						},
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 435553265782753,
+							"parameters": {
+								"type": "log",
+								"message": "\"Scrap target\" & Functions.GetScrapTarget(ScrapLevelReached)"
+							}
+						}
+					],
+					"sid": 893466854524054,
+					"disabled": true
 				}
 			]
 		}

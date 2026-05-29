@@ -149,50 +149,6 @@
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "compare-two-values",
-							"objectClass": "System",
-							"sid": 242296782379925,
-							"parameters": {
-								"first-value": "Damageables.Health",
-								"comparison": 2,
-								"second-value": "Damageables.MaxHealth"
-							}
-						},
-						{
-							"id": "pick-by-evaluate",
-							"objectClass": "System",
-							"sid": 621201482681749,
-							"parameters": {
-								"object": "MechObject",
-								"expression": "MechObject.MechBaseUID = DamageableUID"
-							}
-						}
-					],
-					"actions": [
-						{
-							"id": "wait",
-							"objectClass": "System",
-							"sid": 861921663321760,
-							"disabled": true,
-							"parameters": {
-								"seconds": "0.1",
-								"use-timescale": true
-							}
-						},
-						{
-							"callFunction": "Hook_OnRepair",
-							"sid": 705220112469202,
-							"parameters": [
-								"MechObject.UID"
-							]
-						}
-					],
-					"sid": 765022785096187
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
 							"id": "pick-by-unique-id",
 							"objectClass": "Damageables",
 							"sid": 457343600715006,
@@ -201,17 +157,70 @@
 							}
 						}
 					],
-					"actions": [
+					"actions": [],
+					"sid": 771442234716875,
+					"children": [
 						{
-							"customAction": "ReceiveHeal",
-							"objectClass": "Damageables",
-							"sid": 593835325753837,
-							"parameters": [
-								"Amount"
-							]
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 263958552321720,
+									"disabled": true,
+									"parameters": {
+										"first-value": "int(Damageables.Health)",
+										"comparison": 2,
+										"second-value": "int(Damageables.MaxHealth)"
+									}
+								},
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 754042167363107,
+									"parameters": {
+										"object": "MechObject",
+										"expression": "MechObject.MechBaseUID = DamageableUID"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 765408190946658,
+									"disabled": true,
+									"parameters": {
+										"seconds": "0.1",
+										"use-timescale": true
+									}
+								},
+								{
+									"callFunction": "Hook_OnRepair",
+									"sid": 374250869366342,
+									"parameters": [
+										"MechObject.UID"
+									]
+								}
+							],
+							"sid": 929365536439221
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"customAction": "ReceiveHeal",
+									"objectClass": "Damageables",
+									"sid": 346598308506060,
+									"parameters": [
+										"Amount"
+									]
+								}
+							],
+							"sid": 784911756705937
 						}
-					],
-					"sid": 771442234716875
+					]
 				}
 			]
 		},

@@ -519,6 +519,24 @@
 							"eventType": "block",
 							"conditions": [
 								{
+									"id": "pick-children",
+									"objectClass": "turretBase",
+									"sid": 262923599557773,
+									"parameters": {
+										"child": "turret_proximity_collision",
+										"which": "own"
+									}
+								},
+								{
+									"id": "is-overlapping-another-object",
+									"objectClass": "turret_proximity_collision",
+									"sid": 942229493504194,
+									"parameters": {
+										"object": "enemies"
+									},
+									"isInverted": true
+								},
+								{
 									"id": "compare-two-values",
 									"objectClass": "System",
 									"sid": 258113943808079,
@@ -542,6 +560,7 @@
 									"id": "is-moving-along-path",
 									"objectClass": "turretBase",
 									"sid": 975849851509950,
+									"disabled": true,
 									"behaviorType": "Pathfinding",
 									"isInverted": true
 								}
@@ -549,6 +568,16 @@
 							"actions": [],
 							"sid": 394894605008245,
 							"children": [
+								{
+									"eventType": "variable",
+									"name": "PickedCount",
+									"type": "number",
+									"initialValue": "0",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 253816735700084
+								},
 								{
 									"eventType": "block",
 									"conditions": [
@@ -568,17 +597,18 @@
 												"object": "enemies"
 											},
 											"isInverted": true
-										},
-										{
-											"id": "pick-random-instance",
-											"objectClass": "System",
-											"sid": 157837743591689,
-											"parameters": {
-												"object": "player_turret_position"
-											}
 										}
 									],
 									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 714152674080431,
+											"parameters": {
+												"variable": "PickedCount",
+												"value": "player_turret_position.PickedCount"
+											}
+										},
 										{
 											"id": "move-to-object",
 											"objectClass": "turretBase",
@@ -644,16 +674,6 @@
 											"behaviorType": "Pathfinding"
 										},
 										{
-											"id": "find-path",
-											"objectClass": "turretBase",
-											"sid": 341233336699854,
-											"behaviorType": "Pathfinding",
-											"parameters": {
-												"x": "player_turret_position.ImagePointX(1) + random(-50,50)",
-												"y": "player_turret_position.ImagePointY(1) + random(-50,50)"
-											}
-										},
-										{
 											"id": "move-to-position",
 											"objectClass": "turretBase",
 											"sid": 730634561923575,
@@ -667,6 +687,91 @@
 										}
 									],
 									"sid": 399750644686864
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 233613654089367,
+											"parameters": {
+												"first-value": "PickedCount",
+												"comparison": 4,
+												"second-value": "0"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 787023624908891,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "is-overlapping-another-object",
+													"objectClass": "player_turret_position",
+													"sid": 963548693887599,
+													"parameters": {
+														"object": "enemies"
+													},
+													"isInverted": true
+												},
+												{
+													"id": "pick-random-instance",
+													"objectClass": "System",
+													"sid": 652470875003960,
+													"parameters": {
+														"object": "player_turret_position"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "find-path",
+													"objectClass": "turretBase",
+													"sid": 204613662716804,
+													"behaviorType": "Pathfinding",
+													"parameters": {
+														"x": "player_turret_position.ImagePointX(1) + random(-50,50)",
+														"y": "player_turret_position.ImagePointY(1) + random(-50,50)"
+													}
+												}
+											],
+											"sid": 900390236356696
+										}
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "else",
+											"objectClass": "System",
+											"sid": 369528647496361
+										},
+										{
+											"id": "pick-random-instance",
+											"objectClass": "System",
+											"sid": 181237489228380,
+											"parameters": {
+												"object": "player_turret_position"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "find-path",
+											"objectClass": "turretBase",
+											"sid": 839158531235804,
+											"behaviorType": "Pathfinding",
+											"parameters": {
+												"x": "player_turret_position.ImagePointX(1) + random(-50,50)",
+												"y": "player_turret_position.ImagePointY(1) + random(-50,50)"
+											}
+										}
+									],
+									"sid": 484188400505529
 								}
 							]
 						}
@@ -1961,6 +2066,7 @@
 					],
 					"actions": [],
 					"sid": 611206337294813,
+					"disabled": true,
 					"children": [
 						{
 							"eventType": "block",
@@ -2008,7 +2114,8 @@
 									}
 								}
 							],
-							"sid": 675047983371873
+							"sid": 675047983371873,
+							"disabled": true
 						}
 					]
 				},

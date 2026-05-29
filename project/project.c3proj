@@ -420,7 +420,8 @@
 			"ScrapBarBg",
 			"ScrapBar",
 			"TimerObject",
-			"ActiveUpgradeText"
+			"ActiveUpgradeText",
+			"MechPathfindDebug"
 		],
 		"subfolders": [
 			{

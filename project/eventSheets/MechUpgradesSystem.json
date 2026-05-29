@@ -141,6 +141,7 @@
 									"id": "log",
 									"objectClass": "Browser",
 									"sid": 604482971387647,
+									"disabled": true,
 									"parameters": {
 										"type": "log",
 										"message": "\"stat name :\" & StatName"
@@ -159,6 +160,7 @@
 									"id": "log",
 									"objectClass": "Browser",
 									"sid": 766894522970419,
+									"disabled": true,
 									"parameters": {
 										"type": "log",
 										"message": "\"base value :\" & BaseValue"
@@ -302,80 +304,12 @@
 																"first-value": "UpgradeDefinitions.Get(UpgradeID & \".modifiers.\" & loopindex(\"modifiers\") & \".on_hook\")",
 																"comparison": 0,
 																"second-value": "\"true\""
-															},
-															"isInverted": true
-														}
-													],
-													"actions": [
-														{
-															"id": "log",
-															"objectClass": "Browser",
-															"sid": 687976758888850,
-															"parameters": {
-																"type": "log",
-																"message": "\"Found Modifier Match in \" & UpgradeID"
 															}
-														},
-														{
-															"id": "set-eventvar-value",
-															"objectClass": "System",
-															"sid": 792339018033018,
-															"parameters": {
-																"variable": "Operation",
-																"value": "UpgradeDefinitions.Get(UpgradeID & \".modifiers.\" & loopindex(\"modifiers\") & \".op\")"
-															}
-														},
-														{
-															"id": "log",
-															"objectClass": "Browser",
-															"sid": 567628985304878,
-															"parameters": {
-																"type": "log",
-																"message": "\"Operation: \" & Operation"
-															}
-														},
-														{
-															"id": "set-eventvar-value",
-															"objectClass": "System",
-															"sid": 733300274352012,
-															"parameters": {
-																"variable": "UpgradeValue",
-																"value": "UpgradeDefinitions.Get(UpgradeID & \".modifiers.\" & loopindex(\"modifiers\") & \".value\")"
-															}
-														},
-														{
-															"id": "log",
-															"objectClass": "Browser",
-															"sid": 494929581279637,
-															"parameters": {
-																"type": "log",
-																"message": "\"Upgrade Value\" & UpgradeValue"
-															}
-														},
-														{
-															"id": "set-boolean-eventvar",
-															"objectClass": "System",
-															"sid": 173096612947758,
-															"parameters": {
-																"variable": "HasFoundStat",
-																"value": "true"
-															}
-														}
-													],
-													"sid": 163627741564810
-												},
-												{
-													"eventType": "block",
-													"conditions": [
-														{
-															"id": "else",
-															"objectClass": "System",
-															"sid": 120835898811393
 														},
 														{
 															"id": "pick-by-evaluate",
 															"objectClass": "System",
-															"sid": 545519045337482,
+															"sid": 900966476259884,
 															"parameters": {
 																"object": "MechActiveModifiersCheck",
 																"expression": "MechActiveModifiersCheck.MechUID = MechUID"
@@ -383,7 +317,7 @@
 														}
 													],
 													"actions": [],
-													"sid": 822135055547026,
+													"sid": 163627741564810,
 													"children": [
 														{
 															"eventType": "variable",
@@ -393,7 +327,7 @@
 															"comment": "",
 															"isStatic": false,
 															"isConstant": false,
-															"sid": 154704527948571
+															"sid": 633030977236380
 														},
 														{
 															"eventType": "block",
@@ -402,14 +336,14 @@
 																{
 																	"id": "set-eventvar-value",
 																	"objectClass": "System",
-																	"sid": 698173778233403,
+																	"sid": 125551682526660,
 																	"parameters": {
 																		"variable": "ModifierIndex",
 																		"value": "loopindex(\"modifiers\")"
 																	}
 																}
 															],
-															"sid": 394433317444906,
+															"sid": 404884362794783,
 															"children": [
 																{
 																	"eventType": "block",
@@ -417,7 +351,7 @@
 																		{
 																			"id": "has-key",
 																			"objectClass": "MechActiveModifiersCheck",
-																			"sid": 236124282058809,
+																			"sid": 812782152234399,
 																			"parameters": {
 																				"key": "UpgradeFID & \",\" & \"active_modifier_index\" & \",\" & ModifierIndex"
 																			}
@@ -427,7 +361,8 @@
 																		{
 																			"id": "log",
 																			"objectClass": "Browser",
-																			"sid": 570970618837502,
+																			"sid": 206890424627029,
+																			"disabled": true,
 																			"parameters": {
 																				"type": "log",
 																				"message": "\"Found ACTIVE Modifier Match in \" & UpgradeID"
@@ -436,7 +371,7 @@
 																		{
 																			"id": "set-eventvar-value",
 																			"objectClass": "System",
-																			"sid": 669776108188829,
+																			"sid": 410169388090568,
 																			"parameters": {
 																				"variable": "Operation",
 																				"value": "UpgradeDefinitions.Get(UpgradeID & \".modifiers.\" & loopindex(\"modifiers\") & \".op\")"
@@ -445,7 +380,8 @@
 																		{
 																			"id": "log",
 																			"objectClass": "Browser",
-																			"sid": 150065698102636,
+																			"sid": 399428121040530,
+																			"disabled": true,
 																			"parameters": {
 																				"type": "log",
 																				"message": "\"Operation: \" & Operation"
@@ -454,7 +390,7 @@
 																		{
 																			"id": "set-eventvar-value",
 																			"objectClass": "System",
-																			"sid": 402410907906424,
+																			"sid": 401275218470847,
 																			"parameters": {
 																				"variable": "UpgradeValue",
 																				"value": "UpgradeDefinitions.Get(UpgradeID & \".modifiers.\" & loopindex(\"modifiers\") & \".value\")"
@@ -463,7 +399,8 @@
 																		{
 																			"id": "log",
 																			"objectClass": "Browser",
-																			"sid": 744048354894737,
+																			"sid": 315961262628039,
+																			"disabled": true,
 																			"parameters": {
 																				"type": "log",
 																				"message": "\"Upgrade Value\" & UpgradeValue"
@@ -472,18 +409,88 @@
 																		{
 																			"id": "set-boolean-eventvar",
 																			"objectClass": "System",
-																			"sid": 614066653413692,
+																			"sid": 844148712550048,
 																			"parameters": {
 																				"variable": "HasFoundStat",
 																				"value": "true"
 																			}
 																		}
 																	],
-																	"sid": 155909637792433
+																	"sid": 280742311197946
 																}
 															]
 														}
 													]
+												},
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "else",
+															"objectClass": "System",
+															"sid": 120835898811393
+														}
+													],
+													"actions": [
+														{
+															"id": "log",
+															"objectClass": "Browser",
+															"sid": 900421056432499,
+															"disabled": true,
+															"parameters": {
+																"type": "log",
+																"message": "\"Found Modifier Match in \" & UpgradeID"
+															}
+														},
+														{
+															"id": "set-eventvar-value",
+															"objectClass": "System",
+															"sid": 871093568600795,
+															"parameters": {
+																"variable": "Operation",
+																"value": "UpgradeDefinitions.Get(UpgradeID & \".modifiers.\" & loopindex(\"modifiers\") & \".op\")"
+															}
+														},
+														{
+															"id": "log",
+															"objectClass": "Browser",
+															"sid": 920047569264978,
+															"disabled": true,
+															"parameters": {
+																"type": "log",
+																"message": "\"Operation: \" & Operation"
+															}
+														},
+														{
+															"id": "set-eventvar-value",
+															"objectClass": "System",
+															"sid": 135286874091885,
+															"parameters": {
+																"variable": "UpgradeValue",
+																"value": "UpgradeDefinitions.Get(UpgradeID & \".modifiers.\" & loopindex(\"modifiers\") & \".value\")"
+															}
+														},
+														{
+															"id": "log",
+															"objectClass": "Browser",
+															"sid": 131305731594312,
+															"disabled": true,
+															"parameters": {
+																"type": "log",
+																"message": "\"Upgrade Value\" & UpgradeValue"
+															}
+														},
+														{
+															"id": "set-boolean-eventvar",
+															"objectClass": "System",
+															"sid": 638247936085158,
+															"parameters": {
+																"variable": "HasFoundStat",
+																"value": "true"
+															}
+														}
+													],
+													"sid": 822135055547026
 												}
 											]
 										},
@@ -1577,6 +1584,33 @@
 									"sid": 758289906149705,
 									"parameters": {
 										"layer": "\"MechUpgrades\"",
+										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 480593984381818,
+									"parameters": {
+										"layer": "\"UpgradeBG\"",
+										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 832656791685178,
+									"parameters": {
+										"layer": "\"MechSelectionParticles\"",
+										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 637875038155001,
+									"parameters": {
+										"layer": "\"MechSelection\"",
 										"visibility": "invisible"
 									}
 								},
@@ -2884,6 +2918,33 @@
 									"parameters": {
 										"layer": "\"MechSelection\"",
 										"interactive": true
+									}
+								},
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 892321732735453,
+									"parameters": {
+										"layer": "\"MechSelection\"",
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 536362415516569,
+									"parameters": {
+										"layer": "\"MechSelectionParticles\"",
+										"visibility": "visible"
+									}
+								},
+								{
+									"id": "set-layer-visible",
+									"objectClass": "System",
+									"sid": 154114835472477,
+									"parameters": {
+										"layer": "\"UpgradeBG\"",
+										"visibility": "visible"
 									}
 								}
 							],
