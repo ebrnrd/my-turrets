@@ -101,5 +101,17 @@
     "behavior_tags": [],
     "hooks": [],
     "mech_types": ["combat"]
+  },
+
+  "mine_trapper": {
+    "label": "Mine Trapper",
+    "description": "Every 5 seconds spawn a Mine",
+    "modifiers": [],
+    "behavior_tags": [],
+    "hooks": [
+      { "tag": "on_loop", "duration": 5, "actions": ["spawn_mine"] }
+    ],
+    "mech_types": ["combat"]
   }
+
 }

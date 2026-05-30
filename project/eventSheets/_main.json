@@ -2409,6 +2409,300 @@
 					]
 				}
 			]
+		},
+		{
+			"functionName": "SpawnExplosion",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "ExplosionSize",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 953207660332902
+				},
+				{
+					"name": "SpawnX",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 470307834180664
+				},
+				{
+					"name": "SpawnY",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 477109246337329
+				},
+				{
+					"name": "AttackerFaction",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 462660579961041
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "create-object",
+					"objectClass": "System",
+					"sid": 138390028496898,
+					"parameters": {
+						"object-to-create": "ExplosionSprite",
+						"layer": "\"main\"",
+						"x": "SpawnX",
+						"y": "SpawnY",
+						"create-hierarchy": false,
+						"template-name": "\"\""
+					}
+				},
+				{
+					"id": "set-size",
+					"objectClass": "ExplosionSprite",
+					"sid": 686264215261285,
+					"parameters": {
+						"width": "ExplosionSize",
+						"height": "ExplosionSize"
+					}
+				}
+			],
+			"sid": 836437907712442,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 215483644108513,
+							"parameters": {
+								"first-value": "AttackerFaction",
+								"comparison": 0,
+								"second-value": "\"player\""
+							}
+						}
+					],
+					"actions": [],
+					"sid": 665500401807735,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "Damageables",
+									"sid": 190497842852674,
+									"parameters": {
+										"instance-variable": "Faction",
+										"comparison": 0,
+										"value": "\"enemies\""
+									}
+								},
+								{
+									"id": "is-overlapping-another-object",
+									"objectClass": "ExplosionSprite",
+									"sid": 309213306431917,
+									"parameters": {
+										"object": "Damageables"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 105826487874099,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "for-each",
+											"objectClass": "System",
+											"sid": 764393371826020,
+											"parameters": {
+												"object": "Damageables"
+											}
+										}
+									],
+									"actions": [
+										{
+											"customAction": "ReceiveDamage",
+											"objectClass": "Damageables",
+											"sid": 612624607183244,
+											"parameters": [
+												"50"
+											]
+										}
+									],
+									"sid": 414437649072107
+								}
+							]
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 145864759115149,
+							"parameters": {
+								"first-value": "AttackerFaction",
+								"comparison": 0,
+								"second-value": "\"enemies\""
+							}
+						}
+					],
+					"actions": [],
+					"sid": 565729139391575,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "Damageables",
+									"sid": 264936008527787,
+									"parameters": {
+										"instance-variable": "Faction",
+										"comparison": 0,
+										"value": "\"player\""
+									}
+								},
+								{
+									"id": "is-overlapping-another-object",
+									"objectClass": "ExplosionSprite",
+									"sid": 420344474928763,
+									"parameters": {
+										"object": "Damageables"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 718172188255380,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "for-each",
+											"objectClass": "System",
+											"sid": 879955397070766,
+											"parameters": {
+												"object": "Damageables"
+											}
+										}
+									],
+									"actions": [
+										{
+											"customAction": "ReceiveDamage",
+											"objectClass": "Damageables",
+											"sid": 208372526082688,
+											"parameters": [
+												"50"
+											]
+										}
+									],
+									"sid": 950686660548975
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-collision-with-another-object",
+					"objectClass": "enemies",
+					"sid": 336462023213904,
+					"parameters": {
+						"object": "Mine"
+					}
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "SpawnExplosion",
+					"sid": 172471284385622,
+					"parameters": [
+						"300",
+						"Mine.X",
+						"Mine.Y",
+						"\"player\""
+					]
+				},
+				{
+					"id": "destroy",
+					"objectClass": "Mine",
+					"sid": 162871360846636
+				}
+			],
+			"sid": 635834146466020
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-created",
+					"objectClass": "Mine",
+					"sid": 528226761639342
+				}
+			],
+			"actions": [
+				{
+					"id": "start-timer",
+					"objectClass": "Mine",
+					"sid": 850903973616960,
+					"behaviorType": "Timer",
+					"parameters": {
+						"duration": "4",
+						"type": "once",
+						"tag": "\"explode\""
+					}
+				}
+			],
+			"sid": 982171511581549
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-timer",
+					"objectClass": "Mine",
+					"sid": 273625978544574,
+					"behaviorType": "Timer",
+					"parameters": {
+						"tag": "\"explode\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "SpawnExplosion",
+					"sid": 529841951678981,
+					"parameters": [
+						"300",
+						"Mine.X",
+						"Mine.Y",
+						"\"player\""
+					]
+				},
+				{
+					"id": "destroy",
+					"objectClass": "Mine",
+					"sid": 649148143268797
+				}
+			],
+			"sid": 430372909985573
 		}
 	],
 	"sid": 540973466625214

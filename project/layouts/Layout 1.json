@@ -1120,6 +1120,7 @@
 						"shadow_width": 60,
 						"Health": 100,
 						"MaxHealth": 100,
+						"Faction": "",
 						"is_attacking": false,
 						"default_walk_speed": 250,
 						"attack_walk_speed": 50

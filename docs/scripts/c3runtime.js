@@ -1873,6 +1873,11 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => (1 / n0.ExpInstVar());
 		},
+		() => "player",
+		() => "enemies",
+		() => 300,
+		() => 4,
+		() => "explode",
 		() => "Brightness",
 		() => 200,
 		() => 0.04,
@@ -2238,7 +2243,6 @@ self.C3_ExpressionFuncs = [
 			return () => f0(1);
 		},
 		() => "trees",
-		() => 4,
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
@@ -2556,10 +2560,33 @@ self.C3_ExpressionFuncs = [
 			const v2 = p._GetNode(2).GetVar();
 			return () => f0(f1(v2.GetValue(), 1, ":"));
 		},
+		() => "on_loop",
+		() => "spawn_mine",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			const n1 = p._GetNode(1);
 			return () => ((v0.GetValue() + ":") + (n1.ExpObject("applied_upgrades")).toString());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			return () => n0.ExpObject((v1.GetValue() + ".hooks"));
+		},
+		() => "FireOnLoopHook",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0("hooks");
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const v1 = p._GetNode(1).GetVar();
+			return () => ((and(v0.GetValue(), ".") + v1.GetValue()) + "_LoopTimer");
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const v1 = p._GetNode(1).GetVar();
+			const v2 = p._GetNode(2).GetVar();
+			return () => and(((and(v0.GetValue(), ".") + v1.GetValue()) + "."), v2.GetValue());
 		},
 		() => "UpgradeSelectionBG",
 		() => "FlameParticles",
@@ -2666,7 +2693,6 @@ self.C3_ExpressionFuncs = [
 		},
 		() => "close_upgrade",
 		() => "CHOOSE WHICH MECH TO UPGRADE",
-		() => "player",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() - 50);

@@ -1566,10 +1566,10 @@
 						{
 							"customAction": "AddUpgradeToMech",
 							"objectClass": "UpgradesManager",
-							"sid": 481434144072448,
+							"sid": 359225009880813,
 							"disabled": true,
 							"parameters": [
-								"\"active_sustain\"",
+								"\"mine_trapper\"",
 								"MechObject.UID"
 							]
 						},

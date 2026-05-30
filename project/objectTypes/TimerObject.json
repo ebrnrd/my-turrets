@@ -13,6 +13,13 @@
 			"sid": 337427515636642
 		},
 		{
+			"name": "Duration",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 518438579463717
+		},
+		{
 			"name": "ActionOnTimer",
 			"type": "string",
 			"desc": "",
@@ -25,6 +32,13 @@
 			"desc": "",
 			"show": true,
 			"sid": 223867823625195
+		},
+		{
+			"name": "IsLoop",
+			"type": "boolean",
+			"desc": "",
+			"show": true,
+			"sid": 113484422214923
 		}
 	],
 	"behaviorTypes": [

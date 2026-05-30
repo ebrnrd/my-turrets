@@ -421,7 +421,9 @@
 			"ScrapBar",
 			"TimerObject",
 			"ActiveUpgradeText",
-			"MechPathfindDebug"
+			"MechPathfindDebug",
+			"Mine",
+			"ExplosionSprite"
 		],
 		"subfolders": [
 			{

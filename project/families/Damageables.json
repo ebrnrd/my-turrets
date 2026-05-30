@@ -16,6 +16,13 @@
 			"desc": "",
 			"show": true,
 			"sid": 845186576039917
+		},
+		{
+			"name": "Faction",
+			"type": "string",
+			"desc": "",
+			"show": true,
+			"sid": 762140923613517
 		}
 	],
 	"behaviorTypes": [
