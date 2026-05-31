@@ -493,9 +493,7 @@
 	},
 	"layouts": {
 		"items": [
-			"Layout 1",
 			"stuff",
-			"level_1_test",
 			"survivor_level_test"
 		],
 		"subfolders": []

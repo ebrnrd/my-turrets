@@ -43,6 +43,56 @@
 		},
 		{
 			"eventType": "variable",
+			"name": "WallsAmount",
+			"type": "number",
+			"initialValue": "50",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 441510056036124
+		},
+		{
+			"eventType": "variable",
+			"name": "WallsMinWidth",
+			"type": "number",
+			"initialValue": "100",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 234873521387647
+		},
+		{
+			"eventType": "variable",
+			"name": "WallsMaxWidth",
+			"type": "number",
+			"initialValue": "600",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 764182030150437
+		},
+		{
+			"eventType": "variable",
+			"name": "WallsMinHeight",
+			"type": "number",
+			"initialValue": "100",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 658326211218777
+		},
+		{
+			"eventType": "variable",
+			"name": "WallsMaxHeight",
+			"type": "number",
+			"initialValue": "600",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 167282196441948
+		},
+		{
+			"eventType": "variable",
 			"name": "UpgradeAltarsAmount",
 			"type": "number",
 			"initialValue": "10",
@@ -63,6 +113,87 @@
 			"actions": [],
 			"sid": 739512759342763,
 			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "repeat",
+							"objectClass": "System",
+							"sid": 434030061457389,
+							"parameters": {
+								"count": "WallsAmount"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 149716674605861,
+							"parameters": {
+								"object-to-create": "wall",
+								"layer": "\"walls\"",
+								"x": "random(0, LayoutWidth)",
+								"y": "random(0, LayoutHeight)",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-size",
+							"objectClass": "wall",
+							"sid": 703104532574864,
+							"parameters": {
+								"width": "random(WallsMinWidth, WallsMaxWidth)",
+								"height": "random(WallsMinHeight, WallsMaxHeight)"
+							}
+						},
+						{
+							"id": "set-default-color",
+							"objectClass": "wall",
+							"sid": 254106450994593,
+							"parameters": {
+								"color": "rgbEx(0, 0, 0)"
+							}
+						},
+						{
+							"id": "enabledisable-collisions",
+							"objectClass": "wall",
+							"sid": 445268025527040,
+							"behaviorType": "Physics",
+							"parameters": {
+								"object": "wall",
+								"state": "disable"
+							}
+						}
+					],
+					"sid": 754603933505751,
+					"disabled": true,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-overlapping-another-object",
+									"objectClass": "wall",
+									"sid": 162546260492956,
+									"parameters": {
+										"object": "playerCharacter"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "wall",
+									"sid": 254601017752268
+								}
+							],
+							"sid": 531526284275241,
+							"disabled": true
+						}
+					]
+				},
 				{
 					"eventType": "block",
 					"conditions": [
@@ -253,6 +384,27 @@
 								}
 							],
 							"sid": 400640964122119
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-overlapping-another-object",
+									"objectClass": "tree",
+									"sid": 780600407438408,
+									"parameters": {
+										"object": "wall"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "tree",
+									"sid": 497476404631780
+								}
+							],
+							"sid": 291202516407495
 						}
 					]
 				},
@@ -365,6 +517,27 @@
 								}
 							],
 							"sid": 812795006305128
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-overlapping-another-object",
+									"objectClass": "rock",
+									"sid": 528032922794449,
+									"parameters": {
+										"object": "wall"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "rock",
+									"sid": 652254777265509
+								}
+							],
+							"sid": 764603278621372
 						}
 					]
 				},

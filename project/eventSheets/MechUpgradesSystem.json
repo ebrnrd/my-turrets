@@ -3682,6 +3682,14 @@
 					"conditions": [
 						{
 							"id": "pick-by-unique-id",
+							"objectClass": "MechObject",
+							"sid": 609674372812205,
+							"parameters": {
+								"unique-id": "MechUID"
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
 							"objectClass": "turretBase",
 							"sid": 988402425611677,
 							"parameters": {

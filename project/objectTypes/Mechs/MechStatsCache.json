@@ -2,7 +2,7 @@
 	"name": "MechStatsCache",
 	"plugin-id": "Dictionary",
 	"sid": 271325600945308,
-	"isGlobal": true,
+	"isGlobal": false,
 	"editorNewInstanceIsReplica": true,
 	"instanceVariables": [
 		{

@@ -125,28 +125,6 @@
 			"eventType": "block",
 			"conditions": [
 				{
-					"id": "on-start-of-layout",
-					"objectClass": "System",
-					"sid": 284639563073276
-				}
-			],
-			"actions": [
-				{
-					"id": "wait",
-					"objectClass": "System",
-					"sid": 680602957692853,
-					"parameters": {
-						"seconds": "1.0",
-						"use-timescale": true
-					}
-				}
-			],
-			"sid": 242153965753501
-		},
-		{
-			"eventType": "block",
-			"conditions": [
-				{
 					"id": "every-tick",
 					"objectClass": "System",
 					"sid": 417562871184740
@@ -2703,6 +2681,51 @@
 				}
 			],
 			"sid": 430372909985573
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 904773835874209
+				}
+			],
+			"actions": [],
+			"sid": 942895626891994,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 959933274440378,
+							"parameters": {
+								"object": "MechObject"
+							}
+						},
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "MechObject",
+							"sid": 677831397422714,
+							"parameters": {
+								"instance-variable": "MechBaseUID",
+								"comparison": 0,
+								"value": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "destroy",
+							"objectClass": "MechObject",
+							"sid": 508749354389734
+						}
+					],
+					"sid": 337159332347137
+				}
+			]
 		}
 	],
 	"sid": 540973466625214

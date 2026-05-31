@@ -916,7 +916,6 @@
 					"id": "apply-force-towards-position",
 					"objectClass": "enemyTest",
 					"sid": 367363759089718,
-					"disabled": true,
 					"behaviorType": "Physics",
 					"parameters": {
 						"force": "Self.move_speed * Self.dt",
@@ -992,7 +991,8 @@
 							}
 						}
 					],
-					"sid": 971792512197311
+					"sid": 971792512197311,
+					"disabled": true
 				},
 				{
 					"eventType": "block",
@@ -1042,7 +1042,35 @@
 							}
 						}
 					],
-					"sid": 713371142319042
+					"sid": 713371142319042,
+					"disabled": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-overlapping-another-object",
+							"objectClass": "enemyTest",
+							"sid": 798789244121249,
+							"parameters": {
+								"object": "wall"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "apply-force-at-angle",
+							"objectClass": "enemyTest",
+							"sid": 464183929473360,
+							"behaviorType": "Physics",
+							"parameters": {
+								"force": "Self.move_speed * Self.dt",
+								"angle": "angle(wall.X, wall.Y, enemyTest.X, enemyTest.Y)",
+								"image-point": "0"
+							}
+						}
+					],
+					"sid": 687798959149138
 				}
 			]
 		},

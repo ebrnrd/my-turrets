@@ -26,6 +26,7 @@
 				}
 			],
 			"sid": 712289692408047,
+			"disabled": true,
 			"children": [
 				{
 					"eventType": "block",
@@ -46,6 +47,7 @@
 					],
 					"actions": [],
 					"sid": 743945031550699,
+					"disabled": true,
 					"children": [
 						{
 							"eventType": "variable",
@@ -112,7 +114,8 @@
 									}
 								}
 							],
-							"sid": 134021541021855
+							"sid": 134021541021855,
+							"disabled": true
 						}
 					]
 				}
@@ -142,6 +145,30 @@
 				}
 			],
 			"sid": 279867617788012,
+			"disabled": true
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-start-of-layout",
+					"objectClass": "System",
+					"sid": 996320782430354
+				}
+			],
+			"actions": [
+				{
+					"id": "set-resolution-mode",
+					"objectClass": "reflection_canvas",
+					"sid": 172696130300764,
+					"parameters": {
+						"mode": "fixed",
+						"fixed-width": "320",
+						"fixed-height": "220"
+					}
+				}
+			],
+			"sid": 862480107969370,
 			"disabled": true
 		}
 	],
