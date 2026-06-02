@@ -18,6 +18,27 @@
 			"desc": "",
 			"show": false,
 			"sid": 966303595417695
+		},
+		{
+			"name": "ExplosionSize",
+			"type": "number",
+			"desc": "",
+			"show": false,
+			"sid": 104178392584841
+		},
+		{
+			"name": "ExplosionDamage",
+			"type": "number",
+			"desc": "",
+			"show": false,
+			"sid": 112420293475243
+		},
+		{
+			"name": "ExplosionKnockback",
+			"type": "number",
+			"desc": "",
+			"show": false,
+			"sid": 700692144960421
 		}
 	],
 	"behaviorTypes": [

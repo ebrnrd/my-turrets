@@ -5,7 +5,7 @@
 			"eventType": "variable",
 			"name": "EnemiesSpawnCount",
 			"type": "number",
-			"initialValue": "5",
+			"initialValue": "2",
 			"comment": "",
 			"isStatic": false,
 			"isConstant": false,
@@ -15,7 +15,7 @@
 			"eventType": "variable",
 			"name": "EnemiesSpawnInterval",
 			"type": "number",
-			"initialValue": "10",
+			"initialValue": "1",
 			"comment": "",
 			"isStatic": false,
 			"isConstant": false,
@@ -47,9 +47,9 @@
 				{
 					"id": "every-x-seconds",
 					"objectClass": "System",
-					"sid": 799567708113287,
+					"sid": 280164555604431,
 					"parameters": {
-						"interval-seconds": "random(2,4)"
+						"interval-seconds": "random(0.5,2)"
 					}
 				}
 			],

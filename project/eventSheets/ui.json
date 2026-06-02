@@ -1002,6 +1002,15 @@
 								{
 									"id": "pick-children",
 									"objectClass": "UpgradeCardUIElement",
+									"sid": 130484203817074,
+									"parameters": {
+										"child": "LabelRectUI",
+										"which": "own"
+									}
+								},
+								{
+									"id": "pick-children",
+									"objectClass": "UpgradeCardUIElement",
 									"sid": 856566183493555,
 									"parameters": {
 										"child": "UpgradeCardText",
@@ -1086,6 +1095,15 @@
 								{
 									"id": "paste-object",
 									"objectClass": "CardCanvas",
+									"sid": 980803451523582,
+									"parameters": {
+										"object": "LabelRectUI",
+										"effects": "with-effects"
+									}
+								},
+								{
+									"id": "paste-object",
+									"objectClass": "CardCanvas",
 									"sid": 268723956647718,
 									"parameters": {
 										"object": "UpgradeCardText",
@@ -1113,6 +1131,14 @@
 									"id": "set-visible",
 									"objectClass": "UpgradeCardText",
 									"sid": 255840416426446,
+									"parameters": {
+										"visibility": "invisible"
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "LabelRectUI",
+									"sid": 342228344045998,
 									"parameters": {
 										"visibility": "invisible"
 									}

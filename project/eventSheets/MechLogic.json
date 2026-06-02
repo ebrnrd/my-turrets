@@ -210,15 +210,6 @@
 				{
 					"id": "pick-by-evaluate",
 					"objectClass": "System",
-					"sid": 180540484282518,
-					"parameters": {
-						"object": "BallisticGadget",
-						"expression": "BallisticGadget.turretBaseUID = MechBase.UID"
-					}
-				},
-				{
-					"id": "pick-by-evaluate",
-					"objectClass": "System",
 					"sid": 742122611409747,
 					"parameters": {
 						"object": "MechStatsCache",
@@ -233,57 +224,158 @@
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "compare-instance-variable",
-							"objectClass": "BallisticGadget",
-							"sid": 888049507318507,
+							"id": "pick-by-evaluate",
+							"objectClass": "System",
+							"sid": 936080241152217,
 							"parameters": {
-								"instance-variable": "MagCurrent",
-								"comparison": 3,
-								"value": "0"
+								"object": "BallisticGadget",
+								"expression": "BallisticGadget.turretBaseUID = MechBase.UID"
 							}
 						}
 					],
-					"actions": [
-						{
-							"id": "set-enabled",
-							"objectClass": "BallisticGadget",
-							"sid": 955829345181737,
-							"behaviorType": "Turret",
-							"parameters": {
-								"state": "disabled"
-							}
-						}
-					],
-					"sid": 753947194882617,
+					"actions": [],
+					"sid": 889349977946220,
 					"children": [
 						{
 							"eventType": "block",
 							"conditions": [
 								{
-									"id": "is-timer-running",
+									"id": "compare-instance-variable",
 									"objectClass": "BallisticGadget",
-									"sid": 133067768152302,
-									"behaviorType": "Timer",
+									"sid": 310601750624015,
 									"parameters": {
-										"tag": "\"reload\""
-									},
-									"isInverted": true
+										"instance-variable": "MagCurrent",
+										"comparison": 3,
+										"value": "0"
+									}
 								}
 							],
 							"actions": [
 								{
-									"id": "start-timer",
+									"id": "set-enabled",
 									"objectClass": "BallisticGadget",
-									"sid": 853655468276419,
-									"behaviorType": "Timer",
+									"sid": 122181335503575,
+									"behaviorType": "Turret",
 									"parameters": {
-										"duration": "MechStatsCache.Get(\"reload_time\")",
-										"type": "once",
-										"tag": "\"reload\""
+										"state": "disabled"
 									}
 								}
 							],
-							"sid": 751446872024019
+							"sid": 357127408644312,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-timer-running",
+											"objectClass": "BallisticGadget",
+											"sid": 897449441296865,
+											"behaviorType": "Timer",
+											"parameters": {
+												"tag": "\"reload\""
+											},
+											"isInverted": true
+										}
+									],
+									"actions": [
+										{
+											"id": "start-timer",
+											"objectClass": "BallisticGadget",
+											"sid": 917492133326059,
+											"behaviorType": "Timer",
+											"parameters": {
+												"duration": "MechStatsCache.Get(\"reload_time\")",
+												"type": "once",
+												"tag": "\"reload\""
+											}
+										}
+									],
+									"sid": 177715974354573
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 585115795880997
+								}
+							],
+							"actions": [
+								{
+									"id": "set-enabled",
+									"objectClass": "BallisticGadget",
+									"sid": 666596737208044,
+									"behaviorType": "Turret",
+									"parameters": {
+										"state": "enabled"
+									}
+								}
+							],
+							"sid": 114151391389232
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "has-target",
+									"objectClass": "BallisticGadget",
+									"sid": 778223195392147,
+									"behaviorType": "Turret"
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 342220244814529,
+									"parameters": {
+										"first-value": "BallisticGadget.MagCurrent",
+										"comparison": 4,
+										"second-value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-max-speed",
+									"objectClass": "MechBase",
+									"sid": 197116640913851,
+									"behaviorType": "Pathfinding",
+									"parameters": {
+										"speed": "MechStatsCache.Get(\"shoot_move_speed\")"
+									}
+								}
+							],
+							"sid": 612443690078990
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 197194290218599
+								}
+							],
+							"actions": [
+								{
+									"id": "set-max-speed",
+									"objectClass": "MechBase",
+									"sid": 972173104592037,
+									"behaviorType": "Pathfinding",
+									"parameters": {
+										"speed": "MechStatsCache.Get(\"move_speed\")"
+									}
+								}
+							],
+							"sid": 250708571519370
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [],
+							"sid": 246106492187663
 						}
 					]
 				},
@@ -291,78 +383,67 @@
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "else",
+							"id": "pick-by-evaluate",
 							"objectClass": "System",
-							"sid": 772734286998307
-						}
-					],
-					"actions": [
-						{
-							"id": "set-enabled",
-							"objectClass": "BallisticGadget",
-							"sid": 167011538485489,
-							"behaviorType": "Turret",
+							"sid": 333589352691040,
 							"parameters": {
-								"state": "enabled"
+								"object": "ArtilleryGadget",
+								"expression": "ArtilleryGadget.turretBaseUID = MechBase.UID"
 							}
 						}
 					],
-					"sid": 879655475706036
-				},
-				{
-					"eventType": "block",
-					"conditions": [
+					"actions": [],
+					"sid": 497469831233086,
+					"children": [
 						{
-							"id": "has-target",
-							"objectClass": "BallisticGadget",
-							"sid": 220350159781136,
-							"behaviorType": "Turret"
-						},
-						{
-							"id": "compare-two-values",
-							"objectClass": "System",
-							"sid": 334887265137752,
-							"parameters": {
-								"first-value": "BallisticGadget.MagCurrent",
-								"comparison": 4,
-								"second-value": "0"
-							}
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "ArtilleryGadget",
+									"sid": 216294036706220,
+									"parameters": {
+										"instance-variable": "MagCurrent",
+										"comparison": 3,
+										"value": "0"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 382071645879090,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-timer-running",
+											"objectClass": "ArtilleryGadget",
+											"sid": 804792511238674,
+											"behaviorType": "Timer",
+											"parameters": {
+												"tag": "\"reload\""
+											},
+											"isInverted": true
+										}
+									],
+									"actions": [
+										{
+											"id": "start-timer",
+											"objectClass": "ArtilleryGadget",
+											"sid": 874187481395083,
+											"behaviorType": "Timer",
+											"parameters": {
+												"duration": "MechStatsCache.Get(\"reload_time\")",
+												"type": "once",
+												"tag": "\"reload\""
+											}
+										}
+									],
+									"sid": 442664339662233
+								}
+							]
 						}
-					],
-					"actions": [
-						{
-							"id": "set-max-speed",
-							"objectClass": "MechBase",
-							"sid": 781438134275692,
-							"behaviorType": "Pathfinding",
-							"parameters": {
-								"speed": "MechStatsCache.Get(\"shoot_move_speed\")"
-							}
-						}
-					],
-					"sid": 175766944212178
-				},
-				{
-					"eventType": "block",
-					"conditions": [
-						{
-							"id": "else",
-							"objectClass": "System",
-							"sid": 695823357858098
-						}
-					],
-					"actions": [
-						{
-							"id": "set-max-speed",
-							"objectClass": "MechBase",
-							"sid": 829183771600731,
-							"behaviorType": "Pathfinding",
-							"parameters": {
-								"speed": "MechStatsCache.Get(\"move_speed\")"
-							}
-						}
-					],
-					"sid": 243602168618943
+					]
 				}
 			]
 		},
@@ -407,6 +488,50 @@
 						}
 					],
 					"sid": 588976725883471
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-timer",
+					"objectClass": "ArtilleryGadget",
+					"sid": 601925879660960,
+					"behaviorType": "Timer",
+					"parameters": {
+						"tag": "\"reload\""
+					}
+				}
+			],
+			"actions": [],
+			"sid": 829804861402083,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-evaluate",
+							"objectClass": "System",
+							"sid": 604986389627323,
+							"parameters": {
+								"object": "MechStatsCache",
+								"expression": "MechStatsCache.MechBaseUID = ArtilleryGadget.turretBaseUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-instvar-value",
+							"objectClass": "ArtilleryGadget",
+							"sid": 137522489756106,
+							"parameters": {
+								"instance-variable": "MagCurrent",
+								"value": "MechStatsCache.Get(\"mag_size\")\n"
+							}
+						}
+					],
+					"sid": 292214505465296
 				}
 			]
 		},
@@ -1544,12 +1669,29 @@
 									],
 									"actions": [
 										{
+											"id": "set-animation",
+											"objectClass": "ArtilleryGadget",
+											"sid": 924395366139776,
+											"parameters": {
+												"animation": "\"shoot\"",
+												"from": "beginning"
+											}
+										},
+										{
+											"id": "set-animation-frame",
+											"objectClass": "ArtilleryGadget",
+											"sid": 418450025232373,
+											"parameters": {
+												"frame-number": "0"
+											}
+										},
+										{
 											"id": "spawn-another-object",
 											"objectClass": "ArtilleryGadget",
-											"sid": 361665359293759,
+											"sid": 473230585986587,
 											"parameters": {
 												"object": "ArtilleryBullet",
-												"layer": "ArtilleryGadget.LayerName",
+												"layer": "\"always-top\"",
 												"image-point": "1",
 												"create-hierarchy": true,
 												"template-name": "\"\""
@@ -1558,19 +1700,46 @@
 										{
 											"id": "set-instvar-value",
 											"objectClass": "ArtilleryBullet",
-											"sid": 915386538632730,
+											"sid": 706108631448541,
 											"parameters": {
 												"instance-variable": "TargetX",
-												"value": "enemies.X + random(-MechStatsCache.Get(\"aim_error\"), MechStatsCache.Get(\"aim_error\"))"
+												"value": "lerp(enemies.X, Self.X, 0.2)  + random(-MechStatsCache.Get(\"aim_error\"), MechStatsCache.Get(\"aim_error\"))"
 											}
 										},
 										{
 											"id": "set-instvar-value",
 											"objectClass": "ArtilleryBullet",
-											"sid": 162258407486115,
+											"sid": 289983993704533,
 											"parameters": {
 												"instance-variable": "TargetY",
-												"value": "enemies.Y + random(-MechStatsCache.Get(\"aim_error\"), MechStatsCache.Get(\"aim_error\"))"
+												"value": "lerp(enemies.Y, Self.Y, 0.2)  + random(-MechStatsCache.Get(\"aim_error\"), MechStatsCache.Get(\"aim_error\"))"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "ArtilleryBullet",
+											"sid": 192063337170757,
+											"parameters": {
+												"instance-variable": "ExplosionSize",
+												"value": "MechStatsCache.Get(\"explosion_size\")"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "ArtilleryBullet",
+											"sid": 810551180414265,
+											"parameters": {
+												"instance-variable": "ExplosionDamage",
+												"value": "MechStatsCache.Get(\"explosion_damage\")"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "ArtilleryBullet",
+											"sid": 249078658011477,
+											"parameters": {
+												"instance-variable": "ExplosionKnockback",
+												"value": "MechStatsCache.Get(\"explosion_knockback\")"
 											}
 										},
 										{
@@ -1584,23 +1753,23 @@
 										{
 											"id": "set-angle",
 											"objectClass": "ArtilleryBullet",
-											"sid": 336320784119986,
+											"sid": 431665847880982,
 											"parameters": {
-												"angle": "angle(ArtilleryGadget.X, ArtilleryGadget.Y, TargetX, TargetY)"
+												"angle": "angle(ArtilleryGadget.X, ArtilleryGadget.Y, ArtilleryBullet.TargetX, ArtilleryBullet.TargetY)"
 											}
 										},
 										{
 											"id": "tween-two-properties",
 											"objectClass": "ArtilleryBullet",
-											"sid": 800120662316332,
+											"sid": 960873520998913,
 											"behaviorType": "Tween",
 											"parameters": {
-												"tags": "\"position1\"",
+												"tags": "\"position\"",
 												"property": "position",
-												"end-x": "ArtilleryGadget.X",
-												"end-y": "ArtilleryGadget.Y - 40",
-												"time": "MechStatsCache.Get(\"bullet_time\") / 2",
-												"ease": "easeincubic",
+												"end-x": "ArtilleryBullet.TargetX",
+												"end-y": "ArtilleryBullet.TargetY",
+												"time": "MechStatsCache.Get(\"bullet_time\")",
+												"ease": "easeinoutcirc",
 												"destroy-on-complete": "no",
 												"loop": "no",
 												"ping-pong": "no",
@@ -1610,14 +1779,14 @@
 										{
 											"id": "tween-one-property",
 											"objectClass": "ArtilleryBullet",
-											"sid": 246290856189685,
+											"sid": 363289489703970,
 											"behaviorType": "Tween",
 											"parameters": {
-												"tags": "\"position\"",
+												"tags": "\"scale\"",
 												"property": "offsetWidth",
 												"end-value": "40",
 												"time": "MechStatsCache.Get(\"bullet_time\") / 2",
-												"ease": "easeincubic",
+												"ease": "easeincirc",
 												"destroy-on-complete": "no",
 												"loop": "no",
 												"ping-pong": "yes",
@@ -1627,14 +1796,14 @@
 										{
 											"id": "tween-one-property",
 											"objectClass": "ArtilleryBullet",
-											"sid": 320584073810851,
+											"sid": 858879035299585,
 											"behaviorType": "Tween",
 											"parameters": {
 												"tags": "\"z\"",
 												"property": "offsetZElevation",
-												"end-value": "20",
+												"end-value": "6",
 												"time": "MechStatsCache.Get(\"bullet_time\") / 2",
-												"ease": "easeincubic",
+												"ease": "easeincirc",
 												"destroy-on-complete": "no",
 												"loop": "no",
 												"ping-pong": "yes",
@@ -1654,34 +1823,58 @@
 						{
 							"id": "on-tweens-finished",
 							"objectClass": "ArtilleryBullet",
-							"sid": 639930679803478,
+							"sid": 551071608138529,
 							"behaviorType": "Tween",
 							"parameters": {
-								"tags": "\"position1\""
+								"tags": "\"position\""
 							}
 						}
 					],
 					"actions": [
 						{
-							"id": "tween-two-properties",
+							"callFunction": "SpawnExplosion",
+							"sid": 183114690630133,
+							"parameters": [
+								"ArtilleryBullet.ExplosionDamage",
+								"ArtilleryBullet.ExplosionSize",
+								"ArtilleryBullet.ExplosionKnockback",
+								"ArtilleryBullet.X",
+								"ArtilleryBullet.Y",
+								"\"player\""
+							]
+						},
+						{
+							"id": "destroy",
 							"objectClass": "ArtilleryBullet",
-							"sid": 133751697902296,
-							"behaviorType": "Tween",
+							"sid": 145816004831332
+						}
+					],
+					"sid": 358850828576739
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-animation-finished",
+							"objectClass": "ArtilleryGadget",
+							"sid": 961807414233743,
 							"parameters": {
-								"tags": "\"position2\"",
-								"property": "position",
-								"end-x": "ArtilleryBullet.TargetX",
-								"end-y": "ArtilleryBullet.TargetY",
-								"time": "MechStatsCache.Get(\"bullet_time\") / 2",
-								"ease": "easeincubic",
-								"destroy-on-complete": "no",
-								"loop": "no",
-								"ping-pong": "no",
-								"repeat-count": "1"
+								"animation": "\"shoot\""
 							}
 						}
 					],
-					"sid": 757694657324467
+					"actions": [
+						{
+							"id": "set-animation",
+							"objectClass": "ArtilleryGadget",
+							"sid": 982829891507658,
+							"parameters": {
+								"animation": "\"idle\"",
+								"from": "beginning"
+							}
+						}
+					],
+					"sid": 613669617385346
 				}
 			],
 			"sid": 874505846310406

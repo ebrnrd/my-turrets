@@ -12,7 +12,12 @@
 			"sid": 392957498110996
 		}
 	],
-	"effectTypes": [],
+	"effectTypes": [
+		{
+			"effectId": "difference",
+			"name": "Difference"
+		}
+	],
 	"animations": {
 		"items": [
 			{

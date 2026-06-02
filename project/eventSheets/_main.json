@@ -1664,11 +1664,25 @@
 			"functionIsAsync": false,
 			"functionParameters": [
 				{
+					"name": "ExplosionDamage",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 833902105448496
+				},
+				{
 					"name": "ExplosionSize",
 					"type": "number",
 					"initialValue": "0",
 					"comment": "",
 					"sid": 953207660332902
+				},
+				{
+					"name": "ExplosionKnockback",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 215913501723485
 				},
 				{
 					"name": "SpawnX",
@@ -1698,6 +1712,19 @@
 				{
 					"id": "create-object",
 					"objectClass": "System",
+					"sid": 935144994320447,
+					"parameters": {
+						"object-to-create": "ExplosionParticles",
+						"layer": "\"main\"",
+						"x": "SpawnX",
+						"y": "SpawnY",
+						"create-hierarchy": false,
+						"template-name": "\"\""
+					}
+				},
+				{
+					"id": "create-object",
+					"objectClass": "System",
 					"sid": 138390028496898,
 					"parameters": {
 						"object-to-create": "ExplosionSprite",
@@ -1715,6 +1742,17 @@
 					"parameters": {
 						"width": "ExplosionSize",
 						"height": "ExplosionSize"
+					}
+				},
+				{
+					"id": "shake",
+					"objectClass": "GameCamera",
+					"sid": 448873711707039,
+					"behaviorType": "ScrollTo",
+					"parameters": {
+						"magnitude": "10",
+						"duration": "0.2",
+						"mode": "reducing-magnitude"
 					}
 				}
 			],
@@ -1778,13 +1816,42 @@
 										{
 											"customAction": "ReceiveDamage",
 											"objectClass": "Damageables",
-											"sid": 612624607183244,
+											"sid": 924368417337280,
 											"parameters": [
-												"50"
+												"lerp(ExplosionDamage, 0, distance(Damageables.X, Damageables.Y, SpawnX, SpawnY) / ExplosionSize)"
 											]
 										}
 									],
-									"sid": 414437649072107
+									"sid": 414437649072107,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-by-unique-id",
+													"objectClass": "enemies",
+													"sid": 233316919959139,
+													"parameters": {
+														"unique-id": "Damageables.UID"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "apply-impulse-at-angle",
+													"objectClass": "enemies",
+													"sid": 508810453516823,
+													"behaviorType": "Physics",
+													"parameters": {
+														"impulse": "lerp(ExplosionKnockback, 0, distance(Damageables.X, Damageables.Y, SpawnX, SpawnY) / ExplosionSize)",
+														"angle": "angle(SpawnX, SpawnY, enemies.X, enemies.Y)",
+														"image-point": "0"
+													}
+												}
+											],
+											"sid": 306850091259513
+										}
+									]
 								}
 							]
 						}
@@ -1848,9 +1915,9 @@
 										{
 											"customAction": "ReceiveDamage",
 											"objectClass": "Damageables",
-											"sid": 208372526082688,
+											"sid": 452545475756537,
 											"parameters": [
-												"50"
+												"lerp(ExplosionDamage, 0, distance(Damageables.X, Damageables.Y, SpawnX, SpawnY) / ExplosionSize)"
 											]
 										}
 									],
@@ -1877,9 +1944,11 @@
 			"actions": [
 				{
 					"callFunction": "SpawnExplosion",
-					"sid": 172471284385622,
+					"sid": 262136112092244,
 					"parameters": [
+						"50",
 						"300",
+						"10",
 						"Mine.X",
 						"Mine.Y",
 						"\"player\""
@@ -1933,9 +2002,11 @@
 			"actions": [
 				{
 					"callFunction": "SpawnExplosion",
-					"sid": 529841951678981,
+					"sid": 915718232711857,
 					"parameters": [
+						"50",
 						"300",
+						"10",
 						"Mine.X",
 						"Mine.Y",
 						"\"player\""

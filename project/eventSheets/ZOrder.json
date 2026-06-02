@@ -81,6 +81,48 @@
 					"eventType": "block",
 					"conditions": [
 						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 436758151882883,
+							"parameters": {
+								"object": "ArtilleryGadget"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 296395717077884,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "MechBase",
+									"sid": 666733907311233,
+									"parameters": {
+										"unique-id": "ArtilleryGadget.turretBaseUID"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "move-to-object",
+									"objectClass": "ArtilleryGadget",
+									"sid": 308003140405214,
+									"parameters": {
+										"where": "in-front",
+										"object": "MechBase"
+									}
+								}
+							],
+							"sid": 507196393671240
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
 							"id": "compare-two-values",
 							"objectClass": "System",
 							"sid": 830590997701603,

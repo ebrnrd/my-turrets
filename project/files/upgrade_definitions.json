@@ -7,7 +7,7 @@
     ],
     "behavior_tags": [],
     "hooks": [],
-    "mech_types": ["ballistic"]
+    "mech_type": "ballistic"
   },
 
   "long_barrel": {
@@ -19,7 +19,7 @@
     ],
     "behavior_tags": [],
     "hooks": [],
-    "mech_types": ["ballistic"]
+    "mech_type": "ballistic"
   },
 
   "overpressure": {
@@ -31,7 +31,7 @@
     ],
     "behavior_tags": [],
     "hooks": [],
-    "mech_types": ["ballistic"]
+    "mech_type": "ballistic"
   },
 
   "active_sustain": {
@@ -45,7 +45,7 @@
     "hooks": [
       { "tag": "on_repair", "duration": 5, "actions": ["activate_modifier:0", "activate_modifier:1"] }
     ],
-    "mech_types": ["ballistic"]
+    "mech_type": "ballistic"
   },
 
   "sniper": {
@@ -60,7 +60,7 @@
     ],
     "behavior_tags": [],
     "hooks": {},
-    "mech_types": ["ballistic"]
+    "mech_type": "ballistic"
   },
 
   "giant_bullet": {
@@ -71,7 +71,7 @@
     ],
     "behavior_tags": [],
     "hooks": [],
-    "mech_types": ["ballistic"]
+    "mech_type": "ballistic"
   },
 
   "ricochet": {
@@ -82,7 +82,7 @@
     ],
     "behavior_tags": [],
     "hooks": [],
-    "mech_types": ["ballistic"]
+    "mech_type": "ballistic"
   },
 
   "mine_trapper": {
@@ -93,7 +93,7 @@
     "hooks": [
       { "tag": "on_loop", "duration": 5, "actions": ["spawn_mine"] }
     ],
-    "mech_types": ["ballistic"]
+    "mech_type": "ballistic"
   }
 
 }
