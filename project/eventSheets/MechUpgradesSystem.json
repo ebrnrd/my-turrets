@@ -1716,7 +1716,7 @@
 																		},
 																		{
 																			"id": "pick-by-unique-id",
-																			"objectClass": "turretBase",
+																			"objectClass": "MechBase",
 																			"sid": 426309426054175,
 																			"parameters": {
 																				"unique-id": "MechObject.MechBaseUID"
@@ -1729,8 +1729,8 @@
 																			"sid": 834437931778061,
 																			"parameters": [
 																				"MechUID",
-																				"turretBase.X",
-																				"turretBase.Y"
+																				"MechBase.X",
+																				"MechBase.Y"
 																			]
 																		}
 																	],
@@ -3690,7 +3690,7 @@
 						},
 						{
 							"id": "pick-by-unique-id",
-							"objectClass": "turretBase",
+							"objectClass": "MechBase",
 							"sid": 988402425611677,
 							"parameters": {
 								"unique-id": "MechObject.MechBaseUID"
@@ -3705,8 +3705,8 @@
 							"parameters": {
 								"object-to-create": "ActiveUpgradeText",
 								"layer": "\"player\"",
-								"x": "turretBase.X",
-								"y": "turretBase.Y - 50",
+								"x": "MechBase.X",
+								"y": "MechBase.Y - 50",
 								"create-hierarchy": false,
 								"template-name": "\"\""
 							}
@@ -3743,7 +3743,7 @@
 							"sid": 190761464529143,
 							"parameters": {
 								"instance-variable": "TargetX",
-								"value": "turretBase.X + random(-20,20)"
+								"value": "MechBase.X + random(-20,20)"
 							}
 						},
 						{
@@ -3752,7 +3752,7 @@
 							"sid": 964713145251622,
 							"parameters": {
 								"instance-variable": "TargetY",
-								"value": "turretBase.Y - 100"
+								"value": "MechBase.Y - 100"
 							}
 						},
 						{

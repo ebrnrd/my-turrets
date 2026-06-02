@@ -23,7 +23,7 @@
 	"members": [
 		"enemyTest",
 		"bullet",
-		"turretBase",
+		"MechBase",
 		"playerCharacter",
 		"tree",
 		"rock",

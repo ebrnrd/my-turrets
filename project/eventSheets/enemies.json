@@ -932,7 +932,7 @@
 					"conditions": [
 						{
 							"id": "pick-nearestfurthest",
-							"objectClass": "turretBase",
+							"objectClass": "MechBase",
 							"sid": 198290158627775,
 							"parameters": {
 								"which": "nearest",
@@ -946,7 +946,7 @@
 							"objectClass": "System",
 							"sid": 741212379874798,
 							"parameters": {
-								"first-value": "distance(enemyTest.X, enemyTest.Y, turretBase.X, turretBase.Y)",
+								"first-value": "distance(enemyTest.X, enemyTest.Y, MechBase.X, MechBase.Y)",
 								"comparison": 2,
 								"second-value": "distance(enemyTest.X, enemyTest.Y, playerCharacter.X, playerCharacter.Y)"
 							}
@@ -960,7 +960,7 @@
 							"disabled": true,
 							"behaviorType": "MoveTo",
 							"parameters": {
-								"object": "turretBase",
+								"object": "MechBase",
 								"image-point": "0",
 								"mode": "direct"
 							}
@@ -973,8 +973,8 @@
 							"behaviorType": "Physics",
 							"parameters": {
 								"force": "Self.move_speed",
-								"x": "turretBase.X",
-								"y": "turretBase.Y",
+								"x": "MechBase.X",
+								"y": "MechBase.Y",
 								"image-point": "0"
 							}
 						},
@@ -985,8 +985,8 @@
 							"behaviorType": "Physics",
 							"parameters": {
 								"force": "Self.move_speed * Self.dt",
-								"x": "turretBase.X",
-								"y": "turretBase.Y",
+								"x": "MechBase.X",
+								"y": "MechBase.Y",
 								"image-point": "0"
 							}
 						}
@@ -1285,12 +1285,12 @@
 							"objectClass": "enemyTest",
 							"sid": 528924361694494,
 							"parameters": {
-								"object": "turretBase"
+								"object": "MechBase"
 							}
 						},
 						{
 							"id": "pick-nearestfurthest",
-							"objectClass": "turretBase",
+							"objectClass": "MechBase",
 							"sid": 363549129514143,
 							"parameters": {
 								"which": "nearest",
@@ -1303,7 +1303,7 @@
 					"actions": [
 						{
 							"customAction": "ReceiveDamage",
-							"objectClass": "turretBase",
+							"objectClass": "MechBase",
 							"customActionObjectClass": "Damageables",
 							"sid": 724629477461626,
 							"disabled": true,
@@ -1315,7 +1315,7 @@
 							"callFunction": "SendDamage",
 							"sid": 870254442085088,
 							"parameters": [
-								"turretBase.UID",
+								"MechBase.UID",
 								"enemyTest.UID",
 								"enemyTest.damage"
 							]
@@ -1380,7 +1380,8 @@
 					}
 				}
 			],
-			"sid": 456687359398089
+			"sid": 456687359398089,
+			"disabled": true
 		}
 	],
 	"sid": 183405312286839

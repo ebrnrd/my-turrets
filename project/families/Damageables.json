@@ -43,7 +43,7 @@
 		}
 	],
 	"members": [
-		"turretBase",
+		"MechBase",
 		"playerCharacter",
 		"enemyTest",
 		"rock"

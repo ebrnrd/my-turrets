@@ -241,7 +241,7 @@
 						},
 						{
 							"id": "pick-by-unique-id",
-							"objectClass": "turretBase",
+							"objectClass": "MechBase",
 							"sid": 567224669103749,
 							"parameters": {
 								"unique-id": "MechObject.MechBaseUID"
@@ -254,8 +254,8 @@
 							"objectClass": "GameCamera",
 							"sid": 963286503549180,
 							"parameters": {
-								"x": "lerp(Self.X, turretBase.X, camera_speed * 10 * Self.dt)",
-								"y": "lerp(Self.Y, turretBase.Y - 20, camera_speed * 10 * Self.dt)"
+								"x": "lerp(Self.X, MechBase.X, camera_speed * 10 * Self.dt)",
+								"y": "lerp(Self.Y, MechBase.Y - 20, camera_speed * 10 * Self.dt)"
 							}
 						},
 						{

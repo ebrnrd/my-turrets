@@ -16,7 +16,7 @@
 	"members": [
 		"enemyTest",
 		"playerCharacter",
-		"turretBase",
+		"MechBase",
 		"wall",
 		"tree",
 		"bullet",

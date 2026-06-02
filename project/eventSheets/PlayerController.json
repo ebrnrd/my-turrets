@@ -782,7 +782,7 @@
 							"objectClass": "player_melee_hit",
 							"sid": 301561210065707,
 							"parameters": {
-								"object": "turretBase"
+								"object": "MechBase"
 							}
 						},
 						{
@@ -790,7 +790,7 @@
 							"objectClass": "System",
 							"sid": 748603789690180,
 							"parameters": {
-								"object": "turretBase"
+								"object": "MechBase"
 							}
 						}
 					],
@@ -799,19 +799,19 @@
 							"callFunction": "SendHeal",
 							"sid": 292318488518536,
 							"parameters": [
-								"turretBase.UID",
+								"MechBase.UID",
 								"playerCharacter.UID",
 								"player_melee_damage"
 							]
 						},
 						{
 							"id": "apply-impulse-at-angle",
-							"objectClass": "turretBase",
+							"objectClass": "MechBase",
 							"sid": 425915623291413,
 							"behaviorType": "Physics",
 							"parameters": {
 								"impulse": "random(2,5)",
-								"angle": "angle(turretBase.X, turretBase.Y, playerCharacter.X, playerCharacter.Y) + 180",
+								"angle": "angle(MechBase.X, MechBase.Y, playerCharacter.X, playerCharacter.Y) + 180",
 								"image-point": "0"
 							}
 						},

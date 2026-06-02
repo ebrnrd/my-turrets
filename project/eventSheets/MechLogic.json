@@ -64,7 +64,8 @@
 					}
 				}
 			],
-			"sid": 142923078457539
+			"sid": 142923078457539,
+			"disabled": true
 		},
 		{
 			"eventType": "block",
@@ -89,7 +90,8 @@
 					}
 				}
 			],
-			"sid": 298220854406595
+			"sid": 298220854406595,
+			"disabled": true
 		},
 		{
 			"eventType": "block",
@@ -202,7 +204,7 @@
 					"objectClass": "System",
 					"sid": 895793533729697,
 					"parameters": {
-						"object": "turretBase"
+						"object": "MechBase"
 					}
 				},
 				{
@@ -210,8 +212,8 @@
 					"objectClass": "System",
 					"sid": 180540484282518,
 					"parameters": {
-						"object": "turretGun",
-						"expression": "turretGun.turretBaseUID = turretBase.UID"
+						"object": "BallisticGadget",
+						"expression": "BallisticGadget.turretBaseUID = MechBase.UID"
 					}
 				},
 				{
@@ -220,7 +222,7 @@
 					"sid": 742122611409747,
 					"parameters": {
 						"object": "MechStatsCache",
-						"expression": "MechStatsCache.MechBaseUID = turretBase.UID"
+						"expression": "MechStatsCache.MechBaseUID = MechBase.UID"
 					}
 				}
 			],
@@ -232,10 +234,10 @@
 					"conditions": [
 						{
 							"id": "compare-instance-variable",
-							"objectClass": "turretGun",
+							"objectClass": "BallisticGadget",
 							"sid": 888049507318507,
 							"parameters": {
-								"instance-variable": "mag_current",
+								"instance-variable": "MagCurrent",
 								"comparison": 3,
 								"value": "0"
 							}
@@ -244,7 +246,7 @@
 					"actions": [
 						{
 							"id": "set-enabled",
-							"objectClass": "turretGun",
+							"objectClass": "BallisticGadget",
 							"sid": 955829345181737,
 							"behaviorType": "Turret",
 							"parameters": {
@@ -259,7 +261,7 @@
 							"conditions": [
 								{
 									"id": "is-timer-running",
-									"objectClass": "turretGun",
+									"objectClass": "BallisticGadget",
 									"sid": 133067768152302,
 									"behaviorType": "Timer",
 									"parameters": {
@@ -271,11 +273,11 @@
 							"actions": [
 								{
 									"id": "start-timer",
-									"objectClass": "turretGun",
-									"sid": 686989675652217,
+									"objectClass": "BallisticGadget",
+									"sid": 853655468276419,
 									"behaviorType": "Timer",
 									"parameters": {
-										"duration": "turretGun.reload_speed",
+										"duration": "MechStatsCache.Get(\"reload_time\")",
 										"type": "once",
 										"tag": "\"reload\""
 									}
@@ -297,7 +299,7 @@
 					"actions": [
 						{
 							"id": "set-enabled",
-							"objectClass": "turretGun",
+							"objectClass": "BallisticGadget",
 							"sid": 167011538485489,
 							"behaviorType": "Turret",
 							"parameters": {
@@ -312,7 +314,7 @@
 					"conditions": [
 						{
 							"id": "has-target",
-							"objectClass": "turretGun",
+							"objectClass": "BallisticGadget",
 							"sid": 220350159781136,
 							"behaviorType": "Turret"
 						},
@@ -321,7 +323,7 @@
 							"objectClass": "System",
 							"sid": 334887265137752,
 							"parameters": {
-								"first-value": "turretGun.mag_current",
+								"first-value": "BallisticGadget.MagCurrent",
 								"comparison": 4,
 								"second-value": "0"
 							}
@@ -330,7 +332,7 @@
 					"actions": [
 						{
 							"id": "set-max-speed",
-							"objectClass": "turretBase",
+							"objectClass": "MechBase",
 							"sid": 781438134275692,
 							"behaviorType": "Pathfinding",
 							"parameters": {
@@ -352,7 +354,7 @@
 					"actions": [
 						{
 							"id": "set-max-speed",
-							"objectClass": "turretBase",
+							"objectClass": "MechBase",
 							"sid": 829183771600731,
 							"behaviorType": "Pathfinding",
 							"parameters": {
@@ -369,7 +371,7 @@
 			"conditions": [
 				{
 					"id": "on-timer",
-					"objectClass": "turretGun",
+					"objectClass": "BallisticGadget",
 					"sid": 980973492244636,
 					"behaviorType": "Timer",
 					"parameters": {
@@ -377,18 +379,36 @@
 					}
 				}
 			],
-			"actions": [
+			"actions": [],
+			"sid": 497914033446438,
+			"children": [
 				{
-					"id": "set-instvar-value",
-					"objectClass": "turretGun",
-					"sid": 214348808955053,
-					"parameters": {
-						"instance-variable": "mag_current",
-						"value": "turretGun.mag_size"
-					}
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-evaluate",
+							"objectClass": "System",
+							"sid": 298630229353033,
+							"parameters": {
+								"object": "MechStatsCache",
+								"expression": "MechStatsCache.MechBaseUID = BallisticGadget.turretBaseUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-instvar-value",
+							"objectClass": "BallisticGadget",
+							"sid": 983966721840681,
+							"parameters": {
+								"instance-variable": "MagCurrent",
+								"value": "MechStatsCache.Get(\"mag_size\")\n"
+							}
+						}
+					],
+					"sid": 588976725883471
 				}
-			],
-			"sid": 497914033446438
+			]
 		},
 		{
 			"eventType": "block",
@@ -398,7 +418,7 @@
 					"objectClass": "System",
 					"sid": 720755562159844,
 					"parameters": {
-						"object": "turretBase"
+						"object": "MechBase"
 					}
 				}
 			],
@@ -411,7 +431,7 @@
 					"conditions": [
 						{
 							"id": "pick-children",
-							"objectClass": "turretBase",
+							"objectClass": "MechBase",
 							"sid": 404053917311088,
 							"parameters": {
 								"child": "turret_proximity_collision",
@@ -432,8 +452,8 @@
 							"sid": 707109017894577,
 							"parameters": {
 								"which": "nearest",
-								"x": "turretBase.X",
-								"y": "turretBase.Y",
+								"x": "MechBase.X",
+								"y": "MechBase.Y",
 								"pick-all-tied": false
 							}
 						}
@@ -441,12 +461,12 @@
 					"actions": [
 						{
 							"id": "apply-force-at-angle",
-							"objectClass": "turretBase",
+							"objectClass": "MechBase",
 							"sid": 573868069793407,
 							"behaviorType": "Physics",
 							"parameters": {
 								"force": "turret_follow_force",
-								"angle": "angle(turretBase.X, turretBase.Y, enemies.X, enemies.Y) + 180",
+								"angle": "angle(MechBase.X, MechBase.Y, enemies.X, enemies.Y) + 180",
 								"image-point": "0"
 							}
 						}
@@ -461,7 +481,7 @@
 			"conditions": [
 				{
 					"id": "on-path-found",
-					"objectClass": "turretBase",
+					"objectClass": "MechBase",
 					"sid": 284349770011788,
 					"behaviorType": "Pathfinding"
 				}
@@ -479,7 +499,7 @@
 							"parameters": {
 								"name": "\"\"",
 								"start-index": "0",
-								"end-index": "turretBase.Pathfinding.NodeCount - 1"
+								"end-index": "MechBase.Pathfinding.NodeCount - 1"
 							}
 						}
 					],
@@ -491,8 +511,8 @@
 							"parameters": {
 								"object-to-create": "MechPathfindDebug",
 								"layer": "0",
-								"x": "turretBase.Pathfinding.NodeXAt(loopindex)",
-								"y": "turretBase.Pathfinding.NodeYAt(loopindex)",
+								"x": "MechBase.Pathfinding.NodeXAt(loopindex)",
+								"y": "MechBase.Pathfinding.NodeYAt(loopindex)",
 								"create-hierarchy": false,
 								"template-name": "\"\""
 							}
@@ -519,14 +539,14 @@
 					"objectClass": "System",
 					"sid": 997848402849851,
 					"parameters": {
-						"object": "turretBase"
+						"object": "MechBase"
 					}
 				}
 			],
 			"actions": [
 				{
 					"id": "stop",
-					"objectClass": "turretBase",
+					"objectClass": "MechBase",
 					"sid": 127534708418475,
 					"disabled": true,
 					"behaviorType": "Pathfinding"
@@ -579,7 +599,7 @@
 					"conditions": [
 						{
 							"id": "is-moving-along-path",
-							"objectClass": "turretBase",
+							"objectClass": "MechBase",
 							"sid": 832410643985956,
 							"disabled": true,
 							"behaviorType": "Pathfinding",
@@ -587,7 +607,7 @@
 						},
 						{
 							"id": "compare-speed",
-							"objectClass": "turretBase",
+							"objectClass": "MechBase",
 							"sid": 810408160280142,
 							"behaviorType": "Pathfinding",
 							"parameters": {
@@ -597,14 +617,14 @@
 						},
 						{
 							"id": "is-calculating-path",
-							"objectClass": "turretBase",
+							"objectClass": "MechBase",
 							"sid": 935854512606859,
 							"behaviorType": "Pathfinding",
 							"isInverted": true
 						},
 						{
 							"id": "pick-children",
-							"objectClass": "turretBase",
+							"objectClass": "MechBase",
 							"sid": 714041331374467,
 							"parameters": {
 								"child": "turret_proximity_collision",
@@ -625,8 +645,8 @@
 							"sid": 502108252080166,
 							"parameters": {
 								"which": "nearest",
-								"x": "turretBase.X",
-								"y": "turretBase.Y",
+								"x": "MechBase.X",
+								"y": "MechBase.Y",
 								"pick-all-tied": false
 							}
 						}
@@ -638,7 +658,7 @@
 							"sid": 429161375549214,
 							"parameters": {
 								"variable": "this_angle",
-								"value": "angle(turretBase.X, turretBase.Y, enemies.X, enemies.Y) + 180"
+								"value": "angle(MechBase.X, MechBase.Y, enemies.X, enemies.Y) + 180"
 							}
 						},
 						{
@@ -647,7 +667,7 @@
 							"sid": 448505982098423,
 							"parameters": {
 								"variable": "target_x",
-								"value": "turretBase.X + cos(this_angle) * offset"
+								"value": "MechBase.X + cos(this_angle) * offset"
 							}
 						},
 						{
@@ -656,19 +676,19 @@
 							"sid": 283658333685934,
 							"parameters": {
 								"variable": "target_y",
-								"value": "turretBase.Y + sin(this_angle) * offset"
+								"value": "MechBase.Y + sin(this_angle) * offset"
 							}
 						},
 						{
 							"id": "stop",
-							"objectClass": "turretBase",
+							"objectClass": "MechBase",
 							"sid": 311630578674652,
 							"disabled": true,
 							"behaviorType": "Pathfinding"
 						},
 						{
 							"id": "find-path",
-							"objectClass": "turretBase",
+							"objectClass": "MechBase",
 							"sid": 965623387423409,
 							"behaviorType": "Pathfinding",
 							"parameters": {
@@ -695,13 +715,13 @@
 			"conditions": [
 				{
 					"id": "on-path-found",
-					"objectClass": "turretBase",
+					"objectClass": "MechBase",
 					"sid": 682977314968345,
 					"behaviorType": "Pathfinding"
 				},
 				{
 					"id": "pick-children",
-					"objectClass": "turretBase",
+					"objectClass": "MechBase",
 					"sid": 776625511650350,
 					"parameters": {
 						"child": "turret_proximity_collision",
@@ -720,7 +740,7 @@
 			"actions": [
 				{
 					"id": "move-along-path",
-					"objectClass": "turretBase",
+					"objectClass": "MechBase",
 					"sid": 237864010606164,
 					"behaviorType": "Pathfinding"
 				}
@@ -905,7 +925,7 @@
 			"conditions": [
 				{
 					"id": "on-path-found",
-					"objectClass": "turretBase",
+					"objectClass": "MechBase",
 					"sid": 750675550069941,
 					"behaviorType": "Pathfinding"
 				}
@@ -924,7 +944,7 @@
 							"parameters": {
 								"name": "\"\"",
 								"start-index": "0",
-								"end-index": "turretBase.Pathfinding.NodeCount - 1"
+								"end-index": "MechBase.Pathfinding.NodeCount - 1"
 							}
 						}
 					],
@@ -936,8 +956,8 @@
 							"parameters": {
 								"object-to-create": "path_debug",
 								"layer": "\"main\"",
-								"x": "turretBase.Pathfinding.NodeXAt(loopindex)",
-								"y": "turretBase.Pathfinding.NodeYAt(loopindex)",
+								"x": "MechBase.Pathfinding.NodeXAt(loopindex)",
+								"y": "MechBase.Pathfinding.NodeYAt(loopindex)",
 								"create-hierarchy": false,
 								"template-name": "\"\""
 							}
@@ -956,7 +976,7 @@
 					"objectClass": "System",
 					"sid": 580586751594938,
 					"parameters": {
-						"object": "turretBase"
+						"object": "MechBase"
 					}
 				}
 			],
@@ -968,13 +988,13 @@
 					"conditions": [
 						{
 							"id": "is-moving-along-path",
-							"objectClass": "turretBase",
+							"objectClass": "MechBase",
 							"sid": 612126549529598,
 							"behaviorType": "Pathfinding"
 						},
 						{
 							"id": "compare-speed",
-							"objectClass": "turretBase",
+							"objectClass": "MechBase",
 							"sid": 857836375969595,
 							"behaviorType": "Pathfinding",
 							"parameters": {
@@ -991,7 +1011,7 @@
 							"conditions": [
 								{
 									"id": "is-animation-playing",
-									"objectClass": "turretBase",
+									"objectClass": "MechBase",
 									"sid": 593330287837466,
 									"parameters": {
 										"animation": "\"walk\""
@@ -1002,7 +1022,7 @@
 							"actions": [
 								{
 									"id": "set-animation",
-									"objectClass": "turretBase",
+									"objectClass": "MechBase",
 									"sid": 281725212849354,
 									"parameters": {
 										"animation": "\"walk\"",
@@ -1024,10 +1044,10 @@
 							"actions": [
 								{
 									"id": "set-animation-speed",
-									"objectClass": "turretBase",
+									"objectClass": "MechBase",
 									"sid": 205912602932634,
 									"parameters": {
-										"speed": "clamp(round((turretBase.Pathfinding.Speed / turretBase.Pathfinding.MaxSpeed) * 20), 8, 30)"
+										"speed": "clamp(round((MechBase.Pathfinding.Speed / MechBase.Pathfinding.MaxSpeed) * 20), 8, 30)"
 									}
 								}
 							],
@@ -1052,7 +1072,7 @@
 							"conditions": [
 								{
 									"id": "is-animation-playing",
-									"objectClass": "turretBase",
+									"objectClass": "MechBase",
 									"sid": 558344185905879,
 									"parameters": {
 										"animation": "\"idle\""
@@ -1063,7 +1083,7 @@
 							"actions": [
 								{
 									"id": "set-animation",
-									"objectClass": "turretBase",
+									"objectClass": "MechBase",
 									"sid": 479629564808643,
 									"parameters": {
 										"animation": "\"idle\"",
@@ -1072,7 +1092,7 @@
 								},
 								{
 									"id": "set-animation-speed",
-									"objectClass": "turretBase",
+									"objectClass": "MechBase",
 									"sid": 635189548958591,
 									"parameters": {
 										"speed": "8"
@@ -1090,7 +1110,7 @@
 			"conditions": [
 				{
 					"id": "on-animation-finished",
-					"objectClass": "turretGun",
+					"objectClass": "BallisticGadget",
 					"sid": 631335347196959,
 					"parameters": {
 						"animation": "\"shoot\""
@@ -1100,7 +1120,7 @@
 			"actions": [
 				{
 					"id": "set-animation",
-					"objectClass": "turretGun",
+					"objectClass": "BallisticGadget",
 					"sid": 945271075698577,
 					"parameters": {
 						"animation": "\"idle\"",
@@ -1151,22 +1171,26 @@
 		{
 			"eventType": "group",
 			"disabled": false,
-			"title": "CombatMech",
+			"title": "MechTypesLogic",
 			"description": "",
 			"isActiveOnStart": true,
 			"children": [
+				{
+					"eventType": "comment",
+					"text": "BALLISTIC"
+				},
 				{
 					"eventType": "block",
 					"conditions": [
 						{
 							"id": "on-shoot",
-							"objectClass": "turretGun",
+							"objectClass": "BallisticGadget",
 							"sid": 535706115271625,
 							"behaviorType": "Turret"
 						},
 						{
 							"id": "has-los-to-object",
-							"objectClass": "turretGun",
+							"objectClass": "BallisticGadget",
 							"sid": 898690061529387,
 							"behaviorType": "LineOfSight",
 							"parameters": {
@@ -1179,8 +1203,8 @@
 							"objectClass": "System",
 							"sid": 200889333001706,
 							"parameters": {
-								"object": "turretBase",
-								"expression": "turretGun.turretBaseUID = turretBase.UID"
+								"object": "MechBase",
+								"expression": "BallisticGadget.turretBaseUID = MechBase.UID"
 							}
 						},
 						{
@@ -1189,7 +1213,7 @@
 							"sid": 413154154009695,
 							"parameters": {
 								"object": "MechObject",
-								"expression": "MechObject.MechBaseUID = turretBase.UID"
+								"expression": "MechObject.MechBaseUID = MechBase.UID"
 							}
 						},
 						{
@@ -1204,10 +1228,10 @@
 					"actions": [
 						{
 							"id": "subtract-from-instvar",
-							"objectClass": "turretGun",
+							"objectClass": "BallisticGadget",
 							"sid": 906373303548071,
 							"parameters": {
-								"instance-variable": "mag_current",
+								"instance-variable": "MagCurrent",
 								"value": "1"
 							}
 						}
@@ -1229,7 +1253,7 @@
 							"actions": [
 								{
 									"id": "spawn-another-object",
-									"objectClass": "turretGun",
+									"objectClass": "BallisticGadget",
 									"sid": 252420945825938,
 									"parameters": {
 										"object": "bullet",
@@ -1271,7 +1295,7 @@
 									"objectClass": "bullet",
 									"sid": 374299222143541,
 									"parameters": {
-										"angle": "turretGun.Angle + random(-MechStatsCache.Get(\"bullet_spread\"), MechStatsCache.Get(\"bullet_spread\"))"
+										"angle": "BallisticGadget.Angle + random(-MechStatsCache.Get(\"bullet_spread\"), MechStatsCache.Get(\"bullet_spread\"))"
 									}
 								},
 								{
@@ -1285,12 +1309,12 @@
 								},
 								{
 									"id": "apply-impulse-at-angle",
-									"objectClass": "turretBase",
+									"objectClass": "MechBase",
 									"sid": 498931916017783,
 									"behaviorType": "Physics",
 									"parameters": {
 										"impulse": "random(0.7, 0.9)",
-										"angle": "turretGun.Angle + 180",
+										"angle": "BallisticGadget.Angle + 180",
 										"image-point": "0"
 									}
 								},
@@ -1320,7 +1344,7 @@
 								},
 								{
 									"id": "set-animation",
-									"objectClass": "turretGun",
+									"objectClass": "BallisticGadget",
 									"sid": 220189348734959,
 									"parameters": {
 										"animation": "\"shoot\"",
@@ -1329,7 +1353,7 @@
 								},
 								{
 									"id": "set-animation-speed",
-									"objectClass": "turretGun",
+									"objectClass": "BallisticGadget",
 									"sid": 545421046995251,
 									"parameters": {
 										"speed": "round(clamp(MechStatsCache.Get(\"fire_rate\") * 3, 12, 40))"
@@ -1337,7 +1361,7 @@
 								},
 								{
 									"id": "set-animation-frame",
-									"objectClass": "turretGun",
+									"objectClass": "BallisticGadget",
 									"sid": 243086424145102,
 									"parameters": {
 										"frame-number": "0"
@@ -1374,8 +1398,8 @@
 									"parameters": {
 										"object-to-create": "gun_flash",
 										"layer": "\"fx\"",
-										"x": "turretGun.ImagePointX(1)",
-										"y": "turretGun.ImagePointY(1)",
+										"x": "BallisticGadget.ImagePointX(1)",
+										"y": "BallisticGadget.ImagePointY(1)",
 										"create-hierarchy": false,
 										"template-name": "\"\""
 									}
@@ -1384,6 +1408,280 @@
 							"sid": 946483471356021
 						}
 					]
+				},
+				{
+					"eventType": "comment",
+					"text": "ARTILLERY"
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-timer",
+							"objectClass": "ArtilleryGadget",
+							"sid": 566464221647327,
+							"behaviorType": "Timer",
+							"parameters": {
+								"tag": "\"shoot\""
+							}
+						},
+						{
+							"id": "pick-by-evaluate",
+							"objectClass": "System",
+							"sid": 336825865373937,
+							"parameters": {
+								"object": "MechObject",
+								"expression": "MechObject.MechBaseUID = ArtilleryGadget.turretBaseUID"
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MechStatsCache",
+							"sid": 803699522806627,
+							"parameters": {
+								"unique-id": "MechObject.MechStatsCacheUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "start-timer",
+							"objectClass": "ArtilleryGadget",
+							"sid": 161915223290427,
+							"behaviorType": "Timer",
+							"parameters": {
+								"duration": "1 / MechStatsCache.Get(\"fire_rate\")",
+								"type": "once",
+								"tag": "\"shoot\""
+							}
+						}
+					],
+					"sid": 793867771495877,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "ArtilleryGadget",
+									"sid": 783802558325109,
+									"parameters": {
+										"instance-variable": "MagCurrent",
+										"comparison": 4,
+										"value": "0"
+									}
+								},
+								{
+									"id": "pick-children",
+									"objectClass": "ArtilleryGadget",
+									"sid": 288315554443526,
+									"parameters": {
+										"child": "ArtilleryRangeCollision",
+										"which": "own"
+									}
+								},
+								{
+									"id": "is-overlapping-another-object",
+									"objectClass": "ArtilleryRangeCollision",
+									"sid": 427365674386970,
+									"parameters": {
+										"object": "enemies"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "subtract-from-instvar",
+									"objectClass": "ArtilleryGadget",
+									"sid": 793986710716960,
+									"parameters": {
+										"instance-variable": "MagCurrent",
+										"value": "1"
+									}
+								}
+							],
+							"sid": 132720639427043,
+							"children": [
+								{
+									"eventType": "variable",
+									"name": "TargetX",
+									"type": "number",
+									"initialValue": "0",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 228858185319981
+								},
+								{
+									"eventType": "variable",
+									"name": "TargetY",
+									"type": "number",
+									"initialValue": "0",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 554909411620904
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "repeat",
+											"objectClass": "System",
+											"sid": 243108747409334,
+											"parameters": {
+												"count": "MechStatsCache.Get(\"bullet_count\")"
+											}
+										},
+										{
+											"id": "pick-random-instance",
+											"objectClass": "System",
+											"sid": 500697867920233,
+											"parameters": {
+												"object": "enemies"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "spawn-another-object",
+											"objectClass": "ArtilleryGadget",
+											"sid": 361665359293759,
+											"parameters": {
+												"object": "ArtilleryBullet",
+												"layer": "ArtilleryGadget.LayerName",
+												"image-point": "1",
+												"create-hierarchy": true,
+												"template-name": "\"\""
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "ArtilleryBullet",
+											"sid": 915386538632730,
+											"parameters": {
+												"instance-variable": "TargetX",
+												"value": "enemies.X + random(-MechStatsCache.Get(\"aim_error\"), MechStatsCache.Get(\"aim_error\"))"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "ArtilleryBullet",
+											"sid": 162258407486115,
+											"parameters": {
+												"instance-variable": "TargetY",
+												"value": "enemies.Y + random(-MechStatsCache.Get(\"aim_error\"), MechStatsCache.Get(\"aim_error\"))"
+											}
+										},
+										{
+											"id": "set-width",
+											"objectClass": "ArtilleryBullet",
+											"sid": 176507624687150,
+											"parameters": {
+												"width": "4"
+											}
+										},
+										{
+											"id": "set-angle",
+											"objectClass": "ArtilleryBullet",
+											"sid": 336320784119986,
+											"parameters": {
+												"angle": "angle(ArtilleryGadget.X, ArtilleryGadget.Y, TargetX, TargetY)"
+											}
+										},
+										{
+											"id": "tween-two-properties",
+											"objectClass": "ArtilleryBullet",
+											"sid": 800120662316332,
+											"behaviorType": "Tween",
+											"parameters": {
+												"tags": "\"position1\"",
+												"property": "position",
+												"end-x": "ArtilleryGadget.X",
+												"end-y": "ArtilleryGadget.Y - 40",
+												"time": "MechStatsCache.Get(\"bullet_time\") / 2",
+												"ease": "easeincubic",
+												"destroy-on-complete": "no",
+												"loop": "no",
+												"ping-pong": "no",
+												"repeat-count": "1"
+											}
+										},
+										{
+											"id": "tween-one-property",
+											"objectClass": "ArtilleryBullet",
+											"sid": 246290856189685,
+											"behaviorType": "Tween",
+											"parameters": {
+												"tags": "\"position\"",
+												"property": "offsetWidth",
+												"end-value": "40",
+												"time": "MechStatsCache.Get(\"bullet_time\") / 2",
+												"ease": "easeincubic",
+												"destroy-on-complete": "no",
+												"loop": "no",
+												"ping-pong": "yes",
+												"repeat-count": "1"
+											}
+										},
+										{
+											"id": "tween-one-property",
+											"objectClass": "ArtilleryBullet",
+											"sid": 320584073810851,
+											"behaviorType": "Tween",
+											"parameters": {
+												"tags": "\"z\"",
+												"property": "offsetZElevation",
+												"end-value": "20",
+												"time": "MechStatsCache.Get(\"bullet_time\") / 2",
+												"ease": "easeincubic",
+												"destroy-on-complete": "no",
+												"loop": "no",
+												"ping-pong": "yes",
+												"repeat-count": "1"
+											}
+										}
+									],
+									"sid": 548774907794120
+								}
+							]
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-tweens-finished",
+							"objectClass": "ArtilleryBullet",
+							"sid": 639930679803478,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"position1\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "tween-two-properties",
+							"objectClass": "ArtilleryBullet",
+							"sid": 133751697902296,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"position2\"",
+								"property": "position",
+								"end-x": "ArtilleryBullet.TargetX",
+								"end-y": "ArtilleryBullet.TargetY",
+								"time": "MechStatsCache.Get(\"bullet_time\") / 2",
+								"ease": "easeincubic",
+								"destroy-on-complete": "no",
+								"loop": "no",
+								"ping-pong": "no",
+								"repeat-count": "1"
+							}
+						}
+					],
+					"sid": 757694657324467
 				}
 			],
 			"sid": 874505846310406
@@ -1468,7 +1766,7 @@
 					"objectClass": "System",
 					"sid": 245920353720156,
 					"parameters": {
-						"object-to-create": "turretBase",
+						"object-to-create": "MechBase",
 						"layer": "\"main\"",
 						"x": "playerCharacter.X + random(-50,50)",
 						"y": "playerCharacter.Y + random(-50,50)",
@@ -1491,7 +1789,7 @@
 					"sid": 157283693289031,
 					"parameters": {
 						"instance-variable": "MechBaseUID",
-						"value": "turretBase.UID"
+						"value": "MechBase.UID"
 					}
 				},
 				{
@@ -1518,7 +1816,7 @@
 					"sid": 701615700309370,
 					"parameters": {
 						"instance-variable": "MechBaseUID",
-						"value": "turretBase.UID"
+						"value": "MechBase.UID"
 					}
 				},
 				{
@@ -1584,21 +1882,102 @@
 				},
 				{
 					"eventType": "block",
-					"conditions": [
+					"conditions": [],
+					"actions": [
 						{
-							"id": "compare-two-values",
-							"objectClass": "System",
-							"sid": 767626525913787,
+							"id": "set-world-gravity",
+							"objectClass": "MechBase",
+							"sid": 421169152660823,
+							"behaviorType": "Physics",
 							"parameters": {
-								"first-value": "random(0,1)",
-								"comparison": 3,
-								"second-value": "0.5"
+								"gravity": "0"
 							}
+						},
+						{
+							"id": "enabledisable-collisions",
+							"objectClass": "MechBase",
+							"sid": 416966372961893,
+							"behaviorType": "Physics",
+							"parameters": {
+								"object": "MechBase",
+								"state": "disable"
+							}
+						},
+						{
+							"id": "enabledisable-collisions",
+							"objectClass": "MechBase",
+							"sid": 200028675449362,
+							"behaviorType": "Physics",
+							"parameters": {
+								"object": "enemies",
+								"state": "disable"
+							}
+						},
+						{
+							"id": "enabledisable-collisions",
+							"objectClass": "MechBase",
+							"sid": 801144520500964,
+							"behaviorType": "Physics",
+							"parameters": {
+								"object": "scrap",
+								"state": "disable"
+							}
+						},
+						{
+							"id": "start-timer",
+							"objectClass": "MechBase",
+							"sid": 621369654673817,
+							"behaviorType": "Timer",
+							"parameters": {
+								"duration": "random(1.0,1.5)",
+								"type": "once",
+								"tag": "\"moveTimer\""
+							}
+						},
+						{
+							"id": "add-obstacle",
+							"objectClass": "MechBase",
+							"sid": 550202625372847,
+							"behaviorType": "Pathfinding",
+							"parameters": {
+								"obstacle": "playerCharacter"
+							}
+						},
+						{
+							"id": "pin-to-object-imagepoint",
+							"objectClass": "turretHealthBarBG",
+							"sid": 901388729072683,
+							"behaviorType": "Pin",
+							"parameters": {
+								"pin-to": "MechBase",
+								"image-point": "1",
+								"angle": false,
+								"width-type": "no",
+								"height-type": "no",
+								"z": false
+							}
+						},
+						{
+							"id": "pin-to-object-imagepoint",
+							"objectClass": "turretHealthBar",
+							"sid": 866564175169280,
+							"behaviorType": "Pin",
+							"parameters": {
+								"pin-to": "MechBase",
+								"image-point": "1",
+								"angle": false,
+								"width-type": "no",
+								"height-type": "no",
+								"z": false
+							}
+						},
+						{
+							"id": "move-to-top",
+							"objectClass": "turretHealthBar",
+							"sid": 934206772281678
 						}
 					],
-					"actions": [],
-					"sid": 763636436171883,
-					"disabled": true
+					"sid": 759624159613439
 				},
 				{
 					"eventType": "block",
@@ -1606,27 +1985,70 @@
 						{
 							"id": "compare-two-values",
 							"objectClass": "System",
-							"sid": 594689594418819,
+							"sid": 245954097686228,
 							"parameters": {
-								"first-value": "random(0,1)",
-								"comparison": 3,
-								"second-value": "0.5"
+								"first-value": "Type",
+								"comparison": 0,
+								"second-value": "\"ballistic\""
 							}
 						}
 					],
 					"actions": [
 						{
-							"customAction": "AddUpgradeToMech",
-							"objectClass": "UpgradesManager",
-							"sid": 909334561745066,
-							"parameters": [
-								"\"rapid_fire\"",
-								"MechObject.UID"
-							]
+							"id": "spawn-another-object",
+							"objectClass": "MechBase",
+							"sid": 419510701975508,
+							"parameters": {
+								"object": "BallisticGadget",
+								"layer": "\"main\"",
+								"image-point": "\"gadget\"",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "add-object-to-target",
+							"objectClass": "BallisticGadget",
+							"sid": 991592736035950,
+							"behaviorType": "Turret",
+							"parameters": {
+								"target": "enemyTest"
+							}
+						},
+						{
+							"id": "pin-to-object-imagepoint",
+							"objectClass": "BallisticGadget",
+							"sid": 650963565248123,
+							"behaviorType": "Pin2",
+							"parameters": {
+								"pin-to": "MechBase",
+								"image-point": "\"gadget\"",
+								"angle": false,
+								"width-type": "no",
+								"height-type": "no",
+								"z": false
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "BallisticGadget",
+							"sid": 741972759627405,
+							"parameters": {
+								"instance-variable": "turretBaseUID",
+								"value": "MechBase.UID"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "BallisticGadget",
+							"sid": 680552041234447,
+							"parameters": {
+								"instance-variable": "MagCurrent",
+								"value": "MechStatsCache.Get(\"mag_size\")"
+							}
 						}
 					],
-					"sid": 110499373191480,
-					"disabled": true
+					"sid": 101984407998506
 				},
 				{
 					"eventType": "block",
@@ -1634,27 +2056,148 @@
 						{
 							"id": "compare-two-values",
 							"objectClass": "System",
-							"sid": 352850224663864,
+							"sid": 670946230326296,
 							"parameters": {
-								"first-value": "random(0,1)",
-								"comparison": 3,
-								"second-value": "0.5"
+								"first-value": "Type",
+								"comparison": 0,
+								"second-value": "\"artillery\""
 							}
 						}
 					],
 					"actions": [
 						{
-							"customAction": "AddUpgradeToMech",
-							"objectClass": "UpgradesManager",
-							"sid": 397010152379355,
-							"parameters": [
-								"\"ricochet\"",
-								"MechObject.UID"
-							]
+							"id": "spawn-another-object",
+							"objectClass": "MechBase",
+							"sid": 722714313500705,
+							"parameters": {
+								"object": "ArtilleryGadget",
+								"layer": "MechBase.LayerName",
+								"image-point": "\"gadget\"",
+								"create-hierarchy": true,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "pin-to-object-imagepoint",
+							"objectClass": "ArtilleryGadget",
+							"sid": 260036502185987,
+							"behaviorType": "Pin2",
+							"parameters": {
+								"pin-to": "MechBase",
+								"image-point": "\"gadget\"",
+								"angle": false,
+								"width-type": "no",
+								"height-type": "no",
+								"z": false
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "ArtilleryGadget",
+							"sid": 899964539492112,
+							"parameters": {
+								"instance-variable": "turretBaseUID",
+								"value": "MechBase.UID"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "ArtilleryGadget",
+							"sid": 269285197574404,
+							"parameters": {
+								"instance-variable": "MagCurrent",
+								"value": "MechStatsCache.Get(\"mag_size\")"
+							}
+						},
+						{
+							"id": "start-timer",
+							"objectClass": "ArtilleryGadget",
+							"sid": 812117656424990,
+							"behaviorType": "Timer",
+							"parameters": {
+								"duration": "1 / MechStatsCache.Get(\"fire_rate\")",
+								"type": "once",
+								"tag": "\"shoot\""
+							}
 						}
 					],
-					"sid": 903064687708937,
-					"disabled": true
+					"sid": 487148395782632
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 748137998673586,
+							"parameters": {
+								"first-value": "Type",
+								"comparison": 0,
+								"second-value": "\"healer\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "spawn-another-object",
+							"objectClass": "MechBase",
+							"sid": 251952059461264,
+							"parameters": {
+								"object": "turretRepairer",
+								"layer": "\"main\"",
+								"image-point": "0",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "pin-to-object-imagepoint",
+							"objectClass": "turretRepairer",
+							"sid": 668404158362327,
+							"behaviorType": "Pin2",
+							"parameters": {
+								"pin-to": "MechBase",
+								"image-point": "0",
+								"angle": false,
+								"width-type": "no",
+								"height-type": "no",
+								"z": false
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "turretRepairer",
+							"sid": 176733130763870,
+							"parameters": {
+								"instance-variable": "turretBaseUID",
+								"value": "MechBase.UID"
+							}
+						},
+						{
+							"id": "pin-to-object-imagepoint",
+							"objectClass": "turretRepairArea",
+							"sid": 160415437859451,
+							"behaviorType": "Pin",
+							"parameters": {
+								"pin-to": "turretRepairer",
+								"image-point": "0",
+								"angle": false,
+								"width-type": "no",
+								"height-type": "no",
+								"z": false
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "turretRepairArea",
+							"sid": 936740201641963,
+							"parameters": {
+								"instance-variable": "turretBaseUID",
+								"value": "turretRepairer.turretBaseUID"
+							}
+						}
+					],
+					"sid": 289625103458569
 				}
 			]
 		},
@@ -1681,78 +2224,87 @@
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "compare-two-values",
-							"objectClass": "System",
-							"sid": 753580638297265,
+							"id": "pick-by-unique-id",
+							"objectClass": "MechStatsCache",
+							"sid": 256552652760829,
 							"parameters": {
-								"first-value": "MechObject.Get(\"type\")",
-								"comparison": 0,
-								"second-value": "\"combat\""
+								"unique-id": "MechObject.MechStatsCacheUID"
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MechBase",
+							"sid": 252086148533286,
+							"parameters": {
+								"unique-id": "MechObject.MechBaseUID"
 							}
 						}
 					],
 					"actions": [],
-					"sid": 858571266041007,
+					"sid": 353245325185763,
 					"children": [
 						{
 							"eventType": "block",
 							"conditions": [
 								{
-									"id": "pick-by-unique-id",
-									"objectClass": "MechStatsCache",
-									"sid": 274137201233466,
-									"parameters": {
-										"unique-id": "MechObject.MechStatsCacheUID"
-									}
-								},
-								{
-									"id": "pick-by-unique-id",
-									"objectClass": "turretBase",
-									"sid": 217537479192315,
-									"parameters": {
-										"unique-id": "MechObject.MechBaseUID"
-									}
-								},
-								{
-									"id": "pick-by-evaluate",
+									"id": "compare-two-values",
 									"objectClass": "System",
-									"sid": 377371481744253,
+									"sid": 908003022709652,
 									"parameters": {
-										"object": "turretGun",
-										"expression": "turretGun.turretBaseUID = MechObject.MechBaseUID"
+										"first-value": "MechObject.Get(\"type\")",
+										"comparison": 0,
+										"second-value": "\"ballistic\""
 									}
 								}
 							],
-							"actions": [
+							"actions": [],
+							"sid": 391425069530805,
+							"children": [
 								{
-									"id": "set-range",
-									"objectClass": "turretGun",
-									"sid": 161830757224409,
-									"behaviorType": "Turret",
-									"parameters": {
-										"range": "MechStatsCache.Get(\"range\")"
-									}
-								},
-								{
-									"id": "set-projectile-speed",
-									"objectClass": "turretGun",
-									"sid": 869466066740124,
-									"behaviorType": "Turret",
-									"parameters": {
-										"projectile-speed": "MechStatsCache.Get(\"bullet_speed\")"
-									}
-								},
-								{
-									"id": "set-rate-of-fire",
-									"objectClass": "turretGun",
-									"sid": 878428573730935,
-									"behaviorType": "Turret",
-									"parameters": {
-										"rate-of-fire": "1 / MechStatsCache.Get(\"fire_rate\")"
-									}
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-evaluate",
+											"objectClass": "System",
+											"sid": 736799424818320,
+											"parameters": {
+												"object": "BallisticGadget",
+												"expression": "BallisticGadget.turretBaseUID = MechObject.MechBaseUID"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-range",
+											"objectClass": "BallisticGadget",
+											"sid": 745367445435466,
+											"behaviorType": "Turret",
+											"parameters": {
+												"range": "MechStatsCache.Get(\"range\")"
+											}
+										},
+										{
+											"id": "set-projectile-speed",
+											"objectClass": "BallisticGadget",
+											"sid": 252983781331837,
+											"behaviorType": "Turret",
+											"parameters": {
+												"projectile-speed": "MechStatsCache.Get(\"bullet_speed\")"
+											}
+										},
+										{
+											"id": "set-rate-of-fire",
+											"objectClass": "BallisticGadget",
+											"sid": 120098496441867,
+											"behaviorType": "Turret",
+											"parameters": {
+												"rate-of-fire": "1 / MechStatsCache.Get(\"fire_rate\")"
+											}
+										}
+									],
+									"sid": 914870225624806
 								}
-							],
-							"sid": 515337835596822
+							]
 						}
 					]
 				}
@@ -1963,6 +2515,400 @@
 					]
 				}
 			]
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "MechMovement",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-timer",
+							"objectClass": "MechBase",
+							"sid": 496871337616338,
+							"behaviorType": "Timer",
+							"parameters": {
+								"tag": "\"moveTimer\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "start-timer",
+							"objectClass": "MechBase",
+							"sid": 602260709380513,
+							"behaviorType": "Timer",
+							"parameters": {
+								"duration": "random(1.0,1.5)",
+								"type": "once",
+								"tag": "\"moveTimer\""
+							}
+						}
+					],
+					"sid": 889127490316288,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "player_turret_position",
+									"sid": 619958627044118,
+									"parameters": {
+										"instance-variable": "index",
+										"comparison": 0,
+										"value": "MechBase.turretIndex"
+									}
+								},
+								{
+									"id": "is-moving-along-path",
+									"objectClass": "MechBase",
+									"sid": 143820572931812,
+									"behaviorType": "Pathfinding",
+									"isInverted": true
+								},
+								{
+									"id": "is-calculating-path",
+									"objectClass": "MechBase",
+									"sid": 239788536315192,
+									"behaviorType": "Pathfinding",
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "find-path",
+									"objectClass": "MechBase",
+									"sid": 732624794651280,
+									"behaviorType": "Pathfinding",
+									"parameters": {
+										"x": "player_turret_position.ImagePointX(1)+random(-10,10)",
+										"y": "player_turret_position.ImagePointY(1)+random(-10,10)"
+									}
+								}
+							],
+							"sid": 364716452898258,
+							"disabled": true
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-children",
+									"objectClass": "MechBase",
+									"sid": 515729807596816,
+									"parameters": {
+										"child": "turret_proximity_collision",
+										"which": "own"
+									}
+								},
+								{
+									"id": "is-overlapping-another-object",
+									"objectClass": "turret_proximity_collision",
+									"sid": 573829013449524,
+									"parameters": {
+										"object": "enemies"
+									},
+									"isInverted": true
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 103057964821551,
+									"parameters": {
+										"first-value": "distance(MechBase.X, MechBase.Y, playerCharacter.X, playerCharacter.Y)",
+										"comparison": 4,
+										"second-value": "stop_move_near_player_distance"
+									}
+								},
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "MechBase",
+									"sid": 576546855640590,
+									"parameters": {
+										"instance-variable": "state",
+										"comparison": 0,
+										"value": "\"default\""
+									}
+								},
+								{
+									"id": "is-moving-along-path",
+									"objectClass": "MechBase",
+									"sid": 138792526000044,
+									"disabled": true,
+									"behaviorType": "Pathfinding",
+									"isInverted": true
+								}
+							],
+							"actions": [],
+							"sid": 241067663005030,
+							"children": [
+								{
+									"eventType": "variable",
+									"name": "PickedCount",
+									"type": "number",
+									"initialValue": "0",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 120715706715951
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-moving",
+											"objectClass": "playerCharacter",
+											"sid": 133627631200370,
+											"disabled": true,
+											"behaviorType": "8Direction",
+											"isInverted": true
+										},
+										{
+											"id": "is-overlapping-another-object",
+											"objectClass": "player_turret_position",
+											"sid": 966694397518633,
+											"parameters": {
+												"object": "enemies"
+											},
+											"isInverted": true
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 357165536185584,
+											"parameters": {
+												"variable": "PickedCount",
+												"value": "player_turret_position.PickedCount"
+											}
+										},
+										{
+											"id": "move-to-object",
+											"objectClass": "MechBase",
+											"sid": 505215630206627,
+											"disabled": true,
+											"behaviorType": "MoveTo",
+											"parameters": {
+												"object": "player_turret_position",
+												"image-point": "1",
+												"mode": "direct"
+											}
+										},
+										{
+											"id": "move-to-position",
+											"objectClass": "MechBase",
+											"sid": 854947761433199,
+											"disabled": true,
+											"behaviorType": "MoveTo",
+											"parameters": {
+												"x": "player_turret_position.ImagePointX(1)+random(-20,20)",
+												"y": "player_turret_position.ImagePointY(1)+random(-20,20)",
+												"mode": "add-waypoint"
+											}
+										},
+										{
+											"id": "apply-force-towards-position",
+											"objectClass": "MechBase",
+											"sid": 283146935584648,
+											"disabled": true,
+											"behaviorType": "Physics",
+											"parameters": {
+												"force": "turret_follow_force",
+												"x": "player_turret_position.ImagePointX(1)+random(-20,20)",
+												"y": "player_turret_position.ImagePointY(1)+random(-20,20)",
+												"image-point": "0"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "MechBase",
+											"sid": 893953608917580,
+											"disabled": true,
+											"parameters": {
+												"instance-variable": "patrol_x",
+												"value": "player_turret_position.ImagePointX(1)+random(-20,20)"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "MechBase",
+											"sid": 540349399983082,
+											"disabled": true,
+											"parameters": {
+												"instance-variable": "patrol_y",
+												"value": "player_turret_position.ImagePointY(1)+random(-20,20)"
+											}
+										},
+										{
+											"id": "stop",
+											"objectClass": "MechBase",
+											"sid": 656137887042867,
+											"disabled": true,
+											"behaviorType": "Pathfinding"
+										},
+										{
+											"id": "move-to-position",
+											"objectClass": "MechBase",
+											"sid": 478074327985358,
+											"disabled": true,
+											"behaviorType": "MoveTo",
+											"parameters": {
+												"x": "player_turret_position.ImagePointX(1) + random(-50,50)",
+												"y": "player_turret_position.ImagePointY(1) + random(-50,50)",
+												"mode": "add-waypoint"
+											}
+										}
+									],
+									"sid": 657470389983432
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 704300347862659,
+											"parameters": {
+												"first-value": "PickedCount",
+												"comparison": 4,
+												"second-value": "0"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 589973695451954,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "is-overlapping-another-object",
+													"objectClass": "player_turret_position",
+													"sid": 474456144491366,
+													"parameters": {
+														"object": "enemies"
+													},
+													"isInverted": true
+												},
+												{
+													"id": "pick-random-instance",
+													"objectClass": "System",
+													"sid": 603359822239879,
+													"parameters": {
+														"object": "player_turret_position"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "find-path",
+													"objectClass": "MechBase",
+													"sid": 310593387841929,
+													"behaviorType": "Pathfinding",
+													"parameters": {
+														"x": "player_turret_position.ImagePointX(1) + random(-50,50)",
+														"y": "player_turret_position.ImagePointY(1) + random(-50,50)"
+													}
+												}
+											],
+											"sid": 216806469931715
+										}
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "else",
+											"objectClass": "System",
+											"sid": 512824719775684
+										},
+										{
+											"id": "pick-random-instance",
+											"objectClass": "System",
+											"sid": 864895366439341,
+											"parameters": {
+												"object": "player_turret_position"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "find-path",
+											"objectClass": "MechBase",
+											"sid": 642383539925715,
+											"behaviorType": "Pathfinding",
+											"parameters": {
+												"x": "player_turret_position.ImagePointX(1) + random(-50,50)",
+												"y": "player_turret_position.ImagePointY(1) + random(-50,50)"
+											}
+										}
+									],
+									"sid": 927525379763643
+								}
+							]
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-path-found",
+							"objectClass": "MechBase",
+							"sid": 842846243374934,
+							"behaviorType": "Pathfinding"
+						},
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 875299157745616,
+							"parameters": {
+								"first-value": "distance(MechBase.X, MechBase.Y, playerCharacter.X, playerCharacter.Y)",
+								"comparison": 4,
+								"second-value": "stop_move_near_player_distance"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "move-along-path",
+							"objectClass": "MechBase",
+							"sid": 930088857552507,
+							"behaviorType": "Pathfinding"
+						}
+					],
+					"sid": 793158459370243
+				}
+			],
+			"sid": 535395925155042
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "every-tick",
+					"objectClass": "System",
+					"sid": 151517071701259
+				}
+			],
+			"actions": [
+				{
+					"id": "set-width",
+					"objectClass": "turretHealthBar",
+					"sid": 579799212105290,
+					"parameters": {
+						"width": "(MechBase.Health/MechBase.MaxHealth)*53"
+					}
+				}
+			],
+			"sid": 320584909195028
 		}
 	],
 	"sid": 182913111176321

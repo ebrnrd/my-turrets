@@ -1,75 +1,12 @@
 {
-	"name": "turretGun",
+	"name": "BallisticGadget",
 	"plugin-id": "Sprite",
 	"sid": 611799365234037,
 	"isGlobal": false,
 	"editorNewInstanceIsReplica": true,
 	"instanceVariables": [
 		{
-			"name": "base_damage",
-			"type": "number",
-			"desc": "",
-			"show": true,
-			"sid": 446980034859599
-		},
-		{
-			"name": "fire_rate",
-			"type": "number",
-			"desc": "",
-			"show": true,
-			"sid": 404488440776952
-		},
-		{
-			"name": "spread",
-			"type": "number",
-			"desc": "",
-			"show": true,
-			"sid": 212300029505093
-		},
-		{
-			"name": "bullet_count",
-			"type": "number",
-			"desc": "",
-			"show": true,
-			"sid": 477923101433293
-		},
-		{
-			"name": "bullet_speed",
-			"type": "number",
-			"desc": "",
-			"show": true,
-			"sid": 279177111590915
-		},
-		{
-			"name": "reload_speed",
-			"type": "number",
-			"desc": "",
-			"show": true,
-			"sid": 514426003796149
-		},
-		{
-			"name": "mag_size",
-			"type": "number",
-			"desc": "",
-			"show": true,
-			"sid": 920463947026415
-		},
-		{
-			"name": "bullet_distance",
-			"type": "number",
-			"desc": "",
-			"show": true,
-			"sid": 866717625997401
-		},
-		{
-			"name": "bullet_knockback",
-			"type": "number",
-			"desc": "",
-			"show": true,
-			"sid": 266945616319589
-		},
-		{
-			"name": "mag_current",
+			"name": "MagCurrent",
 			"type": "number",
 			"desc": "",
 			"show": true,

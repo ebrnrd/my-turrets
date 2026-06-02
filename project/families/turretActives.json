@@ -20,7 +20,8 @@
 	],
 	"effectTypes": [],
 	"members": [
-		"turretGun",
-		"turretRepairer"
+		"BallisticGadget",
+		"turretRepairer",
+		"ArtilleryGadget"
 	]
 }

@@ -43,7 +43,7 @@
 							"objectClass": "System",
 							"sid": 232652134277034,
 							"parameters": {
-								"object": "turretGun"
+								"object": "BallisticGadget"
 							}
 						}
 					],
@@ -55,21 +55,21 @@
 							"conditions": [
 								{
 									"id": "pick-by-unique-id",
-									"objectClass": "turretBase",
+									"objectClass": "MechBase",
 									"sid": 253847776514542,
 									"parameters": {
-										"unique-id": "turretGun.turretBaseUID"
+										"unique-id": "BallisticGadget.turretBaseUID"
 									}
 								}
 							],
 							"actions": [
 								{
 									"id": "move-to-object",
-									"objectClass": "turretGun",
+									"objectClass": "BallisticGadget",
 									"sid": 306681864688335,
 									"parameters": {
 										"where": "in-front",
-										"object": "turretBase"
+										"object": "MechBase"
 									}
 								}
 							],

@@ -1,0 +1,81 @@
+{
+	"name": "ArtilleryBullet",
+	"plugin-id": "Sprite",
+	"sid": 361191072506159,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [
+		{
+			"name": "TargetX",
+			"type": "number",
+			"desc": "",
+			"show": false,
+			"sid": 217096935863598
+		},
+		{
+			"name": "TargetY",
+			"type": "number",
+			"desc": "",
+			"show": false,
+			"sid": 966303595417695
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Tween",
+			"name": "Tween",
+			"sid": 514957114967516
+		}
+	],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 10,
+						"height": 6,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 70730,
+						"collisionPoly": {
+							"points": [
+								0.2,
+								0.16666666666666666,
+								0.8,
+								0.16666666666666666,
+								0.9,
+								0.3333333333333333,
+								0.9,
+								0.6666666666666666,
+								0.8,
+								0.8333333333333334,
+								0.2,
+								0.8333333333333334,
+								0.1,
+								0.6666666666666666,
+								0.1,
+								0.3333333333333333
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 342410917417921,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

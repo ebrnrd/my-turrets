@@ -351,8 +351,8 @@
 			"playerCharacter",
 			"placeHolderBG",
 			"wall",
-			"turretBase",
-			"turretGun",
+			"MechBase",
+			"BallisticGadget",
 			"enemyTest",
 			"turretUI",
 			"Keyboard",
@@ -423,7 +423,11 @@
 			"ActiveUpgradeText",
 			"MechPathfindDebug",
 			"Mine",
-			"ExplosionSprite"
+			"ExplosionSprite",
+			"ArtilleryGadget",
+			"ArtilleryRangeCollision",
+			"ArtilleryBullet",
+			"ArtilleryBulletDepthSprite"
 		],
 		"subfolders": [
 			{
@@ -465,7 +469,7 @@
 	"containers": [
 		{
 			"members": [
-				"turretBase",
+				"MechBase",
 				"turretHealthBar",
 				"turretHealthBarBG"
 			]
@@ -494,7 +498,8 @@
 	"layouts": {
 		"items": [
 			"stuff",
-			"survivor_level_test"
+			"survivor_level_test",
+			"MechObjects"
 		],
 		"subfolders": []
 	},

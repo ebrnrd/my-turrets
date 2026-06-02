@@ -9,12 +9,13 @@
 		"playerCharacter",
 		"enemyTest",
 		"bullet",
-		"turretBase",
-		"turretGun",
+		"MechBase",
+		"BallisticGadget",
 		"wall",
 		"tree",
 		"rock",
 		"HighGrass",
-		"UpgradeAltar"
+		"UpgradeAltar",
+		"ArtilleryGadget"
 	]
 }
