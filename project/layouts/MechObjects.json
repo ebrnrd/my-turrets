@@ -391,13 +391,17 @@
 						"TargetY": 0,
 						"ExplosionSize": 0,
 						"ExplosionDamage": 0,
-						"ExplosionKnockback": 0
+						"ExplosionKnockback": 0,
+						"BulletTime": 0
 					},
 					"behaviors": {
 						"Tween": {
 							"properties": {
 								"enabled": true
 							}
+						},
+						"Timer": {
+							"properties": {}
 						}
 					},
 					"sceneGraphData": {
@@ -406,21 +410,6 @@
 						"children": [
 							{
 								"uid": 12,
-								"flags": {
-									"x": true,
-									"y": true,
-									"z": true,
-									"w": false,
-									"h": false,
-									"a": true,
-									"o": false,
-									"v": false,
-									"d": true,
-									"sm": "normal"
-								}
-							},
-							{
-								"uid": 14,
 								"flags": {
 									"x": true,
 									"y": true,
@@ -480,81 +469,47 @@
 					}
 				},
 				{
-					"type": "SmokeTrailParticles",
+					"type": "ArtillerySmokeTrail",
 					"properties": {
-						"rate": 20,
-						"spray-cone": 40,
-						"type": "continuous-spray",
-						"object": -1,
 						"initially-visible": true,
-						"live-preview": false,
-						"speed": 20,
-						"size": 12,
-						"opacity": 100,
-						"grow-rate": 60,
-						"x-randomiser": 4,
-						"y-randomiser": 4,
-						"initial-speed-randomiser": 10,
-						"size-randomiser": 0,
-						"grow-rate-randomiser": 0,
-						"acceleration": 0,
-						"gravity": 0,
-						"angle-randomiser": 0,
-						"life-speed-randomiser": 800,
-						"opacity-randomiser": 0,
-						"destroy-mode": "fade-to-invisible",
-						"timeout": 0.4
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
 					},
 					"uid": 14,
-					"sid": 342959117294670,
+					"sid": 405883517047524,
 					"tags": "",
 					"instanceVariables": {},
-					"behaviors": {},
-					"sceneGraphData": {
-						"parent-uid": 11,
-						"uid": 14,
-						"flags": {
-							"x": true,
-							"y": true,
-							"z": true,
-							"w": false,
-							"h": false,
-							"a": true,
-							"o": false,
-							"v": false,
-							"d": true,
-							"sm": "normal"
-						},
-						"preview": {
-							"transformX": 0,
-							"transformY": 0,
-							"transformZ": 0,
-							"transformW": 2.220446049250313e-16,
-							"transformH": 2.220446049250313e-16,
-							"transformA": 0,
-							"transformSX": 0,
-							"transformSY": 0,
-							"transformO": 0,
-							"previewSceneGraph": false
+					"behaviors": {
+						"Fade": {
+							"properties": {
+								"fade-in-time": 0,
+								"wait-time": 0,
+								"fade-out-time": 1,
+								"destroy": true,
+								"enabled": true,
+								"live-preview": false
+							}
 						}
 					},
 					"showing": true,
 					"locked": false,
 					"world": {
-						"x": 389.8536376953125,
-						"y": 1167.2847900390625,
-						"width": 100,
-						"height": 100,
-						"originX": 0,
+						"x": 378.9403381347656,
+						"y": 1167.4263916015625,
+						"width": 16,
+						"height": 16,
+						"originX": 0.5,
 						"originY": 0.5,
 						"color": [
 							0,
 							0,
 							0,
-							1
+							0.6
 						],
 						"z": 0,
-						"angle": 3.141592653589793
+						"angle": 0
 					}
 				}
 			],

@@ -2203,7 +2203,9 @@
 							"uid": 125,
 							"sid": 283094482487311,
 							"tags": "close_upgrade",
-							"instanceVariables": {},
+							"instanceVariables": {
+								"IsDisabled": false
+							},
 							"behaviors": {},
 							"effects": {
 								"HoverColor": {
@@ -2213,6 +2215,17 @@
 											0.9137254901960784,
 											0.5803921568627451,
 											0.047058823529411764,
+											1
+										]
+									}
+								},
+								"DisabledColor": {
+									"isEnabled": true,
+									"parameters": {
+										"color": [
+											1,
+											0,
+											0,
 											1
 										]
 									}
@@ -3239,7 +3252,8 @@
 			"instanceVariables": {
 				"IsUpgradingMech": false,
 				"SelectedMechUID": 0,
-				"SelectedUpgradeID": ""
+				"SelectedUpgradeID": "",
+				"SelectedUpgradeMechType": ""
 			}
 		},
 		{
@@ -3266,7 +3280,7 @@
 			"instanceVariables": {}
 		},
 		{
-			"type": "UpgradeKeys",
+			"type": "AllUpgradeKeys",
 			"properties": {},
 			"uid": 123,
 			"sid": 852802736543278,

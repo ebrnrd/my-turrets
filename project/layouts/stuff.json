@@ -786,7 +786,7 @@
 						"height_from_ground": -10,
 						"shadow_width": 100,
 						"Health": 100,
-						"MaxHealth": 50,
+						"MaxHealth": 16,
 						"Faction": ""
 					},
 					"behaviors": {
@@ -3502,8 +3502,10 @@
 					},
 					"uid": 118,
 					"sid": 166493009347464,
-					"tags": "",
-					"instanceVariables": {},
+					"tags": "apply_upgrade",
+					"instanceVariables": {
+						"IsDisabled": false
+					},
 					"behaviors": {},
 					"effects": {
 						"HoverColor": {
@@ -3513,6 +3515,17 @@
 									1,
 									1,
 									1,
+									1
+								]
+							}
+						},
+						"DisabledColor": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									0.43137254901960786,
+									0.43137254901960786,
+									0.43137254901960786,
 									1
 								]
 							}
@@ -3692,7 +3705,24 @@
 		}
 	],
 	"sid": 621959585809670,
-	"nonworld-instances": [],
+	"nonworld-instances": [
+		{
+			"type": "PlayerMechTypes",
+			"properties": {},
+			"uid": 24,
+			"sid": 902684170703088,
+			"tags": "",
+			"instanceVariables": {}
+		},
+		{
+			"type": "PossibleUpgradeKeys",
+			"properties": {},
+			"uid": 27,
+			"sid": 949391911016288,
+			"tags": "",
+			"instanceVariables": {}
+		}
+	],
 	"effectTypes": [],
 	"width": 3840,
 	"height": 2160,

@@ -25,6 +25,13 @@
 			"desc": "",
 			"show": true,
 			"sid": 541746918008352
+		},
+		{
+			"name": "SelectedUpgradeMechType",
+			"type": "string",
+			"desc": "",
+			"show": true,
+			"sid": 561969813801073
 		}
 	]
 }

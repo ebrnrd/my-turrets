@@ -39,6 +39,13 @@
 			"desc": "",
 			"show": false,
 			"sid": 700692144960421
+		},
+		{
+			"name": "BulletTime",
+			"type": "number",
+			"desc": "",
+			"show": false,
+			"sid": 929150216358806
 		}
 	],
 	"behaviorTypes": [
@@ -46,6 +53,11 @@
 			"behaviorId": "Tween",
 			"name": "Tween",
 			"sid": 514957114967516
+		},
+		{
+			"behaviorId": "Timer",
+			"name": "Timer",
+			"sid": 555605087315144
 		}
 	],
 	"effectTypes": [],
@@ -84,6 +96,13 @@
 							]
 						},
 						"useCollisionPoly": true,
+						"imagePoints": [
+							{
+								"name": "TrailOrigin",
+								"x": 0.1,
+								"y": 0.5
+							}
+						],
 						"duration": 1,
 						"tag": ""
 					}

@@ -94,6 +94,51 @@
       { "tag": "on_loop", "duration": 5, "actions": ["spawn_mine"] }
     ],
     "mech_type": "ballistic"
+  },
+
+  "more_missiles": {
+    "label": "More Missiles",
+    "description": "",
+    "modifiers": [
+      { "stat": "bullet_count", "op": "add", "value": 1 }
+    ],
+    "behavior_tags": [],
+    "hooks": [],
+    "mech_type": "artillery"
+  },
+
+  "bigger_blast": {
+    "label": "Bigger Blast",
+    "description": "",
+    "modifiers": [
+      { "stat": "explosion_size", "op": "multiply", "value": 1.5 }
+    ],
+    "behavior_tags": [],
+    "hooks": [],
+    "mech_type": "artillery"
+  },
+
+  "heavy_missiles": {
+    "label": "Heavy Missiles",
+    "description": "",
+    "modifiers": [
+      { "stat": "explosion_damage", "op": "multiply", "value": 1.6 },
+      { "stat": "bullet_time", "op": "multiply", "value": 1.2 }
+    ],
+    "behavior_tags": [],
+    "hooks": [],
+    "mech_type": "artillery"
+  },
+
+  "bigger_reserve": {
+    "label": "Bigger Reserve",
+    "description": "",
+    "modifiers": [
+      { "stat": "mag_size", "op": "multiply", "value": 1.5 }
+    ],
+    "behavior_tags": [],
+    "hooks": [],
+    "mech_type": "artillery"
   }
 
 }

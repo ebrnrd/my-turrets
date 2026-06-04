@@ -1,6 +1,6 @@
 {
 	"projectFormatVersion": 1,
-	"savedWithRelease": 48700,
+	"savedWithRelease": 48702,
 	"name": "turrets_1",
 	"runtime": "c3",
 	"useWorker": "auto",
@@ -435,18 +435,27 @@
 			"ArtilleryRangeCollision",
 			"ArtilleryBullet",
 			"ArtilleryBulletDepthSprite",
-			"SmokeTrailParticles",
-			"ExplosionParticles"
+			"ExplosionParticles",
+			"ArtillerySmokeTrail"
 		],
 		"subfolders": [
 			{
 				"items": [
 					"MechDefinitions",
 					"UpgradeDefinitions",
-					"AJAX",
-					"UpgradeKeys"
+					"AJAX"
 				],
-				"subfolders": [],
+				"subfolders": [
+					{
+						"items": [
+							"PlayerMechTypes",
+							"AllUpgradeKeys",
+							"PossibleUpgradeKeys"
+						],
+						"subfolders": [],
+						"name": "OnNecessity"
+					}
+				],
 				"name": "DataObjects"
 			},
 			{

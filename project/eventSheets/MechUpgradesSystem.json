@@ -3094,12 +3094,22 @@
 						},
 						{
 							"id": "clear",
-							"objectClass": "UpgradeKeys",
+							"objectClass": "AllUpgradeKeys",
 							"sid": 781116971616238
 						},
 						{
+							"id": "clear",
+							"objectClass": "PossibleUpgradeKeys",
+							"sid": 755326050384980
+						},
+						{
+							"id": "clear",
+							"objectClass": "PlayerMechTypes",
+							"sid": 323049121462957
+						},
+						{
 							"id": "load",
-							"objectClass": "UpgradeKeys",
+							"objectClass": "AllUpgradeKeys",
 							"sid": 123735550351496,
 							"parameters": {
 								"json": "\"{\"\"c2dictionary\"\":true,\"\"data\"\":\" & UpgradeDefinitions.ToCompactString & \"}\""
@@ -3122,8 +3132,72 @@
 							"eventType": "block",
 							"conditions": [
 								{
+									"id": "for-each",
+									"objectClass": "System",
+									"sid": 352697877794154,
+									"parameters": {
+										"object": "MechObject"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "add-key",
+									"objectClass": "PlayerMechTypes",
+									"sid": 541318689771403,
+									"parameters": {
+										"key": "MechObject.Get(\"type\")",
+										"value": "0"
+									}
+								}
+							],
+							"sid": 991823244548833
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
 									"id": "for-each-key",
-									"objectClass": "UpgradeKeys",
+									"objectClass": "AllUpgradeKeys",
+									"sid": 705463353116469
+								}
+							],
+							"actions": [],
+							"sid": 120643361037689,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "has-key",
+											"objectClass": "PlayerMechTypes",
+											"sid": 233835934288075,
+											"parameters": {
+												"key": "UpgradeDefinitions.Get(AllUpgradeKeys.CurrentKey & \".mech_type\")"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "add-key",
+											"objectClass": "PossibleUpgradeKeys",
+											"sid": 608648025164275,
+											"parameters": {
+												"key": "AllUpgradeKeys.CurrentKey",
+												"value": "0"
+											}
+										}
+									],
+									"sid": 879931233601560
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "for-each-key",
+									"objectClass": "PossibleUpgradeKeys",
 									"sid": 926172969245414
 								}
 							],
@@ -3134,7 +3208,7 @@
 									"sid": 205713898769621,
 									"parameters": {
 										"where": "back",
-										"value": "UpgradeKeys.CurrentKey",
+										"value": "PossibleUpgradeKeys.CurrentKey",
 										"axis": "x"
 									}
 								}
@@ -3233,6 +3307,12 @@
 								}
 							],
 							"sid": 533765143634632
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [],
+							"sid": 287250172284229
 						}
 					]
 				},
@@ -3250,12 +3330,29 @@
 							}
 						},
 						{
+							"id": "has-tags",
+							"objectClass": "ButtonUI",
+							"sid": 438246084723420,
+							"parameters": {
+								"tags": "\"apply_upgrade\""
+							}
+						},
+						{
 							"id": "pick-by-unique-id",
 							"objectClass": "UpgradeMechInstanceUI",
 							"sid": 773544028772357,
 							"parameters": {
 								"unique-id": "ButtonUI.ParentUID"
 							}
+						},
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "ButtonUI",
+							"sid": 187954307919486,
+							"parameters": {
+								"instance-variable": "IsDisabled"
+							},
+							"isInverted": true
 						}
 					],
 					"actions": [],
@@ -3457,6 +3554,15 @@
 							"parameters": {
 								"instance-variable": "SelectedUpgradeID",
 								"value": "UpgradeCardUIElement.UpgradeID"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "UpgradesManager",
+							"sid": 769316083640015,
+							"parameters": {
+								"instance-variable": "SelectedUpgradeMechType",
+								"value": "Functions.GetUpgradeProperty(UpgradeCardUIElement.UpgradeID, \"mech_type\")"
 							}
 						}
 					],
@@ -3667,6 +3773,105 @@
 								}
 							],
 							"sid": 127674405139364
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "layer-is-visible",
+							"objectClass": "System",
+							"sid": 286060912273676,
+							"parameters": {
+								"layer": "\"MechSelection\""
+							}
+						},
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 764240481768447,
+							"parameters": {
+								"object": "ButtonUI"
+							}
+						},
+						{
+							"id": "has-tags",
+							"objectClass": "ButtonUI",
+							"sid": 232498777808049,
+							"parameters": {
+								"tags": "\"apply_upgrade\""
+							}
+						},
+						{
+							"id": "pick-parent",
+							"objectClass": "ButtonUI",
+							"sid": 831548730468573,
+							"parameters": {
+								"parent": "UpgradeMechInstanceUI",
+								"which": "own"
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MechObject",
+							"sid": 212111100823056,
+							"parameters": {
+								"unique-id": "UpgradeMechInstanceUI.MechUID"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 383605122464421,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 681600982309006,
+									"parameters": {
+										"first-value": "MechObject.Get(\"type\")",
+										"comparison": 0,
+										"second-value": "UpgradesManager.SelectedUpgradeMechType"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "ButtonUI",
+									"sid": 180068085466717,
+									"parameters": {
+										"instance-variable": "IsDisabled",
+										"value": "false"
+									}
+								}
+							],
+							"sid": 597128614425180
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 126685285139973
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "ButtonUI",
+									"sid": 662945636253160,
+									"parameters": {
+										"instance-variable": "IsDisabled",
+										"value": "true"
+									}
+								}
+							],
+							"sid": 531423670225482
 						}
 					]
 				}

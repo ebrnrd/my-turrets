@@ -5,7 +5,7 @@
 			"eventType": "variable",
 			"name": "player_melee_damage",
 			"type": "number",
-			"initialValue": "10",
+			"initialValue": "4",
 			"comment": "",
 			"isStatic": false,
 			"isConstant": false,

@@ -1,7 +1,7 @@
 {
-	"name": "UpgradeKeys",
+	"name": "PlayerMechTypes",
 	"plugin-id": "Dictionary",
-	"sid": 653430930948063,
+	"sid": 795948670555818,
 	"isGlobal": true,
 	"editorNewInstanceIsReplica": true,
 	"instanceVariables": []

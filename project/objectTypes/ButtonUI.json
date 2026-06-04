@@ -4,12 +4,24 @@
 	"sid": 815176618149680,
 	"isGlobal": false,
 	"editorNewInstanceIsReplica": true,
-	"instanceVariables": [],
+	"instanceVariables": [
+		{
+			"name": "IsDisabled",
+			"type": "boolean",
+			"desc": "",
+			"show": false,
+			"sid": 636680386757886
+		}
+	],
 	"behaviorTypes": [],
 	"effectTypes": [
 		{
 			"effectId": "setcolor",
 			"name": "HoverColor"
+		},
+		{
+			"effectId": "setcolor",
+			"name": "DisabledColor"
 		}
 	],
 	"image": {

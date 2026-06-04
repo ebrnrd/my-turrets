@@ -95,7 +95,7 @@
 			"eventType": "variable",
 			"name": "UpgradeAltarsAmount",
 			"type": "number",
-			"initialValue": "10",
+			"initialValue": "4",
 			"comment": "",
 			"isStatic": false,
 			"isConstant": false,

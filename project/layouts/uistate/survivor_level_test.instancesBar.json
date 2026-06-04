@@ -1,6 +1,131 @@
 {
 	"instanceFolderJson": {
-		"items": [],
+		"items": [
+			{
+				"sid": 301113732484293,
+				"expanded": true
+			},
+			{
+				"sid": 974864895662860,
+				"expanded": true
+			},
+			{
+				"sid": 112103042438472,
+				"expanded": true
+			},
+			{
+				"sid": 466470017816078,
+				"expanded": true
+			},
+			{
+				"sid": 393301183803218,
+				"expanded": true
+			},
+			{
+				"sid": 779401866933864,
+				"expanded": true
+			},
+			{
+				"sid": 112249762060137,
+				"expanded": true
+			},
+			{
+				"sid": 203990063814094,
+				"expanded": true
+			},
+			{
+				"sid": 548759627116703,
+				"expanded": true
+			},
+			{
+				"sid": 384228238707687,
+				"expanded": true
+			},
+			{
+				"sid": 207520585614316,
+				"expanded": true
+			},
+			{
+				"sid": 885421939029481,
+				"expanded": true
+			},
+			{
+				"sid": 251508676434535,
+				"expanded": true
+			},
+			{
+				"sid": 228263877978974,
+				"expanded": true
+			},
+			{
+				"sid": 437442090759155,
+				"expanded": true
+			},
+			{
+				"sid": 789047421650219,
+				"expanded": true
+			},
+			{
+				"sid": 537639250099728,
+				"expanded": true
+			},
+			{
+				"sid": 569840847157064,
+				"expanded": true
+			},
+			{
+				"sid": 255842812208665,
+				"expanded": true
+			},
+			{
+				"sid": 694173533727509,
+				"expanded": true
+			},
+			{
+				"sid": 931935330627753,
+				"expanded": true
+			},
+			{
+				"sid": 541689279667548,
+				"expanded": true
+			},
+			{
+				"sid": 820313100313658,
+				"expanded": true
+			},
+			{
+				"sid": 214552794710928,
+				"expanded": true
+			},
+			{
+				"sid": 283094482487311,
+				"expanded": true
+			},
+			{
+				"sid": 112610810761606,
+				"expanded": true
+			},
+			{
+				"sid": 536338038265839,
+				"expanded": true
+			},
+			{
+				"sid": 862817290085236,
+				"expanded": true
+			},
+			{
+				"sid": 655513296660855,
+				"expanded": true
+			},
+			{
+				"sid": 452173748550230,
+				"expanded": true
+			},
+			{
+				"sid": 377314580482662,
+				"expanded": true
+			}
+		],
 		"subfolders": []
 	},
 	"instanceFolderUIStateJson": {

@@ -1540,6 +1540,70 @@
 			"eventType": "block",
 			"conditions": [
 				{
+					"id": "for-each",
+					"objectClass": "System",
+					"sid": 129450842463760,
+					"parameters": {
+						"object": "ButtonUI"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 638772770085479,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "ButtonUI",
+							"sid": 945324380657977,
+							"parameters": {
+								"instance-variable": "IsDisabled"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-effect-enabled",
+							"objectClass": "ButtonUI",
+							"sid": 797429155789245,
+							"parameters": {
+								"mode": "enable",
+								"effect": "\"DisabledColor\""
+							}
+						}
+					],
+					"sid": 903721886929894
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 599392956035685
+						}
+					],
+					"actions": [
+						{
+							"id": "set-effect-enabled",
+							"objectClass": "ButtonUI",
+							"sid": 619513006772746,
+							"parameters": {
+								"mode": "disable",
+								"effect": "\"DisabledColor\""
+							}
+						}
+					],
+					"sid": 720938778133383
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
 					"id": "has-tags",
 					"objectClass": "TextUI",
 					"sid": 152714571863249,
