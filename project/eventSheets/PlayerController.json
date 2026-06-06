@@ -796,6 +796,12 @@
 					],
 					"actions": [
 						{
+							"id": "stop",
+							"objectClass": "MechBase",
+							"sid": 520529022599361,
+							"behaviorType": "Pathfinding"
+						},
+						{
 							"callFunction": "SendHeal",
 							"sid": 292318488518536,
 							"parameters": [
@@ -825,7 +831,39 @@
 							}
 						}
 					],
-					"sid": 167551522819030
+					"sid": 167551522819030,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 980455857659301,
+									"parameters": {
+										"object": "MechObject",
+										"expression": "MechObject.MechBaseUID = MechBase.UID"
+									}
+								},
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "MechObject",
+									"sid": 678282831426333,
+									"parameters": {
+										"instance-variable": "ReadyToLevelUp"
+									}
+								}
+							],
+							"actions": [
+								{
+									"customAction": "LevelUp",
+									"objectClass": "MechObject",
+									"sid": 909546072923944
+								}
+							],
+							"sid": 894154481138372
+						}
+					]
 				},
 				{
 					"eventType": "block",

@@ -18,6 +18,13 @@
 			"desc": "",
 			"show": true,
 			"sid": 836397604498715
+		},
+		{
+			"name": "ReadyToLevelUp",
+			"type": "boolean",
+			"desc": "",
+			"show": true,
+			"sid": 503708995951776
 		}
 	]
 }

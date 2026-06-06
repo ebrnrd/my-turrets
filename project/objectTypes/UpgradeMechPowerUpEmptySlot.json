@@ -1,7 +1,7 @@
 {
-	"name": "UpgradeMechPowerUpListElement",
+	"name": "UpgradeMechPowerUpEmptySlot",
 	"plugin-id": "Sprite",
-	"sid": 199591315837264,
+	"sid": 514484407221824,
 	"isGlobal": false,
 	"editorNewInstanceIsReplica": true,
 	"instanceVariables": [
@@ -10,14 +10,14 @@
 			"type": "string",
 			"desc": "",
 			"show": true,
-			"sid": 381759759172832
+			"sid": 845840718525258
 		},
 		{
 			"name": "SlotIndex",
 			"type": "number",
 			"desc": "",
 			"show": true,
-			"sid": 652003155246918
+			"sid": 191486120814987
 		}
 	],
 	"behaviorTypes": [],
@@ -35,13 +35,13 @@
 						"exportFormat": "lossless",
 						"exportQuality": 0.8,
 						"fileType": "image/png",
-						"imageSpriteId": 9262147,
+						"imageSpriteId": 1706625,
 						"useCollisionPoly": true,
 						"duration": 1,
 						"tag": ""
 					}
 				],
-				"sid": 300440532293707,
+				"sid": 229143256646688,
 				"name": "Animation 1",
 				"isLooping": false,
 				"isPingPong": false,

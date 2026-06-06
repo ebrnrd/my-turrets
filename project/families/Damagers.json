@@ -1,0 +1,21 @@
+{
+	"name": "Damagers",
+	"plugin-id": "Sprite",
+	"sid": 462498829623107,
+	"instanceVariables": [
+		{
+			"name": "OwnerUID",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 466975177888254
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"members": [
+		"bullet",
+		"Mine",
+		"ArtilleryBullet"
+	]
+}

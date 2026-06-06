@@ -1306,10 +1306,10 @@
 				{
 					"id": "pick-children",
 					"objectClass": "HintElementUI",
-					"sid": 209424745335497,
+					"sid": 555526618001516,
 					"parameters": {
 						"child": "TextUI",
-						"which": "own"
+						"which": "all"
 					}
 				},
 				{
@@ -1383,10 +1383,10 @@
 						{
 							"id": "pick-children",
 							"objectClass": "HintElementUI",
-							"sid": 965862981225781,
+							"sid": 792623462329600,
 							"parameters": {
 								"child": "TextUI",
-								"which": "own"
+								"which": "all"
 							}
 						},
 						{
@@ -1623,6 +1623,27 @@
 				}
 			],
 			"sid": 570384291299892
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-created",
+					"objectClass": "MechUpgradeArrow",
+					"sid": 604837030133445
+				}
+			],
+			"actions": [
+				{
+					"id": "move-to-layer",
+					"objectClass": "MechUpgradeArrow",
+					"sid": 915001784858563,
+					"parameters": {
+						"layer": "\"always-top\""
+					}
+				}
+			],
+			"sid": 487174338681484
 		}
 	],
 	"sid": 986417878794597

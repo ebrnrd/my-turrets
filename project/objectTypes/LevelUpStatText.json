@@ -1,0 +1,57 @@
+{
+	"name": "LevelUpStatText",
+	"plugin-id": "Text",
+	"sid": 406171375546715,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [
+		{
+			"name": "TargetY",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 722339451257310
+		},
+		{
+			"name": "TargetX",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 757400062980619
+		},
+		{
+			"name": "TargetAngle",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 395913840936781
+		},
+		{
+			"name": "UpgradeFID",
+			"type": "string",
+			"desc": "",
+			"show": true,
+			"sid": 218971808898956
+		},
+		{
+			"name": "MechUID",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 797071838500926
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Fade",
+			"name": "Fade",
+			"sid": 651978192847618
+		}
+	],
+	"effectTypes": [
+		{
+			"effectId": "skymen_BetterOutline",
+			"name": "BetterOutline"
+		}
+	]
+}

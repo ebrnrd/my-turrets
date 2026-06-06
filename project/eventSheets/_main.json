@@ -944,10 +944,10 @@
 							"actions": [
 								{
 									"callFunction": "SendDamage",
-									"sid": 490510712035185,
+									"sid": 369228873926247,
 									"parameters": [
 										"enemies.UID",
-										"playerCharacter.UID",
+										"bullet.OwnerUID",
 										"Damage"
 									]
 								},
@@ -1704,6 +1704,13 @@
 					"initialValue": "",
 					"comment": "",
 					"sid": 462660579961041
+				},
+				{
+					"name": "AttackerUID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 590276062184260
 				}
 			],
 			"eventType": "function-block",
@@ -1814,10 +1821,11 @@
 									],
 									"actions": [
 										{
-											"customAction": "ReceiveDamage",
-											"objectClass": "Damageables",
-											"sid": 924368417337280,
+											"callFunction": "SendDamage",
+											"sid": 935490237828799,
 											"parameters": [
+												"Damageables.UID",
+												"AttackerUID",
 												"lerp(ExplosionDamage, 0, distance(Damageables.X, Damageables.Y, SpawnX, SpawnY) / ExplosionSize)"
 											]
 										}
@@ -1913,10 +1921,11 @@
 									],
 									"actions": [
 										{
-											"customAction": "ReceiveDamage",
-											"objectClass": "Damageables",
-											"sid": 452545475756537,
+											"callFunction": "SendDamage",
+											"sid": 454851761849757,
 											"parameters": [
+												"Damageables.UID",
+												"AttackerUID",
 												"lerp(ExplosionDamage, 0, distance(Damageables.X, Damageables.Y, SpawnX, SpawnY) / ExplosionSize)"
 											]
 										}
@@ -1944,14 +1953,15 @@
 			"actions": [
 				{
 					"callFunction": "SpawnExplosion",
-					"sid": 262136112092244,
+					"sid": 302724729438533,
 					"parameters": [
 						"50",
 						"300",
 						"10",
 						"Mine.X",
 						"Mine.Y",
-						"\"player\""
+						"\"player\"",
+						"Mine.OwnerUID"
 					]
 				},
 				{
@@ -2002,14 +2012,15 @@
 			"actions": [
 				{
 					"callFunction": "SpawnExplosion",
-					"sid": 915718232711857,
+					"sid": 262993161578466,
 					"parameters": [
 						"50",
 						"300",
 						"10",
 						"Mine.X",
 						"Mine.Y",
-						"\"player\""
+						"\"player\"",
+						"Mine.OwnerUID"
 					]
 				},
 				{

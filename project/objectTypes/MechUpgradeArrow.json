@@ -1,53 +1,44 @@
 {
-	"name": "UpgradeMechPowerUpListElement",
+	"name": "MechUpgradeArrow",
 	"plugin-id": "Sprite",
-	"sid": 199591315837264,
+	"sid": 898802534339781,
 	"isGlobal": false,
 	"editorNewInstanceIsReplica": true,
-	"instanceVariables": [
+	"instanceVariables": [],
+	"behaviorTypes": [
 		{
-			"name": "UpgradeID",
-			"type": "string",
-			"desc": "",
-			"show": true,
-			"sid": 381759759172832
-		},
-		{
-			"name": "SlotIndex",
-			"type": "number",
-			"desc": "",
-			"show": true,
-			"sid": 652003155246918
+			"behaviorId": "Sin",
+			"name": "Sine",
+			"sid": 279365701336593
 		}
 	],
-	"behaviorTypes": [],
 	"effectTypes": [],
 	"animations": {
 		"items": [
 			{
 				"frames": [
 					{
-						"width": 250,
-						"height": 250,
+						"width": 9,
+						"height": 8,
 						"originX": 0.5,
-						"originY": 0,
+						"originY": 0.5,
 						"originalSource": "",
 						"exportFormat": "lossless",
 						"exportQuality": 0.8,
 						"fileType": "image/png",
-						"imageSpriteId": 9262147,
+						"imageSpriteId": 488544,
 						"useCollisionPoly": true,
 						"duration": 1,
 						"tag": ""
 					}
 				],
-				"sid": 300440532293707,
+				"sid": 935786693702575,
 				"name": "Animation 1",
 				"isLooping": false,
 				"isPingPong": false,
 				"repeatCount": 1,
 				"repeatTo": 0,
-				"speed": 5
+				"speed": 0
 			}
 		],
 		"subfolders": []

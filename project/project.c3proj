@@ -211,6 +211,13 @@
 		},
 		{
 			"type": "behavior",
+			"id": "bound",
+			"name": "Bound to",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "behavior",
 			"id": "destroy",
 			"name": "Destroy outside",
 			"author": "Scirra",
@@ -436,7 +443,10 @@
 			"ArtilleryBullet",
 			"ArtilleryBulletDepthSprite",
 			"ExplosionParticles",
-			"ArtillerySmokeTrail"
+			"ArtillerySmokeTrail",
+			"MechUpgradeArrow",
+			"UpgradeMechPowerUpEmptySlot",
+			"LevelUpStatText"
 		],
 		"subfolders": [
 			{
@@ -509,7 +519,8 @@
 			"reflective_family",
 			"Damageables",
 			"Buttons",
-			"UIElements"
+			"UIElements",
+			"Damagers"
 		],
 		"subfolders": []
 	},

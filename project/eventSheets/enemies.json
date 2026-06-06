@@ -1090,16 +1090,6 @@
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "compare-two-values",
-							"objectClass": "System",
-							"sid": 595740242831605,
-							"parameters": {
-								"first-value": "random(0,1)",
-								"comparison": 3,
-								"second-value": "0.5"
-							}
-						},
-						{
 							"id": "repeat",
 							"objectClass": "System",
 							"sid": 692393739439922,

@@ -25,7 +25,7 @@
 			"eventType": "variable",
 			"name": "ScrapLevelReached",
 			"type": "number",
-			"initialValue": "0",
+			"initialValue": "1",
 			"comment": "",
 			"isStatic": false,
 			"isConstant": false,
@@ -90,7 +90,17 @@
 			],
 			"eventType": "function-block",
 			"conditions": [],
-			"actions": [],
+			"actions": [
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 269259450149849,
+					"parameters": {
+						"variable": "ScrapLevel",
+						"value": "ScrapLevel - 1"
+					}
+				}
+			],
 			"sid": 476073803399515,
 			"children": [
 				{
@@ -107,7 +117,7 @@
 					"eventType": "variable",
 					"name": "LinearMult",
 					"type": "number",
-					"initialValue": "10",
+					"initialValue": "4",
 					"comment": "",
 					"isStatic": false,
 					"isConstant": false,
@@ -124,19 +134,74 @@
 					"sid": 112646958007231
 				},
 				{
+					"eventType": "variable",
+					"name": "ReturnValue",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 390655429997115
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 596944909164471,
+							"parameters": {
+								"variable": "ReturnValue",
+								"value": "ExponentMult * (ScrapLevel * ScrapLevel) + (LinearMult * ScrapLevel) + Base"
+							}
+						}
+					],
+					"sid": 289679902471970,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 995390009797284,
+									"parameters": {
+										"first-value": "ReturnValue",
+										"comparison": 2,
+										"second-value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 717810516315916,
+									"parameters": {
+										"variable": "ReturnValue",
+										"value": "0"
+									}
+								}
+							],
+							"sid": 656319163878486
+						}
+					]
+				},
+				{
 					"eventType": "block",
 					"conditions": [],
 					"actions": [
 						{
 							"id": "set-function-return-value",
 							"objectClass": "Functions",
-							"sid": 472480097474689,
+							"sid": 598429920658189,
 							"parameters": {
-								"value": "ExponentMult * (ScrapLevel * ScrapLevel) + (LinearMult * ScrapLevel) + Base"
+								"value": "ReturnValue"
 							}
 						}
 					],
-					"sid": 289679902471970
+					"sid": 630951265542486
 				}
 			]
 		},
@@ -172,8 +237,17 @@
 					"id": "set-width",
 					"objectClass": "ScrapBar",
 					"sid": 248293188140852,
+					"disabled": true,
 					"parameters": {
 						"width": "ViewportWidth(Self.LayerName) * ((PlayerScrapInterpolated - Functions.GetScrapTarget(ScrapLevelReached - 1)) / ( Functions.GetScrapTarget(ScrapLevelReached) - Functions.GetScrapTarget(ScrapLevelReached - 1)))"
+					}
+				},
+				{
+					"id": "set-width",
+					"objectClass": "ScrapBar",
+					"sid": 353656405378531,
+					"parameters": {
+						"width": "ViewportWidth(Self.LayerName) * PlayerScrapInterpolated/ Functions.GetScrapTarget(ScrapLevelReached)"
 					}
 				}
 			],
@@ -185,7 +259,7 @@
 						{
 							"id": "compare-two-values",
 							"objectClass": "System",
-							"sid": 528762977538208,
+							"sid": 918170933693518,
 							"parameters": {
 								"first-value": "PlayerScrapInterpolated",
 								"comparison": 5,
@@ -200,18 +274,27 @@
 					],
 					"actions": [
 						{
-							"customAction": "BeginUpgradeShopSequence",
-							"objectClass": "UpgradesManager",
-							"sid": 236873909799368
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 195387982997121,
+							"parameters": {
+								"variable": "PlayerScrap",
+								"value": "PlayerScrap - Functions.GetScrapTarget(ScrapLevelReached)"
+							}
 						},
 						{
 							"id": "add-to-eventvar",
 							"objectClass": "System",
-							"sid": 708920864148131,
+							"sid": 145556929200307,
 							"parameters": {
 								"variable": "ScrapLevelReached",
 								"value": "1"
 							}
+						},
+						{
+							"customAction": "BeginUpgradeShopSequence",
+							"objectClass": "UpgradesManager",
+							"sid": 236873909799368
 						}
 					],
 					"sid": 126035615126504

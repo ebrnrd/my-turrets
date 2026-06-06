@@ -340,10 +340,10 @@
 								{
 									"id": "set-max-speed",
 									"objectClass": "MechBase",
-									"sid": 197116640913851,
+									"sid": 182287890652464,
 									"behaviorType": "Pathfinding",
 									"parameters": {
-										"speed": "MechStatsCache.Get(\"shoot_move_speed\")"
+										"speed": "MechStatsCache.Get(\"move_speed\") * MechStatsCache.Get(\"shoot_move_speed_mult\")"
 									}
 								}
 							],
@@ -617,6 +617,7 @@
 			],
 			"actions": [],
 			"sid": 407894863342452,
+			"disabled": true,
 			"children": [
 				{
 					"eventType": "block",
@@ -647,8 +648,7 @@
 							}
 						}
 					],
-					"sid": 173449225270615,
-					"disabled": true
+					"sid": 173449225270615
 				}
 			]
 		},
@@ -1472,6 +1472,15 @@
 									}
 								},
 								{
+									"id": "set-instvar-value",
+									"objectClass": "bullet",
+									"sid": 157218649420767,
+									"parameters": {
+										"instance-variable": "OwnerUID",
+										"value": "MechObject.UID"
+									}
+								},
+								{
 									"id": "set-animation",
 									"objectClass": "BallisticGadget",
 									"sid": 220189348734959,
@@ -1756,6 +1765,15 @@
 											}
 										},
 										{
+											"id": "set-instvar-value",
+											"objectClass": "ArtilleryBullet",
+											"sid": 374960701436434,
+											"parameters": {
+												"instance-variable": "OwnerUID",
+												"value": "MechObject.UID"
+											}
+										},
+										{
 											"id": "set-width",
 											"objectClass": "ArtilleryBullet",
 											"sid": 176507624687150,
@@ -1907,14 +1925,15 @@
 					"actions": [
 						{
 							"callFunction": "SpawnExplosion",
-							"sid": 265799949096339,
+							"sid": 840990746396324,
 							"parameters": [
 								"ArtilleryBullet.ExplosionDamage",
 								"ArtilleryBullet.ExplosionSize",
 								"ArtilleryBullet.ExplosionKnockback",
 								"ArtilleryBullet.X",
 								"ArtilleryBullet.Y",
-								"\"player\""
+								"\"player\"",
+								"ArtilleryBullet.OwnerUID"
 							]
 						},
 						{
@@ -2042,6 +2061,7 @@
 					"sid": 585019388213042
 				}
 			],
+			"bookmark": true,
 			"eventType": "function-block",
 			"conditions": [],
 			"actions": [
@@ -2190,12 +2210,39 @@
 							}
 						},
 						{
+							"id": "set-value",
+							"objectClass": "MechObject",
+							"sid": 285176826598180,
+							"parameters": {
+								"path": "\"slots\"",
+								"value": "MechDefinitions.Get(Type & \".base_stats\" & \".starting_slots\")"
+							}
+						},
+						{
 							"id": "set-array",
 							"objectClass": "MechObject",
-							"sid": 478937257899184,
+							"sid": 277362557756244,
 							"parameters": {
 								"path": "\"applied_upgrades\"",
-								"size": "0"
+								"size": "MechDefinitions.Get(Type & \".base_stats\" & \".starting_slots\")"
+							}
+						},
+						{
+							"id": "set-value",
+							"objectClass": "MechObject",
+							"sid": 858427526041907,
+							"parameters": {
+								"path": "\"experience\"",
+								"value": "0"
+							}
+						},
+						{
+							"id": "set-value",
+							"objectClass": "MechObject",
+							"sid": 678203208909619,
+							"parameters": {
+								"path": "\"level\"",
+								"value": "1"
 							}
 						},
 						{
@@ -2205,7 +2252,8 @@
 							"disabled": true,
 							"parameters": [
 								"\"mine_trapper\"",
-								"MechObject.UID"
+								"MechObject.UID",
+								"0"
 							]
 						},
 						{
@@ -3245,6 +3293,978 @@
 				}
 			],
 			"sid": 320584909195028
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "MechLevelUp",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"aceType": "action",
+					"aceName": "AddExperience",
+					"objectClass": "MechObject",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "Amount",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 281711931782084
+						}
+					],
+					"eventType": "custom-ace-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 981022067202772,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "MechObject",
+									"sid": 403438245497075,
+									"parameters": {
+										"instance-variable": "ReadyToLevelUp"
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "add-to",
+									"objectClass": "MechObject",
+									"sid": 470565546693792,
+									"parameters": {
+										"path": "\"experience\"",
+										"value": "Amount"
+									}
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 881581323596690,
+									"parameters": {
+										"type": "log",
+										"message": "\"Added Experience to Mech\""
+									}
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 864045415282126,
+									"disabled": true,
+									"parameters": {
+										"type": "log",
+										"message": "\"Current experience Adjusted: \" & MechObject.Get(\"experience\") - Functions.GetMechTargetExperience(MechObject.Get(\"level\"))"
+									}
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 775020567147878,
+									"parameters": {
+										"type": "log",
+										"message": "\"Target experience: \" & Functions.GetMechTargetExperience(MechObject.Get(\"level\"))"
+									}
+								}
+							],
+							"sid": 110126167087831,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 660046581789112,
+											"parameters": {
+												"first-value": "MechObject.Get(\"experience\")",
+												"comparison": 5,
+												"second-value": "Functions.GetMechTargetExperience(MechObject.Get(\"level\"))"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "MechObject",
+											"sid": 694951756502819,
+											"parameters": {
+												"instance-variable": "ReadyToLevelUp",
+												"value": "true"
+											}
+										}
+									],
+									"sid": 293194401467789
+								}
+							]
+						}
+					]
+				},
+				{
+					"aceType": "action",
+					"aceName": "LevelUp",
+					"objectClass": "MechObject",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "custom-ace-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "subtract-from",
+							"objectClass": "MechObject",
+							"sid": 282734448997655,
+							"parameters": {
+								"path": "\"experience\"",
+								"value": "Functions.GetMechTargetExperience(MechObject.Get(\"level\"))"
+							}
+						},
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "MechObject",
+							"sid": 957241182615337,
+							"parameters": {
+								"instance-variable": "ReadyToLevelUp",
+								"value": "false"
+							}
+						},
+						{
+							"id": "add-to",
+							"objectClass": "MechObject",
+							"sid": 344372959100668,
+							"parameters": {
+								"path": "\"level\"",
+								"value": "1"
+							}
+						}
+					],
+					"sid": 172488684291411,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "add-to",
+									"objectClass": "MechObject",
+									"sid": 282186982965185,
+									"parameters": {
+										"path": "\"slots\"",
+										"value": "1"
+									}
+								},
+								{
+									"id": "push-value",
+									"objectClass": "MechObject",
+									"sid": 993111570562219,
+									"parameters": {
+										"where": "back",
+										"path": "\"applied_upgrades\"",
+										"value": "0"
+									}
+								},
+								{
+									"id": "wait",
+									"objectClass": "System",
+									"sid": 932284069411577,
+									"parameters": {
+										"seconds": "0.1",
+										"use-timescale": false
+									}
+								},
+								{
+									"customAction": "ImproveRandomImprovableStat",
+									"objectClass": "MechObject",
+									"sid": 971331198006079
+								}
+							],
+							"sid": 295501261956090
+						}
+					]
+				},
+				{
+					"functionName": "GetMechTargetExperience",
+					"functionDescription": "Mechs",
+					"functionCategory": "",
+					"functionReturnType": "number",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "MechLevel",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 210208232270607
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 288515505612201,
+							"parameters": {
+								"variable": "MechLevel",
+								"value": "MechLevel - 1"
+							}
+						}
+					],
+					"sid": 931146115951902,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "ExponentMult",
+							"type": "number",
+							"initialValue": "3",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 811051272865899
+						},
+						{
+							"eventType": "variable",
+							"name": "LinearMult",
+							"type": "number",
+							"initialValue": "16",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 911201572443775
+						},
+						{
+							"eventType": "variable",
+							"name": "Base",
+							"type": "number",
+							"initialValue": "10",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 301220514208396
+						},
+						{
+							"eventType": "variable",
+							"name": "ReturnValue",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 534345342579861
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 481603011218716,
+									"parameters": {
+										"variable": "ReturnValue",
+										"value": "ExponentMult * (MechLevel * MechLevel) + (LinearMult * MechLevel) + Base"
+									}
+								}
+							],
+							"sid": 903141212481597,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 237156870833390,
+											"parameters": {
+												"first-value": "ReturnValue",
+												"comparison": 2,
+												"second-value": "0"
+											}
+										},
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 336875621888646,
+											"parameters": {
+												"first-value": "MechLevel",
+												"comparison": 2,
+												"second-value": "0"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 473550368354190,
+											"parameters": {
+												"variable": "ReturnValue",
+												"value": "0"
+											}
+										}
+									],
+									"sid": 458267838768546,
+									"isOrBlock": true
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-function-return-value",
+									"objectClass": "Functions",
+									"sid": 654432524874636,
+									"parameters": {
+										"value": "ReturnValue"
+									}
+								}
+							],
+							"sid": 869878305999192
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 966481027934275,
+							"parameters": {
+								"object": "MechObject"
+							}
+						},
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MechBase",
+							"sid": 507139203959608,
+							"parameters": {
+								"unique-id": "MechObject.MechBaseUID"
+							}
+						},
+						{
+							"id": "pick-children",
+							"objectClass": "MechBase",
+							"sid": 759522350407348,
+							"parameters": {
+								"child": "MechUpgradeArrow",
+								"which": "own"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 961276441733471,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "MechObject",
+									"sid": 621004304302717,
+									"parameters": {
+										"instance-variable": "ReadyToLevelUp"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "MechBase",
+									"sid": 655473167658046,
+									"parameters": {
+										"mode": "enable",
+										"effect": "\"UpgradeOutline\""
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "MechUpgradeArrow",
+									"sid": 218856755730194,
+									"parameters": {
+										"visibility": "visible"
+									}
+								}
+							],
+							"sid": 718407673535367
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 866585186601238
+								}
+							],
+							"actions": [
+								{
+									"id": "set-effect-enabled",
+									"objectClass": "MechBase",
+									"sid": 312854026654793,
+									"parameters": {
+										"mode": "disable",
+										"effect": "\"UpgradeOutline\""
+									}
+								},
+								{
+									"id": "set-visible",
+									"objectClass": "MechUpgradeArrow",
+									"sid": 921462816676299,
+									"parameters": {
+										"visibility": "invisible"
+									}
+								}
+							],
+							"sid": 908285556682995
+						}
+					]
+				},
+				{
+					"aceType": "action",
+					"aceName": "ImproveRandomImprovableStat",
+					"objectClass": "MechObject",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "custom-ace-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 314421172119455,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "MechType",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 418505276939603
+						},
+						{
+							"eventType": "variable",
+							"name": "RandomIndex",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 326877107333726
+						},
+						{
+							"eventType": "variable",
+							"name": "ChosenStatName",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 942971761225459
+						},
+						{
+							"eventType": "variable",
+							"name": "Operation",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 651064514476156
+						},
+						{
+							"eventType": "variable",
+							"name": "Amount",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 355925912234832
+						},
+						{
+							"eventType": "variable",
+							"name": "OriginalValue",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 930207942533601
+						},
+						{
+							"eventType": "variable",
+							"name": "NewValue",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 908238528951173
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 508283283242311,
+									"parameters": {
+										"variable": "MechType",
+										"value": "MechObject.Get(\"type\")"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 689301783363889,
+									"parameters": {
+										"variable": "RandomIndex",
+										"value": "round(random(0, MechDefinitions.ArraySize(MechType & \".improvable_stats\") - 1))"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 320057792221211,
+									"parameters": {
+										"variable": "ChosenStatName",
+										"value": "MechDefinitions.Get(MechType & \".improvable_stats.\" & RandomIndex & \".stat_name\")"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 664132368247356,
+									"parameters": {
+										"variable": "Operation",
+										"value": "MechDefinitions.Get(MechType & \".improvable_stats.\" & RandomIndex & \".op\")"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 352834171653421,
+									"parameters": {
+										"variable": "Amount",
+										"value": "MechDefinitions.Get(MechType & \".improvable_stats.\" & RandomIndex & \".amount\")"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 859618700722050,
+									"parameters": {
+										"variable": "OriginalValue",
+										"value": "MechObject.Get(\"stats.\" & ChosenStatName)"
+									}
+								}
+							],
+							"sid": 445139409785072,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 974872531167417,
+											"parameters": {
+												"first-value": "Operation",
+												"comparison": 0,
+												"second-value": "\"add\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 566781222155360,
+											"parameters": {
+												"variable": "NewValue",
+												"value": "OriginalValue + Amount"
+											}
+										}
+									],
+									"sid": 671613374390430
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 388209479925726,
+											"parameters": {
+												"first-value": "Operation",
+												"comparison": 0,
+												"second-value": "\"subtract\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 989907908083533,
+											"parameters": {
+												"variable": "NewValue",
+												"value": "OriginalValue - Amount"
+											}
+										}
+									],
+									"sid": 959170440353394
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 653570551890314,
+											"parameters": {
+												"first-value": "Operation",
+												"comparison": 0,
+												"second-value": "\"multiply\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 592080925294853,
+											"parameters": {
+												"variable": "NewValue",
+												"value": "OriginalValue * Amount"
+											}
+										}
+									],
+									"sid": 942559130420699
+								},
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"id": "set-value",
+											"objectClass": "MechObject",
+											"sid": 179996496587290,
+											"parameters": {
+												"path": "\"stats.\" & ChosenStatName",
+												"value": "NewValue"
+											}
+										},
+										{
+											"customAction": "UpdateMechStatsCache",
+											"objectClass": "MechObject",
+											"sid": 381831277626626
+										},
+										{
+											"callFunction": "MechLevelUpStatTextFeedback",
+											"sid": 925053958126477,
+											"parameters": [
+												"MechObject.UID",
+												"\"\"",
+												"ChosenStatName",
+												"Operation"
+											]
+										}
+									],
+									"sid": 475877488185133
+								}
+							]
+						}
+					]
+				},
+				{
+					"functionName": "MechLevelUpStatTextFeedback",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "MechUID",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 241664699354360
+						},
+						{
+							"name": "UpgradeFID",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 719477613533913
+						},
+						{
+							"name": "StatName",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 467438362492161
+						},
+						{
+							"name": "Operation",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 141192304687236
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 493411966437983,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "OpSign",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 820672576525925
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 376528264625583,
+									"parameters": {
+										"first-value": "Operation",
+										"comparison": 0,
+										"second-value": "\"add\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 561294485274102,
+									"parameters": {
+										"variable": "OpSign",
+										"value": "\"+\""
+									}
+								}
+							],
+							"sid": 910393163827107
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 143868090213996,
+									"parameters": {
+										"first-value": "Operation",
+										"comparison": 0,
+										"second-value": "\"subtract\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 335594688695805,
+									"parameters": {
+										"variable": "OpSign",
+										"value": "\"-\""
+									}
+								}
+							],
+							"sid": 863542031155532
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 102436552934357,
+									"parameters": {
+										"first-value": "Operation",
+										"comparison": 0,
+										"second-value": "\"multiply\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 825224645422680,
+									"parameters": {
+										"variable": "OpSign",
+										"value": "\"+\""
+									}
+								}
+							],
+							"sid": 739562382973106
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "MechObject",
+									"sid": 545611404778366,
+									"parameters": {
+										"unique-id": "MechUID"
+									}
+								},
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "MechBase",
+									"sid": 122595610265338,
+									"parameters": {
+										"unique-id": "MechObject.MechBaseUID"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 814039327498865,
+									"parameters": {
+										"object-to-create": "LevelUpStatText",
+										"layer": "\"always-top\"",
+										"x": "MechBase.X",
+										"y": "MechBase.Y - 50",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "LevelUpStatText",
+									"sid": 354720798322383,
+									"parameters": {
+										"instance-variable": "UpgradeFID",
+										"value": "UpgradeFID"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "LevelUpStatText",
+									"sid": 239952851996662,
+									"parameters": {
+										"instance-variable": "MechUID",
+										"value": "MechUID"
+									}
+								},
+								{
+									"id": "set-text",
+									"objectClass": "LevelUpStatText",
+									"sid": 529805976300041,
+									"parameters": {
+										"text": "OpSign & replace(uppercase(StatName), \"_\", \" \")"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "LevelUpStatText",
+									"sid": 354095153663443,
+									"parameters": {
+										"instance-variable": "TargetX",
+										"value": "MechBase.X + random(-20,20)"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "LevelUpStatText",
+									"sid": 217317073724092,
+									"parameters": {
+										"instance-variable": "TargetY",
+										"value": "MechBase.Y - 100"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "LevelUpStatText",
+									"sid": 643705695699448,
+									"parameters": {
+										"instance-variable": "TargetAngle",
+										"value": "random(-20,20)"
+									}
+								}
+							],
+							"sid": 581424440685759
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 767281909540024,
+							"parameters": {
+								"object": "LevelUpStatText"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 960449577055437,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-angle",
+									"objectClass": "LevelUpStatText",
+									"sid": 863716756932473,
+									"parameters": {
+										"angle": "anglelerp(Self.Angle, Self.TargetAngle, 4 * dt)"
+									}
+								},
+								{
+									"id": "set-position",
+									"objectClass": "LevelUpStatText",
+									"sid": 735728177989224,
+									"parameters": {
+										"x": "lerp(Self.X, Self.TargetX, 4 * dt)",
+										"y": "lerp(Self.Y, Self.TargetY, 4 * dt)"
+									}
+								}
+							],
+							"sid": 342298617399324
+						}
+					]
+				}
+			],
+			"sid": 436936503731154
 		}
 	],
 	"sid": 182913111176321

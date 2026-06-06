@@ -78,6 +78,10 @@
 		{
 			"effectId": "setcolor",
 			"name": "SetColor"
+		},
+		{
+			"effectId": "skymen_BetterOutline",
+			"name": "UpgradeOutline"
 		}
 	],
 	"animations": {

@@ -70,18 +70,88 @@
 							}
 						}
 					],
-					"actions": [
-						{
-							"customAction": "ReceiveDamage",
-							"objectClass": "Damageables",
-							"sid": 970423758739828,
-							"parameters": [
-								"Amount"
-							]
-						}
-					],
+					"actions": [],
 					"sid": 116978986070401,
 					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "MechObject",
+									"sid": 661619240746524,
+									"parameters": {
+										"unique-id": "SenderUID"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 333399147168577,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-instance-variable",
+											"objectClass": "Damageables",
+											"sid": 104757533015390,
+											"parameters": {
+												"instance-variable": "Health",
+												"comparison": 3,
+												"value": "Amount"
+											}
+										}
+									],
+									"actions": [
+										{
+											"customAction": "AddExperience",
+											"objectClass": "MechObject",
+											"sid": 139287838388454,
+											"parameters": [
+												"clamp(Amount, 0, Damageables.Health) / 2"
+											]
+										}
+									],
+									"sid": 678780271784005
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "else",
+											"objectClass": "System",
+											"sid": 179172878300101
+										}
+									],
+									"actions": [
+										{
+											"customAction": "AddExperience",
+											"objectClass": "MechObject",
+											"sid": 801776055151845,
+											"parameters": [
+												"clamp(Amount, 0, Damageables.Health) / 4"
+											]
+										}
+									],
+									"sid": 689927086433132
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"customAction": "ReceiveDamage",
+									"objectClass": "Damageables",
+									"sid": 780543814759593,
+									"parameters": [
+										"Amount"
+									]
+								}
+							],
+							"sid": 686032669318684
+						},
 						{
 							"eventType": "block",
 							"conditions": [

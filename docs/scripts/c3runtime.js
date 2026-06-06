@@ -1584,6 +1584,11 @@ const C3=self.C3,ParticleEngine=self.ParticleEngine;function randomOffset(t){ret
 {const e=self.C3;e.Behaviors.Timer=class extends e.SDKBehaviorBase{constructor(e){super(e)}Release(){super.Release()}}}{const e=self.C3;e.Behaviors.Timer.Type=class extends e.SDKBehaviorTypeBase{constructor(e){super(e)}Release(){super.Release()}OnCreate(){}}}{const e=self.C3,t=self.C3X,r=self.IBehaviorInstance;e.Behaviors.Timer.SingleTimer=class{constructor(t,r,i,s){this._current=e.New(e.KahanSum),this._current.Set(t||0),this._total=e.New(e.KahanSum),this._total.Set(r||0),this._duration=i||0,this._isRegular=!!s,this._isPaused=!1}GetCurrentTime(){return this._current.Get()}GetTotalTime(){return this._total.Get()}GetDuration(){return this._duration}SetPaused(e){this._isPaused=!!e}IsPaused(){return this._isPaused}Add(e){this._current.Add(e),this._total.Add(e)}HasFinished(){return this._current.Get()>=this._duration}Update(){if(this.HasFinished()){if(!this._isRegular)return!0;this._current.Subtract(this._duration)}return!1}SaveToJson(){return{"c":this._current.Get(),"t":this._total.Get(),"d":this._duration,"r":this._isRegular,"p":this._isPaused}}LoadFromJson(e){this._current.Set(e["c"]),this._total.Set(e["t"]),this._duration=e["d"],this._isRegular=!!e["r"],this._isPaused=!!e["p"]}},e.Behaviors.Timer.Instance=class extends e.SDKBehaviorInstanceBase{constructor(e,t){super(e),this._timers=new Map}Release(){this._timers.clear(),super.Release()}_StartTimer(t,r,i){const s=new e.Behaviors.Timer.SingleTimer(0,0,t,i);this._timers.set(r.toLowerCase(),s),this._UpdateTickState()}_StopTimer(e){this._timers.delete(e.toLowerCase()),this._UpdateTickState()}_StopAllTimers(){this._timers.clear(),this._UpdateTickState()}_IsTimerRunning(e){return this._timers.has(e.toLowerCase())}_GetTimerCurrentTime(e){const t=this._timers.get(e.toLowerCase());return t?t.GetCurrentTime():0}_GetTimerNormalizedProgress(e){const t=this._timers.get(e.toLowerCase());return t?t.GetCurrentTime()/t.GetDuration():0}_GetTimerTotalTime(e){const t=this._timers.get(e.toLowerCase());return t?t.GetTotalTime():0}_GetTimerDuration(e){const t=this._timers.get(e.toLowerCase());return t?t.GetDuration():0}_HasTimerFinished(e){const t=this._timers.get(e.toLowerCase());return!!t&&t.HasFinished()}_SetTimerPaused(e,t){const r=this._timers.get(e.toLowerCase());r&&r.SetPaused(t)}_IsTimerPaused(e){const t=this._timers.get(e.toLowerCase());return!!t&&t.IsPaused()}_SetAllTimersPaused(e){for(const t of this._timers.values())t.SetPaused(e)}_UpdateTickState(){this._timers.size>0?(this._StartTicking(),this._StartTicking2()):(this._StopTicking(),this._StopTicking2())}SaveToJson(){const e={};for(const[t,r]of this._timers.entries())e[t]=r.SaveToJson();return e}LoadFromJson(t){this._timers.clear();for(const[r,i]of Object.entries(t)){const t=new e.Behaviors.Timer.SingleTimer;t.LoadFromJson(i),this._timers.set(r,t)}this._UpdateTickState()}Tick(){const e=this._runtime.GetDt(this._inst);for(const[t,r]of this._timers)r.IsPaused()||(r.Add(e),r.HasFinished()&&this.DispatchScriptEvent("timer",!1,{tag:t}))}Tick2(){for(const[e,t]of this._timers.entries()){t.Update()&&this._timers.delete(e)}}GetDebuggerProperties(){return[{title:"behaviors.timer.debugger.timers",properties:[...this._timers.entries()].map(e=>({name:"$"+e[0],value:`${Math.round(10*e[1].GetCurrentTime())/10} / ${Math.round(10*e[1].GetDuration())/10}`}))}]}GetScriptInterfaceClass(){return self.ITimerBehaviorInstance}};const i=["once","regular"];self.ITimerBehaviorInstance=class extends r{#e;constructor(){super(),this.#e=r._GetInitInst().GetSdkInstance()}startTimer(e,r,s="once"){t.RequireFiniteNumber(e),t.RequireString(r);const a=i.indexOf(s);if(-1===a)throw new Error("invalid type");this.#e._StartTimer(e,r,1===a)}setTimerPaused(e,r){t.RequireString(e),this.#e._SetTimerPaused(e,!!r)}setAllTimersPaused(e){this.#e._SetAllTimersPaused(!!e)}stopTimer(e){t.RequireString(e),this.#e._StopTimer(e)}stopAllTimers(){this.#e._StopAllTimers()}isTimerRunning(e){return t.RequireString(e),this.#e._IsTimerRunning(e)}isTimerPaused(e){return t.RequireString(e),this.#e._IsTimerPaused(e)}getCurrentTime(e){return t.RequireString(e),this.#e._GetTimerCurrentTime(e)}getNormalizedProgress(e){return t.RequireString(e),this.#e._GetTimerNormalizedProgress(e)}getTotalTime(e){return t.RequireString(e),this.#e._GetTimerTotalTime(e)}getDuration(e){return t.RequireString(e),this.#e._GetTimerDuration(e)}hasFinished(e){return t.RequireString(e),this.#e._HasTimerFinished(e)}}}self.C3.Behaviors.Timer.Cnds={OnTimer(e){return this._HasTimerFinished(e)},IsTimerRunning(e){return this._IsTimerRunning(e)},IsTimerPaused(e){return this._IsTimerPaused(e)}};self.C3.Behaviors.Timer.Acts={StartTimer(e,t,r){this._StartTimer(e,r,1===t)},StopTimer(e){this._StopTimer(e)},StopAllTimers(){this._StopAllTimers()},PauseResumeTimer(e,t){this._SetTimerPaused(e,0===t)},PauseResumeAllTimers(e){this._SetAllTimersPaused(0===e)}};self.C3.Behaviors.Timer.Exps={CurrentTime(e){return this._GetTimerCurrentTime(e)},NormalizedProgress(e){return this._GetTimerNormalizedProgress(e)},TotalTime(e){return this._GetTimerTotalTime(e)},Duration(e){return this._GetTimerDuration(e)}};
 }
 
+// scripts/behaviors/bound/c3runtime/runtime.js
+{
+{const e=self.C3;e.Behaviors.bound=class extends e.SDKBehaviorBase{constructor(e){super(e)}Release(){super.Release()}}}{const e=self.C3;e.Behaviors.bound.Type=class extends e.SDKBehaviorTypeBase{constructor(e){super(e)}Release(){super.Release()}OnCreate(){}}}{const e=self.C3,t=0,s=1,o=new e.Rect;e.Behaviors.bound.Instance=class extends e.SDKBehaviorInstanceBase{#e=0;#t=0;constructor(e,o){super(e),o&&(this.#e=o[t],this.#t=o[s]),this._StartTicking2()}Release(){super.Release()}SaveToJson(){return{"m":this.#e,"r":this.#t}}LoadFromJson(e){this.#e=e["m"],this.#t=e["r"]??0}Tick2(){const e=this._inst.GetWorldInfo(),t=e.GetBoundingBox();let s=!1;const i=o;if(0===this.#t){const t=e.GetLayout();i.set(0,0,t.GetWidth(),t.GetHeight())}else i.copy(e.GetLayer().GetViewport());0===this.#e?(e.GetX()<i.getLeft()&&(e.SetX(i.getLeft()),s=!0),e.GetY()<i.getTop()&&(e.SetY(i.getTop()),s=!0),e.GetX()>i.getRight()&&(e.SetX(i.getRight()),s=!0),e.GetY()>i.getBottom()&&(e.SetY(i.getBottom()),s=!0)):(t.getLeft()<i.getLeft()&&(e.OffsetX(i.getLeft()-t.getLeft()),s=!0),t.getTop()<i.getTop()&&(e.OffsetY(i.getTop()-t.getTop()),s=!0),t.getRight()>i.getRight()&&(e.OffsetX(i.getRight()-t.getRight()),s=!0),t.getBottom()>i.getBottom()&&(e.OffsetY(i.getBottom()-t.getBottom()),s=!0)),s&&e.SetBboxChanged()}GetPropertyValueByIndex(e){switch(e){case t:return this.#e;case s:return this.#t}}SetPropertyValueByIndex(e,o){switch(e){case t:this.#e=o;break;case s:this.#t=o}}}}self.C3.Behaviors.bound.Cnds={};self.C3.Behaviors.bound.Acts={};self.C3.Behaviors.bound.Exps={};
+}
+
 // scripts/behaviors/EightDir/c3runtime/runtime.js
 {
 {const t=self.C3;t.Behaviors.EightDir=class extends t.SDKBehaviorBase{constructor(t){super(t)}Release(){super.Release()}}}{const t=self.C3;t.Behaviors.EightDir.Type=class extends t.SDKBehaviorTypeBase{constructor(t){super(t)}Release(){super.Release()}OnCreate(){}}}{const t=self.C3,e=self.C3X,i=self.IBehaviorInstance,s=1/Math.sqrt(2),h=0,n=1,r=2,a=3,o=4,_=5,l=6,d=7;t.Behaviors.EightDir.Instance=class extends t.SDKBehaviorInstanceBase{constructor(t,e){super(t),this._upKey=!1,this._downKey=!1,this._leftKey=!1,this._rightKey=!1,this._ignoreInput=!1,this._simUp=!1,this._simDown=!1,this._simLeft=!1,this._simRight=!1,this._dx=0,this._dy=0,this._maxSpeed=200,this._acc=600,this._dec=500,this._directions=3,this._angleMode=3,this._allowSliding=!1,this._defaultControls=!0,this._isEnabled=!0,e&&(this._maxSpeed=e[h],this._acc=e[n],this._dec=e[r],this._directions=e[a],this._angleMode=e[o],this._allowSliding=!!e[_],this._defaultControls=!!e[l],this._isEnabled=!!e[d]),this._isEnabled&&this._StartTicking(),this._defaultControls&&this._BindEvents()}_BindEvents(){if(this._disposables)return;const e=this._runtime.Dispatcher();this._disposables=new t.CompositeDisposable(t.Disposable.From(e,"keydown",t=>this._OnKeyDown(t.data)),t.Disposable.From(e,"keyup",t=>this._OnKeyUp(t.data)),t.Disposable.From(e,"window-blur",()=>this._OnWindowOrKeyboardBlur()),t.Disposable.From(e,"keyboard-blur",()=>this._OnWindowOrKeyboardBlur()))}_UnBindEvents(){this._disposables&&(this._disposables.Release(),this._disposables=null)}Release(){super.Release()}SaveToJson(){return{"dx":this._dx,"dy":this._dy,"e":this._isEnabled,"ms":this._maxSpeed,"acc":this._acc,"dec":this._dec,"d":this._directions,"am":this._angleMode,"dc":this._defaultControls,"ii":this._ignoreInput}}LoadFromJson(t){this._dx=t["dx"],this._dy=t["dy"],this._SetEnabled(t["e"]),this._maxSpeed=t["ms"],this._acc=t["acc"],this._dec=t["dec"],this._directions=t["d"],this._angleMode=t["am"],this._defaultControls=t["dc"],this._ignoreInput=t["ii"],this._upKey=!1,this._downKey=!1,this._leftKey=!1,this._rightKey=!1,this._simUp=!1,this._simDown=!1,this._simLeft=!1,this._simRight=!1,this._defaultControls?this._BindEvents():this._UnBindEvents()}_OnKeyDown(t){switch(t["key"]){case"ArrowLeft":this._leftKey=!0;break;case"ArrowUp":this._upKey=!0;break;case"ArrowRight":this._rightKey=!0;break;case"ArrowDown":this._downKey=!0}}_OnKeyUp(t){switch(t["key"]){case"ArrowLeft":this._leftKey=!1;break;case"ArrowUp":this._upKey=!1;break;case"ArrowRight":this._rightKey=!1;break;case"ArrowDown":this._downKey=!1}}_OnWindowOrKeyboardBlur(){this._upKey=!1,this._downKey=!1,this._leftKey=!1,this._rightKey=!1}Tick(){const e=this._runtime.GetDt(this._inst),i=this._runtime.GetCollisionEngine();let h=this._leftKey||this._simLeft,n=this._rightKey||this._simRight,r=this._upKey||this._simUp,a=this._downKey||this._simDown;if(this._simLeft=!1,this._simRight=!1,this._simUp=!1,this._simDown=!1,!this._isEnabled)return;let o=i.TestOverlapSolid(this._inst);if(o&&(i.RegisterCollision(this._inst,o),!i.PushOutSolidNearest(this._inst)))return;if(this._ignoreInput&&(h=n=r=a=!1),0===this._directions?h=n=!1:1===this._directions&&(r=a=!1),2===this._directions&&(r||a)&&(h=n=!1),h===n){const t=r===a&&0!==this._dy?s:1;this._dx<0?this._dx=Math.min(this._dx+this._dec*t*e,0):this._dx>0&&(this._dx=Math.max(this._dx-this._dec*t*e,0))}if(r===a){const t=h===n&&0!==this._dx?s:1;this._dy<0?this._dy=Math.min(this._dy+this._dec*t*e,0):this._dy>0&&(this._dy=Math.max(this._dy-this._dec*t*e,0))}let _=0,l=0;h&&!n&&(_=-1),n&&!h&&(_=1),r&&!a&&(l=-1),a&&!r&&(l=1);let d=0,c=0;if(0!==_){const t=0!==l?s:1;d=Math.sign(this._dx)===-_?_*t*(this._acc+this._dec):_*t*this._acc}if(0!==l){const t=0!==_?s:1;c=Math.sign(this._dy)===-l?l*t*(this._acc+this._dec):l*t*this._acc}if(this._dx+=d*e,this._dy+=c*e,0!==this._dx||0!==this._dy){let s=Math.hypot(this._dx,this._dy);const h=Math.atan2(this._dy,this._dx),n=this._maxSpeed*Math.cos(h),r=this._maxSpeed*Math.sin(h);s>this._maxSpeed&&(s=this._maxSpeed,this._dx=n,this._dy=r);const a=this._inst.GetWorldInfo(),_=a.GetX(),l=a.GetY(),S=a.GetAngle(),u=Math.abs(n)*e,g=Math.abs(r)*e,p=t.clamp(this._dx*e+.5*d*e*e,-u,u),m=t.clamp(this._dy*e+.5*c*e*e,-g,g);if(this._allowSliding){if(a.OffsetXY(p,m),a.SetBboxChanged(),o=i.TestOverlapSolid(this._inst),o){i.RegisterCollision(this._inst,o);const h=Math.atan2(this._dy,this._dx)+Math.PI/2;let n=!1;const r=(a.GetWidth()+a.GetHeight())/4;if(i.PushOutSolidAxis(this._inst,Math.cos(h),Math.sin(h),Math.max(2.5*s*e,r))){n=!0;const h=a.GetX(),r=a.GetY(),d=s*e,c=t.distanceTo(_,l,h,r);if(c>1.01*d){const e=d/c,s=t.lerp(_,h,e),S=t.lerp(l,r,e);if(a.SetXY(s,S),a.SetBboxChanged(),o=i.TestOverlapSolid(this._inst),o){const e=t.angleTo(_,l,h,r)+Math.PI/2,s=Math.cos(e),o=Math.sin(e),d=(a.GetWidth()+a.GetHeight())/2/10;i.PushOutSolidAxis(this._inst,s,o,Math.max(d,1))||(a.SetXY(_,l),a.SetBboxChanged(),n=!1)}}}if(!n){const t=Math.hypot(p,m),h=-p/t,n=-m/t;this._dx=0,this._dy=0,i.PushOutSolid(this._inst,h,n,Math.max(2.5*s*e,r))||(a.SetXY(_,l),a.SetBboxChanged())}}}else a.OffsetX(p),a.SetBboxChanged(),o=i.TestOverlapSolid(this._inst),o&&(i.PushOutSolid(this._inst,this._dx<0?1:-1,0,Math.max(Math.abs(Math.floor(p)),1))||(a.SetX(_),a.SetBboxChanged()),this._dx=0,i.RegisterCollision(this._inst,o)),a.OffsetY(m),a.SetBboxChanged(),o=i.TestOverlapSolid(this._inst),o&&(i.PushOutSolid(this._inst,0,this._dy<0?1:-1,Math.max(Math.abs(Math.floor(m)),1))||(a.SetY(l),a.SetBboxChanged()),this._dy=0,i.RegisterCollision(this._inst,o));const b=t.roundToDp(this._dx,6),x=t.roundToDp(this._dy,6);0===b&&0===x||!this._inst.GetPlugin().IsRotatable()||(1===this._angleMode?a.SetAngle(t.toRadians(90*Math.round(t.toDegrees(Math.atan2(x,b))/90))):2===this._angleMode?a.SetAngle(t.toRadians(45*Math.round(t.toDegrees(Math.atan2(x,b))/45))):3===this._angleMode&&a.SetAngle(Math.atan2(x,b))),a.SetBboxChanged(),a.GetAngle()!=S&&(o=i.TestOverlapSolid(this._inst),o&&(a.SetAngle(S),a.SetBboxChanged(),i.RegisterCollision(this._inst,o)))}}GetPropertyValueByIndex(t){switch(t){case h:return this._GetMaxSpeed();case n:return this._GetAcceleration();case r:return this._GetDeceleration();case a:return this._directions;case o:return this._angleMode;case _:return this._allowSliding;case l:return this._IsDefaultControls();case d:return this._IsEnabled()}}SetPropertyValueByIndex(t,e){switch(t){case h:this._SetMaxSpeed(e);break;case n:this._SetAcceleration(e);break;case r:this._SetDeceleration(e);break;case a:this._directions=e;break;case o:this._angleMode=e;break;case _:this._allowSliding=!!e;break;case l:this._SetDefaultControls(!!e);break;case d:this._SetEnabled(!!e)}}_Stop(){this._dx=0,this._dy=0}_Reverse(){this._dx*=-1,this._dy*=-1}_MaybeClampSpeed(){const t=Math.hypot(this._dx,this._dy);t>this._maxSpeed&&this._SetSpeed(t)}_SetSpeed(e){e=t.clamp(e,0,this._maxSpeed);const i=Math.atan2(this._dy,this._dx);this._dx=e*Math.cos(i),this._dy=e*Math.sin(i)}_GetSpeed(){return Math.hypot(this._dx,this._dy)}_SetMaxSpeed(t){this._maxSpeed=Math.max(t,0)}_GetMaxSpeed(){return this._maxSpeed}_SetAcceleration(t){this._acc=Math.max(t,0)}_GetAcceleration(){return this._acc}_SetDeceleration(t){this._dec=Math.max(t,0)}_GetDeceleration(){return this._dec}_GetMovingAngle(){return Math.atan2(this._dy,this._dx)}_SetVectorX(t){this._dx=t,this._MaybeClampSpeed()}_GetVectorX(){return this._dx}_SetVectorY(t){this._dy=t,this._MaybeClampSpeed()}_GetVectorY(){return this._dy}_SimulateControl(t){if(this._isEnabled)switch(t){case 0:this._simLeft=!0;break;case 1:this._simRight=!0;break;case 2:this._simUp=!0;break;case 3:this._simDown=!0}}_SetDefaultControls(t){t=!!t,this._defaultControls!==t&&(this._defaultControls=t,this._defaultControls?this._BindEvents():(this._UnBindEvents(),this._OnWindowOrKeyboardBlur()))}_IsDefaultControls(){return this._defaultControls}_SetIgnoreInput(t){this._ignoreInput=!!t}_IsIgnoreInput(){return this._ignoreInput}_SetEnabled(t){this._isEnabled=!!t,this._isEnabled?this._StartTicking():(this._simLeft=!1,this._simRight=!1,this._simUp=!1,this._simDown=!1,this._StopTicking())}_IsEnabled(){return this._isEnabled}_SetAllowSliding(t){this._allowSliding=!!t}_IsAllowSliding(){return this._allowSliding}GetDebuggerProperties(){const e="behaviors.eightdir";return[{title:"$"+this.GetBehaviorType().GetName(),properties:[{name:e+".debugger.vector-x",value:this._GetVectorX(),onedit:t=>this._SetVectorX(t)},{name:e+".debugger.vector-y",value:this._GetVectorY(),onedit:t=>this._SetVectorY(t)},{name:e+".debugger.speed",value:this._GetSpeed(),onedit:t=>this._SetSpeed(t)},{name:e+".debugger.angle-of-motion",value:t.toDegrees(this._GetMovingAngle())},{name:e+".properties.max-speed.name",value:this._GetMaxSpeed(),onedit:t=>this._SetMaxSpeed(t)},{name:e+".properties.acceleration.name",value:this._GetAcceleration(),onedit:t=>this._SetAcceleration(t)},{name:e+".properties.deceleration.name",value:this._GetDeceleration(),onedit:t=>this._SetDeceleration(t)},{name:e+".properties.allow-sliding.name",value:this._IsAllowSliding(),onedit:t=>this._SetAllowSliding(t)},{name:e+".properties.enabled.name",value:this._IsEnabled(),onedit:t=>this._SetEnabled(t)}]}]}GetScriptInterfaceClass(){return self.I8DirectionBehaviorInstance}};const c=new WeakMap,S=new Map([["left",0],["right",1],["up",2],["down",3]]);self.I8DirectionBehaviorInstance=class extends i{constructor(){super(),c.set(this,i._GetInitInst().GetSdkInstance())}stop(){c.get(this)._Stop()}reverse(){c.get(this)._Reverse()}simulateControl(t){e.RequireString(t);const i=S.get(t);if("number"!=typeof i)throw new Error("invalid control");c.get(this)._SimulateControl(i)}get speed(){return c.get(this)._GetSpeed()}set speed(t){e.RequireFiniteNumber(t),c.get(this)._SetSpeed(t)}get maxSpeed(){return c.get(this)._GetMaxSpeed()}set maxSpeed(t){e.RequireFiniteNumber(t),c.get(this)._SetMaxSpeed(t)}get acceleration(){return c.get(this)._GetAcceleration()}set acceleration(t){e.RequireFiniteNumber(t),c.get(this)._SetAcceleration(t)}get deceleration(){return c.get(this)._GetDeceleration()}set deceleration(t){e.RequireFiniteNumber(t),c.get(this)._SetDeceleration(t)}get vectorX(){return c.get(this)._GetVectorX()}set vectorX(t){e.RequireFiniteNumber(t),c.get(this)._SetVectorX(t)}get vectorY(){return c.get(this)._GetVectorY()}set vectorY(t){e.RequireFiniteNumber(t),c.get(this)._SetVectorY(t)}setVector(t,i){e.RequireFiniteNumber(t),e.RequireFiniteNumber(i);const s=c.get(this);s._SetVectorX(t),s._SetVectorY(i)}getVector(){const t=c.get(this);return[t._GetVectorX(),t._GetVectorY()]}get isDefaultControls(){return c.get(this)._IsDefaultControls()}set isDefaultControls(t){c.get(this)._SetDefaultControls(!!t)}get isIgnoringInput(){return c.get(this)._IsIgnoreInput()}set isIgnoringInput(t){c.get(this)._SetIgnoreInput(!!t)}get isAllowSliding(){return c.get(this)._IsAllowSliding()}set isAllowSliding(t){c.get(this)._SetAllowSliding(!!t)}get isEnabled(){return c.get(this)._IsEnabled()}set isEnabled(t){c.get(this)._SetEnabled(!!t)}}}{const t=self.C3;t.Behaviors.EightDir.Cnds={IsMoving(){return this._GetSpeed()>1e-10},CompareSpeed(e,i){return t.compare(this._GetSpeed(),e,i)},IsEnabled(){return this._IsEnabled()},IsAllowSliding(){return this._IsAllowSliding()}}}self.C3.Behaviors.EightDir.Acts={Stop(){this._Stop()},Reverse(){this._Reverse()},SetIgnoreInput(t){this._SetIgnoreInput(t)},SetSpeed(t){this._SetSpeed(t)},SetMaxSpeed(t){this._SetMaxSpeed(t)},SetAcceleration(t){this._SetAcceleration(t)},SetDeceleration(t){this._SetDeceleration(t)},SimulateControl(t){this._SimulateControl(t)},SetEnabled(t){this._SetEnabled(t)},SetVectorX(t){this._SetVectorX(t)},SetVectorY(t){this._SetVectorY(t)},SetDefaultControls(t){this._SetDefaultControls(!!t)},SetAllowSliding(t){this._SetAllowSliding(t)}};{const t=self.C3;t.Behaviors.EightDir.Exps={Speed(){return this._GetSpeed()},MaxSpeed(){return this._GetMaxSpeed()},Acceleration(){return this._GetAcceleration()},Deceleration(){return this._GetDeceleration()},MovingAngle(){return t.toDegrees(this._GetMovingAngle())},VectorX(){return this._GetVectorX()},VectorY(){return this._GetVectorY()}}}
@@ -1912,7 +1917,8 @@ self.C3_ExpressionFuncs = [
 		},
 		p => {
 			const n0 = p._GetNode(0);
-			return () => n0.ExpObject("shoot_move_speed");
+			const n1 = p._GetNode(1);
+			return () => multiply(n0.ExpObject("move_speed"), n1.ExpObject("shoot_move_speed_mult"));
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -2098,7 +2104,15 @@ self.C3_ExpressionFuncs = [
 			return () => n0.ExpObject((v1.GetValue() + ".base_stats"));
 		},
 		() => "type",
+		() => "slots",
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			return () => n0.ExpObject(((v1.GetValue() + ".base_stats") + ".starting_slots"));
+		},
 		() => "applied_upgrades",
+		() => "experience",
+		() => "level",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0(1, 1.5);
@@ -2187,6 +2201,121 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
 			return () => ((n0.ExpInstVar() / n1.ExpInstVar()) * 53);
+		},
+		() => "MechLevelUp",
+		() => "Added Experience to Mech",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			return () => and("Target experience: ", f0(n1.ExpObject("level")));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("experience");
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			return () => f0(n1.ExpObject("level"));
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() - 1);
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const v1 = p._GetNode(1).GetVar();
+			const v2 = p._GetNode(2).GetVar();
+			const v3 = p._GetNode(3).GetVar();
+			const v4 = p._GetNode(4).GetVar();
+			const v5 = p._GetNode(5).GetVar();
+			return () => (((v0.GetValue() * (v1.GetValue() * v2.GetValue())) + (v3.GetValue() * v4.GetValue())) + v5.GetValue());
+		},
+		() => "UpgradeOutline",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			const v2 = p._GetNode(2).GetVar();
+			return () => Math.round(f0(0, (n1.ExpObject((v2.GetValue() + ".improvable_stats")) - 1)));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			const v2 = p._GetNode(2).GetVar();
+			return () => n0.ExpObject((and((v1.GetValue() + ".improvable_stats."), v2.GetValue()) + ".stat_name"));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			const v2 = p._GetNode(2).GetVar();
+			return () => n0.ExpObject((and((v1.GetValue() + ".improvable_stats."), v2.GetValue()) + ".op"));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			const v2 = p._GetNode(2).GetVar();
+			return () => n0.ExpObject((and((v1.GetValue() + ".improvable_stats."), v2.GetValue()) + ".amount"));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			return () => n0.ExpObject(("stats." + v1.GetValue()));
+		},
+		() => "add",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const v1 = p._GetNode(1).GetVar();
+			return () => (v0.GetValue() + v1.GetValue());
+		},
+		() => "subtract",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const v1 = p._GetNode(1).GetVar();
+			return () => (v0.GetValue() - v1.GetValue());
+		},
+		() => "multiply",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const v1 = p._GetNode(1).GetVar();
+			return () => (v0.GetValue() * v1.GetValue());
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => ("stats." + v0.GetValue());
+		},
+		() => "+",
+		() => "-",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() - 50);
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			const f2 = p._GetNode(2).GetBoundMethod();
+			const v3 = p._GetNode(3).GetVar();
+			return () => (v0.GetValue() + f1(f2(v3.GetValue()), "_", " "));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() - 100);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0((-20), 20);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			const f3 = p._GetNode(3).GetBoundMethod();
+			return () => f0(n1.ExpObject(), n2.ExpInstVar(), (4 * f3()));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			const f2 = p._GetNode(2).GetBoundMethod();
+			return () => C3.lerp(n0.ExpObject(), n1.ExpInstVar(), (4 * f2()));
 		},
 		() => -20,
 		() => 20,
@@ -2284,11 +2413,6 @@ self.C3_ExpressionFuncs = [
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0(0, 1);
-		},
-		() => 0.5,
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => Math.round(f0(1, 2));
 		},
 		p => {
@@ -2339,6 +2463,7 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0(1);
 		},
+		() => 0.5,
 		() => "trees",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -2468,6 +2593,16 @@ self.C3_ExpressionFuncs = [
 			return () => and(v0.GetValue(), "©");
 		},
 		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const n1 = p._GetNode(1);
+			return () => (C3.clamp(v0.GetValue(), 0, n1.ExpInstVar_Family()) / 2);
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const n1 = p._GetNode(1);
+			return () => (C3.clamp(v0.GetValue(), 0, n1.ExpInstVar_Family()) / 4);
+		},
+		p => {
 			const n0 = p._GetNode(0);
 			const v1 = p._GetNode(1).GetVar();
 			return () => (n0.ExpInstVar_Family() - v1.GetValue());
@@ -2482,11 +2617,6 @@ self.C3_ExpressionFuncs = [
 		() => "HealedColor",
 		() => "healed",
 		() => "--- GETTING MECH STAT ---",
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			return () => n0.ExpObject(("stats." + v1.GetValue()));
-		},
 		p => {
 			const n0 = p._GetNode(0);
 			const f1 = p._GetNode(1).GetBoundMethod();
@@ -2530,12 +2660,6 @@ self.C3_ExpressionFuncs = [
 			const f2 = p._GetNode(2).GetBoundMethod();
 			return () => n0.ExpObject((and((v1.GetValue() + ".modifiers."), f2("modifiers")) + ".value"));
 		},
-		() => "add",
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			const v1 = p._GetNode(1).GetVar();
-			return () => (v0.GetValue() + v1.GetValue());
-		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => and("Add Operation performed. New Value: ", v0.GetValue());
@@ -2544,12 +2668,6 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const f1 = p._GetNode(1).GetBoundMethod();
 			return () => and(((and("upgrades index: ", f0("upgrades")) + " | ") + "modifiers index: "), f1("modifiers"));
-		},
-		() => "multiply",
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			const v1 = p._GetNode(1).GetVar();
-			return () => (v0.GetValue() * v1.GetValue());
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
@@ -2566,6 +2684,10 @@ self.C3_ExpressionFuncs = [
 		},
 		() => "Hooks",
 		() => "giant_bullet_chance",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0(0, 1);
+		},
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("giant_bullet_chance");
@@ -2647,8 +2769,12 @@ self.C3_ExpressionFuncs = [
 		() => "spawn_mine",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
-			const n1 = p._GetNode(1);
-			return () => ((v0.GetValue() + ":") + (n1.ExpObject("applied_upgrades")).toString());
+			const v1 = p._GetNode(1).GetVar();
+			return () => ((v0.GetValue() + ":") + (v1.GetValue()).toString());
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => and("applied_upgrades.", v0.GetValue());
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -2705,17 +2831,21 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			const n1 = p._GetNode(1);
-			return () => ((v0.GetValue() * n1.ExpObject("applied_upgrades")) + 18);
+			return () => add(multiply(v0.GetValue(), n1.ExpObject("slots")), 18);
 		},
 		p => {
 			const n0 = p._GetNode(0);
-			return () => n0.ExpObject("applied_upgrades");
+			return () => subtract(n0.ExpObject("slots"), 1);
 		},
 		p => {
 			const n0 = p._GetNode(0);
 			const v1 = p._GetNode(1).GetVar();
 			const f2 = p._GetNode(2).GetBoundMethod();
 			return () => ((n0.ExpObject() + 10) + (v1.GetValue() * f2("upgrades")));
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0("upgrades");
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -2729,7 +2859,7 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const v1 = p._GetNode(1).GetVar();
-			return () => ((f0("UpgradeUI") - v1.GetValue()) - 40);
+			return () => ((f0("UpgradeUI") - v1.GetValue()) + 80);
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -2795,37 +2925,12 @@ self.C3_ExpressionFuncs = [
 		},
 		() => "CHOOSE WHICH MECH TO UPGRADE",
 		p => {
-			const n0 = p._GetNode(0);
-			return () => (n0.ExpObject() - 50);
-		},
-		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const f1 = p._GetNode(1).GetBoundMethod();
 			const f2 = p._GetNode(2).GetBoundMethod();
 			const f3 = p._GetNode(3).GetBoundMethod();
 			const v4 = p._GetNode(4).GetVar();
 			return () => f0(f1(f2(f3(v4.GetValue()), "label")), "_", " ");
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => (n0.ExpObject() - 100);
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0((-20), 20);
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			const n1 = p._GetNode(1);
-			const n2 = p._GetNode(2);
-			const f3 = p._GetNode(3).GetBoundMethod();
-			return () => f0(n1.ExpObject(), n2.ExpInstVar(), (4 * f3()));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			const f2 = p._GetNode(2).GetBoundMethod();
-			return () => C3.lerp(n0.ExpObject(), n1.ExpInstVar(), (4 * f2()));
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -2875,7 +2980,6 @@ self.C3_ExpressionFuncs = [
 			const f2 = p._GetNode(2).GetBoundMethod();
 			return () => n0.ExpObject((and((v1.GetValue() + ".modifiers."), f2()) + ".stat"));
 		},
-		() => "+",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			const v1 = p._GetNode(1).GetVar();
@@ -2912,6 +3016,7 @@ self.C3_ExpressionFuncs = [
 			const v1 = p._GetNode(1).GetVar();
 			return () => f0(v1.GetValue(), 1, ":");
 		},
+		() => -1,
 		() => "mech_definitions",
 		() => "upgrade_definitions",
 		() => 0.3,
@@ -2948,15 +3053,6 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			const v1 = p._GetNode(1).GetVar();
-			const v2 = p._GetNode(2).GetVar();
-			const v3 = p._GetNode(3).GetVar();
-			const v4 = p._GetNode(4).GetVar();
-			const v5 = p._GetNode(5).GetVar();
-			return () => (((v0.GetValue() * (v1.GetValue() * v2.GetValue())) + (v3.GetValue() * v4.GetValue())) + v5.GetValue());
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			const v1 = p._GetNode(1).GetVar();
 			const f2 = p._GetNode(2).GetBoundMethod();
 			return () => C3.lerp(v0.GetValue(), v1.GetValue(), (10 * f2()));
 		},
@@ -2966,16 +3062,18 @@ self.C3_ExpressionFuncs = [
 			const v2 = p._GetNode(2).GetVar();
 			const f3 = p._GetNode(3).GetBoundMethod();
 			const v4 = p._GetNode(4).GetVar();
-			const f5 = p._GetNode(5).GetBoundMethod();
-			const v6 = p._GetNode(6).GetVar();
-			const f7 = p._GetNode(7).GetBoundMethod();
-			const v8 = p._GetNode(8).GetVar();
-			return () => (f0(n1.ExpObject()) * ((v2.GetValue() - f3((v4.GetValue() - 1))) / (f5(v6.GetValue()) - f7((v8.GetValue() - 1)))));
+			return () => (f0(n1.ExpObject()) * (v2.GetValue() / f3(v4.GetValue())));
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const v1 = p._GetNode(1).GetVar();
 			return () => (f0(v1.GetValue()) - 0.001);
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			const v2 = p._GetNode(2).GetVar();
+			return () => (v0.GetValue() - f1(v2.GetValue()));
 		}
 ];
 
