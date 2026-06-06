@@ -22,6 +22,28 @@
     "mech_type": "ballistic"
   },
 
+  "quick_reload": {
+    "label": "Quick Reload",
+    "description": "",
+    "modifiers": [
+      { "stat": "reload_time", "op": "multiply", "value": 0.5 }
+    ],
+    "behavior_tags": [],
+    "hooks": [],
+    "mech_type": "ballistic"
+  },
+
+  "bigger_mag": {
+    "label": "Bigger Magazine",
+    "description": "",
+    "modifiers": [
+      { "stat": "mag_size", "op": "multiply", "value": 1.5 }
+    ],
+    "behavior_tags": [],
+    "hooks": [],
+    "mech_type": "ballistic"
+  },
+
   "overpressure": {
     "label": "Overpressure",
     "description": "",
@@ -63,6 +85,22 @@
     "mech_type": "ballistic"
   },
 
+  "shotgun": {
+    "label": "Shotgun Conversion",
+    "description": "",
+    "modifiers": [
+      { "stat": "bullet_damage", "op": "add", "value": 10 },
+      { "stat": "range", "op": "add", "value": -40 },
+      { "stat": "bullet_count", "op": "add", "value": 6 },
+      { "stat": "bullet_spread", "op": "add", "value": 15 },
+      { "stat": "bullet_knockback", "op": "multiply", "value": 3.0 },
+      { "stat": "fire_rate", "op": "multiply", "value": 0.4 }
+    ],
+    "behavior_tags": [],
+    "hooks": {},
+    "mech_type": "ballistic"
+  },
+
   "giant_bullet": {
     "label": "Giant Bullet",
     "description": "Chance to fire a massive piercing round",
@@ -76,7 +114,7 @@
 
   "ricochet": {
     "label": "Ricochet",
-    "description": "",
+    "description": "Bullets can ricochet",
     "modifiers": [
       { "stat": "ricochet_chance", "op": "add", "value": 0.1 }
     ],

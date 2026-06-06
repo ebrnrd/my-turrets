@@ -9,6 +9,20 @@
 			"desc": "",
 			"show": true,
 			"sid": 972077827667570
+		},
+		{
+			"name": "MinScrapOnDeath",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 119229553672008
+		},
+		{
+			"name": "MaxScrapOnDeath",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 252017550837983
 		}
 	],
 	"behaviorTypes": [

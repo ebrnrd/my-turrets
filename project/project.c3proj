@@ -446,7 +446,8 @@
 			"ArtillerySmokeTrail",
 			"MechUpgradeArrow",
 			"UpgradeMechPowerUpEmptySlot",
-			"LevelUpStatText"
+			"LevelUpStatText",
+			"EnemyAttackCollision"
 		],
 		"subfolders": [
 			{

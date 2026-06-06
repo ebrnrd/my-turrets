@@ -3454,7 +3454,18 @@
 					"children": [
 						{
 							"eventType": "block",
-							"conditions": [],
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 112477790105421,
+									"parameters": {
+										"first-value": "MechObject.Get(\"level\") % 3",
+										"comparison": 0,
+										"second-value": "0"
+									}
+								}
+							],
 							"actions": [
 								{
 									"id": "add-to",
@@ -3476,21 +3487,30 @@
 									}
 								},
 								{
-									"id": "wait",
-									"objectClass": "System",
-									"sid": 932284069411577,
-									"parameters": {
-										"seconds": "0.1",
-										"use-timescale": false
-									}
-								},
-								{
-									"customAction": "ImproveRandomImprovableStat",
-									"objectClass": "MechObject",
-									"sid": 971331198006079
+									"callFunction": "MechLevelUpStatTextFeedback",
+									"sid": 611333423392655,
+									"parameters": [
+										"MechObject.UID",
+										"\"1 SLOT\"",
+										"\"add\"",
+										"- 60",
+										"\"#000000\""
+									]
 								}
 							],
 							"sid": 295501261956090
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"customAction": "ImproveRandomImprovableStat",
+									"objectClass": "MechObject",
+									"sid": 758451314888889
+								}
+							],
+							"sid": 103097531026485
 						}
 					]
 				},
@@ -3982,12 +4002,13 @@
 										},
 										{
 											"callFunction": "MechLevelUpStatTextFeedback",
-											"sid": 925053958126477,
+											"sid": 720047417890476,
 											"parameters": [
 												"MechObject.UID",
-												"\"\"",
 												"ChosenStatName",
-												"Operation"
+												"Operation",
+												"0",
+												"\"#1a40ff\""
 											]
 										}
 									],
@@ -4013,13 +4034,6 @@
 							"sid": 241664699354360
 						},
 						{
-							"name": "UpgradeFID",
-							"type": "string",
-							"initialValue": "",
-							"comment": "",
-							"sid": 719477613533913
-						},
-						{
 							"name": "StatName",
 							"type": "string",
 							"initialValue": "",
@@ -4032,6 +4046,20 @@
 							"initialValue": "",
 							"comment": "",
 							"sid": 141192304687236
+						},
+						{
+							"name": "YOffest",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 762432777704375
+						},
+						{
+							"name": "Color",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 745089288593463
 						}
 					],
 					"eventType": "function-block",
@@ -4154,23 +4182,14 @@
 								{
 									"id": "create-object",
 									"objectClass": "System",
-									"sid": 814039327498865,
+									"sid": 399405811115886,
 									"parameters": {
 										"object-to-create": "LevelUpStatText",
 										"layer": "\"always-top\"",
 										"x": "MechBase.X",
-										"y": "MechBase.Y - 50",
+										"y": "MechBase.Y - 50 + YOffest",
 										"create-hierarchy": false,
 										"template-name": "\"\""
-									}
-								},
-								{
-									"id": "set-instvar-value",
-									"objectClass": "LevelUpStatText",
-									"sid": 354720798322383,
-									"parameters": {
-										"instance-variable": "UpgradeFID",
-										"value": "UpgradeFID"
 									}
 								},
 								{
@@ -4202,10 +4221,10 @@
 								{
 									"id": "set-instvar-value",
 									"objectClass": "LevelUpStatText",
-									"sid": 217317073724092,
+									"sid": 293156305854912,
 									"parameters": {
 										"instance-variable": "TargetY",
-										"value": "MechBase.Y - 100"
+										"value": "MechBase.Y - 100 + YOffest"
 									}
 								},
 								{
@@ -4215,6 +4234,14 @@
 									"parameters": {
 										"instance-variable": "TargetAngle",
 										"value": "random(-20,20)"
+									}
+								},
+								{
+									"id": "set-font-color",
+									"objectClass": "LevelUpStatText",
+									"sid": 689540198196262,
+									"parameters": {
+										"color": "HexColor(Color)"
 									}
 								}
 							],

@@ -42,6 +42,16 @@
 			"sid": 619381416471158
 		},
 		{
+			"eventType": "variable",
+			"name": "EnemiesDifficulty",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 526830100003945
+		},
+		{
 			"eventType": "block",
 			"conditions": [
 				{
@@ -82,16 +92,17 @@
 				{
 					"id": "add-to-eventvar",
 					"objectClass": "System",
-					"sid": 551604532367634,
+					"sid": 979409526617239,
 					"parameters": {
-						"variable": "EnemiesSpawnInterval",
-						"value": "0.1"
+						"variable": "EnemiesDifficulty",
+						"value": "0.5"
 					}
 				},
 				{
 					"id": "log",
 					"objectClass": "Browser",
 					"sid": 123315672650882,
+					"disabled": true,
 					"parameters": {
 						"type": "log",
 						"message": "\"Enemies Spawn Interval \" & EnemiesSpawnInterval"
@@ -116,16 +127,17 @@
 				{
 					"id": "subtract-from-eventvar",
 					"objectClass": "System",
-					"sid": 755551504036628,
+					"sid": 752510928501743,
 					"parameters": {
-						"variable": "EnemiesSpawnInterval",
-						"value": "0.1"
+						"variable": "EnemiesDifficulty",
+						"value": "0.5"
 					}
 				},
 				{
 					"id": "log",
 					"objectClass": "Browser",
 					"sid": 535626588963060,
+					"disabled": true,
 					"parameters": {
 						"type": "log",
 						"message": "\"Enemies Spawn Interval \" & EnemiesSpawnInterval"
@@ -219,14 +231,14 @@
 				{
 					"id": "create-object",
 					"objectClass": "System",
-					"sid": 598582560783950,
+					"sid": 945542961464823,
 					"parameters": {
 						"object-to-create": "enemyTest",
 						"layer": "\"main\"",
 						"x": "Mouse.X + random(-20,20)",
 						"y": "Mouse.Y + random(-20,20)",
-						"create-hierarchy": false,
-						"template-name": "\"\""
+						"create-hierarchy": true,
+						"template-name": "\"Enemy1\""
 					}
 				}
 			],
@@ -428,23 +440,96 @@
 						},
 						{
 							"eventType": "block",
-							"conditions": [],
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 257074647841690,
+									"parameters": {
+										"first-value": "random(0,1)",
+										"comparison": 3,
+										"second-value": "EnemiesDifficulty / 10"
+									}
+								}
+							],
 							"actions": [
 								{
 									"id": "create-object",
 									"objectClass": "System",
-									"sid": 372975714257302,
+									"sid": 632495109578161,
 									"parameters": {
 										"object-to-create": "enemyTest",
 										"layer": "\"main\"",
 										"x": "spawn_x",
 										"y": "spawn_y",
-										"create-hierarchy": false,
-										"template-name": "\"\""
+										"create-hierarchy": true,
+										"template-name": "\"Enemy3\""
 									}
 								}
 							],
 							"sid": 522428217406310
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 293118303472162
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 446176858719397,
+									"parameters": {
+										"first-value": "random(0,1)",
+										"comparison": 3,
+										"second-value": "EnemiesDifficulty / 5"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 799310793815976,
+									"parameters": {
+										"object-to-create": "enemyTest",
+										"layer": "\"main\"",
+										"x": "spawn_x",
+										"y": "spawn_y",
+										"create-hierarchy": true,
+										"template-name": "\"Enemy2\""
+									}
+								}
+							],
+							"sid": 716274882445629
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 321419581071946
+								}
+							],
+							"actions": [
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 960292040262725,
+									"parameters": {
+										"object-to-create": "enemyTest",
+										"layer": "\"main\"",
+										"x": "spawn_x",
+										"y": "spawn_y",
+										"create-hierarchy": true,
+										"template-name": "\"Enemy1\""
+									}
+								}
+							],
+							"sid": 931808265624298
 						}
 					]
 				}
@@ -651,14 +736,14 @@
 								{
 									"id": "create-object",
 									"objectClass": "System",
-									"sid": 245543243257634,
+									"sid": 621869196480106,
 									"parameters": {
 										"object-to-create": "enemyTest",
 										"layer": "\"main\"",
 										"x": "spawn_x",
 										"y": "spawn_y",
-										"create-hierarchy": false,
-										"template-name": "\"\""
+										"create-hierarchy": true,
+										"template-name": "\"Enemy1\""
 									}
 								}
 							],
@@ -739,9 +824,53 @@
 						"type": "regular",
 						"tag": "\"attack\""
 					}
+				},
+				{
+					"id": "set-animation-frame",
+					"objectClass": "enemyTest",
+					"sid": 688416002773347,
+					"parameters": {
+						"frame-number": "round(random(0,3))"
+					}
 				}
 			],
-			"sid": 739945247765564
+			"sid": 739945247765564,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "randomColor",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 837311228449435
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 380148054522286,
+							"parameters": {
+								"variable": "randomColor",
+								"value": "random(0,15)"
+							}
+						},
+						{
+							"id": "set-default-color",
+							"objectClass": "enemyTest",
+							"sid": 484031494126604,
+							"parameters": {
+								"color": "rgbEx(randomColor, randomColor, randomColor)"
+							}
+						}
+					],
+					"sid": 639907621579317
+				}
+			]
 		},
 		{
 			"eventType": "block",
@@ -915,10 +1044,10 @@
 				{
 					"id": "apply-force-towards-position",
 					"objectClass": "enemyTest",
-					"sid": 367363759089718,
+					"sid": 224923202965312,
 					"behaviorType": "Physics",
 					"parameters": {
-						"force": "Self.move_speed * Self.dt",
+						"force": "Self.move_speed * dt",
 						"x": "playerCharacter.X",
 						"y": "playerCharacter.Y",
 						"image-point": "0"
@@ -1092,9 +1221,9 @@
 						{
 							"id": "repeat",
 							"objectClass": "System",
-							"sid": 692393739439922,
+							"sid": 570279750981950,
 							"parameters": {
-								"count": "round(random(1,2))"
+								"count": "round(random(enemyTest.MinScrapOnDeath, enemyTest.MaxScrapOnDeath))"
 							}
 						}
 					],
@@ -1262,6 +1391,15 @@
 					"parameters": {
 						"tag": "\"attack\""
 					}
+				},
+				{
+					"id": "pick-children",
+					"objectClass": "enemyTest",
+					"sid": 717992013562616,
+					"parameters": {
+						"child": "EnemyAttackCollision",
+						"which": "own"
+					}
 				}
 			],
 			"actions": [],
@@ -1272,7 +1410,7 @@
 					"conditions": [
 						{
 							"id": "is-overlapping-another-object",
-							"objectClass": "enemyTest",
+							"objectClass": "EnemyAttackCollision",
 							"sid": 528924361694494,
 							"parameters": {
 								"object": "MechBase"
@@ -1318,7 +1456,7 @@
 					"conditions": [
 						{
 							"id": "is-overlapping-another-object",
-							"objectClass": "enemyTest",
+							"objectClass": "EnemyAttackCollision",
 							"sid": 464697019777693,
 							"parameters": {
 								"object": "playerCharacter"
