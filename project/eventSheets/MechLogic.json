@@ -1661,6 +1661,16 @@
 									"sid": 554909411620904
 								},
 								{
+									"eventType": "variable",
+									"name": "BulletTime",
+									"type": "number",
+									"initialValue": "0",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 142854769801387
+								},
+								{
 									"eventType": "block",
 									"conditions": [
 										{
@@ -1758,15 +1768,6 @@
 										{
 											"id": "set-instvar-value",
 											"objectClass": "ArtilleryBullet",
-											"sid": 580513079874232,
-											"parameters": {
-												"instance-variable": "BulletTime",
-												"value": "MechStatsCache.Get(\"bullet_time\")"
-											}
-										},
-										{
-											"id": "set-instvar-value",
-											"objectClass": "ArtilleryBullet",
 											"sid": 374960701436434,
 											"parameters": {
 												"instance-variable": "OwnerUID",
@@ -1790,15 +1791,33 @@
 											}
 										},
 										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 852397047827647,
+											"parameters": {
+												"variable": "BulletTime",
+												"value": "MechStatsCache.Get(\"bullet_time\") + random(-0.2, 0.2)"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "ArtilleryBullet",
+											"sid": 690881981316041,
+											"parameters": {
+												"instance-variable": "BulletTime",
+												"value": "BulletTime"
+											}
+										},
+										{
 											"id": "tween-one-property",
 											"objectClass": "ArtilleryBullet",
-											"sid": 389080906332051,
+											"sid": 888181265298683,
 											"behaviorType": "Tween",
 											"parameters": {
 												"tags": "\"positionX\"",
 												"property": "offsetX",
 												"end-value": "ArtilleryBullet.TargetX",
-												"time": "MechStatsCache.Get(\"bullet_time\")",
+												"time": "BulletTime",
 												"ease": "easeinoutcubic",
 												"destroy-on-complete": "no",
 												"loop": "no",
@@ -1809,13 +1828,13 @@
 										{
 											"id": "tween-one-property",
 											"objectClass": "ArtilleryBullet",
-											"sid": 112114931508628,
+											"sid": 820770397084089,
 											"behaviorType": "Tween",
 											"parameters": {
 												"tags": "\"positionY\"",
 												"property": "offsetY",
 												"end-value": "min(ArtilleryBullet.TargetY - 60, ArtilleryBullet.Y - 60)",
-												"time": "MechStatsCache.Get(\"bullet_time\") / 2",
+												"time": "BulletTime / 2",
 												"ease": "easeoutcubic",
 												"destroy-on-complete": "no",
 												"loop": "no",
@@ -1826,13 +1845,13 @@
 										{
 											"id": "tween-one-property",
 											"objectClass": "ArtilleryBullet",
-											"sid": 122457377444010,
+											"sid": 935379697699260,
 											"behaviorType": "Tween",
 											"parameters": {
 												"tags": "\"scale\"",
 												"property": "offsetWidth",
 												"end-value": "40",
-												"time": "MechStatsCache.Get(\"bullet_time\") / 2",
+												"time": "BulletTime / 2",
 												"ease": "easeincubic",
 												"destroy-on-complete": "no",
 												"loop": "no",
@@ -1843,13 +1862,13 @@
 										{
 											"id": "tween-one-property",
 											"objectClass": "ArtilleryBullet",
-											"sid": 362668482697584,
+											"sid": 695746155750610,
 											"behaviorType": "Tween",
 											"parameters": {
 												"tags": "\"z\"",
 												"property": "offsetZElevation",
 												"end-value": "6",
-												"time": "MechStatsCache.Get(\"bullet_time\") / 2",
+												"time": "BulletTime / 2",
 												"ease": "easeincubic",
 												"destroy-on-complete": "no",
 												"loop": "no",

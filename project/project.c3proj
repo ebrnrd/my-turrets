@@ -414,7 +414,7 @@
 			"UpgradeCardText",
 			"UpgradeCardThumb",
 			"CardGlow",
-			"UpgradeCardUIElement",
+			"ShopCardUIElement",
 			"Mouse",
 			"CardCanvas",
 			"UpgradeCardBg",
@@ -454,7 +454,8 @@
 				"items": [
 					"MechDefinitions",
 					"UpgradeDefinitions",
-					"AJAX"
+					"AJAX",
+					"PlayerDefinitions"
 				],
 				"subfolders": [
 					{
@@ -490,6 +491,14 @@
 				],
 				"subfolders": [],
 				"name": "UI"
+			},
+			{
+				"items": [
+					"PlayerStatsCache",
+					"PlayerData"
+				],
+				"subfolders": [],
+				"name": "Player"
 			}
 		]
 	},
@@ -683,6 +692,14 @@
 					"name": "upgrade_definitions.json",
 					"type": "application/json",
 					"sid": 830408465147523,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "player_definitions.json",
+					"type": "application/json",
+					"sid": 145428814192002,
 					"file-info": {
 						"purpose": "none"
 					}

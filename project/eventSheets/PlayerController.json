@@ -1233,6 +1233,15 @@
 				}
 			],
 			"sid": 381397535478321
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "PlayerStats",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [],
+			"sid": 836157692841173
 		}
 	],
 	"sid": 135398769691869

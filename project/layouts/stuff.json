@@ -1713,7 +1713,7 @@
 					}
 				},
 				{
-					"type": "UpgradeCardUIElement",
+					"type": "ShopCardUIElement",
 					"properties": {
 						"initially-visible": false,
 						"initial-animation": "Animation 1",
@@ -1730,7 +1730,9 @@
 						"TargetY": 0,
 						"OffsetX": 0,
 						"OffsetY": 0,
-						"UpgradeID": ""
+						"CardType": "",
+						"UpgradeID": "",
+						"MechType": ""
 					},
 					"behaviors": {},
 					"sceneGraphData": {
@@ -5894,6 +5896,30 @@
 			"properties": {},
 			"uid": 27,
 			"sid": 949391911016288,
+			"tags": "",
+			"instanceVariables": {}
+		},
+		{
+			"type": "PlayerDefinitions",
+			"properties": {},
+			"uid": 39,
+			"sid": 666477579528994,
+			"tags": "",
+			"instanceVariables": {}
+		},
+		{
+			"type": "PlayerStatsCache",
+			"properties": {},
+			"uid": 40,
+			"sid": 574410126701283,
+			"tags": "",
+			"instanceVariables": {}
+		},
+		{
+			"type": "PlayerData",
+			"properties": {},
+			"uid": 41,
+			"sid": 973246860175989,
 			"tags": "",
 			"instanceVariables": {}
 		}

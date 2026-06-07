@@ -1,5 +1,5 @@
 {
-	"name": "UpgradeCardUIElement",
+	"name": "ShopCardUIElement",
 	"plugin-id": "Sprite",
 	"sid": 963685009086814,
 	"isGlobal": false,
@@ -41,11 +41,25 @@
 			"sid": 450275565284803
 		},
 		{
+			"name": "CardType",
+			"type": "string",
+			"desc": "",
+			"show": true,
+			"sid": 347125523894030
+		},
+		{
 			"name": "UpgradeID",
 			"type": "string",
 			"desc": "",
 			"show": true,
 			"sid": 311574775347313
+		},
+		{
+			"name": "MechType",
+			"type": "string",
+			"desc": "",
+			"show": true,
+			"sid": 575216570954599
 		}
 	],
 	"behaviorTypes": [],

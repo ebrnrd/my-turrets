@@ -1,0 +1,8 @@
+{
+	"name": "PlayerData",
+	"plugin-id": "Json",
+	"sid": 287059260386990,
+	"isGlobal": true,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": []
+}
