@@ -46,6 +46,20 @@
 			"desc": "",
 			"show": true,
 			"sid": 946406327972978
+		},
+		{
+			"name": "CanMove",
+			"type": "boolean",
+			"desc": "",
+			"show": true,
+			"sid": 587653007025035
+		},
+		{
+			"name": "PlayerHitCounter",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 755073548359006
 		}
 	],
 	"behaviorTypes": [

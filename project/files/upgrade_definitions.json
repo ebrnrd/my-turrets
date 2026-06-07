@@ -1,9 +1,42 @@
 {
-  "rapid_fire": {
-    "label": "Rapid Fire",
+  "rapid_fire_1": {
+    "label": "Rapid Fire I",
     "description": "",
     "modifiers": [
       { "stat": "fire_rate", "op": "multiply", "value": 1.5 }
+    ],
+    "behavior_tags": [],
+    "hooks": [],
+    "mech_type": "ballistic"
+  },
+
+  "rapid_fire_2": {
+    "label": "Rapid Fire II",
+    "description": "",
+    "modifiers": [
+      { "stat": "fire_rate", "op": "multiply", "value": 1.75 }
+    ],
+    "behavior_tags": [],
+    "hooks": [],
+    "mech_type": "ballistic"
+  },
+
+  "bullet_damage_1": {
+    "label": "Bullet Damage I",
+    "description": "",
+    "modifiers": [
+      { "stat": "bullet_damage", "op": "multiply", "value": 1.25 }
+    ],
+    "behavior_tags": [],
+    "hooks": [],
+    "mech_type": "ballistic"
+  },
+
+  "bullet_damage_2": {
+    "label": "Bullet Damage II",
+    "description": "",
+    "modifiers": [
+      { "stat": "bullet_damage", "op": "multiply", "value": 1.5 }
     ],
     "behavior_tags": [],
     "hooks": [],

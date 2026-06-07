@@ -550,6 +550,67 @@
 			"subLayers": [],
 			"instances": [
 				{
+					"type": "MechVacuumCollision",
+					"properties": {
+						"initially-visible": false,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 42,
+					"sid": 117845325364244,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {},
+					"sceneGraphData": {
+						"parent-uid": 7,
+						"uid": 42,
+						"flags": {
+							"x": true,
+							"y": true,
+							"z": true,
+							"w": true,
+							"h": true,
+							"a": true,
+							"o": false,
+							"v": false,
+							"d": true,
+							"sm": "normal"
+						},
+						"preview": {
+							"transformX": 0,
+							"transformY": 0,
+							"transformZ": 0,
+							"transformW": 0,
+							"transformH": 0,
+							"transformA": 0,
+							"transformSX": 0,
+							"transformSY": 0,
+							"transformO": 0,
+							"previewSceneGraph": false
+						}
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 202.0845489501953,
+						"y": 166.88796997070312,
+						"width": 106,
+						"height": 106,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"z": 0,
+						"angle": 0
+					}
+				},
+				{
 					"type": "turret_proximity_collision",
 					"properties": {
 						"initially-visible": true,
@@ -673,7 +734,9 @@
 						"patrol_x": 0,
 						"patrol_y": 0,
 						"is_reloading": false,
-						"state": "default"
+						"state": "default",
+						"CanMove": true,
+						"PlayerHitCounter": 0
 					},
 					"behaviors": {
 						"Timer2": {
@@ -802,6 +865,21 @@
 							},
 							{
 								"uid": 29,
+								"flags": {
+									"x": true,
+									"y": true,
+									"z": true,
+									"w": true,
+									"h": true,
+									"a": true,
+									"o": false,
+									"v": false,
+									"d": true,
+									"sm": "normal"
+								}
+							},
+							{
+								"uid": 42,
 								"flags": {
 									"x": true,
 									"y": true,

@@ -3,6 +3,16 @@
 	"events": [
 		{
 			"eventType": "variable",
+			"name": "PlayerCumulativeScrap",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 100405032406611
+		},
+		{
+			"eventType": "variable",
 			"name": "PlayerScrap",
 			"type": "number",
 			"initialValue": "0",
@@ -68,6 +78,15 @@
 						"variable": "PlayerScrap",
 						"value": "Amount"
 					}
+				},
+				{
+					"id": "add-to-eventvar",
+					"objectClass": "System",
+					"sid": 379909653671290,
+					"parameters": {
+						"variable": "PlayerCumulativeScrap",
+						"value": "Amount"
+					}
 				}
 			],
 			"sid": 494612388296851
@@ -107,7 +126,7 @@
 					"eventType": "variable",
 					"name": "ExponentMult",
 					"type": "number",
-					"initialValue": "1",
+					"initialValue": "3",
 					"comment": "",
 					"isStatic": false,
 					"isConstant": false,
@@ -127,7 +146,7 @@
 					"eventType": "variable",
 					"name": "Base",
 					"type": "number",
-					"initialValue": "4",
+					"initialValue": "10",
 					"comment": "",
 					"isStatic": false,
 					"isConstant": false,

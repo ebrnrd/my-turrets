@@ -1,0 +1,60 @@
+{
+	"name": "IconUI",
+	"plugin-id": "Sprite",
+	"sid": 980157807903122,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 9,
+						"height": 7,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 5280977,
+						"collisionPoly": {
+							"points": [
+								0.3333333333333333,
+								0.14285714285714285,
+								0.6666666666666666,
+								0.14285714285714285,
+								0.8888888888888888,
+								0.2857142857142857,
+								0.8888888888888888,
+								0.7142857142857143,
+								0.6666666666666666,
+								0.8571428571428571,
+								0.3333333333333333,
+								0.8571428571428571,
+								0.1111111111111111,
+								0.7142857142857143,
+								0.1111111111111111,
+								0.2857142857142857
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 441036095471077,
+				"name": "Scrap",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 0
+			}
+		],
+		"subfolders": []
+	}
+}

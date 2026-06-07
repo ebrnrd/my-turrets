@@ -670,6 +670,25 @@
 					"parameters": {
 						"object": "MechBase"
 					}
+				},
+				{
+					"id": "compare-two-values",
+					"objectClass": "System",
+					"sid": 447072441607707,
+					"disabled": true,
+					"parameters": {
+						"first-value": "distance(MechBase.X, MechBase.Y, playerCharacter.X, playerCharacter.Y)",
+						"comparison": 4,
+						"second-value": "stop_move_near_player_distance"
+					}
+				},
+				{
+					"id": "is-boolean-instance-variable-set",
+					"objectClass": "MechBase",
+					"sid": 151974865193156,
+					"parameters": {
+						"instance-variable": "CanMove"
+					}
 				}
 			],
 			"actions": [
@@ -2913,6 +2932,41 @@
 						{
 							"id": "on-timer",
 							"objectClass": "MechBase",
+							"sid": 351976073183997,
+							"behaviorType": "Timer",
+							"parameters": {
+								"tag": "\"CanMoveCheck\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "MechBase",
+							"sid": 178244895087863,
+							"parameters": {
+								"instance-variable": "CanMove",
+								"value": "true"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "MechBase",
+							"sid": 222595417457383,
+							"parameters": {
+								"instance-variable": "PlayerHitCounter",
+								"value": "0"
+							}
+						}
+					],
+					"sid": 139772112659575
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-timer",
+							"objectClass": "MechBase",
 							"sid": 496871337616338,
 							"behaviorType": "Timer",
 							"parameters": {
@@ -3003,10 +3057,19 @@
 									"id": "compare-two-values",
 									"objectClass": "System",
 									"sid": 103057964821551,
+									"disabled": true,
 									"parameters": {
 										"first-value": "distance(MechBase.X, MechBase.Y, playerCharacter.X, playerCharacter.Y)",
 										"comparison": 4,
 										"second-value": "stop_move_near_player_distance"
+									}
+								},
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "MechBase",
+									"sid": 941819983755603,
+									"parameters": {
+										"instance-variable": "CanMove"
 									}
 								},
 								{
@@ -3253,10 +3316,19 @@
 							"id": "compare-two-values",
 							"objectClass": "System",
 							"sid": 875299157745616,
+							"disabled": true,
 							"parameters": {
 								"first-value": "distance(MechBase.X, MechBase.Y, playerCharacter.X, playerCharacter.Y)",
 								"comparison": 4,
 								"second-value": "stop_move_near_player_distance"
+							}
+						},
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "MechBase",
+							"sid": 370235568103944,
+							"parameters": {
+								"instance-variable": "CanMove"
 							}
 						}
 					],
@@ -3269,6 +3341,51 @@
 						}
 					],
 					"sid": 793158459370243
+				},
+				{
+					"aceType": "action",
+					"aceName": "CanMoveCheck",
+					"objectClass": "MechBase",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "custom-ace-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "MechBase",
+							"sid": 903013797064744,
+							"parameters": {
+								"instance-variable": "CanMove",
+								"value": "false"
+							}
+						},
+						{
+							"id": "stop-timer",
+							"objectClass": "MechBase",
+							"sid": 131581979944327,
+							"behaviorType": "Timer",
+							"parameters": {
+								"tag": "\"CanMoveCheck\""
+							}
+						},
+						{
+							"id": "start-timer",
+							"objectClass": "MechBase",
+							"sid": 990535142329709,
+							"behaviorType": "Timer",
+							"parameters": {
+								"duration": "1.0",
+								"type": "once",
+								"tag": "\"CanMoveCheck\""
+							}
+						}
+					],
+					"sid": 711919580898122
 				}
 			],
 			"sid": 535395925155042
@@ -3459,6 +3576,7 @@
 									"id": "compare-two-values",
 									"objectClass": "System",
 									"sid": 112477790105421,
+									"disabled": true,
 									"parameters": {
 										"first-value": "MechObject.Get(\"level\") % 3",
 										"comparison": 0,
@@ -3466,11 +3584,17 @@
 									}
 								}
 							],
+							"actions": [],
+							"sid": 295501261956090
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
 							"actions": [
 								{
 									"id": "add-to",
 									"objectClass": "MechObject",
-									"sid": 282186982965185,
+									"sid": 983775165273873,
 									"parameters": {
 										"path": "\"slots\"",
 										"value": "1"
@@ -3479,7 +3603,7 @@
 								{
 									"id": "push-value",
 									"objectClass": "MechObject",
-									"sid": 993111570562219,
+									"sid": 530088362048817,
 									"parameters": {
 										"where": "back",
 										"path": "\"applied_upgrades\"",
@@ -3488,7 +3612,7 @@
 								},
 								{
 									"callFunction": "MechLevelUpStatTextFeedback",
-									"sid": 611333423392655,
+									"sid": 838025839364928,
 									"parameters": [
 										"MechObject.UID",
 										"\"1 SLOT\"",
@@ -3496,18 +3620,19 @@
 										"- 60",
 										"\"#000000\""
 									]
-								}
-							],
-							"sid": 295501261956090
-						},
-						{
-							"eventType": "block",
-							"conditions": [],
-							"actions": [
+								},
 								{
 									"customAction": "ImproveRandomImprovableStat",
 									"objectClass": "MechObject",
 									"sid": 758451314888889
+								},
+								{
+									"customAction": "BeginUpgradeShopSequenceOnMechLevelUp",
+									"objectClass": "UpgradesManager",
+									"sid": 313340247582081,
+									"parameters": [
+										"MechObject.UID"
+									]
 								}
 							],
 							"sid": 103097531026485
@@ -3549,7 +3674,7 @@
 							"eventType": "variable",
 							"name": "ExponentMult",
 							"type": "number",
-							"initialValue": "3",
+							"initialValue": "2",
 							"comment": "",
 							"isStatic": false,
 							"isConstant": false,
@@ -3559,7 +3684,7 @@
 							"eventType": "variable",
 							"name": "LinearMult",
 							"type": "number",
-							"initialValue": "16",
+							"initialValue": "4",
 							"comment": "",
 							"isStatic": false,
 							"isConstant": false,
@@ -3569,7 +3694,7 @@
 							"eventType": "variable",
 							"name": "Base",
 							"type": "number",
-							"initialValue": "10",
+							"initialValue": "4",
 							"comment": "",
 							"isStatic": false,
 							"isConstant": false,
@@ -3953,7 +4078,36 @@
 											}
 										}
 									],
-									"sid": 959170440353394
+									"sid": 959170440353394,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-two-values",
+													"objectClass": "System",
+													"sid": 537984594750517,
+													"parameters": {
+														"first-value": "NewValue",
+														"comparison": 3,
+														"second-value": "0"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 532012883710519,
+													"parameters": {
+														"variable": "NewValue",
+														"value": "0.0001"
+													}
+												}
+											],
+											"sid": 758487339464528
+										}
+									]
 								},
 								{
 									"eventType": "block",

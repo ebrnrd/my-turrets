@@ -12,6 +12,16 @@
 			"sid": 114318154168768
 		},
 		{
+			"eventType": "variable",
+			"name": "AddExperienceAmount",
+			"type": "number",
+			"initialValue": "2",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 607820112020044
+		},
+		{
 			"eventType": "block",
 			"conditions": [
 				{
@@ -792,6 +802,15 @@
 							"parameters": {
 								"object": "MechBase"
 							}
+						},
+						{
+							"id": "pick-by-evaluate",
+							"objectClass": "System",
+							"sid": 123871806589840,
+							"parameters": {
+								"object": "MechObject",
+								"expression": "MechObject.MechBaseUID = MechBase.UID"
+							}
 						}
 					],
 					"actions": [
@@ -822,6 +841,11 @@
 							}
 						},
 						{
+							"customAction": "CanMoveCheck",
+							"objectClass": "MechBase",
+							"sid": 697174271200534
+						},
+						{
 							"id": "set-boolean-eventvar",
 							"objectClass": "System",
 							"sid": 676718527366171,
@@ -837,14 +861,80 @@
 							"eventType": "block",
 							"conditions": [
 								{
-									"id": "pick-by-evaluate",
+									"id": "compare-two-values",
 									"objectClass": "System",
-									"sid": 980455857659301,
+									"sid": 996709741809844,
 									"parameters": {
-										"object": "MechObject",
-										"expression": "MechObject.MechBaseUID = MechBase.UID"
+										"first-value": "PlayerCumulativeScrap",
+										"comparison": 5,
+										"second-value": "AddExperienceAmount + MechBase.PlayerHitCounter"
 									}
+								}
+							],
+							"actions": [
+								{
+									"customAction": "AddExperience",
+									"objectClass": "MechObject",
+									"sid": 224792545929822,
+									"parameters": [
+										"AddExperienceAmount + MechBase.PlayerHitCounter"
+									]
 								},
+								{
+									"id": "subtract-from-eventvar",
+									"objectClass": "System",
+									"sid": 195986394455661,
+									"parameters": {
+										"variable": "PlayerCumulativeScrap",
+										"value": "AddExperienceAmount + MechBase.PlayerHitCounter"
+									}
+								}
+							],
+							"sid": 592280324198712
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 463169730014486
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 581581994206029,
+									"parameters": {
+										"first-value": "PlayerCumulativeScrap",
+										"comparison": 4,
+										"second-value": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"customAction": "AddExperience",
+									"objectClass": "MechObject",
+									"sid": 261961523031367,
+									"parameters": [
+										"PlayerCumulativeScrap"
+									]
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 600266710416990,
+									"parameters": {
+										"variable": "PlayerCumulativeScrap",
+										"value": "0"
+									}
+								}
+							],
+							"sid": 303367458666848
+						},
+						{
+							"eventType": "block",
+							"conditions": [
 								{
 									"id": "is-boolean-instance-variable-set",
 									"objectClass": "MechObject",
@@ -862,6 +952,22 @@
 								}
 							],
 							"sid": 894154481138372
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "add-to-instvar",
+									"objectClass": "MechBase",
+									"sid": 947810167796632,
+									"parameters": {
+										"instance-variable": "PlayerHitCounter",
+										"value": "1"
+									}
+								}
+							],
+							"sid": 531368105455621
 						}
 					]
 				},
@@ -1210,6 +1316,64 @@
 			"eventType": "block",
 			"conditions": [
 				{
+					"id": "on-collision-with-another-object",
+					"objectClass": "MechBase",
+					"sid": 422045974967643,
+					"parameters": {
+						"object": "scrap"
+					}
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "AddPlayerScrap",
+					"sid": 894260668794366,
+					"disabled": true,
+					"parameters": [
+						"1"
+					]
+				}
+			],
+			"sid": 485449475452563,
+			"disabled": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-evaluate",
+							"objectClass": "System",
+							"sid": 352493040418641,
+							"parameters": {
+								"object": "MechObject",
+								"expression": "MechObject.MechBaseUID = MechBase.UID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"customAction": "AddExperience",
+							"objectClass": "MechObject",
+							"sid": 448129453575483,
+							"parameters": [
+								"1"
+							]
+						},
+						{
+							"id": "destroy",
+							"objectClass": "scrap",
+							"sid": 941696810679161
+						}
+					],
+					"sid": 701953448900479,
+					"disabled": true
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
 					"id": "is-overlapping-another-object",
 					"objectClass": "PlayerVacuumArea",
 					"sid": 234238868241317,
@@ -1233,6 +1397,35 @@
 				}
 			],
 			"sid": 381397535478321
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "is-overlapping-another-object",
+					"objectClass": "MechVacuumCollision",
+					"sid": 272786795141031,
+					"parameters": {
+						"object": "scrap"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "apply-force-towards-position",
+					"objectClass": "scrap",
+					"sid": 120248239273364,
+					"behaviorType": "Physics",
+					"parameters": {
+						"force": "20",
+						"x": "MechVacuumCollision.X",
+						"y": "MechVacuumCollision.Y",
+						"image-point": "0"
+					}
+				}
+			],
+			"sid": 657467566593787,
+			"disabled": true
 		}
 	],
 	"sid": 135398769691869

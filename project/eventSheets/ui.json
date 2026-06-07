@@ -1644,6 +1644,30 @@
 				}
 			],
 			"sid": 487174338681484
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "has-tags",
+					"objectClass": "TextUI",
+					"sid": 958773431322254,
+					"parameters": {
+						"tags": "\"cumulative_scrap\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-text",
+					"objectClass": "TextUI",
+					"sid": 572796399547981,
+					"parameters": {
+						"text": "PlayerCumulativeScrap"
+					}
+				}
+			],
+			"sid": 510589315093732
 		}
 	],
 	"sid": 986417878794597
