@@ -12,7 +12,9 @@
       "bullet_knockback": 0.1,
       "move_speed": 400,
       "shoot_move_speed_mult": 0.5,
-      "starting_slots" : 2
+      "starting_slots": 2,
+      "crit_chance": 0.1,
+      "crit_damage_mult": 2
     },
     "improvable_stats" : [
     { "stat_name": "fire_rate", "op": "add", "amount": 1 },

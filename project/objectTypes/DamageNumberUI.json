@@ -1,0 +1,52 @@
+{
+	"name": "DamageNumberUI",
+	"plugin-id": "Text",
+	"sid": 762086783282700,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [
+		{
+			"name": "TargetY",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 439250886175179
+		},
+		{
+			"name": "TargetX",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 135618780371395
+		},
+		{
+			"name": "TargetAngle",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 955099199316395
+		},
+		{
+			"name": "UpgradeFID",
+			"type": "string",
+			"desc": "",
+			"show": true,
+			"sid": 609748296142376
+		},
+		{
+			"name": "MechUID",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 246740803035369
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Fade",
+			"name": "Fade",
+			"sid": 543444891772564
+		}
+	],
+	"effectTypes": []
+}

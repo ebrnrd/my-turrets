@@ -92,10 +92,10 @@
 				{
 					"id": "add-to-eventvar",
 					"objectClass": "System",
-					"sid": 979409526617239,
+					"sid": 669704803032170,
 					"parameters": {
 						"variable": "EnemiesDifficulty",
-						"value": "0.5"
+						"value": "0.1"
 					}
 				},
 				{
@@ -127,10 +127,10 @@
 				{
 					"id": "subtract-from-eventvar",
 					"objectClass": "System",
-					"sid": 752510928501743,
+					"sid": 788103518965700,
 					"parameters": {
 						"variable": "EnemiesDifficulty",
-						"value": "0.5"
+						"value": "0.1"
 					}
 				},
 				{
@@ -468,6 +468,42 @@
 								}
 							],
 							"sid": 522428217406310
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 135475656062778
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 693160975341853,
+									"parameters": {
+										"first-value": "random(0,1)",
+										"comparison": 3,
+										"second-value": "EnemiesDifficulty / 7"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 766183290344230,
+									"parameters": {
+										"object-to-create": "enemyTest",
+										"layer": "\"main\"",
+										"x": "spawn_x",
+										"y": "spawn_y",
+										"create-hierarchy": true,
+										"template-name": "\"EnemyFast\""
+									}
+								}
+							],
+							"sid": 488150455828427
 						},
 						{
 							"eventType": "block",
@@ -1045,6 +1081,7 @@
 					"id": "apply-force-towards-position",
 					"objectClass": "enemyTest",
 					"sid": 224923202965312,
+					"disabled": true,
 					"behaviorType": "Physics",
 					"parameters": {
 						"force": "Self.move_speed * dt",
@@ -1120,8 +1157,7 @@
 							}
 						}
 					],
-					"sid": 971792512197311,
-					"disabled": true
+					"sid": 971792512197311
 				},
 				{
 					"eventType": "block",
@@ -1171,8 +1207,7 @@
 							}
 						}
 					],
-					"sid": 713371142319042,
-					"disabled": true
+					"sid": 713371142319042
 				},
 				{
 					"eventType": "block",
@@ -1199,7 +1234,8 @@
 							}
 						}
 					],
-					"sid": 687798959149138
+					"sid": 687798959149138,
+					"disabled": true
 				}
 			]
 		},

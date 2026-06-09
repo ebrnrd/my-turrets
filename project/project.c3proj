@@ -447,7 +447,8 @@
 			"MechUpgradeArrow",
 			"UpgradeMechPowerUpEmptySlot",
 			"LevelUpStatText",
-			"EnemyAttackCollision"
+			"EnemyAttackCollision",
+			"DamageNumberUI"
 		],
 		"subfolders": [
 			{

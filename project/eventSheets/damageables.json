@@ -323,6 +323,14 @@
 						"instance-variable": "Health",
 						"value": "Damageables.Health - amount"
 					}
+				},
+				{
+					"callFunction": "DamageNumberFeedbackUI",
+					"sid": 633106153924050,
+					"parameters": [
+						"Damageables.UID",
+						"amount"
+					]
 				}
 			],
 			"sid": 657742819867976,
@@ -525,6 +533,189 @@
 				}
 			],
 			"sid": 860362437875366
+		},
+		{
+			"functionName": "DamageNumberFeedbackUI",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "DamageableUID",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 128826189954327
+				},
+				{
+					"name": "DamageAmount",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"sid": 299057199070275
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 913024677968057,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "TextMinSize",
+					"type": "number",
+					"initialValue": "32",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 515649611642717
+				},
+				{
+					"eventType": "variable",
+					"name": "TextMaxSize",
+					"type": "number",
+					"initialValue": "60",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 634445471717535
+				},
+				{
+					"eventType": "variable",
+					"name": "MinDamageSize",
+					"type": "number",
+					"initialValue": "1",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 374122346001506
+				},
+				{
+					"eventType": "variable",
+					"name": "MaxDamageSize",
+					"type": "number",
+					"initialValue": "40",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 494075085256601
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "Damageables",
+							"sid": 840962651772367,
+							"parameters": {
+								"unique-id": "DamageableUID"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 581362544808629,
+							"parameters": {
+								"object-to-create": "DamageNumberUI",
+								"layer": "\"always-top\"",
+								"x": "Damageables.X",
+								"y": "Damageables.Y - 50",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-font-size",
+							"objectClass": "DamageNumberUI",
+							"sid": 876222328841020,
+							"parameters": {
+								"size-pt": "clamp(lerp(TextMinSize, TextMaxSize, DamageAmount / MaxDamageSize), TextMinSize, TextMaxSize)"
+							}
+						},
+						{
+							"id": "set-text",
+							"objectClass": "DamageNumberUI",
+							"sid": 738940467257577,
+							"parameters": {
+								"text": "int(DamageAmount)"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "DamageNumberUI",
+							"sid": 702776032063194,
+							"parameters": {
+								"instance-variable": "TargetX",
+								"value": "Damageables.X + random(-20,20)"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "DamageNumberUI",
+							"sid": 818601981701419,
+							"parameters": {
+								"instance-variable": "TargetY",
+								"value": "Damageables.Y - 100"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "DamageNumberUI",
+							"sid": 897839026743219,
+							"parameters": {
+								"instance-variable": "TargetAngle",
+								"value": "random(-20,20)"
+							}
+						}
+					],
+					"sid": 649188274986424
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "for-each",
+					"objectClass": "System",
+					"sid": 201607366058392,
+					"parameters": {
+						"object": "DamageNumberUI"
+					}
+				}
+			],
+			"actions": [],
+			"sid": 502811305674187,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-angle",
+							"objectClass": "DamageNumberUI",
+							"sid": 923863122051269,
+							"parameters": {
+								"angle": "anglelerp(Self.Angle, Self.TargetAngle, 4 * dt)"
+							}
+						},
+						{
+							"id": "set-position",
+							"objectClass": "DamageNumberUI",
+							"sid": 330890151241060,
+							"parameters": {
+								"x": "lerp(Self.X, Self.TargetX, 4 * dt)",
+								"y": "lerp(Self.Y, Self.TargetY, 4 * dt)"
+							}
+						}
+					],
+					"sid": 573926778266353
+				}
+			]
 		}
 	],
 	"sid": 539396073994805

@@ -1,36 +1,18 @@
 {
-  "ballistic": {
+  "default": {
     "base_stats": {
-      "fire_rate": 2,
-      "bullet_count": 1,
-      "bullet_spread": 6,
-      "bullet_damage": 4,
-      "range": 500,
-      "bullet_speed": 800,
-      "mag_size": 40,
-      "reload_time": 3,
-      "bullet_knockback": 0.1,
-      "move_speed": 400,
-      "shoot_move_speed_mult": 0.5,
-      "starting_slots": 2,
-      "crit_chance": 0.1,
-      "crit_damage_mult": 2
-    },
-    "improvable_stats" : [
-    { "stat_name": "fire_rate", "op": "add", "amount": 1 },
-    { "stat_name": "bullet_damage", "op": "add", "amount": 1 },
-    { "stat_name": "reload_time", "op": "subtract", "amount": 0.5 },
-    { "stat_name": "mag_size", "op": "add", "amount": 20 },
-    { "stat_name": "move_speed", "op": "add", "amount": 100 }
-    ],
-    "behavior_type": "ballistic"
+      "attack_damage": 2,
+      "max_health": 1,
+      "repair_amount": 6,
+      "move_speed": 400
+    }
   },
   "artillery": {
     "base_stats": {
       "fire_rate": 0.4,
       "bullet_count": 1,
       "aim_error": 10,
-      "explosion_damage": 8,
+      "explosion_damage": 12,
       "explosion_size" : 200,
       "range": 500,
       "bullet_time": 1,

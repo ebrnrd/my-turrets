@@ -1,9 +1,97 @@
 {
-  "rapid_fire": {
-    "label": "Rapid Fire",
+  "rapid_fire_1": {
+    "label": "Rapid Fire I",
+    "description": "",
+    "modifiers": [
+      { "stat": "fire_rate", "op": "multiply", "value": 1.25 }
+    ],
+    "behavior_tags": [],
+    "hooks": [],
+    "mech_type": "ballistic"
+  },
+
+  "rapid_fire_2": {
+    "label": "Rapid Fire II",
     "description": "",
     "modifiers": [
       { "stat": "fire_rate", "op": "multiply", "value": 1.5 }
+    ],
+    "behavior_tags": [],
+    "hooks": [],
+    "mech_type": "ballistic"
+  },
+
+  "rapid_fire_3": {
+    "label": "Rapid Fire III",
+    "description": "",
+    "modifiers": [
+      { "stat": "fire_rate", "op": "multiply", "value": 1.75 }
+    ],
+    "behavior_tags": [],
+    "hooks": [],
+    "mech_type": "ballistic"
+  },
+
+  "damage_1": {
+    "label": "Damage I",
+    "description": "",
+    "modifiers": [
+      { "stat": "bullet_damage", "op": "multiply", "value": 1.2 }
+    ],
+    "behavior_tags": [],
+    "hooks": [],
+    "mech_type": "ballistic"
+  },
+
+  "damage_2": {
+    "label": "Damage II",
+    "description": "",
+    "modifiers": [
+      { "stat": "bullet_damage", "op": "multiply", "value": 1.4 }
+    ],
+    "behavior_tags": [],
+    "hooks": [],
+    "mech_type": "ballistic"
+  },
+
+  "damage_3": {
+    "label": "Damage III",
+    "description": "",
+    "modifiers": [
+      { "stat": "bullet_damage", "op": "multiply", "value": 1.8 }
+    ],
+    "behavior_tags": [],
+    "hooks": [],
+    "mech_type": "ballistic"
+  },
+
+  "crit_chance_1": {
+    "label": "Crit Chance I",
+    "description": "",
+    "modifiers": [
+      { "stat": "crit_chance", "op": "add", "value": 0.1 }
+    ],
+    "behavior_tags": [],
+    "hooks": [],
+    "mech_type": "ballistic"
+  },
+
+  "crit_chance_2": {
+    "label": "Crit Chance II",
+    "description": "",
+    "modifiers": [
+      { "stat": "crit_chance", "op": "add", "value": 0.25 }
+    ],
+    "behavior_tags": [],
+    "hooks": [],
+    "mech_type": "ballistic"
+  },
+
+  "crit_chance_3": {
+    "label": "Crit Chance III",
+    "description": "",
+    "modifiers": [
+      { "stat": "crit_chance", "op": "add", "value": 0.4 }
     ],
     "behavior_tags": [],
     "hooks": [],

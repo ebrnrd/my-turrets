@@ -921,6 +921,33 @@
 							"eventType": "block",
 							"conditions": [
 								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 533612226363593,
+									"parameters": {
+										"first-value": "random(0,1)",
+										"comparison": 3,
+										"second-value": "MechStatsCache.Get(\"crit_chance\")"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 404951286260038,
+									"parameters": {
+										"variable": "Damage",
+										"value": "Damage * MechStatsCache.Get(\"crit_damage_mult\")"
+									}
+								}
+							],
+							"sid": 601949709933485
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
 									"id": "compare-boolean-eventvar",
 									"objectClass": "System",
 									"sid": 718328416930066,

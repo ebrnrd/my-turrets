@@ -778,6 +778,16 @@
 								"y": "MechBase.Y",
 								"pick-all-tied": false
 							}
+						},
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 640172725858223,
+							"parameters": {
+								"first-value": "distance(MechBase.X, MechBase.Y, playerCharacter.X, playerCharacter.Y)",
+								"comparison": 2,
+								"second-value": "800"
+							}
 						}
 					],
 					"actions": [
@@ -788,6 +798,16 @@
 							"parameters": {
 								"variable": "this_angle",
 								"value": "angle(MechBase.X, MechBase.Y, enemies.X, enemies.Y) + 180"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 751711931370232,
+							"disabled": true,
+							"parameters": {
+								"variable": "this_angle",
+								"value": "angle(MechBase.X, MechBase.Y, playerCharacter.X, playerCharacter.Y)"
 							}
 						},
 						{

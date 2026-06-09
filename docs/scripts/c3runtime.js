@@ -1842,6 +1842,19 @@ self.C3_ExpressionFuncs = [
 		},
 		() => "ricochet_triggered",
 		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0(0, 1);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("crit_chance");
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const n1 = p._GetNode(1);
+			return () => multiply(v0.GetValue(), n1.ExpObject("crit_damage_mult"));
+		},
+		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => v0.GetValue();
 		},
@@ -1933,6 +1946,14 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => Math.round(n0.ExpObject("mag_size"));
 		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			const n3 = p._GetNode(3);
+			return () => C3.distanceTo(n0.ExpObject(), n1.ExpObject(), n2.ExpObject(), n3.ExpObject());
+		},
+		() => 800,
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -2051,11 +2072,12 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("explosion_knockback");
 		},
+		() => -90,
 		p => {
 			const n0 = p._GetNode(0);
-			return () => n0.ExpObject("bullet_time");
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => add(n0.ExpObject("bullet_time"), f1((-0.2), 0.2));
 		},
-		() => -90,
 		() => "positionX",
 		() => "positionY",
 		p => {
@@ -2065,8 +2087,8 @@ self.C3_ExpressionFuncs = [
 			return () => f0((n1.ExpInstVar() - 60), (n2.ExpObject() - 60));
 		},
 		p => {
-			const n0 = p._GetNode(0);
-			return () => divide(n0.ExpObject("bullet_time"), 2);
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() / 2);
 		},
 		() => "scale",
 		() => 40,
@@ -2184,13 +2206,6 @@ self.C3_ExpressionFuncs = [
 			return () => ("Added stat " + v0.GetValue());
 		},
 		() => "MechMovement",
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			const n2 = p._GetNode(2);
-			const n3 = p._GetNode(3);
-			return () => C3.distanceTo(n0.ExpObject(), n1.ExpObject(), n2.ExpObject(), n3.ExpObject());
-		},
 		() => "default",
 		p => {
 			const n0 = p._GetNode(0);
@@ -2218,6 +2233,14 @@ self.C3_ExpressionFuncs = [
 			const n1 = p._GetNode(1);
 			return () => f0(n1.ExpObject("level"));
 		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => mod(n0.ExpObject("level"), 3);
+		},
+		() => "1 SLOT",
+		() => "add",
+		() => -60,
+		() => "#000000",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => (v0.GetValue() - 1);
@@ -2261,7 +2284,6 @@ self.C3_ExpressionFuncs = [
 			const v1 = p._GetNode(1).GetVar();
 			return () => n0.ExpObject(("stats." + v1.GetValue()));
 		},
-		() => "add",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			const v1 = p._GetNode(1).GetVar();
@@ -2283,11 +2305,13 @@ self.C3_ExpressionFuncs = [
 			const v0 = p._GetNode(0).GetVar();
 			return () => ("stats." + v0.GetValue());
 		},
+		() => "#1a40ff",
 		() => "+",
 		() => "-",
 		p => {
 			const n0 = p._GetNode(0);
-			return () => (n0.ExpObject() - 50);
+			const v1 = p._GetNode(1).GetVar();
+			return () => ((n0.ExpObject() - 50) + v1.GetValue());
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
@@ -2298,11 +2322,17 @@ self.C3_ExpressionFuncs = [
 		},
 		p => {
 			const n0 = p._GetNode(0);
-			return () => (n0.ExpObject() - 100);
+			const v1 = p._GetNode(1).GetVar();
+			return () => ((n0.ExpObject() - 100) + v1.GetValue());
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0((-20), 20);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const v1 = p._GetNode(1).GetVar();
+			return () => f0(v1.GetValue());
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -2341,7 +2371,6 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0(2, 3);
 		},
-		() => 800,
 		() => 3,
 		() => "player_damaged",
 		p => {
@@ -2349,6 +2378,7 @@ self.C3_ExpressionFuncs = [
 			const v1 = p._GetNode(1).GetVar();
 			return () => (n0.ExpInstVar() - v1.GetValue());
 		},
+		() => "PlayerStats",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0(0.5, 2);
@@ -2359,10 +2389,6 @@ self.C3_ExpressionFuncs = [
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
-			return () => and("Enemies Spawn Interval ", v0.GetValue());
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
 			return () => and("Enemies Spawn Count ", v0.GetValue());
 		},
 		p => {
@@ -2370,6 +2396,7 @@ self.C3_ExpressionFuncs = [
 			const f1 = p._GetNode(1).GetBoundMethod();
 			return () => (f0() + f1((-20), 20));
 		},
+		() => "Enemy1",
 		() => "top",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -2392,6 +2419,21 @@ self.C3_ExpressionFuncs = [
 		},
 		() => "left",
 		() => "right",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() / 10);
+		},
+		() => "Enemy3",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() / 7);
+		},
+		() => "EnemyFast",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() / 5);
+		},
+		() => "Enemy2",
 		() => "spawn_wave",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -2400,20 +2442,30 @@ self.C3_ExpressionFuncs = [
 		() => "enemyPatrollingTimer",
 		() => "enemyFollowPlayerTimer",
 		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => Math.round(f0(0, 3));
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0(0, 15);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const v1 = p._GetNode(1).GetVar();
+			const v2 = p._GetNode(2).GetVar();
+			const v3 = p._GetNode(3).GetVar();
+			return () => f0(v1.GetValue(), v2.GetValue(), v3.GetValue());
+		},
+		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
 			return () => (n0.ExpInstVar() * n1.ExpObject());
 		},
 		p => {
-			const n0 = p._GetNode(0);
+			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
 			const n2 = p._GetNode(2);
-			const n3 = p._GetNode(3);
-			return () => C3.toDegrees(C3.angleTo(n0.ExpObject(), n1.ExpObject(), n2.ExpObject(), n3.ExpObject()));
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => Math.round(f0(1, 2));
+			return () => Math.round(f0(n1.ExpInstVar(), n2.ExpInstVar()));
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -2616,16 +2668,28 @@ self.C3_ExpressionFuncs = [
 		() => "DamagedColor",
 		() => "HealedColor",
 		() => "healed",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() - 50);
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const v1 = p._GetNode(1).GetVar();
+			const v2 = p._GetNode(2).GetVar();
+			const v3 = p._GetNode(3).GetVar();
+			const v4 = p._GetNode(4).GetVar();
+			const v5 = p._GetNode(5).GetVar();
+			return () => C3.clamp(C3.lerp(v0.GetValue(), v1.GetValue(), (v2.GetValue() / v3.GetValue())), v4.GetValue(), v5.GetValue());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() - 100);
+		},
 		() => "--- GETTING MECH STAT ---",
 		p => {
 			const n0 = p._GetNode(0);
 			const f1 = p._GetNode(1).GetBoundMethod();
 			return () => n0.ExpObject(and("applied_upgrades.", f1("upgrades")));
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			const v1 = p._GetNode(1).GetVar();
-			return () => f0(v1.GetValue());
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -2685,10 +2749,6 @@ self.C3_ExpressionFuncs = [
 		() => "Hooks",
 		() => "giant_bullet_chance",
 		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0(0, 1);
-		},
-		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("giant_bullet_chance");
 		},
@@ -2700,6 +2760,13 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("ricochet_chance");
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			const n3 = p._GetNode(3);
+			return () => C3.toDegrees(C3.angleTo(n0.ExpObject(), n1.ExpObject(), n2.ExpObject(), n3.ExpObject()));
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -2868,6 +2935,7 @@ self.C3_ExpressionFuncs = [
 			const v3 = p._GetNode(3).GetVar();
 			return () => f0(f1(f2(v3.GetValue()), "label"));
 		},
+		() => "mech_upgrade",
 		() => "name",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -2888,6 +2956,17 @@ self.C3_ExpressionFuncs = [
 			const f1 = p._GetNode(1).GetBoundMethod();
 			const v2 = p._GetNode(2).GetVar();
 			return () => f0(f1(v2.GetValue(), "mech_type"));
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0("#e9940c");
+		},
+		() => "new_mech",
+		() => "NEW MECH",
+		() => "ADD A NEW MECH TO YOUR SQUAD!",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0("#2478ff");
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -2915,6 +2994,19 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			const f1 = p._GetNode(1).GetBoundMethod();
 			return () => n0.ExpObject((f1() - 1));
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0();
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const n1 = p._GetNode(1);
+			return () => ((v0.GetValue() - (n1.ExpObject() * 2)) / 10);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0("ballistic", "artillery");
 		},
 		() => "apply_upgrade",
 		() => "close_upgrade",
@@ -2956,10 +3048,6 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const v1 = p._GetNode(1).GetVar();
 			return () => and(f0(v1.GetValue(), "description"), "\n");
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0();
 		},
 		() => "\n",
 		p => {
@@ -3019,6 +3107,8 @@ self.C3_ExpressionFuncs = [
 		() => -1,
 		() => "mech_definitions",
 		() => "upgrade_definitions",
+		() => "player_definitions",
+		() => "PlayerDefinitionsLoaded",
 		() => 0.3,
 		() => "follow_player",
 		p => {
