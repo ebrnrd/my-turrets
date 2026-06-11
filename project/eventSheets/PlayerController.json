@@ -1240,8 +1240,312 @@
 			"title": "PlayerStats",
 			"description": "",
 			"isActiveOnStart": true,
-			"children": [],
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-signal",
+							"objectClass": "System",
+							"sid": 729471242925716,
+							"parameters": {
+								"tag": "\"PlayerDefinitionsLoaded\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-json",
+							"objectClass": "PlayerData",
+							"sid": 118345840208303,
+							"parameters": {
+								"path": "\"stats\"",
+								"json": "PlayerDefinitions.GetAsBeautifiedString(\"default\" & \".base_stats\")"
+							}
+						}
+					],
+					"sid": 292918055039329
+				},
+				{
+					"aceType": "action",
+					"aceName": "ApplyPlayerUpgrade",
+					"objectClass": "PlayerData",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "UpgradeID",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 573129850388060
+						}
+					],
+					"eventType": "custom-ace-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 455136305588748,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "for",
+									"objectClass": "System",
+									"sid": 692795726239680,
+									"parameters": {
+										"name": "\"modifiers\"",
+										"start-index": "0",
+										"end-index": "PlayerUpgradeDefinitions.ArraySize(UpgradeID & \".modifiers\") - 1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"customAction": "ModifyPlayerStat",
+									"objectClass": "PlayerData",
+									"sid": 449653657786244,
+									"parameters": [
+										"PlayerUpgradeDefinitions.Get(UpgradeID & \".modifiers.\" & loopindex(\"modifiers\") & \".stat\")",
+										"PlayerUpgradeDefinitions.Get(UpgradeID & \".modifiers.\" & loopindex(\"modifiers\") & \".op\")",
+										"PlayerUpgradeDefinitions.Get(UpgradeID & \".modifiers.\" & loopindex(\"modifiers\") & \".value\")"
+									]
+								}
+							],
+							"sid": 163211714359778
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "for-each",
+									"objectClass": "System",
+									"sid": 680982275596342,
+									"parameters": {
+										"object": "MechObject"
+									}
+								}
+							],
+							"actions": [
+								{
+									"customAction": "UpdateMechStatsCache",
+									"objectClass": "MechObject",
+									"sid": 521883927566393
+								}
+							],
+							"sid": 992147478902257
+						}
+					]
+				},
+				{
+					"aceType": "action",
+					"aceName": "ModifyPlayerStat",
+					"objectClass": "PlayerData",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "StatName",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 870430992188245
+						},
+						{
+							"name": "Operation",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 249723072834433
+						},
+						{
+							"name": "Amount",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 394152951294277
+						}
+					],
+					"eventType": "custom-ace-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 512901873934732,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "CurrentValue",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 117510223352948
+						},
+						{
+							"eventType": "variable",
+							"name": "NewValue",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 467864095313224
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 636785155966272,
+									"parameters": {
+										"variable": "CurrentValue",
+										"value": "Functions.GetPlayerStat(StatName)"
+									}
+								}
+							],
+							"sid": 375266973511197,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 604567872338973,
+											"parameters": {
+												"first-value": "Operation",
+												"comparison": 0,
+												"second-value": "\"add\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 489888556856174,
+											"parameters": {
+												"variable": "NewValue",
+												"value": "CurrentValue + Amount"
+											}
+										}
+									],
+									"sid": 477513876585869
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 519742728802329,
+											"parameters": {
+												"first-value": "Operation",
+												"comparison": 0,
+												"second-value": "\"subtract\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 321614444239038,
+											"parameters": {
+												"variable": "NewValue",
+												"value": "CurrentValue - Amount"
+											}
+										}
+									],
+									"sid": 473500001673610
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 484738694142459,
+											"parameters": {
+												"first-value": "Operation",
+												"comparison": 0,
+												"second-value": "\"multiply\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 988877578740347,
+											"parameters": {
+												"variable": "NewValue",
+												"value": "CurrentValue * Amount"
+											}
+										}
+									],
+									"sid": 643315554733514
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-value",
+									"objectClass": "PlayerData",
+									"sid": 431349691433944,
+									"parameters": {
+										"path": "\"stats.\" & StatName",
+										"value": "NewValue"
+									}
+								}
+							],
+							"sid": 292046674789196
+						}
+					]
+				}
+			],
 			"sid": 836157692841173
+		},
+		{
+			"functionName": "GetPlayerStat",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "any",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "StatName",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 759933905051340
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-function-return-value",
+					"objectClass": "Functions",
+					"sid": 565753095823813,
+					"parameters": {
+						"value": "PlayerData.Get(\"stats.\" & StatName)"
+					}
+				}
+			],
+			"sid": 693367654169632
 		}
 	],
 	"sid": 135398769691869

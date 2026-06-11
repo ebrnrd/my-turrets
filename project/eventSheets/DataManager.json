@@ -53,6 +53,22 @@
 							"path": "player_definitions.json"
 						}
 					}
+				},
+				{
+					"id": "wait-for-previous-actions",
+					"objectClass": "System",
+					"sid": 190331177101436
+				},
+				{
+					"id": "request-project-file",
+					"objectClass": "AJAX",
+					"sid": 594218627599645,
+					"parameters": {
+						"tag": "\"player_upgrade_definitions\"",
+						"file": {
+							"path": "player_upgrade_definitions.json"
+						}
+					}
 				}
 			],
 			"sid": 465641204770641
@@ -136,6 +152,38 @@
 				}
 			],
 			"sid": 492485896116665
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-completed",
+					"objectClass": "AJAX",
+					"sid": 215367294788623,
+					"parameters": {
+						"tag": "\"player_upgrade_definitions\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "parse",
+					"objectClass": "PlayerUpgradeDefinitions",
+					"sid": 265995237774295,
+					"parameters": {
+						"data": "AJAX.LastData"
+					}
+				},
+				{
+					"id": "signal",
+					"objectClass": "System",
+					"sid": 877859402730761,
+					"parameters": {
+						"tag": "\"PlayerUpgradeDefinitionsLoaded\""
+					}
+				}
+			],
+			"sid": 747918450310614
 		}
 	],
 	"sid": 363367969661520

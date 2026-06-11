@@ -1,45 +1,12 @@
 {
   "default": {
     "base_stats": {
-      "attack_damage": 2,
-      "max_health": 1,
+      "bullet_damage_mult": 1,
+      "elemental_damage_mult": 1,
+      "max_health": 100,
+      "attack_damage": 4,
       "repair_amount": 6,
       "move_speed": 400
     }
-  },
-  "artillery": {
-    "base_stats": {
-      "fire_rate": 0.4,
-      "bullet_count": 1,
-      "aim_error": 10,
-      "explosion_damage": 12,
-      "explosion_size" : 200,
-      "range": 500,
-      "bullet_time": 1,
-      "mag_size": 5,
-      "reload_time": 6,
-      "explosion_knockback": 2,
-      "move_speed": 300,
-      "shoot_move_speed": 200,
-      "starting_slots" : 1
-    },
-    "improvable_stats" : [
-    { "stat_name": "fire_rate", "op": "add", "amount": 0.5 },
-    { "stat_name": "explosion_damage", "op": "add", "amount": 2 },
-    { "stat_name": "explosion_size", "op": "add", "amount": 40 },
-    { "stat_name": "reload_time", "op": "subtract", "amount": 0.4 },
-    { "stat_name": "mag_size", "op": "add", "amount": 1 },
-    { "stat_name": "move_speed", "op": "add", "amount": 75 }
-    ],
-    "behavior_type": "artillery"
-  },
-  "healer": {
-    "base_stats": {
-      "heal_rate": 5,
-      "heal_range": 150,
-      "speed": 60,
-      "aoe_heal_chance": 0.0
-    },
-    "behavior_type": "healer"
   }
 }

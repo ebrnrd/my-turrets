@@ -1,0 +1,8 @@
+{
+	"name": "PlayerUpgradeDefinitions",
+	"plugin-id": "Json",
+	"sid": 360765005326068,
+	"isGlobal": true,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": []
+}

@@ -149,6 +149,37 @@
 			"eventType": "block",
 			"conditions": [
 				{
+					"id": "on-created",
+					"objectClass": "player_turret_position",
+					"sid": 491654274847357
+				}
+			],
+			"actions": [
+				{
+					"id": "set-instvar-value",
+					"objectClass": "player_turret_position",
+					"sid": 651616242752399,
+					"parameters": {
+						"instance-variable": "OffsetX",
+						"value": "Self.X - playerCharacter.X"
+					}
+				},
+				{
+					"id": "set-instvar-value",
+					"objectClass": "player_turret_position",
+					"sid": 781310039447339,
+					"parameters": {
+						"instance-variable": "OffsetY",
+						"value": "Self.Y - playerCharacter.Y"
+					}
+				}
+			],
+			"sid": 993510554954818
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
 					"id": "for-each",
 					"objectClass": "System",
 					"sid": 768551631713444,
@@ -187,6 +218,7 @@
 							"id": "set-angle",
 							"objectClass": "player_turret_position",
 							"sid": 804152868662920,
+							"disabled": true,
 							"parameters": {
 								"angle": "anglelerp(Self.Angle, target_angle, 10 * dt)"
 							}
@@ -658,9 +690,9 @@
 				{
 					"id": "every-x-seconds",
 					"objectClass": "System",
-					"sid": 378456709152128,
+					"sid": 706282585845995,
 					"parameters": {
-						"interval-seconds": "0.1"
+						"interval-seconds": "0.5"
 					}
 				},
 				{
@@ -738,6 +770,7 @@
 							"id": "compare-speed",
 							"objectClass": "MechBase",
 							"sid": 810408160280142,
+							"disabled": true,
 							"behaviorType": "Pathfinding",
 							"parameters": {
 								"comparison": 2,
@@ -839,6 +872,7 @@
 							"id": "find-path",
 							"objectClass": "MechBase",
 							"sid": 965623387423409,
+							"disabled": true,
 							"behaviorType": "Pathfinding",
 							"parameters": {
 								"x": "target_x",
@@ -855,7 +889,57 @@
 							}
 						}
 					],
-					"sid": 358810049908509
+					"sid": 358810049908509,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "player_turret_position",
+									"sid": 540625359855513,
+									"parameters": {
+										"instance-variable": "HasEnemy"
+									},
+									"isInverted": true
+								},
+								{
+									"id": "pick-nearestfurthest",
+									"objectClass": "player_turret_position",
+									"sid": 737918599263711,
+									"parameters": {
+										"which": "nearest",
+										"x": "target_x",
+										"y": "target_y",
+										"pick-all-tied": false
+									}
+								},
+								{
+									"id": "is-overlapping-another-object",
+									"objectClass": "player_turret_position",
+									"sid": 332441519564869,
+									"disabled": true,
+									"parameters": {
+										"object": "MechBase"
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "find-path",
+									"objectClass": "MechBase",
+									"sid": 890950726773790,
+									"behaviorType": "Pathfinding",
+									"parameters": {
+										"x": "player_turret_position.ImagePointX(1) + random(-50,50)",
+										"y": "player_turret_position.ImagePointY(1) + random(-50,50)"
+									}
+								}
+							],
+							"sid": 564049110804199
+						}
+					]
 				}
 			]
 		},
@@ -1040,19 +1124,19 @@
 						{
 							"id": "set-eventvar-value",
 							"objectClass": "System",
-							"sid": 228686094769479,
+							"sid": 858064939375586,
 							"parameters": {
 								"variable": "target_x",
-								"value": "playerCharacter.X + (cos(player_moving_angle) * turret_targets_offset) * (playerCharacter.8Direction.Speed / playerCharacter.8Direction.MaxSpeed)"
+								"value": "playerCharacter.X + player_turret_position.OffsetX + (cos(player_moving_angle) * turret_targets_offset) * (playerCharacter.8Direction.Speed / playerCharacter.8Direction.MaxSpeed)"
 							}
 						},
 						{
 							"id": "set-eventvar-value",
 							"objectClass": "System",
-							"sid": 447076368336172,
+							"sid": 194663285157713,
 							"parameters": {
 								"variable": "target_y",
-								"value": "playerCharacter.Y + (sin(player_moving_angle) * turret_targets_offset) * (playerCharacter.8Direction.Speed / playerCharacter.8Direction.MaxSpeed)"
+								"value": "playerCharacter.Y + player_turret_position.OffsetY + (sin(player_moving_angle) * turret_targets_offset) * (playerCharacter.8Direction.Speed / playerCharacter.8Direction.MaxSpeed)"
 							}
 						},
 						{
@@ -1415,10 +1499,10 @@
 								{
 									"id": "set-instvar-value",
 									"objectClass": "bullet",
-									"sid": 419019807929059,
+									"sid": 401077525896087,
 									"parameters": {
 										"instance-variable": "damage",
-										"value": "MechStatsCache.Get(\"bullet_damage\")"
+										"value": "MechStatsCache.Get(\"damage\")"
 									}
 								},
 								{
@@ -1770,10 +1854,10 @@
 										{
 											"id": "set-instvar-value",
 											"objectClass": "ArtilleryBullet",
-											"sid": 810551180414265,
+											"sid": 172144158459835,
 											"parameters": {
 												"instance-variable": "ExplosionDamage",
-												"value": "MechStatsCache.Get(\"explosion_damage\")"
+												"value": "MechStatsCache.Get(\"damage\")"
 											}
 										},
 										{
@@ -2950,6 +3034,70 @@
 					"eventType": "block",
 					"conditions": [
 						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 674775751006616,
+							"parameters": {
+								"object": "player_turret_position"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 391710884027986,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-overlapping-another-object",
+									"objectClass": "player_turret_position",
+									"sid": 728924035690883,
+									"parameters": {
+										"object": "enemies"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "player_turret_position",
+									"sid": 601089122970837,
+									"parameters": {
+										"instance-variable": "HasEnemy",
+										"value": "true"
+									}
+								}
+							],
+							"sid": 400404106110585
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 148202890716087
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "player_turret_position",
+									"sid": 340498987736214,
+									"parameters": {
+										"instance-variable": "HasEnemy",
+										"value": "false"
+									}
+								}
+							],
+							"sid": 120291253134508
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
 							"id": "on-timer",
 							"objectClass": "MechBase",
 							"sid": 496871337616338,
@@ -3211,11 +3359,20 @@
 											"eventType": "block",
 											"conditions": [
 												{
+													"id": "is-boolean-instance-variable-set",
+													"objectClass": "player_turret_position",
+													"sid": 984853838148977,
+													"parameters": {
+														"instance-variable": "HasEnemy"
+													},
+													"isInverted": true
+												},
+												{
 													"id": "is-overlapping-another-object",
 													"objectClass": "player_turret_position",
-													"sid": 474456144491366,
+													"sid": 865304803842702,
 													"parameters": {
-														"object": "enemies"
+														"object": "MechBase"
 													},
 													"isInverted": true
 												},

@@ -4,7 +4,8 @@
       "fire_rate": 2,
       "bullet_count": 1,
       "bullet_spread": 6,
-      "bullet_damage": 4,
+      "damage": 4,
+      "damage_type": "bullet",
       "range": 500,
       "bullet_speed": 800,
       "mag_size": 40,
@@ -17,11 +18,10 @@
       "crit_damage_mult": 2
     },
     "improvable_stats" : [
-    { "stat_name": "fire_rate", "op": "add", "amount": 1 },
-    { "stat_name": "bullet_damage", "op": "add", "amount": 1 },
-    { "stat_name": "reload_time", "op": "subtract", "amount": 0.5 },
-    { "stat_name": "mag_size", "op": "add", "amount": 20 },
-    { "stat_name": "move_speed", "op": "add", "amount": 100 }
+    { "stat_name": "fire_rate", "op": "add", "amount": 0.2 },
+    { "stat_name": "damage", "op": "add", "amount": 0.5 },
+    { "stat_name": "mag_size", "op": "add", "amount": 5 }
+
     ],
     "behavior_type": "ballistic"
   },
@@ -29,25 +29,23 @@
     "base_stats": {
       "fire_rate": 0.4,
       "bullet_count": 1,
-      "aim_error": 10,
-      "explosion_damage": 8,
+      "aim_error": 30,
+      "damage": 8,
+      "damage_type": "elemental",
       "explosion_size" : 200,
       "range": 500,
       "bullet_time": 1,
       "mag_size": 5,
       "reload_time": 6,
       "explosion_knockback": 2,
-      "move_speed": 300,
+      "move_speed": 200,
       "shoot_move_speed": 200,
       "starting_slots" : 1
     },
     "improvable_stats" : [
-    { "stat_name": "fire_rate", "op": "add", "amount": 0.5 },
-    { "stat_name": "explosion_damage", "op": "add", "amount": 2 },
-    { "stat_name": "explosion_size", "op": "add", "amount": 40 },
-    { "stat_name": "reload_time", "op": "subtract", "amount": 0.4 },
-    { "stat_name": "mag_size", "op": "add", "amount": 1 },
-    { "stat_name": "move_speed", "op": "add", "amount": 75 }
+    { "stat_name": "explosion_size", "op": "add", "amount": 5 },
+    { "stat_name": "damage", "op": "add", "amount": 0.6 },
+    { "stat_name": "explosion_knockback", "op": "add", "amount": 0.2 }
     ],
     "behavior_type": "artillery"
   },

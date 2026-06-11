@@ -6636,6 +6636,22 @@
 			"sid": 973246860175989,
 			"tags": "",
 			"instanceVariables": {}
+		},
+		{
+			"type": "PlayerUpgradeDefinitions",
+			"properties": {},
+			"uid": 47,
+			"sid": 346586152364637,
+			"tags": "",
+			"instanceVariables": {}
+		},
+		{
+			"type": "AllPlayerUpgradeKeys",
+			"properties": {},
+			"uid": 48,
+			"sid": 910454435932112,
+			"tags": "",
+			"instanceVariables": {}
 		}
 	],
 	"effectTypes": [],

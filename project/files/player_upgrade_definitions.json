@@ -1,0 +1,33 @@
+{
+  "bullet_damage": {
+    "label": "Bullet Damage",
+    "description": "+ Damage to all BULLET mechs",
+    "modifiers": [
+      { "stat": "bullet_damage_mult", "op": "add", "value": 0.2 }
+    ],
+    "behavior_tags": [],
+    "hooks": []
+  },
+
+  "elemental_damage": {
+    "label": "Elemental Damage",
+    "description": "+ Damage to all ELEMENTAL mechs",
+    "modifiers": [
+      { "stat": "elemental_damage_mult", "op": "add", "value": 0.2 }
+    ],
+    "behavior_tags": [],
+    "hooks": []
+  },
+
+  "move_speed": {
+    "label": "Move Speed",
+    "description": "You move faster",
+    "modifiers": [
+      { "stat": "move_speed", "op": "add", "value": 40 }
+    ],
+    "behavior_tags": [],
+    "hooks": []
+  }
+}
+
+

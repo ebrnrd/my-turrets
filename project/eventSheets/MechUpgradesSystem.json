@@ -167,7 +167,120 @@
 									}
 								}
 							],
-							"sid": 228262762223947
+							"sid": 228262762223947,
+							"children": [
+								{
+									"eventType": "variable",
+									"name": "DamageType",
+									"type": "string",
+									"initialValue": "",
+									"comment": "",
+									"isStatic": false,
+									"isConstant": false,
+									"sid": 806226438533588
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 613148075675642,
+											"parameters": {
+												"first-value": "StatName",
+												"comparison": 0,
+												"second-value": "\"damage\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "log",
+											"objectClass": "Browser",
+											"sid": 205816607468423,
+											"parameters": {
+												"type": "log",
+												"message": "\"------ STAT NAME IS DAMAGE -------\""
+											}
+										},
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 361151034374100,
+											"parameters": {
+												"variable": "DamageType",
+												"value": "MechObject.Get(\"stats\" & \".damage_type\")"
+											}
+										},
+										{
+											"id": "log",
+											"objectClass": "Browser",
+											"sid": 227170052137356,
+											"parameters": {
+												"type": "log",
+												"message": "\"Damage type: \" & DamageType"
+											}
+										}
+									],
+									"sid": 422544541748310,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-two-values",
+													"objectClass": "System",
+													"sid": 535854583096189,
+													"parameters": {
+														"first-value": "DamageType",
+														"comparison": 0,
+														"second-value": "\"bullet\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 179294911313699,
+													"parameters": {
+														"variable": "NewValue",
+														"value": "NewValue * Functions.GetPlayerStat(\"bullet_damage_mult\")"
+													}
+												}
+											],
+											"sid": 181690771220184
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-two-values",
+													"objectClass": "System",
+													"sid": 905890227064059,
+													"parameters": {
+														"first-value": "DamageType",
+														"comparison": 0,
+														"second-value": "\"elemental\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-eventvar-value",
+													"objectClass": "System",
+													"sid": 854781483207398,
+													"parameters": {
+														"variable": "NewValue",
+														"value": "NewValue * Functions.GetPlayerStat(\"elemental_damage_mult\")"
+													}
+												}
+											],
+											"sid": 261195080561647
+										}
+									]
+								}
+							]
 						},
 						{
 							"eventType": "variable",
@@ -3516,6 +3629,265 @@
 				},
 				{
 					"aceType": "action",
+					"aceName": "DrawPlayerUpgradeCardUI",
+					"objectClass": "UpgradesManager",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "PosX",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 842965506311579
+						},
+						{
+							"name": "PosY",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 990807898168527
+						},
+						{
+							"name": "UpgradeID",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 785207111227590
+						},
+						{
+							"name": "LayerName",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"sid": 485422867271060
+						}
+					],
+					"eventType": "custom-ace-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 486403500498565,
+							"disabled": true,
+							"parameters": {
+								"object-to-create": "ShopCardUIElement",
+								"layer": "LayerName",
+								"x": "PosX",
+								"y": "ViewportTop(LayerName) - 500",
+								"create-hierarchy": true,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 796736185849816,
+							"parameters": {
+								"object-to-create": "ShopCardUIElement",
+								"layer": "LayerName",
+								"x": "PosX",
+								"y": "PosY",
+								"create-hierarchy": true,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-object-time-scale",
+							"objectClass": "System",
+							"sid": 685148869301595,
+							"parameters": {
+								"object": "ShopCardUIElement",
+								"time-scale": "1.0"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "ShopCardUIElement",
+							"sid": 577001223612698,
+							"parameters": {
+								"instance-variable": "TargetX",
+								"value": "PosX"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "ShopCardUIElement",
+							"sid": 850263182469200,
+							"parameters": {
+								"instance-variable": "TargetY",
+								"value": "PosY"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "ShopCardUIElement",
+							"sid": 674056963060863,
+							"parameters": {
+								"instance-variable": "CardType",
+								"value": "\"player_upgrade\""
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "ShopCardUIElement",
+							"sid": 994854842664093,
+							"parameters": {
+								"instance-variable": "UpgradeID",
+								"value": "UpgradeID"
+							}
+						}
+					],
+					"sid": 312637090014395,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-children",
+									"objectClass": "ShopCardUIElement",
+									"sid": 496806039184657,
+									"parameters": {
+										"child": "UpgradeCardText",
+										"which": "own"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 757811344914998,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "has-tags",
+											"objectClass": "UpgradeCardText",
+											"sid": 204011157609444,
+											"parameters": {
+												"tags": "\"name\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-text",
+											"objectClass": "UpgradeCardText",
+											"sid": 773767959837256,
+											"parameters": {
+												"text": "uppercase(PlayerUpgradeDefinitions.Get(UpgradeID & \".label\"))"
+											}
+										}
+									],
+									"sid": 167016231526219
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "has-tags",
+											"objectClass": "UpgradeCardText",
+											"sid": 362842964600998,
+											"parameters": {
+												"tags": "\"description\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-text",
+											"objectClass": "UpgradeCardText",
+											"sid": 253031023886020,
+											"parameters": {
+												"text": "uppercase(PlayerUpgradeDefinitions.Get(UpgradeID & \".description\"))"
+											}
+										}
+									],
+									"sid": 934901969761885
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "has-tags",
+											"objectClass": "UpgradeCardText",
+											"sid": 845783397465187,
+											"parameters": {
+												"tags": "\"mech_type\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-visible",
+											"objectClass": "UpgradeCardText",
+											"sid": 652952286751926,
+											"parameters": {
+												"visibility": "invisible"
+											}
+										}
+									],
+									"sid": 578014340404049
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-children",
+									"objectClass": "ShopCardUIElement",
+									"sid": 952051209808533,
+									"parameters": {
+										"child": "UpgradeCardBg",
+										"which": "own"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-default-color",
+									"objectClass": "UpgradeCardBg",
+									"sid": 274166932745714,
+									"parameters": {
+										"color": "HexColor(\"#00ff7b\")"
+									}
+								}
+							],
+							"sid": 128715588382505
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-children",
+									"objectClass": "ShopCardUIElement",
+									"sid": 835584038840509,
+									"parameters": {
+										"child": "LabelRectUI",
+										"which": "own"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-visible",
+									"objectClass": "LabelRectUI",
+									"sid": 809948352227879,
+									"parameters": {
+										"visibility": "invisible"
+									}
+								}
+							],
+							"sid": 625923859040688
+						}
+					]
+				},
+				{
+					"aceType": "action",
 					"aceName": "Create3MechUpgrades",
 					"objectClass": "UpgradesManager",
 					"functionDescription": "",
@@ -3808,6 +4180,14 @@
 							}
 						},
 						{
+							"id": "load",
+							"objectClass": "AllPlayerUpgradeKeys",
+							"sid": 314768346121570,
+							"parameters": {
+								"json": "\"{\"\"c2dictionary\"\":true,\"\"data\"\":\" & PlayerUpgradeDefinitions.ToCompactString & \"}\""
+							}
+						},
+						{
 							"id": "set-size",
 							"objectClass": "ArrayTemp1",
 							"sid": 263332371844013,
@@ -3824,176 +4204,176 @@
 							"eventType": "block",
 							"conditions": [
 								{
-									"id": "for-each",
+									"id": "compare-two-values",
 									"objectClass": "System",
-									"sid": 965417732349715,
+									"sid": 278074663192558,
 									"parameters": {
-										"object": "MechObject"
+										"first-value": "ScrapLevelReached % 3",
+										"comparison": 1,
+										"second-value": "0"
 									}
-								}
-							],
-							"actions": [
-								{
-									"id": "add-key",
-									"objectClass": "PlayerMechTypes",
-									"sid": 701097672837553,
-									"parameters": {
-										"key": "MechObject.Get(\"type\")",
-										"value": "0"
-									}
-								}
-							],
-							"sid": 407057359755595
-						},
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "for-each-key",
-									"objectClass": "AllUpgradeKeys",
-									"sid": 991909780118466
 								}
 							],
 							"actions": [],
-							"sid": 628259077587064,
+							"sid": 620756755472609,
 							"children": [
 								{
 									"eventType": "block",
 									"conditions": [
 										{
-											"id": "has-key",
-											"objectClass": "PlayerMechTypes",
-											"sid": 678642224441634,
+											"id": "for-each",
+											"objectClass": "System",
+											"sid": 799387989685986,
 											"parameters": {
-												"key": "UpgradeDefinitions.Get(AllUpgradeKeys.CurrentKey & \".mech_type\")"
+												"object": "MechObject"
 											}
 										}
 									],
 									"actions": [
 										{
 											"id": "add-key",
-											"objectClass": "PossibleUpgradeKeys",
-											"sid": 815293649783488,
+											"objectClass": "PlayerMechTypes",
+											"sid": 120330751174434,
 											"parameters": {
-												"key": "AllUpgradeKeys.CurrentKey",
+												"key": "MechObject.Get(\"type\")",
 												"value": "0"
 											}
 										}
 									],
-									"sid": 303690910623180
-								}
-							]
-						},
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "for-each-key",
-									"objectClass": "PossibleUpgradeKeys",
-									"sid": 323884081170530
-								}
-							],
-							"actions": [
-								{
-									"id": "push",
-									"objectClass": "ArrayTemp1",
-									"sid": 557993786292909,
-									"parameters": {
-										"where": "back",
-										"value": "PossibleUpgradeKeys.CurrentKey",
-										"axis": "x"
-									}
-								}
-							],
-							"sid": 229873026516281
-						},
-						{
-							"eventType": "block",
-							"conditions": [],
-							"actions": [
-								{
-									"id": "shuffle",
-									"objectClass": "ArrayTemp1",
-									"sid": 704066971268292,
-									"parameters": {
-										"axis": "x"
-									}
+									"sid": 849971920669055
 								},
-								{
-									"id": "set-size",
-									"objectClass": "ArrayTemp1",
-									"sid": 754000559213991,
-									"parameters": {
-										"width": "3",
-										"height": "1",
-										"depth": "1"
-									}
-								}
-							],
-							"sid": 270165632018369
-						},
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "for",
-									"objectClass": "System",
-									"sid": 744842298284764,
-									"parameters": {
-										"name": "\"\"",
-										"start-index": "1",
-										"end-index": "3"
-									}
-								}
-							],
-							"actions": [
-								{
-									"id": "set-layer-parallax",
-									"objectClass": "System",
-									"sid": 156407556985894,
-									"parameters": {
-										"layer": "\"card\" & loopindex",
-										"parallax-x": "0",
-										"parallax-y": "0"
-									}
-								},
-								{
-									"id": "set-layer-scale-rate",
-									"objectClass": "System",
-									"sid": 569628802974445,
-									"parameters": {
-										"layer": "\"card\" & loopindex",
-										"scale-rate": "0"
-									}
-								},
-								{
-									"id": "set-layer-force-own-texture",
-									"objectClass": "System",
-									"sid": 479979021052769,
-									"parameters": {
-										"layer": "\"card\" & loopindex",
-										"mode": "on"
-									}
-								}
-							],
-							"sid": 184440052827970,
-							"children": [
 								{
 									"eventType": "block",
 									"conditions": [
 										{
-											"id": "compare-two-values",
-											"objectClass": "System",
-											"sid": 450130113753961,
-											"parameters": {
-												"first-value": "loopindex",
-												"comparison": 0,
-												"second-value": "3"
-											}
+											"id": "for-each-key",
+											"objectClass": "AllUpgradeKeys",
+											"sid": 355348287763711
 										}
 									],
 									"actions": [],
-									"sid": 344073195844569,
+									"sid": 378776047499191,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "has-key",
+													"objectClass": "PlayerMechTypes",
+													"sid": 746384395856867,
+													"parameters": {
+														"key": "UpgradeDefinitions.Get(AllUpgradeKeys.CurrentKey & \".mech_type\")"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "add-key",
+													"objectClass": "PossibleUpgradeKeys",
+													"sid": 350906889995176,
+													"parameters": {
+														"key": "AllUpgradeKeys.CurrentKey",
+														"value": "0"
+													}
+												}
+											],
+											"sid": 556767661900511
+										}
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "for-each-key",
+											"objectClass": "PossibleUpgradeKeys",
+											"sid": 494208538388973
+										}
+									],
+									"actions": [
+										{
+											"id": "push",
+											"objectClass": "ArrayTemp1",
+											"sid": 563970710754001,
+											"parameters": {
+												"where": "back",
+												"value": "PossibleUpgradeKeys.CurrentKey",
+												"axis": "x"
+											}
+										}
+									],
+									"sid": 479522386140702
+								},
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"id": "shuffle",
+											"objectClass": "ArrayTemp1",
+											"sid": 600001876172352,
+											"parameters": {
+												"axis": "x"
+											}
+										},
+										{
+											"id": "set-size",
+											"objectClass": "ArrayTemp1",
+											"sid": 498319048717769,
+											"parameters": {
+												"width": "3",
+												"height": "1",
+												"depth": "1"
+											}
+										}
+									],
+									"sid": 641883111418677
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "for",
+											"objectClass": "System",
+											"sid": 126805902206695,
+											"parameters": {
+												"name": "\"\"",
+												"start-index": "1",
+												"end-index": "3"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-layer-parallax",
+											"objectClass": "System",
+											"sid": 454741002747053,
+											"parameters": {
+												"layer": "\"card\" & loopindex",
+												"parallax-x": "0",
+												"parallax-y": "0"
+											}
+										},
+										{
+											"id": "set-layer-scale-rate",
+											"objectClass": "System",
+											"sid": 772133100991179,
+											"parameters": {
+												"layer": "\"card\" & loopindex",
+												"scale-rate": "0"
+											}
+										},
+										{
+											"id": "set-layer-force-own-texture",
+											"objectClass": "System",
+											"sid": 771055530478657,
+											"parameters": {
+												"layer": "\"card\" & loopindex",
+												"mode": "on"
+											}
+										}
+									],
+									"sid": 157729196371921,
 									"children": [
 										{
 											"eventType": "block",
@@ -4001,29 +4381,72 @@
 												{
 													"id": "compare-two-values",
 													"objectClass": "System",
-													"sid": 952089558424301,
+													"sid": 738030922997164,
 													"parameters": {
-														"first-value": "random(0,1)",
-														"comparison": 3,
-														"second-value": "(ScrapLevelReached - (MechObject.Count * 2)) / 10"
+														"first-value": "loopindex",
+														"comparison": 0,
+														"second-value": "3"
 													}
 												}
 											],
-											"actions": [
+											"actions": [],
+											"sid": 138543419623455,
+											"children": [
 												{
-													"customAction": "DrawNewMechCardUI",
-													"objectClass": "UpgradesManager",
-													"sid": 899806791976996,
-													"parameters": [
-														"ViewportMidX(\"MechUpgrades\") + 400 * (loopindex - 2)",
-														"ViewportMidY(\"MechUpgrades\")",
-														"ArrayTemp1.At(loopindex - 1)",
-														"\"card\" & loopindex",
-														"choose(\"ballistic\",\"artillery\")"
-													]
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "compare-two-values",
+															"objectClass": "System",
+															"sid": 569942934513444,
+															"parameters": {
+																"first-value": "random(0,1)",
+																"comparison": 3,
+																"second-value": "(ScrapLevelReached - (MechObject.Count * 2)) / 10"
+															}
+														}
+													],
+													"actions": [
+														{
+															"customAction": "DrawNewMechCardUI",
+															"objectClass": "UpgradesManager",
+															"sid": 486452283353435,
+															"parameters": [
+																"ViewportMidX(\"MechUpgrades\") + 400 * (loopindex - 2)",
+																"ViewportMidY(\"MechUpgrades\")",
+																"ArrayTemp1.At(loopindex - 1)",
+																"\"card\" & loopindex",
+																"choose(\"ballistic\",\"artillery\")"
+															]
+														}
+													],
+													"sid": 821621325595192
+												},
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "else",
+															"objectClass": "System",
+															"sid": 593616545999382
+														}
+													],
+													"actions": [
+														{
+															"customAction": "DrawUpgradeCardUI",
+															"objectClass": "UpgradesManager",
+															"sid": 510941871482091,
+															"parameters": [
+																"ViewportMidX(\"MechUpgrades\") + 400 * (loopindex - 2)",
+																"ViewportMidY(\"MechUpgrades\")",
+																"ArrayTemp1.At(loopindex - 1)",
+																"\"card\" & loopindex"
+															]
+														}
+													],
+													"sid": 430152874941201
 												}
-											],
-											"sid": 298303704114420
+											]
 										},
 										{
 											"eventType": "block",
@@ -4031,14 +4454,25 @@
 												{
 													"id": "else",
 													"objectClass": "System",
-													"sid": 445199192221303
+													"sid": 712118747725886
 												}
 											],
 											"actions": [
 												{
+													"id": "add-layer",
+													"objectClass": "System",
+													"sid": 859507495661269,
+													"disabled": true,
+													"parameters": {
+														"name": "\"card\" & loopindex",
+														"insert-by": "\"MechUpgrades\"",
+														"where": "add-top-sublayer"
+													}
+												},
+												{
 													"customAction": "DrawUpgradeCardUI",
 													"objectClass": "UpgradesManager",
-													"sid": 953103978511138,
+													"sid": 897378176124648,
 													"parameters": [
 														"ViewportMidX(\"MechUpgrades\") + 400 * (loopindex - 2)",
 														"ViewportMidY(\"MechUpgrades\")",
@@ -4047,44 +4481,148 @@
 													]
 												}
 											],
-											"sid": 732230359693236
+											"sid": 155370522356117
 										}
 									]
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 410398113310500
+								}
+							],
+							"actions": [],
+							"sid": 101041400852056,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "for-each-key",
+											"objectClass": "AllPlayerUpgradeKeys",
+											"sid": 422810201371650
+										}
+									],
+									"actions": [
+										{
+											"id": "push",
+											"objectClass": "ArrayTemp1",
+											"sid": 765566668902387,
+											"parameters": {
+												"where": "back",
+												"value": "AllPlayerUpgradeKeys.CurrentKey",
+												"axis": "x"
+											}
+										}
+									],
+									"sid": 255908994908285
+								},
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"id": "shuffle",
+											"objectClass": "ArrayTemp1",
+											"sid": 378645594600011,
+											"parameters": {
+												"axis": "x"
+											}
+										},
+										{
+											"id": "set-size",
+											"objectClass": "ArrayTemp1",
+											"sid": 863033070682082,
+											"parameters": {
+												"width": "3",
+												"height": "1",
+												"depth": "1"
+											}
+										}
+									],
+									"sid": 286911276121376
 								},
 								{
 									"eventType": "block",
 									"conditions": [
 										{
-											"id": "else",
+											"id": "for",
 											"objectClass": "System",
-											"sid": 958987134932142
+											"sid": 297693280642206,
+											"parameters": {
+												"name": "\"\"",
+												"start-index": "1",
+												"end-index": "3"
+											}
 										}
 									],
 									"actions": [
 										{
-											"id": "add-layer",
+											"id": "set-layer-parallax",
 											"objectClass": "System",
-											"sid": 407334586096020,
-											"disabled": true,
+											"sid": 807890217029880,
 											"parameters": {
-												"name": "\"card\" & loopindex",
-												"insert-by": "\"MechUpgrades\"",
-												"where": "add-top-sublayer"
+												"layer": "\"card\" & loopindex",
+												"parallax-x": "0",
+												"parallax-y": "0"
 											}
 										},
 										{
-											"customAction": "DrawUpgradeCardUI",
-											"objectClass": "UpgradesManager",
-											"sid": 801813520036469,
-											"parameters": [
-												"ViewportMidX(\"MechUpgrades\") + 400 * (loopindex - 2)",
-												"ViewportMidY(\"MechUpgrades\")",
-												"ArrayTemp1.At(loopindex - 1)",
-												"\"card\" & loopindex"
-											]
+											"id": "set-layer-scale-rate",
+											"objectClass": "System",
+											"sid": 539638174611957,
+											"parameters": {
+												"layer": "\"card\" & loopindex",
+												"scale-rate": "0"
+											}
+										},
+										{
+											"id": "set-layer-force-own-texture",
+											"objectClass": "System",
+											"sid": 785680752287946,
+											"parameters": {
+												"layer": "\"card\" & loopindex",
+												"mode": "on"
+											}
 										}
 									],
-									"sid": 473018622521447
+									"sid": 370720838048463,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [],
+											"actions": [
+												{
+													"id": "add-layer",
+													"objectClass": "System",
+													"sid": 232079839209445,
+													"disabled": true,
+													"parameters": {
+														"name": "\"card\" & loopindex",
+														"insert-by": "\"MechUpgrades\"",
+														"where": "add-top-sublayer"
+													}
+												},
+												{
+													"customAction": "DrawPlayerUpgradeCardUI",
+													"objectClass": "UpgradesManager",
+													"sid": 414914625841876,
+													"parameters": [
+														"ViewportMidX(\"MechUpgrades\") + 400 * (loopindex - 2)",
+														"ViewportMidY(\"MechUpgrades\")",
+														"ArrayTemp1.At(loopindex - 1)",
+														"\"card\" & loopindex"
+													]
+												}
+											],
+											"sid": 910357836932845
+										}
+									]
 								}
 							]
 						}
@@ -4847,6 +5385,42 @@
 								}
 							],
 							"sid": 462729614395077
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 662203348988879
+								},
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "ShopCardUIElement",
+									"sid": 353984643807664,
+									"parameters": {
+										"instance-variable": "CardType",
+										"comparison": 0,
+										"value": "\"player_upgrade\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"customAction": "ApplyPlayerUpgrade",
+									"objectClass": "PlayerData",
+									"sid": 275038577269316,
+									"parameters": [
+										"ShopCardUIElement.UpgradeID"
+									]
+								},
+								{
+									"customAction": "CloseUpgradeSequence",
+									"objectClass": "UpgradesManager",
+									"sid": 419566130539096
+								}
+							],
+							"sid": 532601921430352
 						}
 					]
 				},

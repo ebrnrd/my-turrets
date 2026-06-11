@@ -1,6 +1,6 @@
 {
 	"projectFormatVersion": 1,
-	"savedWithRelease": 48702,
+	"savedWithRelease": 48703,
 	"name": "turrets_1",
 	"runtime": "c3",
 	"useWorker": "auto",
@@ -456,14 +456,16 @@
 					"MechDefinitions",
 					"UpgradeDefinitions",
 					"AJAX",
-					"PlayerDefinitions"
+					"PlayerDefinitions",
+					"PlayerUpgradeDefinitions"
 				],
 				"subfolders": [
 					{
 						"items": [
 							"PlayerMechTypes",
 							"AllUpgradeKeys",
-							"PossibleUpgradeKeys"
+							"PossibleUpgradeKeys",
+							"AllPlayerUpgradeKeys"
 						],
 						"subfolders": [],
 						"name": "OnNecessity"
@@ -701,6 +703,14 @@
 					"name": "player_definitions.json",
 					"type": "application/json",
 					"sid": 145428814192002,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "player_upgrade_definitions.json",
+					"type": "application/json",
+					"sid": 937640116315080,
 					"file-info": {
 						"purpose": "none"
 					}
