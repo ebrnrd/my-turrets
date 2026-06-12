@@ -25,6 +25,7 @@
 		"HighGrass",
 		"smoke_particle_object",
 		"fog_sprite",
-		"UpgradeAltar"
+		"UpgradeAltar",
+		"HealthAltar"
 	]
 }

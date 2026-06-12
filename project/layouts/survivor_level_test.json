@@ -2496,41 +2496,6 @@
 			"global": false
 		},
 		{
-			"name": "always-top",
-			"overriden": 0,
-			"subLayers": [],
-			"instances": [],
-			"sid": 644833784168065,
-			"effectTypes": [],
-			"isInitiallyVisible": true,
-			"isInitiallyInteractive": true,
-			"isHTMLElementsLayer": false,
-			"color": [
-				1,
-				1,
-				1,
-				1
-			],
-			"backgroundColor": [
-				0.3686274509803922,
-				0.3686274509803922,
-				0.3686274509803922,
-				1
-			],
-			"isTransparent": true,
-			"sampling": "auto",
-			"parallaxX": 1,
-			"parallaxY": 1,
-			"scaleRate": 1,
-			"forceOwnTexture": false,
-			"renderingMode": "3d",
-			"drawOrder": "z-order",
-			"useRenderCells": false,
-			"blendMode": "normal",
-			"zElevation": 0,
-			"global": false
-		},
-		{
 			"name": "tilt-shift-top",
 			"overriden": 0,
 			"subLayers": [],
@@ -2854,6 +2819,41 @@
 			"parallaxX": 0,
 			"parallaxY": 0,
 			"scaleRate": 0,
+			"forceOwnTexture": false,
+			"renderingMode": "3d",
+			"drawOrder": "z-order",
+			"useRenderCells": false,
+			"blendMode": "normal",
+			"zElevation": 0,
+			"global": false
+		},
+		{
+			"name": "always-top",
+			"overriden": 0,
+			"subLayers": [],
+			"instances": [],
+			"sid": 644833784168065,
+			"effectTypes": [],
+			"isInitiallyVisible": true,
+			"isInitiallyInteractive": true,
+			"isHTMLElementsLayer": false,
+			"color": [
+				1,
+				1,
+				1,
+				1
+			],
+			"backgroundColor": [
+				0.3686274509803922,
+				0.3686274509803922,
+				0.3686274509803922,
+				1
+			],
+			"isTransparent": true,
+			"sampling": "auto",
+			"parallaxX": 1,
+			"parallaxY": 1,
+			"scaleRate": 1,
 			"forceOwnTexture": false,
 			"renderingMode": "3d",
 			"drawOrder": "z-order",

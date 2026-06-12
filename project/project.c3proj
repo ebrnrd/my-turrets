@@ -448,7 +448,11 @@
 			"UpgradeMechPowerUpEmptySlot",
 			"LevelUpStatText",
 			"EnemyAttackCollision",
-			"DamageNumberUI"
+			"DamageNumberUI",
+			"ArrayTemp2",
+			"ArrayTemp3",
+			"HealthAltar",
+			"MechPositionSignal"
 		],
 		"subfolders": [
 			{

@@ -444,7 +444,43 @@
 								{
 									"id": "compare-two-values",
 									"objectClass": "System",
-									"sid": 257074647841690,
+									"sid": 544738507419951,
+									"parameters": {
+										"first-value": "random(0,1)",
+										"comparison": 3,
+										"second-value": "EnemiesDifficulty / 20"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 387954802066793,
+									"parameters": {
+										"object-to-create": "enemyTest",
+										"layer": "\"main\"",
+										"x": "spawn_x",
+										"y": "spawn_y",
+										"create-hierarchy": true,
+										"template-name": "\"EnemyBoss\""
+									}
+								}
+							],
+							"sid": 522428217406310
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 461068414839170
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 981693534701156,
 									"parameters": {
 										"first-value": "random(0,1)",
 										"comparison": 3,
@@ -456,7 +492,7 @@
 								{
 									"id": "create-object",
 									"objectClass": "System",
-									"sid": 632495109578161,
+									"sid": 968793748227633,
 									"parameters": {
 										"object-to-create": "enemyTest",
 										"layer": "\"main\"",
@@ -467,7 +503,7 @@
 									}
 								}
 							],
-							"sid": 522428217406310
+							"sid": 245515255057160
 						},
 						{
 							"eventType": "block",

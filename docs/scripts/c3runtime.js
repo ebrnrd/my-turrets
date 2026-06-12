@@ -2145,6 +2145,10 @@ self.C3_ExpressionFuncs = [
 		() => "healer",
 		p => {
 			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("mech_max_health");
+		},
+		p => {
+			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("type");
 		},
 		p => {
@@ -2362,7 +2366,15 @@ self.C3_ExpressionFuncs = [
 		() => "player_hit_frame",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0("repair_amount");
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0(2, 5);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0("attack_damage");
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -2376,10 +2388,23 @@ self.C3_ExpressionFuncs = [
 			return () => (n0.ExpInstVar() - v1.GetValue());
 		},
 		() => "PlayerStats",
+		() => "stats.player_max_health",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject(("stats" + ".player_max_health"));
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0("scrap_area");
+		},
 		() => "PlayerDefinitionsLoaded",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject(("default" + ".base_stats"));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject(("stats." + "player_max_health"));
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -2433,6 +2458,11 @@ self.C3_ExpressionFuncs = [
 		},
 		() => "left",
 		() => "right",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() / 20);
+		},
+		() => "EnemyBoss",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => (v0.GetValue() / 10);
@@ -2720,6 +2750,12 @@ self.C3_ExpressionFuncs = [
 			const v0 = p._GetNode(0).GetVar();
 			const f1 = p._GetNode(1).GetBoundMethod();
 			return () => multiply(v0.GetValue(), f1("elemental_damage_mult"));
+		},
+		() => "mech_max_health",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => add(v0.GetValue(), f1("mech_max_health"));
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -3033,6 +3069,16 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => (v0.GetValue() % 3);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => n0.ExpObject(and("applied_upgrades.", f1()));
+		},
+		() => 2,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject(0);
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();

@@ -102,6 +102,16 @@
 			"sid": 996949964558114
 		},
 		{
+			"eventType": "variable",
+			"name": "HealthAltarsAmount",
+			"type": "number",
+			"initialValue": "8",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 510342287715371
+		},
+		{
 			"eventType": "block",
 			"conditions": [
 				{
@@ -569,6 +579,35 @@
 						}
 					],
 					"sid": 915093530325961
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "repeat",
+							"objectClass": "System",
+							"sid": 645933425220502,
+							"parameters": {
+								"count": "HealthAltarsAmount"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 906793290031327,
+							"parameters": {
+								"object-to-create": "HealthAltar",
+								"layer": "\"main\"",
+								"x": "random(0, LayoutWidth)",
+								"y": "random(0, LayoutHeight)",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						}
+					],
+					"sid": 299830457795730
 				}
 			]
 		},

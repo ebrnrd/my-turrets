@@ -27,6 +27,56 @@
     ],
     "behavior_tags": [],
     "hooks": []
+  },
+
+  "max_health": {
+    "label": "Max Health",
+    "description": "+ Max Health",
+    "modifiers": [
+      { "stat": "player_max_health", "op": "add", "value": 20 }
+    ],
+    "behavior_tags": [],
+    "hooks": []
+  },
+
+  "mech_max_health": {
+    "label": "Mechs Max Health",
+    "description": "+ Max Health to all your Mechs",
+    "modifiers": [
+      { "stat": "mech_max_health", "op": "add", "value":10 }
+    ],
+    "behavior_tags": [],
+    "hooks": []
+  },
+
+  "attack_damage": {
+    "label": "Attack Damage",
+    "description": "Your attacks deal more damage",
+    "modifiers": [
+      { "stat": "attack_damage", "op": "add", "value": 2 }
+    ],
+    "behavior_tags": [],
+    "hooks": []
+  },
+
+  "repair_amount": {
+    "label": "Repair Efficiency",
+    "description": "Your Mechs are repaired more when you hit them",
+    "modifiers": [
+      { "stat": "repair_amount", "op": "add", "value": 2 }
+    ],
+    "behavior_tags": [],
+    "hooks": []
+  },
+
+  "scrap_area": {
+    "label": "Scrap Area",
+    "description": "You Scrap Collection Area is larger",
+    "modifiers": [
+      { "stat": "scrap_area", "op": "add", "value": 30 }
+    ],
+    "behavior_tags": [],
+    "hooks": []
   }
 }
 

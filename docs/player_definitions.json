@@ -3,9 +3,11 @@
     "base_stats": {
       "bullet_damage_mult": 1,
       "elemental_damage_mult": 1,
-      "max_health": 100,
+      "player_max_health": 200,
+      "mech_max_health": 0,
       "attack_damage": 4,
       "repair_amount": 6,
+      "scrap_area": 120,
       "move_speed": 400
     }
   }

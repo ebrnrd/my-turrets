@@ -257,6 +257,18 @@
     "mech_type": "artillery"
   },
 
+  "triangulation": {
+    "label": "Triangulation",
+    "description": "",
+    "modifiers": [
+      { "stat": "aim_error", "op": "multiply", "value": 0.5 },
+      { "stat": "bullet_time", "op": "multiply", "value": 0.5 }
+    ],
+    "behavior_tags": [],
+    "hooks": [],
+    "mech_type": "artillery"
+  },
+
   "bigger_reserve": {
     "label": "Bigger Reserve",
     "description": "",

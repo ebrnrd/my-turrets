@@ -1,6 +1,7 @@
 {
   "ballistic": {
     "base_stats": {
+      "mech_max_health": 40,
       "fire_rate": 2,
       "bullet_count": 1,
       "bullet_spread": 6,
@@ -27,6 +28,7 @@
   },
   "artillery": {
     "base_stats": {
+      "mech_max_health": 40,
       "fire_rate": 0.4,
       "bullet_count": 1,
       "aim_error": 30,

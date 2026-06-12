@@ -2747,9 +2747,46 @@
 							}
 						}
 					],
-					"actions": [],
+					"actions": [
+						{
+							"id": "set-instvar-value",
+							"objectClass": "MechBase",
+							"sid": 782030633584581,
+							"parameters": {
+								"instance-variable": "MaxHealth",
+								"value": "MechStatsCache.Get(\"mech_max_health\")"
+							}
+						}
+					],
 					"sid": 353245325185763,
 					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "MechBase",
+									"sid": 465714940509213,
+									"parameters": {
+										"instance-variable": "Health",
+										"comparison": 4,
+										"value": "MechBase.MaxHealth"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-instvar-value",
+									"objectClass": "MechBase",
+									"sid": 499311496194542,
+									"parameters": {
+										"instance-variable": "Health",
+										"value": "Self.MaxHealth"
+									}
+								}
+							],
+							"sid": 152134841709810
+						},
 						{
 							"eventType": "block",
 							"conditions": [
@@ -4488,6 +4525,93 @@
 				}
 			],
 			"sid": 436936503731154
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "for-each",
+					"objectClass": "System",
+					"sid": 294615303067779,
+					"parameters": {
+						"object": "MechBase"
+					}
+				},
+				{
+					"id": "pick-children",
+					"objectClass": "MechBase",
+					"sid": 293409964008643,
+					"parameters": {
+						"child": "MechPositionSignal",
+						"which": "own"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-position",
+					"objectClass": "MechPositionSignal",
+					"sid": 905679673637548,
+					"parameters": {
+						"x": "MechBase.X",
+						"y": "MechBase.Y"
+					}
+				}
+			],
+			"sid": 170454880347113,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-on-screen",
+							"objectClass": "MechBase",
+							"sid": 330591626294699,
+							"isInverted": true
+						}
+					],
+					"actions": [
+						{
+							"id": "set-visible",
+							"objectClass": "MechPositionSignal",
+							"sid": 486603739650765,
+							"parameters": {
+								"visibility": "visible"
+							}
+						},
+						{
+							"id": "move-to-layer",
+							"objectClass": "MechPositionSignal",
+							"sid": 950606157146019,
+							"parameters": {
+								"layer": "\"always-top\""
+							}
+						}
+					],
+					"sid": 103824519500201
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 864672901179512
+						}
+					],
+					"actions": [
+						{
+							"id": "set-visible",
+							"objectClass": "MechPositionSignal",
+							"sid": 556789379491930,
+							"parameters": {
+								"visibility": "invisible"
+							}
+						}
+					],
+					"sid": 490047962383984
+				}
+			]
 		}
 	],
 	"sid": 182913111176321

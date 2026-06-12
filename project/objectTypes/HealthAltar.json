@@ -1,0 +1,70 @@
+{
+	"name": "HealthAltar",
+	"plugin-id": "Sprite",
+	"sid": 801450508792683,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [
+		{
+			"name": "IsUsed",
+			"type": "boolean",
+			"desc": "",
+			"show": true,
+			"sid": 922632258165729
+		}
+	],
+	"behaviorTypes": [],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 31,
+						"height": 31,
+						"originX": 0.5,
+						"originY": 0.9193548387096774,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 75037,
+						"collisionPoly": {
+							"points": [
+								0.2903225806451613,
+								0,
+								0.7096774193548387,
+								0,
+								0.8387096774193549,
+								0.12903225806451613,
+								0.8387096774193549,
+								0.41935483870967744,
+								0.7741935483870968,
+								0.967741935483871,
+								0.3548387096774194,
+								1,
+								0.22580645161290322,
+								0.967741935483871,
+								0.16129032258064516,
+								0.41935483870967744,
+								0.16129032258064516,
+								0.12903225806451613
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 116554465091703,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 0
+			}
+		],
+		"subfolders": []
+	}
+}

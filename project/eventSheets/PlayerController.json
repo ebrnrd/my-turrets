@@ -803,11 +803,11 @@
 						},
 						{
 							"callFunction": "SendHeal",
-							"sid": 292318488518536,
+							"sid": 184698884181661,
 							"parameters": [
 								"MechBase.UID",
 								"playerCharacter.UID",
-								"player_melee_damage"
+								"Functions.GetPlayerStat(\"repair_amount\")"
 							]
 						},
 						{
@@ -888,11 +888,11 @@
 					"actions": [
 						{
 							"callFunction": "SendDamage",
-							"sid": 487177716575671,
+							"sid": 666002617066366,
 							"parameters": [
 								"enemies.UID",
 								"playerCharacter.UID",
-								"player_melee_damage"
+								"Functions.GetPlayerStat(\"attack_damage\")"
 							]
 						},
 						{
@@ -944,11 +944,11 @@
 					"actions": [
 						{
 							"callFunction": "SendDamage",
-							"sid": 740858558888827,
+							"sid": 640700634102506,
 							"parameters": [
 								"rock.UID",
 								"playerCharacter.UID",
-								"player_melee_damage"
+								"Functions.GetPlayerStat(\"attack_damage\")"
 							]
 						},
 						{
@@ -1081,6 +1081,147 @@
 						}
 					],
 					"sid": 242544686341716
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-overlapping-another-object",
+							"objectClass": "player_melee_hit",
+							"sid": 174281199372089,
+							"parameters": {
+								"object": "HealthAltar"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "HealthAltar",
+							"sid": 494922596584044,
+							"parameters": {
+								"instance-variable": "IsUsed",
+								"value": "true"
+							}
+						},
+						{
+							"id": "set-animation-frame",
+							"objectClass": "HealthAltar",
+							"sid": 797687870616490,
+							"disabled": true,
+							"parameters": {
+								"frame-number": "1"
+							}
+						},
+						{
+							"id": "set-boolean-eventvar",
+							"objectClass": "System",
+							"sid": 850430148380329,
+							"parameters": {
+								"variable": "CanShake",
+								"value": "true"
+							}
+						},
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 825358489471118,
+							"parameters": {
+								"object-to-create": "BulgeEffect",
+								"layer": "\"fx\"",
+								"x": "HealthAltar.BBoxMidX",
+								"y": "HealthAltar.BBoxMidY",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-object-time-scale",
+							"objectClass": "System",
+							"sid": 449898770733071,
+							"parameters": {
+								"object": "BulgeEffect",
+								"time-scale": "1.0"
+							}
+						},
+						{
+							"id": "set-size",
+							"objectClass": "BulgeEffect",
+							"sid": 999929988485389,
+							"parameters": {
+								"width": "0",
+								"height": "0"
+							}
+						},
+						{
+							"id": "tween-two-properties",
+							"objectClass": "BulgeEffect",
+							"sid": 380837452758974,
+							"behaviorType": "Tween",
+							"parameters": {
+								"tags": "\"\"",
+								"property": "size",
+								"end-x": "800",
+								"end-y": "800",
+								"time": "1",
+								"ease": "easeoutcubic",
+								"destroy-on-complete": "no",
+								"loop": "no",
+								"ping-pong": "no",
+								"repeat-count": "1"
+							}
+						},
+						{
+							"id": "set-time-scale",
+							"objectClass": "System",
+							"sid": 216429420237083,
+							"parameters": {
+								"time-scale": "0.1"
+							}
+						},
+						{
+							"id": "destroy",
+							"objectClass": "HealthAltar",
+							"sid": 899983432682640
+						},
+						{
+							"callFunction": "SendHeal",
+							"sid": 695846342269552,
+							"parameters": [
+								"playerCharacter.UID",
+								"playerCharacter.UID",
+								"playerCharacter.MaxHealth / 2"
+							]
+						},
+						{
+							"customAction": "ReceiveHeal",
+							"objectClass": "playerCharacter",
+							"customActionObjectClass": "Damageables",
+							"sid": 540874882857472,
+							"disabled": true,
+							"parameters": [
+								"Self.MaxHealth / 2"
+							]
+						},
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 399444676086831,
+							"parameters": {
+								"seconds": "1.0",
+								"use-timescale": false
+							}
+						},
+						{
+							"id": "set-time-scale",
+							"objectClass": "System",
+							"sid": 352277446947885,
+							"parameters": {
+								"time-scale": "1"
+							}
+						}
+					],
+					"sid": 933273416722482
 				},
 				{
 					"eventType": "block",
@@ -1245,6 +1386,90 @@
 					"eventType": "block",
 					"conditions": [
 						{
+							"id": "every-tick",
+							"objectClass": "System",
+							"sid": 261871638592010
+						}
+					],
+					"actions": [],
+					"sid": 594313666759656,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "has-key",
+									"objectClass": "PlayerData",
+									"sid": 827921674573804,
+									"parameters": {
+										"path": "\"stats\" & \".player_max_health\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-instvar-value",
+									"objectClass": "playerCharacter",
+									"sid": 547700905173311,
+									"parameters": {
+										"instance-variable": "MaxHealth",
+										"value": "PlayerData.Get(\"stats\" & \".player_max_health\")"
+									}
+								}
+							],
+							"sid": 979737262405582,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 815276278482673,
+											"parameters": {
+												"first-value": "playerCharacter.Health",
+												"comparison": 4,
+												"second-value": "playerCharacter.MaxHealth"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-instvar-value",
+											"objectClass": "playerCharacter",
+											"sid": 181910917691596,
+											"parameters": {
+												"instance-variable": "Health",
+												"value": "Self.MaxHealth"
+											}
+										}
+									],
+									"sid": 200010944466915
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-size",
+									"objectClass": "PlayerVacuumArea",
+									"sid": 433336685111580,
+									"parameters": {
+										"width": "Functions.GetPlayerStat(\"scrap_area\")",
+										"height": "Functions.GetPlayerStat(\"scrap_area\")"
+									}
+								}
+							],
+							"sid": 839041228693351
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
 							"id": "on-signal",
 							"objectClass": "System",
 							"sid": 729471242925716,
@@ -1261,6 +1486,15 @@
 							"parameters": {
 								"path": "\"stats\"",
 								"json": "PlayerDefinitions.GetAsBeautifiedString(\"default\" & \".base_stats\")"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "playerCharacter",
+							"sid": 814062391144680,
+							"parameters": {
+								"instance-variable": "Health",
+								"value": "PlayerData.Get(\"stats.\" & \"player_max_health\")"
 							}
 						}
 					],

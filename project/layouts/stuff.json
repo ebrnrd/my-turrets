@@ -2760,7 +2760,7 @@
 						"Faction": "enemies",
 						"healthold": 24,
 						"damage": 5,
-						"damage_seconds": 4
+						"damage_seconds": 1
 					},
 					"behaviors": {
 						"Timer": {
@@ -3408,7 +3408,7 @@
 						"Faction": "enemies",
 						"healthold": 24,
 						"damage": 18,
-						"damage_seconds": 12
+						"damage_seconds": 1
 					},
 					"behaviors": {
 						"Timer": {
@@ -4122,7 +4122,7 @@
 						"Faction": "enemies",
 						"healthold": 24,
 						"damage": 5,
-						"damage_seconds": 4
+						"damage_seconds": 1
 					},
 					"behaviors": {
 						"Timer": {
@@ -4673,6 +4673,690 @@
 						"y": 479.1614990234375,
 						"width": 72,
 						"height": 60,
+						"originX": 0.5,
+						"originY": 0.8,
+						"color": [
+							0,
+							0,
+							0,
+							1
+						],
+						"z": 0,
+						"angle": 0
+					}
+				},
+				{
+					"type": "HealthAltar",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 150,
+					"sid": 580511494545017,
+					"tags": "",
+					"instanceVariables": {
+						"order": 0,
+						"IsUsed": false
+					},
+					"behaviors": {},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 501,
+						"y": 599,
+						"width": 124,
+						"height": 124,
+						"originX": 0.5,
+						"originY": 0.9193548387096774,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"z": 0,
+						"angle": 0
+					}
+				},
+				{
+					"type": "EnemyAttackCollision",
+					"properties": {
+						"initially-visible": false,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 151,
+					"sid": 476560630274872,
+					"tags": "",
+					"instanceVariables": {},
+					"behaviors": {},
+					"sceneGraphData": {
+						"parent-uid": 152,
+						"uid": 151,
+						"flags": {
+							"x": true,
+							"y": true,
+							"z": true,
+							"w": true,
+							"h": true,
+							"a": true,
+							"o": false,
+							"v": false,
+							"d": true,
+							"sm": "normal"
+						},
+						"preview": {
+							"transformX": 0,
+							"transformY": 0,
+							"transformZ": 0,
+							"transformW": 0,
+							"transformH": 0,
+							"transformA": 0,
+							"transformSX": 0,
+							"transformSY": 0,
+							"transformO": 0,
+							"previewSceneGraph": false
+						}
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 1198,
+						"y": 422,
+						"width": 188.6300124833466,
+						"height": 130.72056494824403,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"z": 0,
+						"angle": 0
+					}
+				},
+				{
+					"type": "enemyTest",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 2",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 152,
+					"sid": 496644974913592,
+					"tags": "",
+					"instanceVariables": {
+						"order": 0,
+						"move_speed": 400,
+						"MinScrapOnDeath": 40,
+						"MaxScrapOnDeath": 60,
+						"height_from_ground": 0,
+						"shadow_width": 130,
+						"Health": 100,
+						"MaxHealth": 500,
+						"Faction": "enemies",
+						"healthold": 24,
+						"damage": 30,
+						"damage_seconds": 1
+					},
+					"behaviors": {
+						"Timer": {
+							"properties": {}
+						},
+						"Physics": {
+							"properties": {
+								"immovable": false,
+								"collision-mask": "use-collision-polygon",
+								"collision-filter-tags": "",
+								"collision-filter-mode": "exclusive",
+								"prevent-rotation": true,
+								"density": 1,
+								"friction": 0.5,
+								"elasticity": 0.2,
+								"linear-damping": 5,
+								"angular-damping": 0.01,
+								"bullet": false,
+								"enabled": true
+							}
+						},
+						"Timer2": {
+							"properties": {}
+						},
+						"Pathfinding": {
+							"properties": {
+								"cell-size": 30,
+								"cell-border": -1,
+								"obstacles": "solids",
+								"max-speed": 100,
+								"acceleration": 400,
+								"deceleration": 100,
+								"rotate-speed": 135,
+								"rotate-object": false,
+								"diagonals": true,
+								"direct-movement": "to-destination",
+								"enabled": false
+							}
+						},
+						"Timer3": {
+							"properties": {}
+						},
+						"LineOfSight": {
+							"properties": {
+								"obstacles": "solids",
+								"range": 1000,
+								"cone-of-view": 360,
+								"use-collision-cells": true
+							}
+						},
+						"MoveTo": {
+							"properties": {
+								"max-speed": 100,
+								"acceleration": 600,
+								"deceleration": 600,
+								"rotate-speed": 0,
+								"set-angle": false,
+								"stop-on-solids": false,
+								"enabled": true
+							}
+						}
+					},
+					"template": {
+						"mode": "template",
+						"templateName": "EnemyBoss",
+						"sourceTemplateName": "Enemy3",
+						"replicaHierarchyInSyncWithTemplate": false,
+						"templatePropagateHierarchyChanges": true,
+						"replicaIgnoreTemplateHierarchyChanges": false,
+						"components": [
+							{
+								"id": "plugin",
+								"component": [
+									{
+										"key": "plugin",
+										"state": [
+											[
+												"initially-visible",
+												true
+											],
+											[
+												"initial-animation",
+												true
+											],
+											[
+												"initial-frame",
+												true
+											],
+											[
+												"enable-collisions",
+												true
+											]
+										]
+									}
+								]
+							},
+							{
+								"id": "instance-variable",
+								"component": [
+									{
+										"key": "instance-variable",
+										"state": [
+											{
+												"iv": "order",
+												"state": true
+											},
+											{
+												"iv": "move_speed",
+												"state": true
+											},
+											{
+												"iv": "MinScrapOnDeath",
+												"state": true
+											},
+											{
+												"iv": "MaxScrapOnDeath",
+												"state": true
+											},
+											{
+												"iv": "height_from_ground",
+												"state": true
+											},
+											{
+												"iv": "shadow_width",
+												"state": true
+											},
+											{
+												"iv": "Health",
+												"state": true
+											},
+											{
+												"iv": "MaxHealth",
+												"state": true
+											},
+											{
+												"iv": "Faction",
+												"state": true
+											},
+											{
+												"iv": "healthold",
+												"state": true
+											},
+											{
+												"iv": "damage",
+												"state": true
+											},
+											{
+												"iv": "damage_seconds",
+												"state": true
+											}
+										]
+									}
+								]
+							},
+							{
+								"id": "behavior",
+								"component": [
+									{
+										"key": "Timer",
+										"state": []
+									},
+									{
+										"key": "Physics",
+										"state": [
+											[
+												"immovable",
+												true
+											],
+											[
+												"collision-mask",
+												true
+											],
+											[
+												"collision-filter-tags",
+												true
+											],
+											[
+												"collision-filter-mode",
+												true
+											],
+											[
+												"prevent-rotation",
+												true
+											],
+											[
+												"density",
+												true
+											],
+											[
+												"friction",
+												true
+											],
+											[
+												"elasticity",
+												true
+											],
+											[
+												"linear-damping",
+												true
+											],
+											[
+												"angular-damping",
+												true
+											],
+											[
+												"bullet",
+												true
+											],
+											[
+												"enabled",
+												true
+											]
+										]
+									},
+									{
+										"key": "Timer2",
+										"state": []
+									},
+									{
+										"key": "Pathfinding",
+										"state": [
+											[
+												"cell-size",
+												true
+											],
+											[
+												"cell-border",
+												true
+											],
+											[
+												"obstacles",
+												true
+											],
+											[
+												"max-speed",
+												true
+											],
+											[
+												"acceleration",
+												true
+											],
+											[
+												"deceleration",
+												true
+											],
+											[
+												"rotate-speed",
+												true
+											],
+											[
+												"rotate-object",
+												true
+											],
+											[
+												"diagonals",
+												true
+											],
+											[
+												"direct-movement",
+												true
+											],
+											[
+												"enabled",
+												true
+											]
+										]
+									},
+									{
+										"key": "Timer3",
+										"state": []
+									},
+									{
+										"key": "LineOfSight",
+										"state": [
+											[
+												"obstacles",
+												true
+											],
+											[
+												"range",
+												true
+											],
+											[
+												"cone-of-view",
+												true
+											],
+											[
+												"use-collision-cells",
+												true
+											]
+										]
+									},
+									{
+										"key": "MoveTo",
+										"state": [
+											[
+												"max-speed",
+												true
+											],
+											[
+												"acceleration",
+												true
+											],
+											[
+												"deceleration",
+												true
+											],
+											[
+												"rotate-speed",
+												true
+											],
+											[
+												"set-angle",
+												true
+											],
+											[
+												"stop-on-solids",
+												true
+											],
+											[
+												"enabled",
+												true
+											]
+										]
+									}
+								]
+							},
+							{
+								"id": "effect",
+								"component": [
+									{
+										"key": "Brightness",
+										"state": [
+											[
+												"brightness",
+												true
+											],
+											[
+												"<<effect-template-enable>>",
+												true
+											]
+										]
+									},
+									{
+										"key": "DamagedColor",
+										"state": [
+											[
+												"color",
+												true
+											],
+											[
+												"<<effect-template-enable>>",
+												true
+											]
+										]
+									},
+									{
+										"key": "HealedColor",
+										"state": [
+											[
+												"color",
+												true
+											],
+											[
+												"<<effect-template-enable>>",
+												true
+											]
+										]
+									}
+								]
+							},
+							{
+								"id": "world-instance",
+								"component": [
+									{
+										"key": "world-instance",
+										"state": [
+											[
+												"x",
+												false
+											],
+											[
+												"y",
+												false
+											],
+											[
+												"z",
+												true
+											],
+											[
+												"w",
+												true
+											],
+											[
+												"h",
+												true
+											],
+											[
+												"a",
+												true
+											],
+											[
+												"o",
+												true
+											],
+											[
+												"c",
+												true
+											],
+											[
+												"sx",
+												true
+											],
+											[
+												"sy",
+												true
+											],
+											[
+												"bm",
+												true
+											],
+											[
+												"sam",
+												true
+											],
+											[
+												"tgs",
+												true
+											],
+											[
+												"twpx",
+												true
+											],
+											[
+												"twpy",
+												true
+											],
+											[
+												"twpz",
+												true
+											],
+											[
+												"twpw",
+												true
+											],
+											[
+												"twph",
+												true
+											],
+											[
+												"twpa",
+												true
+											],
+											[
+												"dwp",
+												true
+											],
+											[
+												"ssm",
+												true
+											]
+										]
+									}
+								]
+							}
+						],
+						"replicasUIDs": null
+					},
+					"effects": {
+						"Brightness": {
+							"isEnabled": true,
+							"parameters": {
+								"brightness": 1
+							}
+						},
+						"DamagedColor": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									0.8392156862745098,
+									0.2627450980392157,
+									0.2627450980392157,
+									1
+								]
+							}
+						},
+						"HealedColor": {
+							"isEnabled": false,
+							"parameters": {
+								"color": [
+									0.08235294117647059,
+									0.8352941176470589,
+									0.30980392156862746,
+									1
+								]
+							}
+						}
+					},
+					"sceneGraphData": {
+						"parent-uid": null,
+						"uid": 152,
+						"children": [
+							{
+								"uid": 151,
+								"flags": {
+									"x": true,
+									"y": true,
+									"z": true,
+									"w": true,
+									"h": true,
+									"a": true,
+									"o": false,
+									"v": false,
+									"d": true,
+									"sm": "normal"
+								}
+							}
+						],
+						"flags": {
+							"x": true,
+							"y": true,
+							"z": true,
+							"w": true,
+							"h": true,
+							"a": true,
+							"o": false,
+							"v": false,
+							"d": true,
+							"sm": "normal"
+						},
+						"preview": {
+							"transformX": 0,
+							"transformY": 0,
+							"transformZ": 0,
+							"transformW": 0,
+							"transformH": 0,
+							"transformA": 0,
+							"transformSX": 0,
+							"transformSY": 0,
+							"transformO": 0,
+							"previewSceneGraph": false
+						}
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 1199,
+						"y": 489,
+						"width": 316.94393232999585,
+						"height": 264.1199436083299,
 						"originX": 0.5,
 						"originY": 0.8,
 						"color": [
@@ -6650,6 +7334,30 @@
 			"properties": {},
 			"uid": 48,
 			"sid": 910454435932112,
+			"tags": "",
+			"instanceVariables": {}
+		},
+		{
+			"type": "ArrayTemp2",
+			"properties": {
+				"width": 10,
+				"height": 1,
+				"depth": 1
+			},
+			"uid": 148,
+			"sid": 375928386809791,
+			"tags": "",
+			"instanceVariables": {}
+		},
+		{
+			"type": "ArrayTemp3",
+			"properties": {
+				"width": 10,
+				"height": 1,
+				"depth": 1
+			},
+			"uid": 149,
+			"sid": 114658808543716,
 			"tags": "",
 			"instanceVariables": {}
 		}
