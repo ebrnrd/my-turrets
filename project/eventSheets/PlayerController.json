@@ -1186,8 +1186,7 @@
 						{
 							"customAction": "BeginUpgradeShopSequence",
 							"objectClass": "UpgradesManager",
-							"sid": 433283700728502,
-							"disabled": true
+							"sid": 433283700728502
 						},
 						{
 							"id": "destroy",
