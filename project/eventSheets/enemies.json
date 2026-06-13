@@ -57,9 +57,9 @@
 				{
 					"id": "every-x-seconds",
 					"objectClass": "System",
-					"sid": 280164555604431,
+					"sid": 544003108745245,
 					"parameters": {
-						"interval-seconds": "random(0.5,2)"
+						"interval-seconds": "random(0.5,7)"
 					}
 				}
 			],

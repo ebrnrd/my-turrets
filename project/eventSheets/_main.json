@@ -47,7 +47,7 @@
 		},
 		{
 			"eventType": "include",
-			"includeSheet": "MechUpgradesSystem"
+			"includeSheet": "UpgradesSystem"
 		},
 		{
 			"eventType": "include",

@@ -8,7 +8,7 @@
       "attack_damage": 4,
       "repair_amount": 6,
       "scrap_area": 120,
-      "move_speed": 400
+      "move_speed": 200
     }
   }
 }

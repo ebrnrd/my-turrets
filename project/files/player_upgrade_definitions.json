@@ -23,7 +23,7 @@
     "label": "Move Speed",
     "description": "You move faster",
     "modifiers": [
-      { "stat": "move_speed", "op": "add", "value": 40 }
+      { "stat": "move_speed", "op": "add", "value": 10 }
     ],
     "behavior_tags": [],
     "hooks": []
@@ -67,6 +67,17 @@
     ],
     "behavior_tags": [],
     "hooks": []
+  },
+
+
+  "mine_trapper": {
+    "label": "Mine Trapper",
+    "description": "Every 5 seconds spawn a Mine",
+    "modifiers": [],
+    "behavior_tags": [],
+    "hooks": [
+      { "tag": "on_loop", "duration": 5, "actions": ["spawn_mine"] }
+    ]
   },
 
   "scrap_area": {

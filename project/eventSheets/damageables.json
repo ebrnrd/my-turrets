@@ -199,9 +199,9 @@
 														{
 															"customAction": "AddExperience",
 															"objectClass": "MechObject",
-															"sid": 122084669013570,
+															"sid": 395205458816485,
 															"parameters": [
-																"enemies.ExpOnDeath / 2"
+																"(enemies.ExpOnDeath / 2) / DamageableAttackersUIDs.KeyCount"
 															]
 														}
 													],
@@ -364,10 +364,13 @@
 									}
 								},
 								{
-									"callFunction": "Hook_OnRepair",
-									"sid": 374250869366342,
+									"callFunction": "ProcessHook",
+									"sid": 107089944749151,
 									"parameters": [
-										"MechObject.UID"
+										"MechObject.UID",
+										"\"on_repair\"",
+										false,
+										"\"\""
 									]
 								}
 							],

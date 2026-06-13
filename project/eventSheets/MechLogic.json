@@ -3906,6 +3906,29 @@
 					"eventType": "block",
 					"conditions": [
 						{
+							"id": "on-created",
+							"objectClass": "MechBase",
+							"sid": 917646061989386
+						}
+					],
+					"actions": [
+						{
+							"id": "add-path-cost",
+							"objectClass": "MechBase",
+							"sid": 303229958025690,
+							"behaviorType": "Pathfinding",
+							"parameters": {
+								"object": "enemies",
+								"cost": "50"
+							}
+						}
+					],
+					"sid": 492333657671452
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
 							"id": "for-each",
 							"objectClass": "System",
 							"sid": 674775751006616,

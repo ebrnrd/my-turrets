@@ -117,7 +117,7 @@
 					"eventType": "variable",
 					"name": "LinearMult",
 					"type": "number",
-					"initialValue": "30",
+					"initialValue": "24",
 					"comment": "",
 					"isStatic": false,
 					"isConstant": false,
@@ -127,7 +127,7 @@
 					"eventType": "variable",
 					"name": "Base",
 					"type": "number",
-					"initialValue": "8",
+					"initialValue": "4",
 					"comment": "",
 					"isStatic": false,
 					"isConstant": false,
@@ -272,7 +272,12 @@
 							"sid": 152159679344881
 						}
 					],
-					"actions": [],
+					"actions": [
+						{
+							"callFunction": "PlayerLevelUp",
+							"sid": 870592872196047
+						}
+					],
 					"sid": 126035615126504,
 					"children": [
 						{
@@ -298,7 +303,8 @@
 									}
 								}
 							],
-							"sid": 382824089608751
+							"sid": 382824089608751,
+							"disabled": true
 						},
 						{
 							"eventType": "block",
@@ -345,7 +351,8 @@
 									"sid": 150837839334029
 								}
 							],
-							"sid": 532219236166444
+							"sid": 532219236166444,
+							"disabled": true
 						}
 					]
 				},
@@ -380,6 +387,88 @@
 					"conditions": [],
 					"actions": [],
 					"sid": 986902685557902
+				}
+			]
+		},
+		{
+			"functionName": "PlayerLevelUp",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-eventvar-value",
+					"objectClass": "System",
+					"sid": 857706037204980,
+					"parameters": {
+						"variable": "PlayerScrap",
+						"value": "PlayerScrap - Functions.GetScrapTarget(ScrapLevelReached)"
+					}
+				}
+			],
+			"sid": 376996261166613,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 779303629964736,
+							"parameters": {
+								"first-value": "PlayerScrap",
+								"comparison": 2,
+								"second-value": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 581761428738362,
+							"parameters": {
+								"variable": "PlayerScrap",
+								"value": "0"
+							}
+						}
+					],
+					"sid": 226257639321173
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "add-to-eventvar",
+							"objectClass": "System",
+							"sid": 330439320609695,
+							"parameters": {
+								"variable": "ScrapLevelReached",
+								"value": "1"
+							}
+						},
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 866419458388078,
+							"parameters": {
+								"seconds": "0.1",
+								"use-timescale": false
+							}
+						},
+						{
+							"customAction": "BeginUpgradeShopSequence",
+							"objectClass": "UpgradesManager",
+							"sid": 203480139824485
+						}
+					],
+					"sid": 627968762894272
 				}
 			]
 		}

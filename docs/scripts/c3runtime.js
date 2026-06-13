@@ -2434,23 +2434,29 @@ self.C3_ExpressionFuncs = [
 			return () => (n0.ExpInstVar() - v1.GetValue());
 		},
 		() => "PlayerStats",
-		() => "stats.player_max_health",
+		() => "player_max_health",
 		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(("stats" + ".player_max_health"));
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0("player_max_health");
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0("scrap_area");
 		},
-		() => "PlayerDefinitionsLoaded",
+		() => "PlayerUpgradeDefinitionsLoaded",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject(("default" + ".base_stats"));
 		},
 		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => f0(f1("player_max_health"));
+		},
+		p => {
 			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(("stats." + "player_max_health"));
+			const v1 = p._GetNode(1).GetVar();
+			return () => n0.ExpObject((v1.GetValue() + ".modifiers"));
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -2465,8 +2471,98 @@ self.C3_ExpressionFuncs = [
 			return () => n0.ExpObject((and((v1.GetValue() + ".modifiers."), f2("modifiers")) + ".value"));
 		},
 		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			return () => n0.ExpObject(v1.GetValue());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => n0.ExpObject(and(("applied_upgrades" + "."), f1("upgrades")));
+		},
+		() => "hooks",
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			return () => (n0.ExpObject((v1.GetValue() + ".hooks")) - 1);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			const f2 = p._GetNode(2).GetBoundMethod();
+			return () => n0.ExpObject((and((v1.GetValue() + ".hooks."), f2("hooks")) + ".tag"));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			const f2 = p._GetNode(2).GetBoundMethod();
+			return () => n0.ExpObject((and((v1.GetValue() + ".hooks."), f2("hooks")) + ".duration"));
+		},
+		() => "actions",
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			const f2 = p._GetNode(2).GetBoundMethod();
+			return () => (n0.ExpObject((and((v1.GetValue() + ".hooks."), f2("hooks")) + ".actions")) - 1);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			const f2 = p._GetNode(2).GetBoundMethod();
+			const f3 = p._GetNode(3).GetBoundMethod();
+			return () => n0.ExpObject(and((and((v1.GetValue() + ".hooks."), f2("hooks")) + ".actions."), f3("actions")));
+		},
+		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0(0.5, 2);
+			const v1 = p._GetNode(1).GetVar();
+			return () => f0(v1.GetValue(), 0, ":");
+		},
+		() => "activate_modifier",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			const v2 = p._GetNode(2).GetVar();
+			return () => f0(f1(v2.GetValue(), 1, ":"));
+		},
+		() => "spawn_mine",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const n1 = p._GetNode(1);
+			return () => and((v0.GetValue() + ":"), n1.ExpObject("applied_upgrades"));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			return () => n0.ExpObject((v1.GetValue() + ".hooks"));
+		},
+		() => "on_loop",
+		() => "FireOnLoopHook",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0("hooks");
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => ((("Player" + ".") + v0.GetValue()) + "_LoopTimer");
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const v1 = p._GetNode(1).GetVar();
+			return () => and(((("Player" + ".") + v0.GetValue()) + "."), v1.GetValue());
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			return () => f0(n1.ExpObject());
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => f0(f1("move_speed"));
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0(0.5, 7);
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -2632,11 +2728,6 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => Math.round(f0(5, 8));
 		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			const n1 = p._GetNode(1);
-			return () => f0(n1.ExpObject());
-		},
 		() => "Hints",
 		() => "UpgradeUI",
 		p => {
@@ -2750,6 +2841,12 @@ self.C3_ExpressionFuncs = [
 		},
 		p => {
 			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => ((n0.ExpInstVar_Family() / 2) / n1.ExpObject());
+		},
+		() => "on_repair",
+		p => {
+			const n0 = p._GetNode(0);
 			const v1 = p._GetNode(1).GetVar();
 			return () => (n0.ExpInstVar_Family() - v1.GetValue());
 		},
@@ -2811,11 +2908,6 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			const f1 = p._GetNode(1).GetBoundMethod();
 			return () => n0.ExpObject(and("applied_upgrades.", f1("upgrades")));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			return () => n0.ExpObject(v1.GetValue());
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -2887,62 +2979,9 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			const v1 = p._GetNode(1).GetVar();
-			const v2 = p._GetNode(2).GetVar();
-			return () => and(((((and(v0.GetValue(), ".") + v1.GetValue()) + ",") + "active_modifier_index") + ","), v2.GetValue());
+			return () => and(((((("Player" + ".") + v0.GetValue()) + ",") + "active_modifier_index") + ","), v1.GetValue());
 		},
 		() => "RemoveModifier",
-		p => {
-			const n0 = p._GetNode(0);
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => n0.ExpObject(and(("applied_upgrades" + "."), f1("upgrades")));
-		},
-		() => "hooks",
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			return () => (n0.ExpObject((v1.GetValue() + ".hooks")) - 1);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			const f2 = p._GetNode(2).GetBoundMethod();
-			return () => n0.ExpObject((and((v1.GetValue() + ".hooks."), f2("hooks")) + ".tag"));
-		},
-		() => "on_repair",
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			const f2 = p._GetNode(2).GetBoundMethod();
-			return () => n0.ExpObject((and((v1.GetValue() + ".hooks."), f2("hooks")) + ".duration"));
-		},
-		() => "actions",
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			const f2 = p._GetNode(2).GetBoundMethod();
-			return () => (n0.ExpObject((and((v1.GetValue() + ".hooks."), f2("hooks")) + ".actions")) - 1);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			const f2 = p._GetNode(2).GetBoundMethod();
-			const f3 = p._GetNode(3).GetBoundMethod();
-			return () => n0.ExpObject(and((and((v1.GetValue() + ".hooks."), f2("hooks")) + ".actions."), f3("actions")));
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			const v1 = p._GetNode(1).GetVar();
-			return () => f0(v1.GetValue(), 0, ":");
-		},
-		() => "activate_modifier",
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			const f1 = p._GetNode(1).GetBoundMethod();
-			const v2 = p._GetNode(2).GetVar();
-			return () => f0(f1(v2.GetValue(), 1, ":"));
-		},
-		() => "on_loop",
-		() => "spawn_mine",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			const v1 = p._GetNode(1).GetVar();
@@ -2951,16 +2990,6 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => and("applied_upgrades.", v0.GetValue());
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			return () => n0.ExpObject((v1.GetValue() + ".hooks"));
-		},
-		() => "FireOnLoopHook",
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0("hooks");
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
@@ -3231,6 +3260,7 @@ self.C3_ExpressionFuncs = [
 			const n1 = p._GetNode(1);
 			return () => f0(n1.ExpInstVar(), 0, ".");
 		},
+		() => "Player",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
@@ -3246,7 +3276,7 @@ self.C3_ExpressionFuncs = [
 		() => "upgrade_definitions",
 		() => "player_definitions",
 		() => "player_upgrade_definitions",
-		() => "PlayerUpgradeDefinitionsLoaded",
+		() => "PlayerDefinitionsLoaded",
 		() => 0.3,
 		() => "follow_player",
 		p => {

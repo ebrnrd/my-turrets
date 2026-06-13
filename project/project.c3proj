@@ -514,7 +514,8 @@
 			{
 				"items": [
 					"PlayerStatsCache",
-					"PlayerData"
+					"PlayerData",
+					"PlayerActiveModifiersCheck"
 				],
 				"subfolders": [],
 				"name": "Player"
@@ -582,7 +583,7 @@
 			"damageables",
 			"visual_fx",
 			"debug",
-			"MechUpgradesSystem",
+			"UpgradesSystem",
 			"DataManager",
 			"GameCamera",
 			"GameEconomy"

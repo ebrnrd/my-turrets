@@ -921,7 +921,7 @@
 							"parameters": [
 								"MechBase.UID",
 								"playerCharacter.UID",
-								"Functions.GetPlayerStat(\"repair_amount\")"
+								"Functions.GetPlayerCachedStat(\"repair_amount\")"
 							]
 						},
 						{
@@ -1006,7 +1006,7 @@
 							"parameters": [
 								"enemies.UID",
 								"playerCharacter.UID",
-								"Functions.GetPlayerStat(\"attack_damage\")"
+								"Functions.GetPlayerCachedStat(\"attack_damage\")"
 							]
 						},
 						{
@@ -1062,7 +1062,7 @@
 							"parameters": [
 								"rock.UID",
 								"playerCharacter.UID",
-								"Functions.GetPlayerStat(\"attack_damage\")"
+								"Functions.GetPlayerCachedStat(\"attack_damage\")"
 							]
 						},
 						{
@@ -1186,7 +1186,12 @@
 						{
 							"customAction": "BeginUpgradeShopSequence",
 							"objectClass": "UpgradesManager",
-							"sid": 433283700728502
+							"sid": 433283700728502,
+							"disabled": true
+						},
+						{
+							"callFunction": "PlayerLevelUp",
+							"sid": 719715605717963
 						},
 						{
 							"id": "destroy",
@@ -1513,10 +1518,10 @@
 							"conditions": [
 								{
 									"id": "has-key",
-									"objectClass": "PlayerData",
-									"sid": 827921674573804,
+									"objectClass": "PlayerStatsCache",
+									"sid": 187062734185968,
 									"parameters": {
-										"path": "\"stats\" & \".player_max_health\""
+										"key": "\"player_max_health\""
 									}
 								}
 							],
@@ -1524,10 +1529,10 @@
 								{
 									"id": "set-instvar-value",
 									"objectClass": "playerCharacter",
-									"sid": 547700905173311,
+									"sid": 438675796852605,
 									"parameters": {
 										"instance-variable": "MaxHealth",
-										"value": "PlayerData.Get(\"stats\" & \".player_max_health\")"
+										"value": "Functions.GetPlayerCachedStat(\"player_max_health\")"
 									}
 								}
 							],
@@ -1571,8 +1576,8 @@
 									"objectClass": "PlayerVacuumArea",
 									"sid": 433336685111580,
 									"parameters": {
-										"width": "Functions.GetPlayerStat(\"scrap_area\")",
-										"height": "Functions.GetPlayerStat(\"scrap_area\")"
+										"width": "Functions.GetPlayerCachedStat(\"scrap_area\")",
+										"height": "Functions.GetPlayerCachedStat(\"scrap_area\")"
 									}
 								}
 							],
@@ -1586,9 +1591,9 @@
 						{
 							"id": "on-signal",
 							"objectClass": "System",
-							"sid": 729471242925716,
+							"sid": 162340107333697,
 							"parameters": {
-								"tag": "\"PlayerDefinitionsLoaded\""
+								"tag": "\"PlayerUpgradeDefinitionsLoaded\""
 							}
 						}
 					],
@@ -1603,13 +1608,27 @@
 							}
 						},
 						{
+							"id": "set-array",
+							"objectClass": "PlayerData",
+							"sid": 147350194330527,
+							"parameters": {
+								"path": "\"applied_upgrades\"",
+								"size": "0"
+							}
+						},
+						{
 							"id": "set-instvar-value",
 							"objectClass": "playerCharacter",
-							"sid": 814062391144680,
+							"sid": 591781561045317,
 							"parameters": {
 								"instance-variable": "Health",
-								"value": "PlayerData.Get(\"stats.\" & \"player_max_health\")"
+								"value": "int(Functions.GetPlayerCachedStat(\"player_max_health\"))"
 							}
+						},
+						{
+							"customAction": "UpdatePlayerStatsCache",
+							"objectClass": "PlayerData",
+							"sid": 632096903555120
 						}
 					],
 					"sid": 292918055039329
@@ -1640,6 +1659,16 @@
 						{
 							"eventType": "block",
 							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 358441627139795,
+									"parameters": {
+										"first-value": "PlayerUpgradeDefinitions.ArraySize(UpgradeID & \".modifiers\")",
+										"comparison": 4,
+										"second-value": "0"
+									}
+								},
 								{
 									"id": "for",
 									"objectClass": "System",
@@ -1755,7 +1784,7 @@
 									"sid": 636785155966272,
 									"parameters": {
 										"variable": "CurrentValue",
-										"value": "Functions.GetPlayerStat(StatName)"
+										"value": "Functions.GetPlayerCachedStat(StatName)"
 									}
 								}
 							],
@@ -1866,7 +1895,7 @@
 			"sid": 836157692841173
 		},
 		{
-			"functionName": "GetPlayerStat",
+			"functionName": "GetPlayerCachedStat",
 			"functionDescription": "",
 			"functionCategory": "",
 			"functionReturnType": "any",
@@ -1883,17 +1912,968 @@
 			],
 			"eventType": "function-block",
 			"conditions": [],
-			"actions": [
+			"actions": [],
+			"sid": 693367654169632,
+			"children": [
 				{
-					"id": "set-function-return-value",
-					"objectClass": "Functions",
-					"sid": 565753095823813,
-					"parameters": {
-						"value": "PlayerData.Get(\"stats.\" & StatName)"
-					}
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-function-return-value",
+							"objectClass": "Functions",
+							"sid": 875062627645995,
+							"parameters": {
+								"value": "PlayerStatsCache.Get(StatName)"
+							}
+						}
+					],
+					"sid": 531932917524596
+				}
+			]
+		},
+		{
+			"functionName": "ProcessPlayerHook",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "HookName",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 371209189226880
+				},
+				{
+					"name": "CheckSpecificUpgrade",
+					"type": "boolean",
+					"initialValue": "false",
+					"comment": "",
+					"sid": 823827033735973
+				},
+				{
+					"name": "SpecificUpgradeFID",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 855843593831542
 				}
 			],
-			"sid": 693367654169632
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 333574466614100,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [],
+					"sid": 378447895099396,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "UpgradeFID",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 450236919161100
+						},
+						{
+							"eventType": "variable",
+							"name": "UpgradeID",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 121417225502728
+						},
+						{
+							"eventType": "variable",
+							"name": "CanProcess",
+							"type": "boolean",
+							"initialValue": "false",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 109061090959899
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "for",
+									"objectClass": "System",
+									"sid": 305385659509012,
+									"parameters": {
+										"name": "\"upgrades\"",
+										"start-index": "0",
+										"end-index": "PlayerData.ArraySize(\"applied_upgrades\") - 1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 516742470924788,
+									"parameters": {
+										"variable": "UpgradeFID",
+										"value": "PlayerData.Get(\"applied_upgrades\" & \".\" & loopindex(\"upgrades\"))"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 636810109725306,
+									"parameters": {
+										"variable": "UpgradeID",
+										"value": "Functions.GetUpgradeIDFromFID(UpgradeFID)"
+									}
+								}
+							],
+							"sid": 857413093939099,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-boolean-eventvar",
+											"objectClass": "System",
+											"sid": 846521322402013,
+											"parameters": {
+												"variable": "CheckSpecificUpgrade"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 357505012370899,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-two-values",
+													"objectClass": "System",
+													"sid": 947390281814086,
+													"parameters": {
+														"first-value": "UpgradeFID",
+														"comparison": 0,
+														"second-value": "SpecificUpgradeFID"
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-boolean-eventvar",
+													"objectClass": "System",
+													"sid": 247144670905673,
+													"parameters": {
+														"variable": "CanProcess",
+														"value": "true"
+													}
+												}
+											],
+											"sid": 227174539742316
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "else",
+													"objectClass": "System",
+													"sid": 510520721587882
+												}
+											],
+											"actions": [
+												{
+													"id": "set-boolean-eventvar",
+													"objectClass": "System",
+													"sid": 892155533089022,
+													"parameters": {
+														"variable": "CanProcess",
+														"value": "false"
+													}
+												}
+											],
+											"sid": 206533508243933
+										}
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "else",
+											"objectClass": "System",
+											"sid": 812010418803773
+										}
+									],
+									"actions": [
+										{
+											"id": "set-boolean-eventvar",
+											"objectClass": "System",
+											"sid": 639357905561977,
+											"parameters": {
+												"variable": "CanProcess",
+												"value": "true"
+											}
+										}
+									],
+									"sid": 517272316220731
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-boolean-eventvar",
+											"objectClass": "System",
+											"sid": 236180893514776,
+											"parameters": {
+												"variable": "CanProcess"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 942890147458513,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "for",
+													"objectClass": "System",
+													"sid": 507785960216376,
+													"parameters": {
+														"name": "\"hooks\"",
+														"start-index": "0",
+														"end-index": "UpgradeDefinitions.ArraySize(UpgradeID & \".hooks\") - 1"
+													}
+												}
+											],
+											"actions": [],
+											"sid": 173684388210770,
+											"children": [
+												{
+													"eventType": "variable",
+													"name": "Duration",
+													"type": "number",
+													"initialValue": "0",
+													"comment": "",
+													"isStatic": false,
+													"isConstant": false,
+													"sid": 442489146933427
+												},
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "compare-two-values",
+															"objectClass": "System",
+															"sid": 276295628103990,
+															"parameters": {
+																"first-value": "UpgradeDefinitions.Get(UpgradeID & \".hooks.\" & loopindex(\"hooks\") & \".tag\")",
+																"comparison": 0,
+																"second-value": "HookName"
+															}
+														}
+													],
+													"actions": [
+														{
+															"id": "set-eventvar-value",
+															"objectClass": "System",
+															"sid": 888188234039308,
+															"parameters": {
+																"variable": "Duration",
+																"value": "UpgradeDefinitions.Get(UpgradeID & \".hooks.\" & loopindex(\"hooks\") & \".duration\")"
+															}
+														}
+													],
+													"sid": 946359225222161,
+													"children": [
+														{
+															"eventType": "variable",
+															"name": "Action",
+															"type": "string",
+															"initialValue": "",
+															"comment": "",
+															"isStatic": false,
+															"isConstant": false,
+															"sid": 946692093777123
+														},
+														{
+															"eventType": "block",
+															"conditions": [
+																{
+																	"id": "for",
+																	"objectClass": "System",
+																	"sid": 788959363712865,
+																	"parameters": {
+																		"name": "\"actions\"",
+																		"start-index": "0",
+																		"end-index": "UpgradeDefinitions.ArraySize(UpgradeID & \".hooks.\" & loopindex(\"hooks\") & \".actions\") - 1"
+																	}
+																}
+															],
+															"actions": [
+																{
+																	"id": "set-eventvar-value",
+																	"objectClass": "System",
+																	"sid": 610706304226629,
+																	"parameters": {
+																		"variable": "Action",
+																		"value": "UpgradeDefinitions.Get(UpgradeID & \".hooks.\" & loopindex(\"hooks\") & \".actions.\" & loopindex(\"actions\"))"
+																	}
+																}
+															],
+															"sid": 903678316261425,
+															"children": [
+																{
+																	"eventType": "comment",
+																	"text": "activate_modifier"
+																},
+																{
+																	"eventType": "block",
+																	"conditions": [
+																		{
+																			"id": "compare-two-values",
+																			"objectClass": "System",
+																			"sid": 882388496969794,
+																			"parameters": {
+																				"first-value": "tokenat(Action, 0, \":\")",
+																				"comparison": 0,
+																				"second-value": "\"activate_modifier\""
+																			}
+																		}
+																	],
+																	"actions": [
+																		{
+																			"callFunction": "Action_ActivateModifier",
+																			"sid": 127278841611230,
+																			"parameters": [
+																				"UpgradeFID",
+																				"int(tokenat(Action, 1, \":\"))",
+																				"0",
+																				"Duration",
+																				false
+																			]
+																		}
+																	],
+																	"sid": 473208002752001,
+																	"children": [
+																		{
+																			"eventType": "block",
+																			"conditions": [
+																				{
+																					"id": "for-each",
+																					"objectClass": "System",
+																					"sid": 949472035085592,
+																					"parameters": {
+																						"object": "MechObject"
+																					}
+																				}
+																			],
+																			"actions": [
+																				{
+																					"customAction": "UpdateMechStatsCache",
+																					"objectClass": "MechObject",
+																					"sid": 377611103007043
+																				}
+																			],
+																			"sid": 996774530048715
+																		}
+																	]
+																},
+																{
+																	"eventType": "comment",
+																	"text": "spawn_mine"
+																},
+																{
+																	"eventType": "block",
+																	"conditions": [
+																		{
+																			"id": "compare-two-values",
+																			"objectClass": "System",
+																			"sid": 111925639106327,
+																			"parameters": {
+																				"first-value": "tokenat(Action, 0, \":\")",
+																				"comparison": 0,
+																				"second-value": "\"spawn_mine\""
+																			}
+																		}
+																	],
+																	"actions": [
+																		{
+																			"callFunction": "Action_SpawnMine",
+																			"sid": 672797450472734,
+																			"parameters": [
+																				"playerCharacter.UID",
+																				"playerCharacter.X",
+																				"playerCharacter.Y"
+																			]
+																		}
+																	],
+																	"sid": 488647811421502
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"aceType": "action",
+			"aceName": "AddUpgradeToPlayer",
+			"objectClass": "UpgradesManager",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "UpgradeID",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 630232054735573
+				}
+			],
+			"eventType": "custom-ace-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 526083531767380,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "UpgradeFID",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 810593105845496
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 440457082240864,
+							"parameters": {
+								"variable": "UpgradeFID",
+								"value": "UpgradeID & \":\" & PlayerData.ArraySize(\"applied_upgrades\")"
+							}
+						},
+						{
+							"id": "push-value",
+							"objectClass": "PlayerData",
+							"sid": 998171431493175,
+							"parameters": {
+								"where": "back",
+								"path": "\"applied_upgrades\"",
+								"value": "UpgradeFID"
+							}
+						},
+						{
+							"callFunction": "StartPlayerUpgradeLoopTimer",
+							"sid": 899560266227643,
+							"parameters": [
+								"UpgradeFID"
+							]
+						},
+						{
+							"customAction": "ApplyPlayerUpgrade",
+							"objectClass": "PlayerData",
+							"sid": 796429963334250,
+							"disabled": true,
+							"parameters": [
+								"UpgradeID"
+							]
+						},
+						{
+							"customAction": "UpdatePlayerStatsCache",
+							"objectClass": "PlayerData",
+							"sid": 545820670756715
+						}
+					],
+					"sid": 941447249319724
+				}
+			]
+		},
+		{
+			"functionName": "StartPlayerUpgradeLoopTimer",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "UpgradeFID",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 176754017162197
+				}
+			],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 491281951585579,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "Duration",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 493304212435398
+				},
+				{
+					"eventType": "variable",
+					"name": "ActionOnTimer",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 288541289376004
+				},
+				{
+					"eventType": "variable",
+					"name": "UpgradeID",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 764685104476993
+				},
+				{
+					"eventType": "variable",
+					"name": "HookIndex",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 490043641924003
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 953335790921167,
+							"parameters": {
+								"variable": "UpgradeID",
+								"value": "Functions.GetUpgradeIDFromFID(UpgradeFID)"
+							}
+						}
+					],
+					"sid": 489494777891051,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "for",
+									"objectClass": "System",
+									"sid": 455558400707417,
+									"parameters": {
+										"name": "\"hooks\"",
+										"start-index": "0",
+										"end-index": "PlayerUpgradeDefinitions.ArraySize(UpgradeID & \".hooks\")"
+									}
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 713878048103795,
+									"parameters": {
+										"first-value": "PlayerUpgradeDefinitions.Get(UpgradeID & \".hooks.\" & loopindex(\"hooks\") & \".tag\")",
+										"comparison": 0,
+										"second-value": "\"on_loop\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 651440558074899,
+									"parameters": {
+										"variable": "ActionOnTimer",
+										"value": "\"FireOnLoopHook\""
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 142174243887327,
+									"parameters": {
+										"variable": "HookIndex",
+										"value": "loopindex(\"hooks\")"
+									}
+								},
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 808763640763445,
+									"parameters": {
+										"variable": "Duration",
+										"value": "PlayerUpgradeDefinitions.Get(UpgradeID & \".hooks.\" & loopindex(\"hooks\") & \".duration\")"
+									}
+								}
+							],
+							"sid": 109160263763916,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [],
+									"actions": [
+										{
+											"id": "create-object",
+											"objectClass": "System",
+											"sid": 748085902475766,
+											"parameters": {
+												"object-to-create": "TimerObject",
+												"layer": "0",
+												"x": "0",
+												"y": "0",
+												"create-hierarchy": false,
+												"template-name": "\"\""
+											}
+										},
+										{
+											"id": "start-timer",
+											"objectClass": "TimerObject",
+											"sid": 230722769400328,
+											"behaviorType": "Timer",
+											"parameters": {
+												"duration": "Duration",
+												"type": "once",
+												"tag": "\"Player\" & \".\" & UpgradeFID & \"_LoopTimer\""
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "TimerObject",
+											"sid": 634625468465868,
+											"parameters": {
+												"instance-variable": "TimerTag",
+												"value": "\"Player\" & \".\" & UpgradeFID & \"_LoopTimer\""
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "TimerObject",
+											"sid": 308587401353612,
+											"parameters": {
+												"instance-variable": "ActionOnTimer",
+												"value": "ActionOnTimer"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "TimerObject",
+											"sid": 468578559719326,
+											"parameters": {
+												"instance-variable": "Duration",
+												"value": "Duration"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "TimerObject",
+											"sid": 780371361668387,
+											"parameters": {
+												"instance-variable": "Parameters",
+												"value": "\"Player\" & \".\" & UpgradeFID & \".\" & HookIndex"
+											}
+										},
+										{
+											"id": "set-boolean-instvar",
+											"objectClass": "TimerObject",
+											"sid": 882247755011960,
+											"parameters": {
+												"instance-variable": "IsLoop",
+												"value": "true"
+											}
+										}
+									],
+									"sid": 467254045953850
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"aceType": "action",
+			"aceName": "UpdatePlayerStatsCache",
+			"objectClass": "PlayerData",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "custom-ace-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "log",
+					"objectClass": "Browser",
+					"sid": 254624772794631,
+					"disabled": true,
+					"parameters": {
+						"type": "log",
+						"message": "\"------- Updating Mech \" & PlayerData.UID & \" Stats -------\""
+					}
+				},
+				{
+					"id": "clear",
+					"objectClass": "PlayerStatsCache",
+					"sid": 255407173142000
+				}
+			],
+			"sid": 956111092140715,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "PlayerData",
+							"sid": 496795169336647,
+							"parameters": {
+								"path": "\"stats\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "add-key",
+							"objectClass": "PlayerStatsCache",
+							"sid": 375547219144625,
+							"parameters": {
+								"key": "PlayerData.CurrentKey",
+								"value": "Functions.GetPlayerStat(PlayerData.CurrentKey)"
+							}
+						},
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 959553838940710,
+							"parameters": {
+								"type": "log",
+								"message": "\"Added new base stat: \" & PlayerData.CurrentKey"
+							}
+						}
+					],
+					"sid": 314956086036142
+				},
+				{
+					"eventType": "variable",
+					"name": "UpgradeID",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 105575837842494
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for",
+							"objectClass": "System",
+							"sid": 879141430317465,
+							"parameters": {
+								"name": "\"upgrades\"",
+								"start-index": "0",
+								"end-index": "PlayerData.ArraySize(\"applied_upgrades\") - 1"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 251176740671924,
+							"parameters": {
+								"variable": "UpgradeID",
+								"value": "Functions.GetUpgradeIDFromFID(PlayerData.Get(\"applied_upgrades.\" & loopindex(\"upgrades\")))"
+							}
+						},
+						{
+							"id": "log",
+							"objectClass": "Browser",
+							"sid": 672333289337598,
+							"parameters": {
+								"type": "log",
+								"message": "\"Deriving stats from Upgrade \" & UpgradeID"
+							}
+						}
+					],
+					"sid": 912210552294429,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "StatName",
+							"type": "string",
+							"initialValue": "",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 645202286471267
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "for",
+									"objectClass": "System",
+									"sid": 353279335297154,
+									"parameters": {
+										"name": "\"modifiers\"",
+										"start-index": "0",
+										"end-index": "PlayerUpgradeDefinitions.ArraySize(UpgradeID & \".modifiers\") - 1"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 927158284840563,
+									"parameters": {
+										"variable": "StatName",
+										"value": "PlayerUpgradeDefinitions.Get(UpgradeID & \".modifiers.\" & loopindex(\"modifiers\") & \".stat\")"
+									}
+								},
+								{
+									"id": "add-key",
+									"objectClass": "PlayerStatsCache",
+									"sid": 821336218361032,
+									"parameters": {
+										"key": "StatName",
+										"value": "Functions.GetPlayerStat(StatName)"
+									}
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 553804894160565,
+									"parameters": {
+										"type": "log",
+										"message": "\"Modifiers count \" & PlayerUpgradeDefinitions.ArraySize(UpgradeID & \".modifiers\")"
+									}
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 241096853418359,
+									"parameters": {
+										"type": "log",
+										"message": "\"Current stat index \" & loopindex(\"modifiers\")"
+									}
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 666828667074987,
+									"parameters": {
+										"type": "log",
+										"message": "\"Added stat \" & StatName"
+									}
+								}
+							],
+							"sid": 784136271068051
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "every-x-seconds",
+					"objectClass": "System",
+					"sid": 873926457192101,
+					"parameters": {
+						"interval-seconds": "0.1"
+					}
+				},
+				{
+					"id": "is-empty",
+					"objectClass": "PlayerStatsCache",
+					"sid": 856400294561116,
+					"isInverted": true
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "UpdatePlayerBehaviours",
+					"sid": 741693634405027
+				}
+			],
+			"sid": 824450236203579
+		},
+		{
+			"functionName": "UpdatePlayerBehaviours",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "function-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 965507253150133,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-max-speed",
+							"objectClass": "playerCharacter",
+							"sid": 960736398824593,
+							"behaviorType": "8Direction",
+							"parameters": {
+								"max-speed": "int(Functions.GetPlayerCachedStat(\"move_speed\"))"
+							}
+						}
+					],
+					"sid": 314418322904413
+				}
+			]
 		}
 	],
 	"sid": 135398769691869

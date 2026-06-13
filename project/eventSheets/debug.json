@@ -16,9 +16,9 @@
 			"actions": [
 				{
 					"callFunction": "AddPlayerScrap",
-					"sid": 161720617430417,
+					"sid": 361919750445661,
 					"parameters": [
-						"100"
+						"50"
 					]
 				}
 			],
@@ -65,6 +65,26 @@
 					"sid": 770499070125114
 				}
 			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-key-pressed",
+					"objectClass": "Keyboard",
+					"sid": 336842079321571,
+					"parameters": {
+						"key": 76
+					}
+				}
+			],
+			"actions": [
+				{
+					"callFunction": "PlayerLevelUp",
+					"sid": 914765013143646
+				}
+			],
+			"sid": 875078570299617
 		}
 	],
 	"sid": 735500702739536

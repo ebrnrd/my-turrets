@@ -7371,6 +7371,16 @@
 			"instanceVariables": {
 				"DamageableUID": 0
 			}
+		},
+		{
+			"type": "PlayerActiveModifiersCheck",
+			"properties": {},
+			"uid": 161,
+			"sid": 917478151294412,
+			"tags": "",
+			"instanceVariables": {
+				"MechUID": 0
+			}
 		}
 	],
 	"effectTypes": [],
