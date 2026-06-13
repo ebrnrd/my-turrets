@@ -28,6 +28,7 @@
 	"behaviorTypes": [],
 	"effectTypes": [],
 	"members": [
-		"bullet"
+		"bullet",
+		"BulletFlame"
 	]
 }

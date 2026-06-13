@@ -17,6 +17,8 @@
 		"HighGrass",
 		"UpgradeAltar",
 		"ArtilleryGadget",
-		"HealthAltar"
+		"HealthAltar",
+		"FlameThrowerGadget",
+		"BulletFlame"
 	]
 }

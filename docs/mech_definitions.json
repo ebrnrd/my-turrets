@@ -51,13 +51,30 @@
     ],
     "behavior_type": "artillery"
   },
-  "healer": {
+
+  "flamethrower": {
     "base_stats": {
-      "heal_rate": 5,
-      "heal_range": 150,
-      "speed": 60,
-      "aoe_heal_chance": 0.0
+      "mech_max_health": 40,
+      "fire_rate": 20,
+      "bullet_count": 1,
+      "bullet_spread": 30,
+      "damage": 0.4,
+      "damage_type": "elemental",
+      "range": 180,
+      "bullet_speed": 300,
+      "mag_size": 80,
+      "reload_time": 5,
+      "bullet_knockback": 0.1,
+      "move_speed": 200,
+      "shoot_move_speed_mult": 0.5,
+      "starting_slots": 2
     },
-    "behavior_type": "healer"
+    "improvable_stats" : [
+    { "stat_name": "range", "op": "add", "amount": 5 },
+    { "stat_name": "damage", "op": "add", "amount": 0.1 },
+    { "stat_name": "mag_size", "op": "add", "amount": 8 }
+
+    ],
+    "behavior_type": "flamethrower"
   }
 }

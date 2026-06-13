@@ -155,7 +155,7 @@
 								"range": 500,
 								"rate-of-fire": 1,
 								"rotate": true,
-								"rotate-speed": 720,
+								"rotate-speed": 2000,
 								"target-mode": "nearest",
 								"predictive-aim": true,
 								"projectile-speed": 2000,
@@ -508,6 +508,212 @@
 							0,
 							0,
 							0.6
+						],
+						"z": 0,
+						"angle": 0
+					}
+				},
+				{
+					"type": "FlameThrowerGadget",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "idle",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 154,
+					"sid": 819390329314124,
+					"tags": "",
+					"instanceVariables": {
+						"turretBaseUID": 0,
+						"MagCurrent": 0
+					},
+					"behaviors": {
+						"Pin2": {
+							"properties": {
+								"destroy": true
+							}
+						},
+						"Turret": {
+							"properties": {
+								"range": 500,
+								"rate-of-fire": 1,
+								"rotate": true,
+								"rotate-speed": 2000,
+								"target-mode": "nearest",
+								"predictive-aim": true,
+								"projectile-speed": 2000,
+								"use-collision-cells": true,
+								"enabled": true
+							}
+						},
+						"LineOfSight": {
+							"properties": {
+								"obstacles": "solids",
+								"range": 10000,
+								"cone-of-view": 360,
+								"use-collision-cells": true
+							}
+						},
+						"Timer": {
+							"properties": {}
+						}
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 1394,
+						"y": 744,
+						"width": 68,
+						"height": 36,
+						"originX": 0.35294117647058826,
+						"originY": 0.4444444444444444,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"z": 0,
+						"angle": 6.283022752853412
+					}
+				},
+				{
+					"type": "bullet",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 26,
+					"sid": 720174801592623,
+					"tags": "",
+					"instanceVariables": {
+						"order": 0,
+						"knockback": 0,
+						"damage": 0,
+						"MechUID": 0,
+						"height_from_ground": 16,
+						"shadow_width": 30,
+						"OwnerUID": 0,
+						"bulletDamage": 0
+					},
+					"behaviors": {
+						"Bullet": {
+							"properties": {
+								"speed": 1200,
+								"acceleration": 0,
+								"gravity": 0,
+								"bounce-off-solids": false,
+								"set-angle": true,
+								"step": false,
+								"enabled": true
+							}
+						},
+						"DestroyOutsideLayout": {
+							"properties": {
+								"region": "layout"
+							}
+						},
+						"Fade": {
+							"properties": {
+								"fade-in-time": 0,
+								"wait-time": 0,
+								"fade-out-time": 0.05,
+								"destroy": true,
+								"enabled": false,
+								"live-preview": false
+							}
+						}
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 1394,
+						"y": 192,
+						"width": 26,
+						"height": 20,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
+						],
+						"z": 0,
+						"angle": 0
+					}
+				},
+				{
+					"type": "BulletFlame",
+					"properties": {
+						"initially-visible": true,
+						"initial-animation": "Animation 1",
+						"initial-frame": 0,
+						"enable-collisions": true,
+						"live-preview": false
+					},
+					"uid": 155,
+					"sid": 102010308266901,
+					"tags": "",
+					"instanceVariables": {
+						"knockback": 0,
+						"damage": 0,
+						"MechUID": 0,
+						"OwnerUID": 0,
+						"bulletDamage": 0,
+						"BulletLifetime": 0,
+						"BulletCurrentTime": 0
+					},
+					"behaviors": {
+						"Bullet": {
+							"properties": {
+								"speed": 1200,
+								"acceleration": 0,
+								"gravity": 0,
+								"bounce-off-solids": false,
+								"set-angle": true,
+								"step": false,
+								"enabled": true
+							}
+						},
+						"DestroyOutsideLayout": {
+							"properties": {
+								"region": "layout"
+							}
+						},
+						"Fade": {
+							"properties": {
+								"fade-in-time": 0,
+								"wait-time": 0,
+								"fade-out-time": 0.05,
+								"destroy": true,
+								"enabled": false,
+								"live-preview": false
+							}
+						},
+						"Timer": {
+							"properties": {}
+						}
+					},
+					"showing": true,
+					"locked": false,
+					"world": {
+						"x": 1454,
+						"y": 743,
+						"width": 28,
+						"height": 28,
+						"originX": 0.5,
+						"originY": 0.5,
+						"color": [
+							1,
+							1,
+							1,
+							1
 						],
 						"z": 0,
 						"angle": 0

@@ -282,6 +282,13 @@
 		},
 		{
 			"type": "effect",
+			"id": "exclusion",
+			"name": "Exclusion",
+			"author": "Scirra",
+			"bundled": false
+		},
+		{
+			"type": "effect",
 			"id": "glowhorizontal",
 			"name": "Glow horizontal",
 			"author": "Scirra",
@@ -452,7 +459,10 @@
 			"ArrayTemp2",
 			"ArrayTemp3",
 			"HealthAltar",
-			"MechPositionSignal"
+			"MechPositionSignal",
+			"FlameThrowerGadget",
+			"BulletFlame",
+			"ArrayTemp4"
 		],
 		"subfolders": [
 			{
@@ -469,7 +479,8 @@
 							"PlayerMechTypes",
 							"AllUpgradeKeys",
 							"PossibleUpgradeKeys",
-							"AllPlayerUpgradeKeys"
+							"AllPlayerUpgradeKeys",
+							"AllMechTypes"
 						],
 						"subfolders": [],
 						"name": "OnNecessity"

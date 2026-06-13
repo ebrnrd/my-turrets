@@ -349,14 +349,44 @@
 							}
 						}
 					],
-					"actions": [
+					"actions": [],
+					"sid": 597034469165246,
+					"children": [
 						{
-							"id": "destroy",
-							"objectClass": "Damageables",
-							"sid": 611807903151802
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 260063988685578,
+									"parameters": {
+										"object": "MechObject",
+										"expression": "MechObject.MechBaseUID = Damageables.UID"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "MechObject",
+									"sid": 562879560068831
+								}
+							],
+							"sid": 552269394881224
+						},
+						{
+							"eventType": "block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "destroy",
+									"objectClass": "Damageables",
+									"sid": 999562495658653
+								}
+							],
+							"sid": 385816429087807
 						}
-					],
-					"sid": 597034469165246
+					]
 				},
 				{
 					"eventType": "block",

@@ -1550,6 +1550,29 @@
 						{
 							"id": "on-key-pressed",
 							"objectClass": "Keyboard",
+							"sid": 971745140327483,
+							"parameters": {
+								"key": 51
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "SpawnMech",
+							"sid": 312588744034750,
+							"parameters": [
+								"\"flamethrower\""
+							]
+						}
+					],
+					"sid": 389543689144810
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-key-pressed",
+							"objectClass": "Keyboard",
 							"sid": 331991072509288,
 							"parameters": {
 								"key": 69

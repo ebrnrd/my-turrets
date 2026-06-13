@@ -2496,6 +2496,82 @@
 			"global": false
 		},
 		{
+			"name": "Fire",
+			"overriden": 0,
+			"subLayers": [],
+			"instances": [],
+			"sid": 145223252445878,
+			"effectTypes": [
+				{
+					"effectId": "blurhorizontal",
+					"name": "BlurHorizontal",
+					"instance": {
+						"isEnabled": true,
+						"parameters": {
+							"intensity": 1
+						}
+					}
+				},
+				{
+					"effectId": "blurvertical",
+					"name": "BlurVertical",
+					"instance": {
+						"isEnabled": true,
+						"parameters": {
+							"intensity": 1
+						}
+					}
+				},
+				{
+					"effectId": "alphaclamp2",
+					"name": "AlphaClamp",
+					"instance": {
+						"isEnabled": true,
+						"parameters": {
+							"threshold": 0.5,
+							"lower-clamp": 0,
+							"upper-clamp": 1
+						}
+					}
+				},
+				{
+					"effectId": "exclusion",
+					"name": "Exclusion",
+					"instance": {
+						"isEnabled": true,
+						"parameters": {}
+					}
+				}
+			],
+			"isInitiallyVisible": true,
+			"isInitiallyInteractive": true,
+			"isHTMLElementsLayer": false,
+			"color": [
+				1,
+				1,
+				1,
+				1
+			],
+			"backgroundColor": [
+				0.3686274509803922,
+				0.3686274509803922,
+				0.3686274509803922,
+				1
+			],
+			"isTransparent": true,
+			"sampling": "auto",
+			"parallaxX": 1,
+			"parallaxY": 1,
+			"scaleRate": 1,
+			"forceOwnTexture": false,
+			"renderingMode": "3d",
+			"drawOrder": "z-order",
+			"useRenderCells": false,
+			"blendMode": "normal",
+			"zElevation": 0,
+			"global": false
+		},
+		{
 			"name": "tilt-shift-top",
 			"overriden": 0,
 			"subLayers": [],

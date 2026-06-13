@@ -1,0 +1,95 @@
+{
+	"name": "BulletFlame",
+	"plugin-id": "Sprite",
+	"sid": 550232827558247,
+	"isGlobal": false,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": [
+		{
+			"name": "bulletDamage",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 362558957372924
+		},
+		{
+			"name": "BulletLifetime",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 234075029238375
+		},
+		{
+			"name": "BulletCurrentTime",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 414102683379790
+		}
+	],
+	"behaviorTypes": [
+		{
+			"behaviorId": "Bullet",
+			"name": "Bullet",
+			"sid": 936834095646679
+		},
+		{
+			"behaviorId": "destroy",
+			"name": "DestroyOutsideLayout",
+			"sid": 985496561608624
+		},
+		{
+			"behaviorId": "Fade",
+			"name": "Fade",
+			"sid": 623389292960343
+		},
+		{
+			"behaviorId": "Timer",
+			"name": "Timer",
+			"sid": 304322721880489
+		}
+	],
+	"effectTypes": [],
+	"animations": {
+		"items": [
+			{
+				"frames": [
+					{
+						"width": 14,
+						"height": 14,
+						"originX": 0.5,
+						"originY": 0.5,
+						"originalSource": "",
+						"exportFormat": "lossless",
+						"exportQuality": 0.8,
+						"fileType": "image/png",
+						"imageSpriteId": 4211887,
+						"collisionPoly": {
+							"points": [
+								0.03571428571428571,
+								0.21428571428571427,
+								0.9642857142857143,
+								0.21428571428571427,
+								0.9642857142857143,
+								0.7857142857142857,
+								0.03571428571428571,
+								0.7857142857142857
+							]
+						},
+						"useCollisionPoly": true,
+						"duration": 1,
+						"tag": ""
+					}
+				],
+				"sid": 936385683703933,
+				"name": "Animation 1",
+				"isLooping": false,
+				"isPingPong": false,
+				"repeatCount": 1,
+				"repeatTo": 0,
+				"speed": 5
+			}
+		],
+		"subfolders": []
+	}
+}

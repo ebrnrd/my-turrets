@@ -16,6 +16,7 @@
 	"members": [
 		"bullet",
 		"Mine",
-		"ArtilleryBullet"
+		"ArtilleryBullet",
+		"BulletFlame"
 	]
 }

@@ -4190,6 +4190,11 @@
 						},
 						{
 							"id": "clear",
+							"objectClass": "AllMechTypes",
+							"sid": 565331770935788
+						},
+						{
+							"id": "clear",
 							"objectClass": "PossibleUpgradeKeys",
 							"sid": 598036598938712
 						},
@@ -4215,6 +4220,14 @@
 							}
 						},
 						{
+							"id": "load",
+							"objectClass": "AllMechTypes",
+							"sid": 225828713354953,
+							"parameters": {
+								"json": "\"{\"\"c2dictionary\"\":true,\"\"data\"\":\" & MechDefinitions.ToCompactString & \"}\""
+							}
+						},
+						{
 							"id": "set-size",
 							"objectClass": "ArrayTemp1",
 							"sid": 263332371844013,
@@ -4228,6 +4241,16 @@
 							"id": "set-size",
 							"objectClass": "ArrayTemp2",
 							"sid": 347364012928757,
+							"parameters": {
+								"width": "0",
+								"height": "1",
+								"depth": "1"
+							}
+						},
+						{
+							"id": "set-size",
+							"objectClass": "ArrayTemp4",
+							"sid": 502321392738791,
 							"parameters": {
 								"width": "0",
 								"height": "1",
@@ -4357,6 +4380,29 @@
 											"sid": 309965995614358
 										}
 									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "for-each-key",
+											"objectClass": "AllMechTypes",
+											"sid": 673210435811065
+										}
+									],
+									"actions": [
+										{
+											"id": "push",
+											"objectClass": "ArrayTemp4",
+											"sid": 831195051083576,
+											"parameters": {
+												"where": "back",
+												"value": "AllMechTypes.CurrentKey",
+												"axis": "x"
+											}
+										}
+									],
+									"sid": 695466077296705
 								},
 								{
 									"eventType": "block",
@@ -4558,6 +4604,14 @@
 												"layer": "\"card\" & loopindex",
 												"mode": "on"
 											}
+										},
+										{
+											"id": "shuffle",
+											"objectClass": "ArrayTemp4",
+											"sid": 281015332631915,
+											"parameters": {
+												"axis": "x"
+											}
 										}
 									],
 									"sid": 157729196371921,
@@ -4614,13 +4668,13 @@
 																{
 																	"customAction": "DrawNewMechCardUI",
 																	"objectClass": "UpgradesManager",
-																	"sid": 309053329856727,
+																	"sid": 149801282115777,
 																	"parameters": [
 																		"ViewportMidX(\"MechUpgrades\") + 400 * (loopindex - 2)",
 																		"ViewportMidY(\"MechUpgrades\")",
 																		"ArrayTemp1.At(loopindex - 1)",
 																		"\"card\" & loopindex",
-																		"choose(\"ballistic\",\"artillery\")"
+																		"ArrayTemp4.At(0)"
 																	]
 																}
 															],
@@ -4702,13 +4756,13 @@
 												{
 													"customAction": "DrawNewMechCardUI",
 													"objectClass": "UpgradesManager",
-													"sid": 489098798239117,
+													"sid": 769124375496388,
 													"parameters": [
 														"ViewportMidX(\"MechUpgrades\") + 400 * (loopindex - 2)",
 														"ViewportMidY(\"MechUpgrades\")",
 														"ArrayTemp1.At(loopindex - 1)",
 														"\"card\" & loopindex",
-														"choose(\"ballistic\",\"artillery\")"
+														"ArrayTemp4.At(0)"
 													]
 												}
 											],

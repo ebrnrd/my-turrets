@@ -1431,6 +1431,21 @@ self["C3_Shaders"]["replacesolidcolor"] = {
 	animated: false,
 	parameters: [["sourceColor",0,"color"],["destColor",0,"color"],["tolerance",0,"percent"]]
 };
+self["C3_Shaders"]["exclusion"] = {
+	glsl: "varying mediump vec2 vTex;\nuniform lowp sampler2D samplerFront;\nuniform mediump vec2 srcStart;\nuniform mediump vec2 srcEnd;\nuniform lowp sampler2D samplerBack;\nuniform mediump vec2 destStart;\nuniform mediump vec2 destEnd;\nvoid main(void)\n{\nlowp vec4 front = texture2D(samplerFront, vTex);\nmediump vec2 tex = (vTex - srcStart) / (srcEnd - srcStart);\nlowp vec4 back = texture2D(samplerBack, mix(destStart, destEnd, tex));\nfront.rgb = 1.0 - (((1.0 - back.rgb * front.a) * (1.0 - front.rgb)) + (back.rgb * front.a * front.rgb));\ngl_FragColor = front;\n}",
+	glslWebGL2: "",
+	wgsl: "%%SAMPLERFRONT_BINDING%% var samplerFront : sampler;\n%%TEXTUREFRONT_BINDING%% var textureFront : texture_2d<f32>;\n%%SAMPLERBACK_BINDING%% var samplerBack : sampler;\n%%TEXTUREBACK_BINDING%% var textureBack : texture_2d<f32>;\n%%FRAGMENTINPUT_STRUCT%%\n%%FRAGMENTOUTPUT_STRUCT%%\n@fragment\nfn main(input : FragmentInput) -> FragmentOutput\n{\nvar front : vec4<f32> = textureSample(textureFront, samplerFront, input.fragUV);\nvar back : vec4<f32> = textureSample(textureBack, samplerBack, c3_getBackUV(input.fragPos.xy, textureBack));\nvar output : FragmentOutput;\noutput.color = vec4<f32>(\n1.0 - (((1.0 - back.rgb * front.a) * (1.0 - front.rgb)) + (back.rgb * front.a * front.rgb)),\nfront.a\n);\nreturn output;\n}",
+	blendsBackground: true,
+	usesDepth: false,
+	extendBoxHorizontal: 0,
+	extendBoxVertical: 0,
+	crossSampling: false,
+	mustPreDraw: false,
+	preservesOpaqueness: false,
+	supports3dDirectRendering: false,
+	animated: false,
+	parameters: []
+};
 self["C3_Shaders"]["glowhorizontal"] = {
 	glsl: "varying mediump vec2 vTex;\nuniform mediump sampler2D samplerFront;\nuniform mediump vec2 pixelSize;\nuniform mediump float intensity;\nvoid main(void)\n{\nmediump vec4 sum = vec4(0.0);\nmediump float pixelWidth = pixelSize.x;\nmediump float halfPixelWidth = pixelWidth / 2.0;\nsum += texture2D(samplerFront, vTex - vec2(pixelWidth * 7.0 + halfPixelWidth, 0.0)) * 0.06;\nsum += texture2D(samplerFront, vTex - vec2(pixelWidth * 5.0 + halfPixelWidth, 0.0)) * 0.10;\nsum += texture2D(samplerFront, vTex - vec2(pixelWidth * 3.0 + halfPixelWidth, 0.0)) * 0.13;\nsum += texture2D(samplerFront, vTex - vec2(pixelWidth * 1.0 + halfPixelWidth, 0.0)) * 0.16;\nmediump vec4 front = texture2D(samplerFront, vTex);\nsum += front * 0.10;\nsum += texture2D(samplerFront, vTex + vec2(pixelWidth * 1.0 + halfPixelWidth, 0.0)) * 0.16;\nsum += texture2D(samplerFront, vTex + vec2(pixelWidth * 3.0 + halfPixelWidth, 0.0)) * 0.13;\nsum += texture2D(samplerFront, vTex + vec2(pixelWidth * 5.0 + halfPixelWidth, 0.0)) * 0.10;\nsum += texture2D(samplerFront, vTex + vec2(pixelWidth * 7.0 + halfPixelWidth, 0.0)) * 0.06;\ngl_FragColor = mix(front, max(front, sum), intensity);\n}",
 	glslWebGL2: "",
@@ -1874,6 +1889,7 @@ self.C3_ExpressionFuncs = [
 		},
 		() => "ballistic",
 		() => "artillery",
+		() => "flamethrower",
 		() => "ui",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -2053,6 +2069,21 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject(1);
 		},
+		() => "Fire",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("damage_interval");
+		},
+		() => "damage",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (1 * n0.ExpObject());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => C3.lerp(28, 140, (n0.ExpInstVar() / n1.ExpInstVar()));
+		},
 		p => {
 			const n0 = p._GetNode(0);
 			return () => divide(1, n0.ExpObject("fire_rate"));
@@ -2146,10 +2177,6 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("mech_max_health");
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject("type");
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -2256,6 +2283,10 @@ self.C3_ExpressionFuncs = [
 			return () => (((v0.GetValue() * (v1.GetValue() * v2.GetValue())) + (v3.GetValue() * v4.GetValue())) + v5.GetValue());
 		},
 		() => "UpgradeOutline",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("type");
+		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
@@ -2729,7 +2760,6 @@ self.C3_ExpressionFuncs = [
 			return () => (n0.ExpObject() - 100);
 		},
 		() => "--- GETTING MECH STAT ---",
-		() => "damage",
 		() => "------ STAT NAME IS DAMAGE -------",
 		p => {
 			const n0 = p._GetNode(0);
@@ -3088,10 +3118,6 @@ self.C3_ExpressionFuncs = [
 			const v0 = p._GetNode(0).GetVar();
 			const n1 = p._GetNode(1);
 			return () => ((v0.GetValue() - (n1.ExpObject() * 2)) / 10);
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0("ballistic", "artillery");
 		},
 		() => "apply_upgrade",
 		() => "close_upgrade",

@@ -43,7 +43,7 @@
 							"objectClass": "System",
 							"sid": 232652134277034,
 							"parameters": {
-								"object": "BallisticGadget"
+								"object": "turretActives"
 							}
 						}
 					],
@@ -58,14 +58,14 @@
 									"objectClass": "MechBase",
 									"sid": 253847776514542,
 									"parameters": {
-										"unique-id": "BallisticGadget.turretBaseUID"
+										"unique-id": "turretActives.turretBaseUID"
 									}
 								}
 							],
 							"actions": [
 								{
 									"id": "move-to-object",
-									"objectClass": "BallisticGadget",
+									"objectClass": "turretActives",
 									"sid": 306681864688335,
 									"parameters": {
 										"where": "in-front",
@@ -83,6 +83,50 @@
 						{
 							"id": "for-each",
 							"objectClass": "System",
+							"sid": 716145100927939,
+							"parameters": {
+								"object": "BallisticGadget"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 273596443144433,
+					"disabled": true,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "MechBase",
+									"sid": 906232700474246,
+									"parameters": {
+										"unique-id": "BallisticGadget.turretBaseUID"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "move-to-object",
+									"objectClass": "BallisticGadget",
+									"sid": 259243753461370,
+									"parameters": {
+										"where": "in-front",
+										"object": "MechBase"
+									}
+								}
+							],
+							"sid": 325417874783113,
+							"disabled": true
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
 							"sid": 436758151882883,
 							"parameters": {
 								"object": "ArtilleryGadget"
@@ -91,6 +135,7 @@
 					],
 					"actions": [],
 					"sid": 296395717077884,
+					"disabled": true,
 					"children": [
 						{
 							"eventType": "block",
@@ -115,7 +160,52 @@
 									}
 								}
 							],
-							"sid": 507196393671240
+							"sid": 507196393671240,
+							"disabled": true
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 228830344473523,
+							"parameters": {
+								"object": "FlameThrowerGadget"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 538022389249064,
+					"disabled": true,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "MechBase",
+									"sid": 482060702878509,
+									"parameters": {
+										"unique-id": "FlameThrowerGadget.turretBaseUID"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "move-to-object",
+									"objectClass": "FlameThrowerGadget",
+									"sid": 344618485383436,
+									"parameters": {
+										"where": "in-front",
+										"object": "MechBase"
+									}
+								}
+							],
+							"sid": 910702560454654,
+							"disabled": true
 						}
 					]
 				},
