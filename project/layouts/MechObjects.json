@@ -142,6 +142,7 @@
 					"tags": "",
 					"instanceVariables": {
 						"turretBaseUID": 0,
+						"IsBeingUsed": false,
 						"MagCurrent": 0
 					},
 					"behaviors": {
@@ -149,6 +150,9 @@
 							"properties": {
 								"destroy": true
 							}
+						},
+						"Timer2": {
+							"properties": {}
 						},
 						"Turret": {
 							"properties": {
@@ -208,6 +212,7 @@
 					"tags": "",
 					"instanceVariables": {
 						"turretBaseUID": 0,
+						"IsBeingUsed": false,
 						"MagCurrent": 0
 					},
 					"behaviors": {
@@ -215,6 +220,9 @@
 							"properties": {
 								"destroy": true
 							}
+						},
+						"Timer2": {
+							"properties": {}
 						},
 						"Timer": {
 							"properties": {}
@@ -297,13 +305,17 @@
 					"sid": 306184206266917,
 					"tags": "",
 					"instanceVariables": {
-						"turretBaseUID": 0
+						"turretBaseUID": 0,
+						"IsBeingUsed": false
 					},
 					"behaviors": {
 						"Pin2": {
 							"properties": {
 								"destroy": false
 							}
+						},
+						"Timer2": {
+							"properties": {}
 						},
 						"LineOfSight": {
 							"properties": {
@@ -527,6 +539,7 @@
 					"tags": "",
 					"instanceVariables": {
 						"turretBaseUID": 0,
+						"IsBeingUsed": false,
 						"MagCurrent": 0
 					},
 					"behaviors": {
@@ -534,6 +547,9 @@
 							"properties": {
 								"destroy": true
 							}
+						},
+						"Timer2": {
+							"properties": {}
 						},
 						"Turret": {
 							"properties": {
@@ -958,7 +974,9 @@
 						"patrol_y": 0,
 						"is_reloading": false,
 						"state": "default",
-						"IsDestroyed": false
+						"IsDestroyed": false,
+						"MaxMoveSpeed": 0,
+						"BusyMoveSpeed": 0
 					},
 					"behaviors": {
 						"Timer2": {
@@ -984,13 +1002,13 @@
 						},
 						"MoveTo": {
 							"properties": {
-								"max-speed": 600,
+								"max-speed": 400,
 								"acceleration": 3000,
 								"deceleration": 1000,
 								"rotate-speed": 0,
 								"set-angle": false,
 								"stop-on-solids": false,
-								"enabled": false
+								"enabled": true
 							}
 						},
 						"Physics": {

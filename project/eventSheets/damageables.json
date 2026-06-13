@@ -335,7 +335,6 @@
 									"id": "compare-two-values",
 									"objectClass": "System",
 									"sid": 263958552321720,
-									"disabled": true,
 									"parameters": {
 										"first-value": "int(Damageables.Health)",
 										"comparison": 2,
@@ -368,6 +367,15 @@
 									"sid": 107089944749151,
 									"parameters": [
 										"MechObject.UID",
+										"\"on_repair\"",
+										false,
+										"\"\""
+									]
+								},
+								{
+									"callFunction": "ProcessPlayerHook",
+									"sid": 494655708009973,
+									"parameters": [
 										"\"on_repair\"",
 										false,
 										"\"\""

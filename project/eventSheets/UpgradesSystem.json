@@ -3,6 +3,16 @@
 	"events": [
 		{
 			"eventType": "variable",
+			"name": "FocusedUpgradeIndexController",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 380958099341435
+		},
+		{
+			"eventType": "variable",
 			"name": "AlternativeUpgradeSystem",
 			"type": "boolean",
 			"initialValue": "true",
@@ -826,7 +836,6 @@
 					"sid": 613939609666558
 				}
 			],
-			"breakpoint": true,
 			"eventType": "function-block",
 			"conditions": [],
 			"actions": [
@@ -2814,6 +2823,7 @@
 							"id": "push-value",
 							"objectClass": "MechObject",
 							"sid": 456118638757871,
+							"disabled": true,
 							"parameters": {
 								"where": "back",
 								"path": "\"applied_upgrades\"",
@@ -2823,16 +2833,27 @@
 						{
 							"id": "set-eventvar-value",
 							"objectClass": "System",
-							"sid": 117812718612029,
+							"sid": 513944072030638,
 							"parameters": {
 								"variable": "UpgradeFID",
-								"value": "UpgradeID & \":\" & str(SlotIndex)"
+								"value": "UpgradeID & \":\" & str(MechObject.ArraySize(\"applied_upgrades\"))"
+							}
+						},
+						{
+							"id": "push-value",
+							"objectClass": "MechObject",
+							"sid": 643893510333743,
+							"parameters": {
+								"where": "back",
+								"path": "\"applied_upgrades\"",
+								"value": "UpgradeFID"
 							}
 						},
 						{
 							"id": "set-value",
 							"objectClass": "MechObject",
 							"sid": 135028035302370,
+							"disabled": true,
 							"parameters": {
 								"path": "\"applied_upgrades.\" & SlotIndex",
 								"value": "UpgradeFID"
@@ -4273,6 +4294,13 @@
 							"initialValue": "",
 							"comment": "",
 							"sid": 369593675773368
+						},
+						{
+							"name": "Index",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 360412032569688
 						}
 					],
 					"eventType": "custom-ace-block",
@@ -4348,6 +4376,15 @@
 							"parameters": {
 								"instance-variable": "CardType",
 								"value": "\"mech_upgrade\""
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "ShopCardUIElement",
+							"sid": 361529520808736,
+							"parameters": {
+								"instance-variable": "Index",
+								"value": "Index"
 							}
 						}
 					],
@@ -4514,6 +4551,13 @@
 							"initialValue": "",
 							"comment": "",
 							"sid": 286478188108079
+						},
+						{
+							"name": "Index",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 929118246956046
 						}
 					],
 					"eventType": "custom-ace-block",
@@ -4589,6 +4633,15 @@
 							"parameters": {
 								"instance-variable": "CardType",
 								"value": "\"new_mech\""
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "ShopCardUIElement",
+							"sid": 986202762841656,
+							"parameters": {
+								"instance-variable": "Index",
+								"value": "Index"
 							}
 						}
 					],
@@ -4773,6 +4826,13 @@
 							"initialValue": "",
 							"comment": "",
 							"sid": 485422867271060
+						},
+						{
+							"name": "Index",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 514499608682546
 						}
 					],
 					"eventType": "custom-ace-block",
@@ -4848,6 +4908,15 @@
 							"parameters": {
 								"instance-variable": "UpgradeID",
 								"value": "UpgradeID"
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "ShopCardUIElement",
+							"sid": 243916810838801,
+							"parameters": {
+								"instance-variable": "Index",
+								"value": "Index"
 							}
 						}
 					],
@@ -5228,7 +5297,8 @@
 										"ViewportMidX(\"MechUpgrades\") + 400 * (loopindex - 2)",
 										"ViewportMidY(\"MechUpgrades\")",
 										"ArrayTemp1.At(loopindex - 1)",
-										"\"card\" & loopindex"
+										"\"card\" & loopindex",
+										"0"
 									]
 								}
 							],
@@ -5750,13 +5820,14 @@
 																{
 																	"customAction": "DrawNewMechCardUI",
 																	"objectClass": "UpgradesManager",
-																	"sid": 149801282115777,
+																	"sid": 286989292162793,
 																	"parameters": [
 																		"ViewportMidX(\"MechUpgrades\") + 400 * (loopindex - 2)",
 																		"ViewportMidY(\"MechUpgrades\")",
 																		"ArrayTemp1.At(loopindex - 1)",
 																		"\"card\" & loopindex",
-																		"ArrayTemp4.At(0)"
+																		"ArrayTemp4.At(0)",
+																		"loopindex - 1"
 																	]
 																}
 															],
@@ -5780,7 +5851,8 @@
 																		"ViewportMidX(\"MechUpgrades\") + 400 * (loopindex - 2)",
 																		"ViewportMidY(\"MechUpgrades\")",
 																		"ArrayTemp1.At(loopindex - 1)",
-																		"\"card\" & loopindex"
+																		"\"card\" & loopindex",
+																		"0"
 																	]
 																}
 															],
@@ -5817,7 +5889,8 @@
 																"ViewportMidX(\"MechUpgrades\") + 400 * (loopindex - 2)",
 																"ViewportMidY(\"MechUpgrades\")",
 																"ArrayTemp1.At(loopindex - 1)",
-																"\"card\" & loopindex"
+																"\"card\" & loopindex",
+																"0"
 															]
 														}
 													],
@@ -5838,13 +5911,14 @@
 												{
 													"customAction": "DrawNewMechCardUI",
 													"objectClass": "UpgradesManager",
-													"sid": 769124375496388,
+													"sid": 567378341013484,
 													"parameters": [
 														"ViewportMidX(\"MechUpgrades\") + 400 * (loopindex - 2)",
 														"ViewportMidY(\"MechUpgrades\")",
 														"ArrayTemp1.At(loopindex - 1)",
 														"\"card\" & loopindex",
-														"ArrayTemp4.At(0)"
+														"ArrayTemp4.At(0)",
+														"loopindex - 1"
 													]
 												}
 											],
@@ -5978,12 +6052,13 @@
 												{
 													"customAction": "DrawPlayerUpgradeCardUI",
 													"objectClass": "UpgradesManager",
-													"sid": 414914625841876,
+													"sid": 301453673270545,
 													"parameters": [
 														"ViewportMidX(\"MechUpgrades\") + 400 * (loopindex - 2)",
 														"ViewportMidY(\"MechUpgrades\")",
 														"ArrayTemp1.At(loopindex - 1)",
-														"\"card\" & loopindex"
+														"\"card\" & loopindex",
+														"loopindex - 1"
 													]
 												}
 											],
@@ -6249,13 +6324,14 @@
 										{
 											"customAction": "DrawNewMechCardUI",
 											"objectClass": "UpgradesManager",
-											"sid": 264650123880166,
+											"sid": 232719804459946,
 											"parameters": [
 												"ViewportMidX(\"MechUpgrades\") + 400 * (loopindex - 2)",
 												"ViewportMidY(\"MechUpgrades\")",
 												"ArrayTemp1.At(loopindex - 1)",
 												"\"card\" & loopindex",
-												"ArrayTemp4.At(0)"
+												"ArrayTemp4.At(0)",
+												"loopindex - 1"
 											]
 										}
 									],
@@ -6321,13 +6397,14 @@
 														{
 															"customAction": "DrawNewMechCardUI",
 															"objectClass": "UpgradesManager",
-															"sid": 942892958826292,
+															"sid": 317815420677100,
 															"parameters": [
 																"ViewportMidX(\"MechUpgrades\") + 400 * (loopindex - 2)",
 																"ViewportMidY(\"MechUpgrades\")",
 																"ArrayTemp1.At(loopindex - 1)",
 																"\"card\" & loopindex",
-																"ArrayTemp4.At(0)"
+																"ArrayTemp4.At(0)",
+																"loopindex - 1"
 															]
 														}
 													],
@@ -6346,12 +6423,13 @@
 														{
 															"customAction": "DrawPlayerUpgradeCardUI",
 															"objectClass": "UpgradesManager",
-															"sid": 957690717506601,
+															"sid": 427568148885115,
 															"parameters": [
 																"ViewportMidX(\"MechUpgrades\") + 400 * (loopindex - 2)",
 																"ViewportMidY(\"MechUpgrades\")",
 																"ArrayTemp1.At(loopindex - 1)",
-																"\"card\" & loopindex"
+																"\"card\" & loopindex",
+																"loopindex - 1"
 															]
 														}
 													],
@@ -6372,12 +6450,13 @@
 												{
 													"customAction": "DrawPlayerUpgradeCardUI",
 													"objectClass": "UpgradesManager",
-													"sid": 726406609968415,
+													"sid": 765681468142452,
 													"parameters": [
 														"ViewportMidX(\"MechUpgrades\") + 400 * (loopindex - 2)",
 														"ViewportMidY(\"MechUpgrades\")",
 														"ArrayTemp1.At(loopindex - 1)",
-														"\"card\" & loopindex"
+														"\"card\" & loopindex",
+														"loopindex - 1"
 													]
 												}
 											],
@@ -6660,12 +6739,13 @@
 								{
 									"customAction": "DrawUpgradeCardUI",
 									"objectClass": "UpgradesManager",
-									"sid": 515729851758818,
+									"sid": 508990476111686,
 									"parameters": [
 										"ViewportMidX(\"MechUpgrades\") + 400 * (loopindex - 2)",
 										"ViewportMidY(\"MechUpgrades\")",
 										"ArrayTemp1.At(loopindex - 1)",
-										"\"card\" & loopindex"
+										"\"card\" & loopindex",
+										"loopindex - 1"
 									]
 								}
 							],
@@ -7199,6 +7279,499 @@
 					"sid": 520444660140872
 				},
 				{
+					"functionName": "SelectShopCard",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "ShopCardUID",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 229385885638109
+						}
+					],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 751931660606242,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "ShopCardUIElement",
+									"sid": 511782223747618,
+									"parameters": {
+										"unique-id": "ShopCardUID"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 709607611844707,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-boolean-eventvar",
+											"objectClass": "System",
+											"sid": 507361972688708,
+											"parameters": {
+												"variable": "AlternativeUpgradeSystem"
+											}
+										}
+									],
+									"actions": [],
+									"sid": 400806657704638,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-instance-variable",
+													"objectClass": "ShopCardUIElement",
+													"sid": 504647613321456,
+													"parameters": {
+														"instance-variable": "CardType",
+														"comparison": 0,
+														"value": "\"mech_upgrade\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-instvar-value",
+													"objectClass": "UpgradesManager",
+													"sid": 951924468269532,
+													"parameters": {
+														"instance-variable": "SelectedUpgradeID",
+														"value": "ShopCardUIElement.UpgradeID"
+													}
+												}
+											],
+											"sid": 832290209297689,
+											"children": [
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "pick-all",
+															"objectClass": "System",
+															"sid": 846877193486453,
+															"parameters": {
+																"object": "ShopCardUIElement"
+															}
+														},
+														{
+															"id": "for-each",
+															"objectClass": "System",
+															"sid": 249902003630356,
+															"parameters": {
+																"object": "ShopCardUIElement"
+															}
+														}
+													],
+													"actions": [
+														{
+															"id": "destroy",
+															"objectClass": "ShopCardUIElement",
+															"sid": 394156473307459
+														}
+													],
+													"sid": 858672437521703
+												},
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "pick-by-unique-id",
+															"objectClass": "MechObject",
+															"sid": 693803407177775,
+															"parameters": {
+																"unique-id": "UpgradesManager.SelectedMechUID"
+															}
+														}
+													],
+													"actions": [
+														{
+															"customAction": "AddUpgradeToMech",
+															"objectClass": "UpgradesManager",
+															"sid": 882631765789008,
+															"parameters": [
+																"UpgradesManager.SelectedUpgradeID",
+																"UpgradesManager.SelectedMechUID",
+																"MechObject.ArraySize(\"applied_upgrades\")"
+															]
+														},
+														{
+															"customAction": "CloseUpgradeSequence",
+															"objectClass": "UpgradesManager",
+															"sid": 289095323660210
+														}
+													],
+													"sid": 211635555364208
+												}
+											]
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "else",
+													"objectClass": "System",
+													"sid": 364143034511674
+												},
+												{
+													"id": "compare-instance-variable",
+													"objectClass": "ShopCardUIElement",
+													"sid": 402892394067083,
+													"parameters": {
+														"instance-variable": "CardType",
+														"comparison": 0,
+														"value": "\"new_mech\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"callFunction": "SpawnMech",
+													"sid": 695072815141098,
+													"parameters": [
+														"ShopCardUIElement.MechType"
+													]
+												},
+												{
+													"customAction": "CloseUpgradeSequence",
+													"objectClass": "UpgradesManager",
+													"sid": 335324132638986
+												}
+											],
+											"sid": 150816045854431
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "else",
+													"objectClass": "System",
+													"sid": 935716771100609
+												},
+												{
+													"id": "compare-instance-variable",
+													"objectClass": "ShopCardUIElement",
+													"sid": 726305833290051,
+													"parameters": {
+														"instance-variable": "CardType",
+														"comparison": 0,
+														"value": "\"player_upgrade\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"customAction": "ApplyPlayerUpgrade",
+													"objectClass": "PlayerData",
+													"sid": 118278430957482,
+													"disabled": true,
+													"parameters": [
+														"ShopCardUIElement.UpgradeID"
+													]
+												},
+												{
+													"customAction": "AddUpgradeToPlayer",
+													"objectClass": "UpgradesManager",
+													"sid": 256824852169830,
+													"parameters": [
+														"ShopCardUIElement.UpgradeID"
+													]
+												},
+												{
+													"customAction": "CloseUpgradeSequence",
+													"objectClass": "UpgradesManager",
+													"sid": 586074200923987
+												}
+											],
+											"sid": 100278747174228
+										}
+									]
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "else",
+											"objectClass": "System",
+											"sid": 728124813645327
+										}
+									],
+									"actions": [],
+									"sid": 988126202902215,
+									"children": [
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "compare-instance-variable",
+													"objectClass": "ShopCardUIElement",
+													"sid": 122183120655717,
+													"parameters": {
+														"instance-variable": "CardType",
+														"comparison": 0,
+														"value": "\"mech_upgrade\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"id": "set-instvar-value",
+													"objectClass": "UpgradesManager",
+													"sid": 161390452883039,
+													"parameters": {
+														"instance-variable": "SelectedUpgradeID",
+														"value": "ShopCardUIElement.UpgradeID"
+													}
+												},
+												{
+													"id": "set-instvar-value",
+													"objectClass": "UpgradesManager",
+													"sid": 484578603452933,
+													"parameters": {
+														"instance-variable": "SelectedUpgradeMechType",
+														"value": "Functions.GetUpgradeProperty(ShopCardUIElement.UpgradeID, \"mech_type\")"
+													}
+												}
+											],
+											"sid": 123448629431041,
+											"children": [
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "pick-all",
+															"objectClass": "System",
+															"sid": 886093179373337,
+															"parameters": {
+																"object": "ShopCardUIElement"
+															}
+														},
+														{
+															"id": "for-each",
+															"objectClass": "System",
+															"sid": 842603880384483,
+															"parameters": {
+																"object": "ShopCardUIElement"
+															}
+														}
+													],
+													"actions": [
+														{
+															"id": "destroy",
+															"objectClass": "ShopCardUIElement",
+															"sid": 451316940191253
+														}
+													],
+													"sid": 716651220245843
+												},
+												{
+													"eventType": "block",
+													"conditions": [],
+													"actions": [
+														{
+															"customAction": "BeginUpgradeShopSequence",
+															"objectClass": "UpgradesManager",
+															"sid": 445902958665128,
+															"disabled": true
+														},
+														{
+															"customAction": "CloseUpgradeSequence",
+															"objectClass": "UpgradesManager",
+															"sid": 250111560284106,
+															"disabled": true
+														},
+														{
+															"id": "set-layer-visible",
+															"objectClass": "System",
+															"sid": 127701402963711,
+															"parameters": {
+																"layer": "\"MechUpgrades\"",
+																"visibility": "invisible"
+															}
+														},
+														{
+															"id": "set-layer-visible",
+															"objectClass": "System",
+															"sid": 638603356367868,
+															"parameters": {
+																"layer": "\"UpgradeSelectionBG\"",
+																"visibility": "invisible"
+															}
+														},
+														{
+															"id": "set-layer-interactive",
+															"objectClass": "System",
+															"sid": 886134833951576,
+															"parameters": {
+																"layer": "\"MechUpgrades\"",
+																"interactive": false
+															}
+														},
+														{
+															"id": "set-layer-interactive",
+															"objectClass": "System",
+															"sid": 298389511862569,
+															"parameters": {
+																"layer": "\"MechSelection\"",
+																"interactive": true
+															}
+														},
+														{
+															"id": "set-layer-visible",
+															"objectClass": "System",
+															"sid": 294570839985349,
+															"parameters": {
+																"layer": "\"MechSelection\"",
+																"visibility": "visible"
+															}
+														},
+														{
+															"id": "set-layer-visible",
+															"objectClass": "System",
+															"sid": 686635088400315,
+															"parameters": {
+																"layer": "\"MechSelectionParticles\"",
+																"visibility": "visible"
+															}
+														},
+														{
+															"id": "set-layer-visible",
+															"objectClass": "System",
+															"sid": 187910626802531,
+															"parameters": {
+																"layer": "\"UpgradeBG\"",
+																"visibility": "visible"
+															}
+														}
+													],
+													"sid": 931609122792863
+												},
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "has-tags",
+															"objectClass": "TextUI",
+															"sid": 270380786509016,
+															"parameters": {
+																"tags": "\"upgrade_text\""
+															}
+														}
+													],
+													"actions": [
+														{
+															"id": "set-text",
+															"objectClass": "TextUI",
+															"sid": 782577009616930,
+															"parameters": {
+																"text": "\"CHOOSE WHICH MECH TO UPGRADE\""
+															}
+														}
+													],
+													"sid": 748659799214415
+												}
+											]
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "else",
+													"objectClass": "System",
+													"sid": 452598744364727
+												},
+												{
+													"id": "compare-instance-variable",
+													"objectClass": "ShopCardUIElement",
+													"sid": 699270141237705,
+													"parameters": {
+														"instance-variable": "CardType",
+														"comparison": 0,
+														"value": "\"new_mech\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"callFunction": "SpawnMech",
+													"sid": 757933519727744,
+													"parameters": [
+														"ShopCardUIElement.MechType"
+													]
+												},
+												{
+													"customAction": "CloseUpgradeSequence",
+													"objectClass": "UpgradesManager",
+													"sid": 874684035909758
+												}
+											],
+											"sid": 986231726136751
+										},
+										{
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "else",
+													"objectClass": "System",
+													"sid": 719067796653704
+												},
+												{
+													"id": "compare-instance-variable",
+													"objectClass": "ShopCardUIElement",
+													"sid": 354296792493537,
+													"parameters": {
+														"instance-variable": "CardType",
+														"comparison": 0,
+														"value": "\"player_upgrade\""
+													}
+												}
+											],
+											"actions": [
+												{
+													"customAction": "AddUpgradeToPlayer",
+													"objectClass": "UpgradesManager",
+													"sid": 425065939359391,
+													"parameters": [
+														"ShopCardUIElement.UpgradeID"
+													]
+												},
+												{
+													"customAction": "ApplyPlayerUpgrade",
+													"objectClass": "PlayerData",
+													"sid": 539800756557295,
+													"disabled": true,
+													"parameters": [
+														"ShopCardUIElement.UpgradeID"
+													]
+												},
+												{
+													"customAction": "CloseUpgradeSequence",
+													"objectClass": "UpgradesManager",
+													"sid": 504598319036108
+												}
+											],
+											"sid": 545288490843820
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
 					"eventType": "block",
 					"conditions": [
 						{
@@ -7220,463 +7793,16 @@
 							}
 						}
 					],
-					"actions": [],
-					"sid": 882211584211294,
-					"children": [
+					"actions": [
 						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "compare-boolean-eventvar",
-									"objectClass": "System",
-									"sid": 174585152427066,
-									"parameters": {
-										"variable": "AlternativeUpgradeSystem"
-									}
-								}
-							],
-							"actions": [],
-							"sid": 357558427994680,
-							"children": [
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "compare-instance-variable",
-											"objectClass": "ShopCardUIElement",
-											"sid": 275844028213625,
-											"parameters": {
-												"instance-variable": "CardType",
-												"comparison": 0,
-												"value": "\"mech_upgrade\""
-											}
-										}
-									],
-									"actions": [
-										{
-											"id": "set-instvar-value",
-											"objectClass": "UpgradesManager",
-											"sid": 532010942315119,
-											"parameters": {
-												"instance-variable": "SelectedUpgradeID",
-												"value": "ShopCardUIElement.UpgradeID"
-											}
-										}
-									],
-									"sid": 489231460653725,
-									"children": [
-										{
-											"eventType": "block",
-											"conditions": [
-												{
-													"id": "pick-all",
-													"objectClass": "System",
-													"sid": 991066217666595,
-													"parameters": {
-														"object": "ShopCardUIElement"
-													}
-												},
-												{
-													"id": "for-each",
-													"objectClass": "System",
-													"sid": 628584387883305,
-													"parameters": {
-														"object": "ShopCardUIElement"
-													}
-												}
-											],
-											"actions": [
-												{
-													"id": "destroy",
-													"objectClass": "ShopCardUIElement",
-													"sid": 997367829571621
-												}
-											],
-											"sid": 131327164596342
-										},
-										{
-											"eventType": "block",
-											"conditions": [
-												{
-													"id": "pick-by-unique-id",
-													"objectClass": "MechObject",
-													"sid": 235773295093253,
-													"parameters": {
-														"unique-id": "UpgradesManager.SelectedMechUID"
-													}
-												}
-											],
-											"actions": [
-												{
-													"customAction": "AddUpgradeToMech",
-													"objectClass": "UpgradesManager",
-													"sid": 830880126611321,
-													"parameters": [
-														"UpgradesManager.SelectedUpgradeID",
-														"UpgradesManager.SelectedMechUID",
-														"MechObject.ArraySize(\"applied_upgrades\") - 1"
-													]
-												},
-												{
-													"customAction": "CloseUpgradeSequence",
-													"objectClass": "UpgradesManager",
-													"sid": 924773326130935
-												}
-											],
-											"sid": 825559780847330
-										}
-									]
-								},
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "else",
-											"objectClass": "System",
-											"sid": 407714127186398
-										},
-										{
-											"id": "compare-instance-variable",
-											"objectClass": "ShopCardUIElement",
-											"sid": 416736335511281,
-											"parameters": {
-												"instance-variable": "CardType",
-												"comparison": 0,
-												"value": "\"new_mech\""
-											}
-										}
-									],
-									"actions": [
-										{
-											"callFunction": "SpawnMech",
-											"sid": 483531152106973,
-											"parameters": [
-												"ShopCardUIElement.MechType"
-											]
-										},
-										{
-											"customAction": "CloseUpgradeSequence",
-											"objectClass": "UpgradesManager",
-											"sid": 182994055257073
-										}
-									],
-									"sid": 652245820028097
-								},
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "else",
-											"objectClass": "System",
-											"sid": 882791910151353
-										},
-										{
-											"id": "compare-instance-variable",
-											"objectClass": "ShopCardUIElement",
-											"sid": 940745079315662,
-											"parameters": {
-												"instance-variable": "CardType",
-												"comparison": 0,
-												"value": "\"player_upgrade\""
-											}
-										}
-									],
-									"actions": [
-										{
-											"customAction": "ApplyPlayerUpgrade",
-											"objectClass": "PlayerData",
-											"sid": 212064855140324,
-											"disabled": true,
-											"parameters": [
-												"ShopCardUIElement.UpgradeID"
-											]
-										},
-										{
-											"customAction": "AddUpgradeToPlayer",
-											"objectClass": "UpgradesManager",
-											"sid": 371543680264464,
-											"parameters": [
-												"ShopCardUIElement.UpgradeID"
-											]
-										},
-										{
-											"customAction": "CloseUpgradeSequence",
-											"objectClass": "UpgradesManager",
-											"sid": 476339676111885
-										}
-									],
-									"sid": 270873132051105
-								}
-							]
-						},
-						{
-							"eventType": "block",
-							"conditions": [
-								{
-									"id": "else",
-									"objectClass": "System",
-									"sid": 786499926642294
-								}
-							],
-							"actions": [],
-							"sid": 344524581079143,
-							"children": [
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "compare-instance-variable",
-											"objectClass": "ShopCardUIElement",
-											"sid": 347653953317715,
-											"parameters": {
-												"instance-variable": "CardType",
-												"comparison": 0,
-												"value": "\"mech_upgrade\""
-											}
-										}
-									],
-									"actions": [
-										{
-											"id": "set-instvar-value",
-											"objectClass": "UpgradesManager",
-											"sid": 491134554065727,
-											"parameters": {
-												"instance-variable": "SelectedUpgradeID",
-												"value": "ShopCardUIElement.UpgradeID"
-											}
-										},
-										{
-											"id": "set-instvar-value",
-											"objectClass": "UpgradesManager",
-											"sid": 249771942179518,
-											"parameters": {
-												"instance-variable": "SelectedUpgradeMechType",
-												"value": "Functions.GetUpgradeProperty(ShopCardUIElement.UpgradeID, \"mech_type\")"
-											}
-										}
-									],
-									"sid": 814699918510921,
-									"children": [
-										{
-											"eventType": "block",
-											"conditions": [
-												{
-													"id": "pick-all",
-													"objectClass": "System",
-													"sid": 509837871336840,
-													"parameters": {
-														"object": "ShopCardUIElement"
-													}
-												},
-												{
-													"id": "for-each",
-													"objectClass": "System",
-													"sid": 351202860675370,
-													"parameters": {
-														"object": "ShopCardUIElement"
-													}
-												}
-											],
-											"actions": [
-												{
-													"id": "destroy",
-													"objectClass": "ShopCardUIElement",
-													"sid": 676963416989087
-												}
-											],
-											"sid": 758922916346599
-										},
-										{
-											"eventType": "block",
-											"conditions": [],
-											"actions": [
-												{
-													"customAction": "BeginUpgradeShopSequence",
-													"objectClass": "UpgradesManager",
-													"sid": 817741682465945,
-													"disabled": true
-												},
-												{
-													"customAction": "CloseUpgradeSequence",
-													"objectClass": "UpgradesManager",
-													"sid": 637101209414983,
-													"disabled": true
-												},
-												{
-													"id": "set-layer-visible",
-													"objectClass": "System",
-													"sid": 288910185617556,
-													"parameters": {
-														"layer": "\"MechUpgrades\"",
-														"visibility": "invisible"
-													}
-												},
-												{
-													"id": "set-layer-visible",
-													"objectClass": "System",
-													"sid": 770585501483439,
-													"parameters": {
-														"layer": "\"UpgradeSelectionBG\"",
-														"visibility": "invisible"
-													}
-												},
-												{
-													"id": "set-layer-interactive",
-													"objectClass": "System",
-													"sid": 274990183120681,
-													"parameters": {
-														"layer": "\"MechUpgrades\"",
-														"interactive": false
-													}
-												},
-												{
-													"id": "set-layer-interactive",
-													"objectClass": "System",
-													"sid": 296234275760846,
-													"parameters": {
-														"layer": "\"MechSelection\"",
-														"interactive": true
-													}
-												},
-												{
-													"id": "set-layer-visible",
-													"objectClass": "System",
-													"sid": 471656293536386,
-													"parameters": {
-														"layer": "\"MechSelection\"",
-														"visibility": "visible"
-													}
-												},
-												{
-													"id": "set-layer-visible",
-													"objectClass": "System",
-													"sid": 952799586378628,
-													"parameters": {
-														"layer": "\"MechSelectionParticles\"",
-														"visibility": "visible"
-													}
-												},
-												{
-													"id": "set-layer-visible",
-													"objectClass": "System",
-													"sid": 654082972270407,
-													"parameters": {
-														"layer": "\"UpgradeBG\"",
-														"visibility": "visible"
-													}
-												}
-											],
-											"sid": 586571192242521
-										},
-										{
-											"eventType": "block",
-											"conditions": [
-												{
-													"id": "has-tags",
-													"objectClass": "TextUI",
-													"sid": 949861061034600,
-													"parameters": {
-														"tags": "\"upgrade_text\""
-													}
-												}
-											],
-											"actions": [
-												{
-													"id": "set-text",
-													"objectClass": "TextUI",
-													"sid": 477171722626525,
-													"parameters": {
-														"text": "\"CHOOSE WHICH MECH TO UPGRADE\""
-													}
-												}
-											],
-											"sid": 832312670212606
-										}
-									]
-								},
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "else",
-											"objectClass": "System",
-											"sid": 701459147262840
-										},
-										{
-											"id": "compare-instance-variable",
-											"objectClass": "ShopCardUIElement",
-											"sid": 808653651942103,
-											"parameters": {
-												"instance-variable": "CardType",
-												"comparison": 0,
-												"value": "\"new_mech\""
-											}
-										}
-									],
-									"actions": [
-										{
-											"callFunction": "SpawnMech",
-											"sid": 337016090629985,
-											"parameters": [
-												"ShopCardUIElement.MechType"
-											]
-										},
-										{
-											"customAction": "CloseUpgradeSequence",
-											"objectClass": "UpgradesManager",
-											"sid": 660737724555103
-										}
-									],
-									"sid": 939773391455739
-								},
-								{
-									"eventType": "block",
-									"conditions": [
-										{
-											"id": "else",
-											"objectClass": "System",
-											"sid": 994923675083820
-										},
-										{
-											"id": "compare-instance-variable",
-											"objectClass": "ShopCardUIElement",
-											"sid": 415700640638799,
-											"parameters": {
-												"instance-variable": "CardType",
-												"comparison": 0,
-												"value": "\"player_upgrade\""
-											}
-										}
-									],
-									"actions": [
-										{
-											"customAction": "AddUpgradeToPlayer",
-											"objectClass": "UpgradesManager",
-											"sid": 183510495163741,
-											"parameters": [
-												"ShopCardUIElement.UpgradeID"
-											]
-										},
-										{
-											"customAction": "ApplyPlayerUpgrade",
-											"objectClass": "PlayerData",
-											"sid": 210958065552094,
-											"disabled": true,
-											"parameters": [
-												"ShopCardUIElement.UpgradeID"
-											]
-										},
-										{
-											"customAction": "CloseUpgradeSequence",
-											"objectClass": "UpgradesManager",
-											"sid": 307364417183278
-										}
-									],
-									"sid": 836501249490905
-								}
+							"callFunction": "SelectShopCard",
+							"sid": 200947231957985,
+							"parameters": [
+								"ShopCardUIElement.UID"
 							]
 						}
-					]
+					],
+					"sid": 882211584211294
 				},
 				{
 					"aceType": "action",
@@ -7845,6 +7971,182 @@
 								}
 							],
 							"sid": 531423670225482
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-axis",
+							"objectClass": "Gamepad",
+							"sid": 890903330700761,
+							"parameters": {
+								"gamepad": "0",
+								"axis": "left-analog-x-axis",
+								"comparison": 5,
+								"value": "20"
+							}
+						},
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 851498478224430
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 533231523068575,
+							"parameters": {
+								"variable": "FocusedUpgradeIndexController",
+								"value": "clamp(FocusedUpgradeIndexController + 1, 0, 2)"
+							}
+						},
+						{
+							"callFunction": "ChangeUpgradeFocus",
+							"sid": 958718095311415
+						}
+					],
+					"sid": 806611929774475
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-axis",
+							"objectClass": "Gamepad",
+							"sid": 877361350869789,
+							"parameters": {
+								"gamepad": "0",
+								"axis": "left-analog-x-axis",
+								"comparison": 3,
+								"value": "-20"
+							}
+						},
+						{
+							"id": "trigger-once-while-true",
+							"objectClass": "System",
+							"sid": 616792235852665
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 411756737481677,
+							"parameters": {
+								"variable": "FocusedUpgradeIndexController",
+								"value": "clamp(FocusedUpgradeIndexController - 1, 0, 2)"
+							}
+						},
+						{
+							"callFunction": "ChangeUpgradeFocus",
+							"sid": 664431705723063
+						}
+					],
+					"sid": 512731635094425
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-button-pressed",
+							"objectClass": "Gamepad",
+							"sid": 824103226338663,
+							"parameters": {
+								"gamepad": "0",
+								"button": "button-a"
+							}
+						},
+						{
+							"id": "layer-is-visible",
+							"objectClass": "System",
+							"sid": 272209563983991,
+							"parameters": {
+								"layer": "\"MechUpgrades\""
+							}
+						}
+					],
+					"actions": [],
+					"sid": 512005447198317,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "ShopCardUIElement",
+									"sid": 543083817221353,
+									"parameters": {
+										"instance-variable": "Index",
+										"comparison": 0,
+										"value": "FocusedUpgradeIndexController"
+									}
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "SelectShopCard",
+									"sid": 689529324190554,
+									"parameters": [
+										"ShopCardUIElement.UID"
+									]
+								}
+							],
+							"sid": 918246299044074
+						}
+					]
+				},
+				{
+					"functionName": "ChangeUpgradeFocus",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [],
+					"eventType": "function-block",
+					"conditions": [],
+					"actions": [],
+					"sid": 237351578527579,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "ShopCardUIElement",
+									"sid": 898912576348611,
+									"parameters": {
+										"instance-variable": "Index",
+										"comparison": 0,
+										"value": "FocusedUpgradeIndexController"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-instvar-value",
+									"objectClass": "ShopCardUIElement",
+									"sid": 395481101848521,
+									"parameters": {
+										"instance-variable": "OffsetX",
+										"value": "random(-0.5,0.5)"
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "ShopCardUIElement",
+									"sid": 967103448115108,
+									"parameters": {
+										"instance-variable": "OffsetY",
+										"value": "random(-0.5,0.5)"
+									}
+								}
+							],
+							"sid": 948237467807951
 						}
 					]
 				}

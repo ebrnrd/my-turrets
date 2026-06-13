@@ -344,6 +344,97 @@
 						}
 					],
 					"sid": 640529998219186
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-key-pressed",
+							"objectClass": "Keyboard",
+							"sid": 867354352671631,
+							"parameters": {
+								"key": 16
+							}
+						},
+						{
+							"id": "on-button-pressed",
+							"objectClass": "Gamepad",
+							"sid": 749848609140424,
+							"parameters": {
+								"gamepad": "0",
+								"button": "left-shoulder-button"
+							}
+						},
+						{
+							"id": "on-button-pressed",
+							"objectClass": "Gamepad",
+							"sid": 725133604126165,
+							"parameters": {
+								"gamepad": "0",
+								"button": "right-shoulder-button"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 346138149439849,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-moving",
+									"objectClass": "playerCharacter",
+									"sid": 761165333105204,
+									"behaviorType": "8Direction"
+								},
+								{
+									"id": "is-timer-running",
+									"objectClass": "playerCharacter",
+									"sid": 968575073853714,
+									"behaviorType": "Timer2",
+									"parameters": {
+										"tag": "\"sprint_cooldown\""
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "start-timer",
+									"objectClass": "playerCharacter",
+									"sid": 212403129802305,
+									"behaviorType": "Timer2",
+									"parameters": {
+										"duration": "0.3",
+										"type": "once",
+										"tag": "\"sprint\""
+									}
+								},
+								{
+									"id": "start-timer",
+									"objectClass": "playerCharacter",
+									"sid": 856249976301859,
+									"behaviorType": "Timer2",
+									"parameters": {
+										"duration": "Functions.GetPlayerCachedStat(\"sprint_cooldown\")",
+										"type": "once",
+										"tag": "\"sprint_cooldown\""
+									}
+								},
+								{
+									"id": "set-boolean-instvar",
+									"objectClass": "playerCharacter",
+									"sid": 819294709355169,
+									"parameters": {
+										"instance-variable": "IsSprinting",
+										"value": "true"
+									}
+								}
+							],
+							"sid": 378127842452587
+						}
+					],
+					"isOrBlock": true
 				}
 			]
 		},
@@ -446,6 +537,137 @@
 					],
 					"sid": 810224052878896,
 					"isOrBlock": true
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-timer",
+					"objectClass": "playerCharacter",
+					"sid": 656250234958424,
+					"behaviorType": "Timer2",
+					"parameters": {
+						"tag": "\"sprint\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-boolean-instvar",
+					"objectClass": "playerCharacter",
+					"sid": 568996393392671,
+					"parameters": {
+						"instance-variable": "IsSprinting",
+						"value": "false"
+					}
+				}
+			],
+			"sid": 408689788372315
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "is-boolean-instance-variable-set",
+					"objectClass": "playerCharacter",
+					"sid": 282657752878897,
+					"parameters": {
+						"instance-variable": "IsSprinting"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "set-max-speed",
+					"objectClass": "playerCharacter",
+					"sid": 985561287519822,
+					"behaviorType": "8Direction",
+					"parameters": {
+						"max-speed": "lerp(Functions.GetPlayerCachedStat(\"move_speed\") * 4, Functions.GetPlayerCachedStat(\"move_speed\"), playerCharacter.Timer2.NormalizedProgress(\"sprint\"))"
+					}
+				},
+				{
+					"id": "set-speed",
+					"objectClass": "playerCharacter",
+					"sid": 616315997245739,
+					"behaviorType": "8Direction",
+					"parameters": {
+						"speed": "lerp(Functions.GetPlayerCachedStat(\"move_speed\") * 4, Functions.GetPlayerCachedStat(\"move_speed\"), playerCharacter.Timer2.NormalizedProgress(\"sprint\"))"
+					}
+				}
+			],
+			"sid": 671190500819689,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "MirrorMult",
+					"type": "number",
+					"initialValue": "1",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 671785274827805
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-mirrored",
+							"objectClass": "playerCharacter",
+							"sid": 648597438989813
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 749623217675104,
+							"parameters": {
+								"variable": "MirrorMult",
+								"value": "-1"
+							}
+						}
+					],
+					"sid": 517625818999940
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 459709157505412
+						}
+					],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 395521061491723,
+							"parameters": {
+								"variable": "MirrorMult",
+								"value": "1"
+							}
+						}
+					],
+					"sid": 750718980147124
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-angle",
+							"objectClass": "playerCharacter",
+							"sid": 567657009787021,
+							"parameters": {
+								"angle": "anglelerp(30 * MirrorMult, 0, playerCharacter.Timer2.NormalizedProgress(\"sprint\"))"
+							}
+						}
+					],
+					"sid": 439590966577018
 				}
 			]
 		},
@@ -886,96 +1108,125 @@
 							"parameters": {
 								"object": "MechBase"
 							}
-						},
-						{
-							"id": "for-each",
-							"objectClass": "System",
-							"sid": 748603789690180,
-							"disabled": true,
-							"parameters": {
-								"object": "MechBase"
-							}
-						},
-						{
-							"id": "pick-nearestfurthest",
-							"objectClass": "MechBase",
-							"sid": 560261954843035,
-							"parameters": {
-								"which": "nearest",
-								"x": "playerCharacter.X",
-								"y": "playerCharacter.Y",
-								"pick-all-tied": false
-							}
 						}
 					],
-					"actions": [
-						{
-							"id": "stop",
-							"objectClass": "MechBase",
-							"sid": 520529022599361,
-							"behaviorType": "Pathfinding"
-						},
-						{
-							"callFunction": "SendHeal",
-							"sid": 184698884181661,
-							"parameters": [
-								"MechBase.UID",
-								"playerCharacter.UID",
-								"Functions.GetPlayerCachedStat(\"repair_amount\")"
-							]
-						},
-						{
-							"id": "apply-impulse-at-angle",
-							"objectClass": "MechBase",
-							"sid": 425915623291413,
-							"behaviorType": "Physics",
-							"parameters": {
-								"impulse": "random(2,5)",
-								"angle": "angle(MechBase.X, MechBase.Y, playerCharacter.X, playerCharacter.Y) + 180",
-								"image-point": "0"
-							}
-						},
-						{
-							"id": "set-boolean-eventvar",
-							"objectClass": "System",
-							"sid": 676718527366171,
-							"parameters": {
-								"variable": "CanShake",
-								"value": "true"
-							}
-						}
-					],
+					"actions": [],
 					"sid": 167551522819030,
 					"children": [
 						{
 							"eventType": "block",
 							"conditions": [
 								{
-									"id": "pick-by-evaluate",
+									"id": "for-each",
 									"objectClass": "System",
-									"sid": 980455857659301,
+									"sid": 885439816678736,
 									"parameters": {
-										"object": "MechObject",
-										"expression": "MechObject.MechBaseUID = MechBase.UID"
-									}
-								},
-								{
-									"id": "is-boolean-instance-variable-set",
-									"objectClass": "MechObject",
-									"sid": 678282831426333,
-									"parameters": {
-										"instance-variable": "ReadyToLevelUp"
+										"object": "MechBase"
 									}
 								}
 							],
 							"actions": [
 								{
-									"customAction": "LevelUp",
-									"objectClass": "MechObject",
-									"sid": 909546072923944
+									"id": "stop",
+									"objectClass": "MechBase",
+									"sid": 486346127311466,
+									"behaviorType": "Pathfinding"
+								},
+								{
+									"callFunction": "SendHeal",
+									"sid": 914458418685588,
+									"parameters": [
+										"MechBase.UID",
+										"playerCharacter.UID",
+										"Functions.GetPlayerCachedStat(\"repair_amount\")"
+									]
+								},
+								{
+									"id": "apply-impulse-at-angle",
+									"objectClass": "MechBase",
+									"sid": 473073735190351,
+									"behaviorType": "Physics",
+									"parameters": {
+										"impulse": "random(2,5)",
+										"angle": "angle(MechBase.X, MechBase.Y, playerCharacter.X, playerCharacter.Y) + 180",
+										"image-point": "0"
+									}
+								},
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 244547676207591,
+									"parameters": {
+										"variable": "CanShake",
+										"value": "true"
+									}
 								}
 							],
-							"sid": 894154481138372
+							"sid": 423204986372608
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "for-each",
+									"objectClass": "System",
+									"sid": 443341249549950,
+									"parameters": {
+										"object": "MechBase"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 633483424583685,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-by-evaluate",
+											"objectClass": "System",
+											"sid": 456111012716572,
+											"parameters": {
+												"object": "MechObject",
+												"expression": "MechObject.MechBaseUID = MechBase.UID"
+											}
+										},
+										{
+											"id": "is-boolean-instance-variable-set",
+											"objectClass": "MechObject",
+											"sid": 751536193720448,
+											"parameters": {
+												"instance-variable": "ReadyToLevelUp"
+											}
+										},
+										{
+											"id": "pick-nearestfurthest",
+											"objectClass": "MechBase",
+											"sid": 277321486919329,
+											"disabled": true,
+											"parameters": {
+												"which": "nearest",
+												"x": "playerCharacter.X",
+												"y": "playerCharacter.Y",
+												"pick-all-tied": false
+											}
+										}
+									],
+									"actions": [
+										{
+											"customAction": "LevelUp",
+											"objectClass": "MechObject",
+											"sid": 492399006817125
+										},
+										{
+											"id": "stop-loop",
+											"objectClass": "System",
+											"sid": 224488060489114
+										}
+									],
+									"sid": 203195342551165
+								}
+							]
 						}
 					]
 				},
@@ -1599,6 +1850,15 @@
 					],
 					"actions": [
 						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 479839185711608,
+							"parameters": {
+								"seconds": "0.3",
+								"use-timescale": false
+							}
+						},
+						{
 							"id": "set-json",
 							"objectClass": "PlayerData",
 							"sid": 118345840208303,
@@ -1617,18 +1877,18 @@
 							}
 						},
 						{
+							"customAction": "UpdatePlayerStatsCache",
+							"objectClass": "PlayerData",
+							"sid": 632096903555120
+						},
+						{
 							"id": "set-instvar-value",
 							"objectClass": "playerCharacter",
-							"sid": 591781561045317,
+							"sid": 308365224425177,
 							"parameters": {
 								"instance-variable": "Health",
 								"value": "int(Functions.GetPlayerCachedStat(\"player_max_health\"))"
 							}
-						},
-						{
-							"customAction": "UpdatePlayerStatsCache",
-							"objectClass": "PlayerData",
-							"sid": 632096903555120
 						}
 					],
 					"sid": 292918055039329

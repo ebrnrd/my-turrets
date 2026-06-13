@@ -25,6 +25,13 @@
 			"desc": "",
 			"show": true,
 			"sid": 657579987758311
+		},
+		{
+			"name": "IsSprinting",
+			"type": "boolean",
+			"desc": "",
+			"show": true,
+			"sid": 415337134442009
 		}
 	],
 	"behaviorTypes": [

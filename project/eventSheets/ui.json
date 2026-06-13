@@ -629,9 +629,36 @@
 								{
 									"id": "cursor-is-over-object",
 									"objectClass": "Mouse",
-									"sid": 250509749229489,
+									"sid": 635383734813679,
 									"parameters": {
 										"object": "ShopCardUIElement"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-eventvar-value",
+									"objectClass": "System",
+									"sid": 251454891897010,
+									"parameters": {
+										"variable": "FocusedUpgradeIndexController",
+										"value": "ShopCardUIElement.Index"
+									}
+								}
+							],
+							"sid": 345980805953633
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "ShopCardUIElement",
+									"sid": 649182445295855,
+									"parameters": {
+										"instance-variable": "Index",
+										"comparison": 0,
+										"value": "FocusedUpgradeIndexController"
 									}
 								}
 							],
@@ -644,24 +671,6 @@
 									"parameters": {
 										"variable": "x_offset",
 										"value": "((Mouse.X - scrollx + (ViewportWidth(\"MechUpgrades\")/2)) - ShopCardUIElement.X) / (400 / 2)"
-									}
-								},
-								{
-									"id": "set-instvar-value",
-									"objectClass": "ShopCardUIElement",
-									"sid": 704131078990726,
-									"parameters": {
-										"instance-variable": "OffsetX",
-										"value": "(LayerToLayerX(0, \"MechUpgrades\", Mouse.X, Mouse.Y) - ShopCardUIElement.X) / (ShopCardUIElement.Width / 2) "
-									}
-								},
-								{
-									"id": "set-instvar-value",
-									"objectClass": "ShopCardUIElement",
-									"sid": 578039150499097,
-									"parameters": {
-										"instance-variable": "OffsetY",
-										"value": "(LayerToLayerY(0, \"MechUpgrades\", Mouse.X, Mouse.Y) - ShopCardUIElement.Y) / (ShopCardUIElement.Height / 2) "
 									}
 								},
 								{
@@ -718,6 +727,7 @@
 									"id": "set-layer-effect-enabled",
 									"objectClass": "System",
 									"sid": 112375148419337,
+									"disabled": true,
 									"parameters": {
 										"layer": "ShopCardUIElement.LayerName",
 										"mode": "enable",
@@ -725,7 +735,43 @@
 									}
 								}
 							],
-							"sid": 755671249454562
+							"sid": 755671249454562,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "cursor-is-over-object",
+											"objectClass": "Mouse",
+											"sid": 977602999238084,
+											"parameters": {
+												"object": "ShopCardUIElement"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-instvar-value",
+											"objectClass": "ShopCardUIElement",
+											"sid": 453842939343208,
+											"parameters": {
+												"instance-variable": "OffsetX",
+												"value": "(LayerToLayerX(0, \"MechUpgrades\", Mouse.X, Mouse.Y) - ShopCardUIElement.X) / (ShopCardUIElement.Width / 2) "
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "ShopCardUIElement",
+											"sid": 583565125180346,
+											"parameters": {
+												"instance-variable": "OffsetY",
+												"value": "(LayerToLayerY(0, \"MechUpgrades\", Mouse.X, Mouse.Y) - ShopCardUIElement.Y) / (ShopCardUIElement.Height / 2) "
+											}
+										}
+									],
+									"sid": 969328831346810
+								}
+							]
 						},
 						{
 							"eventType": "block",
@@ -759,6 +805,7 @@
 									"id": "set-layer-effect-enabled",
 									"objectClass": "System",
 									"sid": 624650141956758,
+									"disabled": true,
 									"parameters": {
 										"layer": "ShopCardUIElement.LayerName",
 										"mode": "disable",
@@ -952,6 +999,62 @@
 									"sid": 164828946686610
 								}
 							]
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 213304347133946,
+							"parameters": {
+								"object": "ShopCardUIElement"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-layer-effect-enabled",
+							"objectClass": "System",
+							"sid": 610780736556575,
+							"parameters": {
+								"layer": "ShopCardUIElement.LayerName",
+								"mode": "disable",
+								"effect": "\"BetterOutline\""
+							}
+						}
+					],
+					"sid": 207217076750121,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "ShopCardUIElement",
+									"sid": 637500278029104,
+									"parameters": {
+										"instance-variable": "Index",
+										"comparison": 0,
+										"value": "FocusedUpgradeIndexController"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-layer-effect-enabled",
+									"objectClass": "System",
+									"sid": 330417218390616,
+									"parameters": {
+										"layer": "ShopCardUIElement.LayerName",
+										"mode": "enable",
+										"effect": "\"BetterOutline\""
+									}
+								}
+							],
+							"sid": 171728249820965
 						}
 					]
 				},

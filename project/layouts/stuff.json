@@ -225,7 +225,7 @@
 						"MinScrapOnDeath": 1,
 						"MaxScrapOnDeath": 2,
 						"ExpOnDeath": 4,
-						"TargetType": "player",
+						"TargetType": "closer",
 						"height_from_ground": 0,
 						"shadow_width": 50,
 						"Health": 100,
@@ -353,6 +353,14 @@
 												"state": true
 											},
 											{
+												"iv": "ExpOnDeath",
+												"state": true
+											},
+											{
+												"iv": "TargetType",
+												"state": true
+											},
+											{
 												"iv": "height_from_ground",
 												"state": true
 											},
@@ -382,14 +390,6 @@
 											},
 											{
 												"iv": "damage_seconds",
-												"state": true
-											},
-											{
-												"iv": "ExpOnDeath",
-												"state": true
-											},
-											{
-												"iv": "TargetType",
 												"state": true
 											}
 										]
@@ -1142,7 +1142,8 @@
 						"Faction": "",
 						"is_attacking": false,
 						"default_walk_speed": 250,
-						"attack_walk_speed": 100
+						"attack_walk_speed": 100,
+						"IsSprinting": false
 					},
 					"behaviors": {
 						"Timer2": {
@@ -1673,7 +1674,8 @@
 						"OffsetY": 0,
 						"CardType": "",
 						"UpgradeID": "",
-						"MechType": ""
+						"MechType": "",
+						"Index": 0
 					},
 					"behaviors": {},
 					"sceneGraphData": {
@@ -2823,6 +2825,14 @@
 												"state": true
 											},
 											{
+												"iv": "ExpOnDeath",
+												"state": true
+											},
+											{
+												"iv": "TargetType",
+												"state": true
+											},
+											{
 												"iv": "height_from_ground",
 												"state": true
 											},
@@ -2852,14 +2862,6 @@
 											},
 											{
 												"iv": "damage_seconds",
-												"state": true
-											},
-											{
-												"iv": "ExpOnDeath",
-												"state": true
-											},
-											{
-												"iv": "TargetType",
 												"state": true
 											}
 										]
@@ -3481,6 +3483,14 @@
 												"state": true
 											},
 											{
+												"iv": "ExpOnDeath",
+												"state": true
+											},
+											{
+												"iv": "TargetType",
+												"state": true
+											},
+											{
 												"iv": "height_from_ground",
 												"state": true
 											},
@@ -3510,14 +3520,6 @@
 											},
 											{
 												"iv": "damage_seconds",
-												"state": true
-											},
-											{
-												"iv": "ExpOnDeath",
-												"state": true
-											},
-											{
-												"iv": "TargetType",
 												"state": true
 											}
 										]
@@ -4205,6 +4207,14 @@
 												"state": true
 											},
 											{
+												"iv": "ExpOnDeath",
+												"state": true
+											},
+											{
+												"iv": "TargetType",
+												"state": true
+											},
+											{
 												"iv": "height_from_ground",
 												"state": true
 											},
@@ -4234,14 +4244,6 @@
 											},
 											{
 												"iv": "damage_seconds",
-												"state": true
-											},
-											{
-												"iv": "ExpOnDeath",
-												"state": true
-											},
-											{
-												"iv": "TargetType",
 												"state": true
 											}
 										]
@@ -4899,6 +4901,14 @@
 												"state": true
 											},
 											{
+												"iv": "ExpOnDeath",
+												"state": true
+											},
+											{
+												"iv": "TargetType",
+												"state": true
+											},
+											{
 												"iv": "height_from_ground",
 												"state": true
 											},
@@ -4928,14 +4938,6 @@
 											},
 											{
 												"iv": "damage_seconds",
-												"state": true
-											},
-											{
-												"iv": "ExpOnDeath",
-												"state": true
-											},
-											{
-												"iv": "TargetType",
 												"state": true
 											}
 										]

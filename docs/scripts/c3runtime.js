@@ -1946,11 +1946,6 @@ self.C3_ExpressionFuncs = [
 		},
 		p => {
 			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => multiply(n0.ExpObject("move_speed"), n1.ExpObject("shoot_move_speed_mult"));
-		},
-		p => {
-			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("move_speed");
 		},
 		p => {
@@ -2034,6 +2029,7 @@ self.C3_ExpressionFuncs = [
 		() => 8,
 		() => "shoot",
 		() => "MechTypesLogic",
+		() => "used",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("bullet_count");
@@ -2178,7 +2174,16 @@ self.C3_ExpressionFuncs = [
 		() => "healer",
 		p => {
 			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("escape_area_size");
+		},
+		p => {
+			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("mech_max_health");
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => multiply(n0.ExpObject("move_speed"), n1.ExpObject("shoot_move_speed_mult"));
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -2241,6 +2246,11 @@ self.C3_ExpressionFuncs = [
 			return () => ("Added stat " + v0.GetValue());
 		},
 		() => "MechMovement",
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => ((n0.ExpInstVar_Family()) === (n1.ExpObject()) ? 1 : 0);
+		},
 		() => "default",
 		p => {
 			const n0 = p._GetNode(0);
@@ -2398,6 +2408,26 @@ self.C3_ExpressionFuncs = [
 		() => 20,
 		() => "walk_back",
 		() => "walk_front",
+		() => "sprint_cooldown",
+		() => 0.3,
+		() => "sprint",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0("sprint_cooldown");
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			const n2 = p._GetNode(2);
+			return () => C3.lerp(multiply(f0("move_speed"), 4), f1("move_speed"), n2.ExpBehavior("sprint"));
+		},
+		() => -1,
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const v1 = p._GetNode(1).GetVar();
+			const n2 = p._GetNode(2);
+			return () => f0((30 * v1.GetValue()), 0, n2.ExpBehavior("sprint"));
+		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => (f0() + 0.5);
@@ -2771,7 +2801,6 @@ self.C3_ExpressionFuncs = [
 			const n4 = p._GetNode(4);
 			return () => ((f0(0, "MechUpgrades", f1(), f2()) - n3.ExpObject()) / (n4.ExpObject() / 2));
 		},
-		() => "BetterOutline",
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -2800,6 +2829,7 @@ self.C3_ExpressionFuncs = [
 			const n3 = p._GetNode(3);
 			return () => C3.lerp(n0.ExpObject(), (n1.ExpObject() - (n2.ExpInstVar() * 20)), (4 * n3.ExpObject()));
 		},
+		() => "BetterOutline",
 		() => 2000,
 		() => "MechUpgrades",
 		p => {
@@ -2843,6 +2873,11 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
 			return () => ((n0.ExpInstVar_Family() / 2) / n1.ExpObject());
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const n1 = p._GetNode(1);
+			return () => f0(n1.ExpInstVar_Family());
 		},
 		() => "on_repair",
 		p => {
@@ -2984,12 +3019,8 @@ self.C3_ExpressionFuncs = [
 		() => "RemoveModifier",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
-			const v1 = p._GetNode(1).GetVar();
-			return () => ((v0.GetValue() + ":") + (v1.GetValue()).toString());
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => and("applied_upgrades.", v0.GetValue());
+			const n1 = p._GetNode(1);
+			return () => ((v0.GetValue() + ":") + (n1.ExpObject("applied_upgrades")).toString());
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();
@@ -3166,6 +3197,10 @@ self.C3_ExpressionFuncs = [
 			return () => ((v0.GetValue() - (n1.ExpObject() * 2)) / 10);
 		},
 		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => (f0() - 1);
+		},
+		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => (v0.GetValue() % 5);
 		},
@@ -3177,11 +3212,27 @@ self.C3_ExpressionFuncs = [
 		() => "apply_upgrade",
 		() => "close_upgrade",
 		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("applied_upgrades");
+		},
+		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
 			return () => f0(n1.ExpInstVar(), "mech_type");
 		},
 		() => "CHOOSE WHICH MECH TO UPGRADE",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => C3.clamp((v0.GetValue() + 1), 0, 2);
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => C3.clamp((v0.GetValue() - 1), 0, 2);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0((-0.5), 0.5);
+		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const f1 = p._GetNode(1).GetBoundMethod();
@@ -3271,13 +3322,11 @@ self.C3_ExpressionFuncs = [
 			const v1 = p._GetNode(1).GetVar();
 			return () => f0(v1.GetValue(), 1, ":");
 		},
-		() => -1,
 		() => "mech_definitions",
 		() => "upgrade_definitions",
 		() => "player_definitions",
 		() => "player_upgrade_definitions",
 		() => "PlayerDefinitionsLoaded",
-		() => 0.3,
 		() => "follow_player",
 		p => {
 			const n0 = p._GetNode(0);

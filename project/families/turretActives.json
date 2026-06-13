@@ -9,6 +9,13 @@
 			"desc": "",
 			"show": true,
 			"sid": 362140504817518
+		},
+		{
+			"name": "IsBeingUsed",
+			"type": "boolean",
+			"desc": "",
+			"show": true,
+			"sid": 219718713845896
 		}
 	],
 	"behaviorTypes": [
@@ -16,6 +23,11 @@
 			"behaviorId": "Pin",
 			"name": "Pin2",
 			"sid": 897151404093773
+		},
+		{
+			"behaviorId": "Timer",
+			"name": "Timer2",
+			"sid": 851512019491347
 		}
 	],
 	"effectTypes": [],

@@ -53,6 +53,20 @@
 			"desc": "",
 			"show": true,
 			"sid": 420440671927477
+		},
+		{
+			"name": "MaxMoveSpeed",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 274256161947575
+		},
+		{
+			"name": "BusyMoveSpeed",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 811168366831740
 		}
 	],
 	"behaviorTypes": [
