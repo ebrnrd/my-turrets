@@ -351,6 +351,108 @@
 			"eventType": "block",
 			"conditions": [
 				{
+					"id": "else",
+					"objectClass": "System",
+					"sid": 123937646964163
+				}
+			],
+			"actions": [],
+			"sid": 966715159242753,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 101483628307528,
+							"parameters": {
+								"key": 65
+							}
+						},
+						{
+							"id": "compare-axis",
+							"objectClass": "Gamepad",
+							"sid": 689402687798532,
+							"parameters": {
+								"gamepad": "0",
+								"axis": "left-analog-x-axis",
+								"comparison": 3,
+								"value": "- 20"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-mirrored",
+							"objectClass": "playerCharacter",
+							"sid": 250287954480712,
+							"parameters": {
+								"state": "mirrored"
+							}
+						},
+						{
+							"id": "set-mirrored",
+							"objectClass": "player_weapon",
+							"sid": 583107075570331,
+							"parameters": {
+								"state": "mirrored"
+							}
+						}
+					],
+					"sid": 776748816990208,
+					"isOrBlock": true
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "key-is-down",
+							"objectClass": "Keyboard",
+							"sid": 442791729069908,
+							"parameters": {
+								"key": 68
+							}
+						},
+						{
+							"id": "compare-axis",
+							"objectClass": "Gamepad",
+							"sid": 250966124214629,
+							"parameters": {
+								"gamepad": "0",
+								"axis": "left-analog-x-axis",
+								"comparison": 5,
+								"value": "20"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-mirrored",
+							"objectClass": "playerCharacter",
+							"sid": 260624342772819,
+							"parameters": {
+								"state": "not-mirrored"
+							}
+						},
+						{
+							"id": "set-mirrored",
+							"objectClass": "player_weapon",
+							"sid": 367042127052335,
+							"parameters": {
+								"state": "not-mirrored"
+							}
+						}
+					],
+					"sid": 810224052878896,
+					"isOrBlock": true
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
 					"id": "on-key-pressed",
 					"objectClass": "Keyboard",
 					"sid": 232393617432585,
@@ -789,8 +891,20 @@
 							"id": "for-each",
 							"objectClass": "System",
 							"sid": 748603789690180,
+							"disabled": true,
 							"parameters": {
 								"object": "MechBase"
+							}
+						},
+						{
+							"id": "pick-nearestfurthest",
+							"objectClass": "MechBase",
+							"sid": 560261954843035,
+							"parameters": {
+								"which": "nearest",
+								"x": "playerCharacter.X",
+								"y": "playerCharacter.Y",
+								"pick-all-tied": false
 							}
 						}
 					],
@@ -1072,7 +1186,8 @@
 						{
 							"customAction": "BeginUpgradeShopSequence",
 							"objectClass": "UpgradesManager",
-							"sid": 433283700728502
+							"sid": 433283700728502,
+							"disabled": true
 						},
 						{
 							"id": "destroy",

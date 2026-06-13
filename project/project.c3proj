@@ -462,7 +462,8 @@
 			"MechPositionSignal",
 			"FlameThrowerGadget",
 			"BulletFlame",
-			"ArrayTemp4"
+			"ArrayTemp4",
+			"MechDestroyedIcon"
 		],
 		"subfolders": [
 			{
@@ -517,6 +518,13 @@
 				],
 				"subfolders": [],
 				"name": "Player"
+			},
+			{
+				"items": [
+					"DamageableAttackersUIDs"
+				],
+				"subfolders": [],
+				"name": "Damageables"
 			}
 		]
 	},

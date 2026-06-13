@@ -1,7 +1,7 @@
 {
   "ballistic": {
     "base_stats": {
-      "mech_max_health": 40,
+      "mech_max_health": 60,
       "fire_rate": 2,
       "bullet_count": 1,
       "bullet_spread": 6,
@@ -14,7 +14,7 @@
       "bullet_knockback": 0.1,
       "move_speed": 400,
       "shoot_move_speed_mult": 0.5,
-      "starting_slots": 2,
+      "starting_slots": 0,
       "crit_chance": 0.1,
       "crit_damage_mult": 2
     },
@@ -28,7 +28,7 @@
   },
   "artillery": {
     "base_stats": {
-      "mech_max_health": 40,
+      "mech_max_health": 60,
       "fire_rate": 0.4,
       "bullet_count": 1,
       "aim_error": 30,
@@ -42,7 +42,7 @@
       "explosion_knockback": 2,
       "move_speed": 200,
       "shoot_move_speed": 200,
-      "starting_slots" : 1
+      "starting_slots" : 0
     },
     "improvable_stats" : [
     { "stat_name": "explosion_size", "op": "add", "amount": 5 },
@@ -54,7 +54,7 @@
 
   "flamethrower": {
     "base_stats": {
-      "mech_max_health": 40,
+      "mech_max_health": 60,
       "fire_rate": 20,
       "bullet_count": 1,
       "bullet_spread": 30,
@@ -67,7 +67,7 @@
       "bullet_knockback": 0.1,
       "move_speed": 200,
       "shoot_move_speed_mult": 0.5,
-      "starting_slots": 2
+      "starting_slots": 0
     },
     "improvable_stats" : [
     { "stat_name": "range", "op": "add", "amount": 5 },

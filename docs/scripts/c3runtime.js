@@ -1932,6 +1932,8 @@ self.C3_ExpressionFuncs = [
 			const v1 = p._GetNode(1).GetVar();
 			return () => (n0.ExpInstVar() + v1.GetValue());
 		},
+		() => -225138747166719,
+		() => -281492157629439,
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -2265,10 +2267,6 @@ self.C3_ExpressionFuncs = [
 			const n0 = p._GetNode(0);
 			return () => mod(n0.ExpObject("level"), 3);
 		},
-		() => "1 SLOT",
-		() => "add",
-		() => -60,
-		() => "#000000",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => (v0.GetValue() - 1);
@@ -2282,7 +2280,23 @@ self.C3_ExpressionFuncs = [
 			const v5 = p._GetNode(5).GetVar();
 			return () => (((v0.GetValue() * (v1.GetValue() * v2.GetValue())) + (v3.GetValue() * v4.GetValue())) + v5.GetValue());
 		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => and("Mech Target Exp: ", v0.GetValue());
+		},
 		() => "UpgradeOutline",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => mod(add(n0.ExpObject("level"), 1), 3);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0("#e9940c");
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0("#1a40ff");
+		},
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("type");
@@ -2316,6 +2330,7 @@ self.C3_ExpressionFuncs = [
 			const v1 = p._GetNode(1).GetVar();
 			return () => n0.ExpObject(("stats." + v1.GetValue()));
 		},
+		() => "add",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			const v1 = p._GetNode(1).GetVar();
@@ -2533,9 +2548,16 @@ self.C3_ExpressionFuncs = [
 		},
 		p => {
 			const n0 = p._GetNode(0);
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => (n0.ExpInstVar() * f1());
+		},
+		() => "mechs",
+		p => {
+			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
 			return () => (n0.ExpInstVar() * n1.ExpObject());
 		},
+		() => "closer",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
@@ -2719,14 +2741,12 @@ self.C3_ExpressionFuncs = [
 			return () => and(v0.GetValue(), "©");
 		},
 		p => {
-			const v0 = p._GetNode(0).GetVar();
-			const n1 = p._GetNode(1);
-			return () => (C3.clamp(v0.GetValue(), 0, n1.ExpInstVar_Family()) / 2);
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject()).toString();
 		},
 		p => {
-			const v0 = p._GetNode(0).GetVar();
-			const n1 = p._GetNode(1);
-			return () => (C3.clamp(v0.GetValue(), 0, n1.ExpInstVar_Family()) / 4);
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpInstVar_Family() / 2);
 		},
 		p => {
 			const n0 = p._GetNode(0);
@@ -3041,10 +3061,6 @@ self.C3_ExpressionFuncs = [
 			const v2 = p._GetNode(2).GetVar();
 			return () => f0(f1(v2.GetValue(), "mech_type"));
 		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0("#e9940c");
-		},
 		() => "new_mech",
 		() => "NEW MECH",
 		() => "ADD A NEW MECH TO YOUR SQUAD!",
@@ -3065,6 +3081,7 @@ self.C3_ExpressionFuncs = [
 			const v2 = p._GetNode(2).GetVar();
 			return () => f0(n1.ExpObject((v2.GetValue() + ".description")));
 		},
+		() => "PLAYER",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0("#00ff7b");
@@ -3118,6 +3135,15 @@ self.C3_ExpressionFuncs = [
 			const v0 = p._GetNode(0).GetVar();
 			const n1 = p._GetNode(1);
 			return () => ((v0.GetValue() - (n1.ExpObject() * 2)) / 10);
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() % 5);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => n0.ExpObject(f1());
 		},
 		() => "apply_upgrade",
 		() => "close_upgrade",

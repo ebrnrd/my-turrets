@@ -224,6 +224,8 @@
 						"move_speed": 100,
 						"MinScrapOnDeath": 1,
 						"MaxScrapOnDeath": 2,
+						"ExpOnDeath": 4,
+						"TargetType": "player",
 						"height_from_ground": 0,
 						"shadow_width": 50,
 						"Health": 100,
@@ -380,6 +382,14 @@
 											},
 											{
 												"iv": "damage_seconds",
+												"state": true
+											},
+											{
+												"iv": "ExpOnDeath",
+												"state": true
+											},
+											{
+												"iv": "TargetType",
 												"state": true
 											}
 										]
@@ -2684,6 +2694,8 @@
 						"move_speed": 160,
 						"MinScrapOnDeath": 4,
 						"MaxScrapOnDeath": 6,
+						"ExpOnDeath": 8,
+						"TargetType": "closer",
 						"height_from_ground": 0,
 						"shadow_width": 80,
 						"Health": 100,
@@ -2840,6 +2852,14 @@
 											},
 											{
 												"iv": "damage_seconds",
+												"state": true
+											},
+											{
+												"iv": "ExpOnDeath",
+												"state": true
+											},
+											{
+												"iv": "TargetType",
 												"state": true
 											}
 										]
@@ -3332,6 +3352,8 @@
 						"move_speed": 240,
 						"MinScrapOnDeath": 10,
 						"MaxScrapOnDeath": 14,
+						"ExpOnDeath": 12,
+						"TargetType": "closer",
 						"height_from_ground": 0,
 						"shadow_width": 130,
 						"Health": 100,
@@ -3488,6 +3510,14 @@
 											},
 											{
 												"iv": "damage_seconds",
+												"state": true
+											},
+											{
+												"iv": "ExpOnDeath",
+												"state": true
+											},
+											{
+												"iv": "TargetType",
 												"state": true
 											}
 										]
@@ -4046,6 +4076,8 @@
 						"move_speed": 400,
 						"MinScrapOnDeath": 5,
 						"MaxScrapOnDeath": 7,
+						"ExpOnDeath": 8,
+						"TargetType": "player",
 						"height_from_ground": 0,
 						"shadow_width": 80,
 						"Health": 100,
@@ -4202,6 +4234,14 @@
 											},
 											{
 												"iv": "damage_seconds",
+												"state": true
+											},
+											{
+												"iv": "ExpOnDeath",
+												"state": true
+											},
+											{
+												"iv": "TargetType",
 												"state": true
 											}
 										]
@@ -4730,6 +4770,8 @@
 						"move_speed": 400,
 						"MinScrapOnDeath": 40,
 						"MaxScrapOnDeath": 60,
+						"ExpOnDeath": 40,
+						"TargetType": "player",
 						"height_from_ground": 0,
 						"shadow_width": 130,
 						"Health": 100,
@@ -4886,6 +4928,14 @@
 											},
 											{
 												"iv": "damage_seconds",
+												"state": true
+											},
+											{
+												"iv": "ExpOnDeath",
+												"state": true
+											},
+											{
+												"iv": "TargetType",
 												"state": true
 											}
 										]
@@ -7311,6 +7361,16 @@
 			"sid": 975105559756680,
 			"tags": "",
 			"instanceVariables": {}
+		},
+		{
+			"type": "DamageableAttackersUIDs",
+			"properties": {},
+			"uid": 158,
+			"sid": 408595521441242,
+			"tags": "",
+			"instanceVariables": {
+				"DamageableUID": 0
+			}
 		}
 	],
 	"effectTypes": [],

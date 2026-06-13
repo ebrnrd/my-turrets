@@ -46,6 +46,13 @@
 			"desc": "",
 			"show": true,
 			"sid": 946406327972978
+		},
+		{
+			"name": "IsDestroyed",
+			"type": "boolean",
+			"desc": "",
+			"show": true,
+			"sid": 420440671927477
 		}
 	],
 	"behaviorTypes": [

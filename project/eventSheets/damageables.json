@@ -19,6 +19,28 @@
 						"instance-variable": "Health",
 						"value": "Self.MaxHealth"
 					}
+				},
+				{
+					"id": "create-object",
+					"objectClass": "System",
+					"sid": 853063582104879,
+					"parameters": {
+						"object-to-create": "DamageableAttackersUIDs",
+						"layer": "0",
+						"x": "0",
+						"y": "0",
+						"create-hierarchy": false,
+						"template-name": "\"\""
+					}
+				},
+				{
+					"id": "set-instvar-value",
+					"objectClass": "DamageableAttackersUIDs",
+					"sid": 966714463740625,
+					"parameters": {
+						"instance-variable": "DamageableUID",
+						"value": "Damageables.UID"
+					}
 				}
 			],
 			"sid": 385400224471035
@@ -83,9 +105,28 @@
 									"parameters": {
 										"unique-id": "SenderUID"
 									}
+								},
+								{
+									"id": "pick-by-evaluate",
+									"objectClass": "System",
+									"sid": 829844334456499,
+									"parameters": {
+										"object": "DamageableAttackersUIDs",
+										"expression": "DamageableAttackersUIDs.DamageableUID = Damageables.UID"
+									}
 								}
 							],
-							"actions": [],
+							"actions": [
+								{
+									"id": "add-key",
+									"objectClass": "DamageableAttackersUIDs",
+									"sid": 144323718195666,
+									"parameters": {
+										"key": "str(MechObject.UID)",
+										"value": "0"
+									}
+								}
+							],
 							"sid": 333399147168577,
 							"children": [
 								{
@@ -102,17 +143,73 @@
 											}
 										}
 									],
-									"actions": [
+									"actions": [],
+									"sid": 678780271784005,
+									"children": [
 										{
-											"customAction": "AddExperience",
-											"objectClass": "MechObject",
-											"sid": 139287838388454,
-											"parameters": [
-												"clamp(Amount, 0, Damageables.Health) / 2"
+											"eventType": "block",
+											"conditions": [
+												{
+													"id": "pick-by-unique-id",
+													"objectClass": "enemies",
+													"sid": 592419289748508,
+													"parameters": {
+														"unique-id": "Damageables.UID"
+													}
+												}
+											],
+											"actions": [
+												{
+													"customAction": "AddExperience",
+													"objectClass": "MechObject",
+													"sid": 324672701494871,
+													"parameters": [
+														"enemies.ExpOnDeath / 2"
+													]
+												}
+											],
+											"sid": 353943299312774,
+											"children": [
+												{
+													"eventType": "block",
+													"conditions": [
+														{
+															"id": "pick-all",
+															"objectClass": "System",
+															"sid": 360029256543004,
+															"parameters": {
+																"object": "MechObject"
+															}
+														},
+														{
+															"id": "for-each-key",
+															"objectClass": "DamageableAttackersUIDs",
+															"sid": 754551368256018
+														},
+														{
+															"id": "pick-by-unique-id",
+															"objectClass": "MechObject",
+															"sid": 505309316336200,
+															"parameters": {
+																"unique-id": "int(DamageableAttackersUIDs.CurrentKey)"
+															}
+														}
+													],
+													"actions": [
+														{
+															"customAction": "AddExperience",
+															"objectClass": "MechObject",
+															"sid": 122084669013570,
+															"parameters": [
+																"enemies.ExpOnDeath / 2"
+															]
+														}
+													],
+													"sid": 728302840453193
+												}
 											]
 										}
-									],
-									"sid": 678780271784005
+									]
 								},
 								{
 									"eventType": "block",
@@ -133,7 +230,8 @@
 											]
 										}
 									],
-									"sid": 689927086433132
+									"sid": 689927086433132,
+									"disabled": true
 								}
 							]
 						},
@@ -349,42 +447,57 @@
 							}
 						}
 					],
-					"actions": [],
+					"actions": [
+						{
+							"id": "set-instvar-value",
+							"objectClass": "Damageables",
+							"sid": 357244316840167,
+							"parameters": {
+								"instance-variable": "Health",
+								"value": "0"
+							}
+						}
+					],
 					"sid": 597034469165246,
 					"children": [
 						{
 							"eventType": "block",
 							"conditions": [
 								{
-									"id": "pick-by-evaluate",
-									"objectClass": "System",
-									"sid": 260063988685578,
+									"id": "pick-by-unique-id",
+									"objectClass": "MechBase",
+									"sid": 469492725121052,
 									"parameters": {
-										"object": "MechObject",
-										"expression": "MechObject.MechBaseUID = Damageables.UID"
+										"unique-id": "Damageables.UID"
 									}
 								}
 							],
 							"actions": [
 								{
-									"id": "destroy",
-									"objectClass": "MechObject",
-									"sid": 562879560068831
+									"customAction": "DeactivateMech",
+									"objectClass": "MechBase",
+									"sid": 560843215562538
 								}
 							],
 							"sid": 552269394881224
 						},
 						{
 							"eventType": "block",
-							"conditions": [],
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 118715166205632
+								}
+							],
 							"actions": [
 								{
 									"id": "destroy",
 									"objectClass": "Damageables",
-									"sid": 999562495658653
+									"sid": 239513061908399
 								}
 							],
-							"sid": 385816429087807
+							"sid": 470991903128754
 						}
 					]
 				},
@@ -438,7 +551,48 @@
 					"sid": 553788971162265
 				}
 			],
-			"sid": 476613787846298
+			"sid": 476613787846298,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-by-unique-id",
+							"objectClass": "MechBase",
+							"sid": 669526357446468,
+							"parameters": {
+								"unique-id": "Damageables.UID"
+							}
+						},
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "MechBase",
+							"sid": 720814206992514,
+							"parameters": {
+								"instance-variable": "IsDestroyed"
+							}
+						},
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "MechBase",
+							"sid": 100854279959281,
+							"parameters": {
+								"instance-variable": "Health",
+								"comparison": 0,
+								"value": "Self.MaxHealth"
+							}
+						}
+					],
+					"actions": [
+						{
+							"customAction": "ActivateMech",
+							"objectClass": "MechBase",
+							"sid": 741491377032295
+						}
+					],
+					"sid": 479829788650295
+				}
+			]
 		},
 		{
 			"aceType": "action",

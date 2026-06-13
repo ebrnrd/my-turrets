@@ -229,6 +229,194 @@
 			]
 		},
 		{
+			"aceType": "action",
+			"aceName": "DeactivateMech",
+			"objectClass": "MechBase",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "custom-ace-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-boolean-instvar",
+					"objectClass": "MechBase",
+					"sid": 234394007465746,
+					"parameters": {
+						"instance-variable": "IsDestroyed",
+						"value": "true"
+					}
+				},
+				{
+					"id": "set-default-color",
+					"objectClass": "MechBase",
+					"sid": 680076291713509,
+					"parameters": {
+						"color": "rgbEx(80, 80, 80)"
+					}
+				},
+				{
+					"id": "set-enabled",
+					"objectClass": "MechBase",
+					"sid": 944541800672882,
+					"behaviorType": "Pathfinding",
+					"parameters": {
+						"set": "disabled"
+					}
+				}
+			],
+			"sid": 435550737954533,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-children",
+							"objectClass": "MechBase",
+							"sid": 503038463856382,
+							"parameters": {
+								"child": "MechDestroyedIcon",
+								"which": "own"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-visible",
+							"objectClass": "MechDestroyedIcon",
+							"sid": 125503681044496,
+							"parameters": {
+								"visibility": "visible"
+							}
+						}
+					],
+					"sid": 239562478353454
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-children",
+							"objectClass": "MechBase",
+							"sid": 442254729284856,
+							"parameters": {
+								"child": "smoke_particle",
+								"which": "own"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-spraying",
+							"objectClass": "smoke_particle",
+							"sid": 667706424802329,
+							"parameters": {
+								"state": "spraying"
+							}
+						}
+					],
+					"sid": 180744656570815
+				}
+			]
+		},
+		{
+			"aceType": "action",
+			"aceName": "ActivateMech",
+			"objectClass": "MechBase",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "custom-ace-block",
+			"conditions": [],
+			"actions": [
+				{
+					"id": "set-boolean-instvar",
+					"objectClass": "MechBase",
+					"sid": 967069541954400,
+					"parameters": {
+						"instance-variable": "IsDestroyed",
+						"value": "false"
+					}
+				},
+				{
+					"id": "set-default-color",
+					"objectClass": "MechBase",
+					"sid": 971162775978650,
+					"parameters": {
+						"color": "rgbEx(100, 100, 100)"
+					}
+				},
+				{
+					"id": "set-enabled",
+					"objectClass": "MechBase",
+					"sid": 788956897262810,
+					"behaviorType": "Pathfinding",
+					"parameters": {
+						"set": "enabled"
+					}
+				}
+			],
+			"sid": 197689686250706,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-children",
+							"objectClass": "MechBase",
+							"sid": 582227878139263,
+							"parameters": {
+								"child": "MechDestroyedIcon",
+								"which": "own"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-visible",
+							"objectClass": "MechDestroyedIcon",
+							"sid": 381953553388331,
+							"parameters": {
+								"visibility": "invisible"
+							}
+						}
+					],
+					"sid": 884516528954486
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-children",
+							"objectClass": "MechBase",
+							"sid": 113870538253180,
+							"parameters": {
+								"child": "smoke_particle",
+								"which": "own"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-spraying",
+							"objectClass": "smoke_particle",
+							"sid": 522839130432935,
+							"parameters": {
+								"state": "not-spraying"
+							}
+						}
+					],
+					"sid": 990384669712715
+				}
+			]
+		},
+		{
 			"eventType": "block",
 			"conditions": [
 				{
@@ -1638,6 +1826,15 @@
 							}
 						},
 						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "MechBase",
+							"sid": 233420507158519,
+							"parameters": {
+								"instance-variable": "IsDestroyed"
+							},
+							"isInverted": true
+						},
+						{
 							"id": "pick-by-evaluate",
 							"objectClass": "System",
 							"sid": 413154154009695,
@@ -1875,6 +2072,15 @@
 								"object": "MechBase",
 								"expression": "FlameThrowerGadget.turretBaseUID = MechBase.UID"
 							}
+						},
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "MechBase",
+							"sid": 868707399098748,
+							"parameters": {
+								"instance-variable": "IsDestroyed"
+							},
+							"isInverted": true
 						},
 						{
 							"id": "pick-by-evaluate",
@@ -2181,6 +2387,24 @@
 							"parameters": {
 								"tag": "\"shoot\""
 							}
+						},
+						{
+							"id": "pick-by-evaluate",
+							"objectClass": "System",
+							"sid": 887727768113109,
+							"parameters": {
+								"object": "MechBase",
+								"expression": "ArtilleryGadget.turretBaseUID = MechBase.UID"
+							}
+						},
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "MechBase",
+							"sid": 818211228900061,
+							"parameters": {
+								"instance-variable": "IsDestroyed"
+							},
+							"isInverted": true
 						},
 						{
 							"id": "pick-by-evaluate",
@@ -3817,6 +4041,15 @@
 							"eventType": "block",
 							"conditions": [
 								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "MechBase",
+									"sid": 153267742440857,
+									"parameters": {
+										"instance-variable": "IsDestroyed"
+									},
+									"isInverted": true
+								},
+								{
 									"id": "pick-children",
 									"objectClass": "MechBase",
 									"sid": 515729807596816,
@@ -4312,9 +4545,18 @@
 							],
 							"actions": [
 								{
+									"customAction": "BeginMechLevelUpSequence",
+									"objectClass": "UpgradesManager",
+									"sid": 681201588087709,
+									"parameters": [
+										"MechObject.UID"
+									]
+								},
+								{
 									"id": "add-to",
 									"objectClass": "MechObject",
 									"sid": 282186982965185,
+									"disabled": true,
 									"parameters": {
 										"path": "\"slots\"",
 										"value": "1"
@@ -4324,6 +4566,7 @@
 									"id": "push-value",
 									"objectClass": "MechObject",
 									"sid": 993111570562219,
+									"disabled": true,
 									"parameters": {
 										"where": "back",
 										"path": "\"applied_upgrades\"",
@@ -4333,6 +4576,7 @@
 								{
 									"callFunction": "MechLevelUpStatTextFeedback",
 									"sid": 611333423392655,
+									"disabled": true,
 									"parameters": [
 										"MechObject.UID",
 										"\"1 SLOT\"",
@@ -4346,15 +4590,21 @@
 						},
 						{
 							"eventType": "block",
-							"conditions": [],
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 314030528359147
+								}
+							],
 							"actions": [
 								{
 									"customAction": "ImproveRandomImprovableStat",
 									"objectClass": "MechObject",
-									"sid": 758451314888889
+									"sid": 827820920816160
 								}
 							],
-							"sid": 103097531026485
+							"sid": 750265150520130
 						}
 					]
 				},
@@ -4393,7 +4643,7 @@
 							"eventType": "variable",
 							"name": "ExponentMult",
 							"type": "number",
-							"initialValue": "3",
+							"initialValue": "2",
 							"comment": "",
 							"isStatic": false,
 							"isConstant": false,
@@ -4403,7 +4653,7 @@
 							"eventType": "variable",
 							"name": "LinearMult",
 							"type": "number",
-							"initialValue": "16",
+							"initialValue": "40",
 							"comment": "",
 							"isStatic": false,
 							"isConstant": false,
@@ -4413,7 +4663,7 @@
 							"eventType": "variable",
 							"name": "Base",
 							"type": "number",
-							"initialValue": "10",
+							"initialValue": "20",
 							"comment": "",
 							"isStatic": false,
 							"isConstant": false,
@@ -4440,6 +4690,15 @@
 									"parameters": {
 										"variable": "ReturnValue",
 										"value": "ExponentMult * (MechLevel * MechLevel) + (LinearMult * MechLevel) + Base"
+									}
+								},
+								{
+									"id": "log",
+									"objectClass": "Browser",
+									"sid": 203837364005087,
+									"parameters": {
+										"type": "log",
+										"message": "\"Mech Target Exp: \" & ReturnValue"
 									}
 								}
 							],
@@ -4565,7 +4824,76 @@
 									}
 								}
 							],
-							"sid": 718407673535367
+							"sid": 718407673535367,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 376649613509633,
+											"parameters": {
+												"first-value": "(MechObject.Get(\"level\") + 1) % 3",
+												"comparison": 0,
+												"second-value": "0"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-effect-parameter",
+											"objectClass": "MechBase",
+											"sid": 559343333729289,
+											"parameters": {
+												"effect": "\"UpgradeOutline\"",
+												"parameter-index": "0",
+												"value": "HexColor(\"#e9940c\")"
+											}
+										},
+										{
+											"id": "set-default-color",
+											"objectClass": "MechUpgradeArrow",
+											"sid": 286502360318564,
+											"parameters": {
+												"color": "HexColor(\"#e9940c\")"
+											}
+										}
+									],
+									"sid": 678212258157297
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "else",
+											"objectClass": "System",
+											"sid": 149601667021949
+										}
+									],
+									"actions": [
+										{
+											"id": "set-effect-parameter",
+											"objectClass": "MechBase",
+											"sid": 190478152844885,
+											"parameters": {
+												"effect": "\"UpgradeOutline\"",
+												"parameter-index": "0",
+												"value": "HexColor(\"#1a40ff\")"
+											}
+										},
+										{
+											"id": "set-default-color",
+											"objectClass": "MechUpgradeArrow",
+											"sid": 232945991216105,
+											"parameters": {
+												"color": "HexColor(\"#1a40ff\")"
+											}
+										}
+									],
+									"sid": 693639782567682
+								}
+							]
 						},
 						{
 							"eventType": "block",

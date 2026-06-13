@@ -23,6 +23,48 @@
 				}
 			],
 			"sid": 199613806965169
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-key-pressed",
+					"objectClass": "Keyboard",
+					"sid": 491151760828970,
+					"parameters": {
+						"key": 90
+					}
+				}
+			],
+			"actions": [],
+			"sid": 537787735516249,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 390955269733661,
+							"parameters": {
+								"object": "MechBase"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-position",
+							"objectClass": "MechBase",
+							"sid": 438604489385497,
+							"parameters": {
+								"x": "playerCharacter.X + random(-50,50)",
+								"y": "playerCharacter.Y + random(-50,50)"
+							}
+						}
+					],
+					"sid": 770499070125114
+				}
+			]
 		}
 	],
 	"sid": 735500702739536

@@ -1112,138 +1112,223 @@
 					}
 				}
 			],
-			"actions": [
-				{
-					"id": "apply-force-towards-position",
-					"objectClass": "enemyTest",
-					"sid": 224923202965312,
-					"disabled": true,
-					"behaviorType": "Physics",
-					"parameters": {
-						"force": "Self.move_speed * dt",
-						"x": "playerCharacter.X",
-						"y": "playerCharacter.Y",
-						"image-point": "0"
-					}
-				}
-			],
+			"actions": [],
 			"sid": 310953589152886,
 			"children": [
 				{
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "pick-nearestfurthest",
-							"objectClass": "MechBase",
-							"sid": 198290158627775,
+							"id": "compare-instance-variable",
+							"objectClass": "enemyTest",
+							"sid": 316212139533468,
 							"parameters": {
-								"which": "nearest",
-								"x": "enemyTest.X",
-								"y": "enemyTest.Y",
-								"pick-all-tied": false
-							}
-						},
-						{
-							"id": "compare-two-values",
-							"objectClass": "System",
-							"sid": 741212379874798,
-							"parameters": {
-								"first-value": "distance(enemyTest.X, enemyTest.Y, MechBase.X, MechBase.Y)",
-								"comparison": 2,
-								"second-value": "distance(enemyTest.X, enemyTest.Y, playerCharacter.X, playerCharacter.Y)"
+								"instance-variable": "TargetType",
+								"comparison": 0,
+								"value": "\"player\""
 							}
 						}
 					],
 					"actions": [
 						{
-							"id": "move-to-object",
-							"objectClass": "enemyTest",
-							"sid": 337141581483506,
-							"disabled": true,
-							"behaviorType": "MoveTo",
-							"parameters": {
-								"object": "MechBase",
-								"image-point": "0",
-								"mode": "direct"
-							}
-						},
-						{
 							"id": "apply-force-towards-position",
 							"objectClass": "enemyTest",
-							"sid": 113039235274525,
-							"disabled": true,
+							"sid": 126985160265634,
 							"behaviorType": "Physics",
 							"parameters": {
-								"force": "Self.move_speed",
-								"x": "MechBase.X",
-								"y": "MechBase.Y",
-								"image-point": "0"
-							}
-						},
-						{
-							"id": "apply-force-towards-position",
-							"objectClass": "enemyTest",
-							"sid": 963373427279427,
-							"behaviorType": "Physics",
-							"parameters": {
-								"force": "Self.move_speed * Self.dt",
-								"x": "MechBase.X",
-								"y": "MechBase.Y",
+								"force": "Self.move_speed * dt",
+								"x": "playerCharacter.X",
+								"y": "playerCharacter.Y",
 								"image-point": "0"
 							}
 						}
 					],
-					"sid": 971792512197311
+					"sid": 438968772416457
 				},
 				{
 					"eventType": "block",
 					"conditions": [
 						{
-							"id": "else",
-							"objectClass": "System",
-							"sid": 307555074275243
+							"id": "compare-instance-variable",
+							"objectClass": "enemyTest",
+							"sid": 268197939024556,
+							"parameters": {
+								"instance-variable": "TargetType",
+								"comparison": 0,
+								"value": "\"mechs\""
+							}
 						}
 					],
 					"actions": [
 						{
-							"id": "move-to-object",
-							"objectClass": "enemyTest",
-							"sid": 442814893187433,
-							"disabled": true,
-							"behaviorType": "MoveTo",
-							"parameters": {
-								"object": "playerCharacter",
-								"image-point": "0",
-								"mode": "direct"
-							}
-						},
-						{
 							"id": "apply-force-towards-position",
 							"objectClass": "enemyTest",
-							"sid": 333695143775766,
-							"disabled": true,
-							"behaviorType": "Physics",
-							"parameters": {
-								"force": "Self.move_speed",
-								"x": "playerCharacter.X",
-								"y": "playerCharacter.Y",
-								"image-point": "0"
-							}
-						},
-						{
-							"id": "apply-force-towards-position",
-							"objectClass": "enemyTest",
-							"sid": 684416140035582,
+							"sid": 219799283978232,
 							"behaviorType": "Physics",
 							"parameters": {
 								"force": "Self.move_speed * Self.dt",
-								"x": "playerCharacter.X",
-								"y": "playerCharacter.Y",
+								"x": "MechBase.X",
+								"y": "MechBase.Y",
 								"image-point": "0"
 							}
 						}
 					],
-					"sid": 713371142319042
+					"sid": 927482756032013,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-nearestfurthest",
+									"objectClass": "MechBase",
+									"sid": 473476391355514,
+									"parameters": {
+										"which": "nearest",
+										"x": "enemyTest.X",
+										"y": "enemyTest.Y",
+										"pick-all-tied": false
+									}
+								}
+							],
+							"actions": [],
+							"sid": 832445427028390
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-instance-variable",
+							"objectClass": "enemyTest",
+							"sid": 708758532891495,
+							"parameters": {
+								"instance-variable": "TargetType",
+								"comparison": 0,
+								"value": "\"closer\""
+							}
+						}
+					],
+					"actions": [],
+					"sid": 469156427258401,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-nearestfurthest",
+									"objectClass": "MechBase",
+									"sid": 218037068229389,
+									"parameters": {
+										"which": "nearest",
+										"x": "enemyTest.X",
+										"y": "enemyTest.Y",
+										"pick-all-tied": false
+									}
+								},
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 782684515621350,
+									"parameters": {
+										"first-value": "distance(enemyTest.X, enemyTest.Y, MechBase.X, MechBase.Y)",
+										"comparison": 2,
+										"second-value": "distance(enemyTest.X, enemyTest.Y, playerCharacter.X, playerCharacter.Y)"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "move-to-object",
+									"objectClass": "enemyTest",
+									"sid": 599045465039893,
+									"disabled": true,
+									"behaviorType": "MoveTo",
+									"parameters": {
+										"object": "MechBase",
+										"image-point": "0",
+										"mode": "direct"
+									}
+								},
+								{
+									"id": "apply-force-towards-position",
+									"objectClass": "enemyTest",
+									"sid": 540714397402749,
+									"disabled": true,
+									"behaviorType": "Physics",
+									"parameters": {
+										"force": "Self.move_speed",
+										"x": "MechBase.X",
+										"y": "MechBase.Y",
+										"image-point": "0"
+									}
+								},
+								{
+									"id": "apply-force-towards-position",
+									"objectClass": "enemyTest",
+									"sid": 846012745284525,
+									"behaviorType": "Physics",
+									"parameters": {
+										"force": "Self.move_speed * Self.dt",
+										"x": "MechBase.X",
+										"y": "MechBase.Y",
+										"image-point": "0"
+									}
+								}
+							],
+							"sid": 959388879474031
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 273478755517681
+								}
+							],
+							"actions": [
+								{
+									"id": "move-to-object",
+									"objectClass": "enemyTest",
+									"sid": 297234244479026,
+									"disabled": true,
+									"behaviorType": "MoveTo",
+									"parameters": {
+										"object": "playerCharacter",
+										"image-point": "0",
+										"mode": "direct"
+									}
+								},
+								{
+									"id": "apply-force-towards-position",
+									"objectClass": "enemyTest",
+									"sid": 479996031376262,
+									"disabled": true,
+									"behaviorType": "Physics",
+									"parameters": {
+										"force": "Self.move_speed",
+										"x": "playerCharacter.X",
+										"y": "playerCharacter.Y",
+										"image-point": "0"
+									}
+								},
+								{
+									"id": "apply-force-towards-position",
+									"objectClass": "enemyTest",
+									"sid": 388468018106478,
+									"behaviorType": "Physics",
+									"parameters": {
+										"force": "Self.move_speed * Self.dt",
+										"x": "playerCharacter.X",
+										"y": "playerCharacter.Y",
+										"image-point": "0"
+									}
+								}
+							],
+							"sid": 777839006925235
+						}
+					]
 				},
 				{
 					"eventType": "block",

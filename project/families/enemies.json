@@ -23,6 +23,20 @@
 			"desc": "",
 			"show": true,
 			"sid": 252017550837983
+		},
+		{
+			"name": "ExpOnDeath",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 262884545697826
+		},
+		{
+			"name": "TargetType",
+			"type": "string",
+			"desc": "",
+			"show": true,
+			"sid": 289852537067411
 		}
 	],
 	"behaviorTypes": [
