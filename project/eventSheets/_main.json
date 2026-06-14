@@ -39,7 +39,7 @@
 		},
 		{
 			"eventType": "include",
-			"includeSheet": "damageables"
+			"includeSheet": "Damageables"
 		},
 		{
 			"eventType": "include",

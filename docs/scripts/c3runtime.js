@@ -1963,14 +1963,6 @@ self.C3_ExpressionFuncs = [
 			const n1 = p._GetNode(1);
 			const n2 = p._GetNode(2);
 			const n3 = p._GetNode(3);
-			return () => C3.distanceTo(n0.ExpObject(), n1.ExpObject(), n2.ExpObject(), n3.ExpObject());
-		},
-		() => 800,
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			const n2 = p._GetNode(2);
-			const n3 = p._GetNode(3);
 			return () => (C3.toDegrees(C3.angleTo(n0.ExpObject(), n1.ExpObject(), n2.ExpObject(), n3.ExpObject())) + 180);
 		},
 		p => {
@@ -2070,9 +2062,14 @@ self.C3_ExpressionFuncs = [
 		() => "Fire",
 		p => {
 			const n0 = p._GetNode(0);
+			return () => n0.ExpObject("burn_chance");
+		},
+		p => {
+			const n0 = p._GetNode(0);
 			return () => n0.ExpObject("damage_interval");
 		},
 		() => "damage",
+		() => "burn",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (1 * n0.ExpObject());
@@ -2246,6 +2243,7 @@ self.C3_ExpressionFuncs = [
 			return () => ("Added stat " + v0.GetValue());
 		},
 		() => "MechMovement",
+		() => "ResumeMovement",
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -2456,6 +2454,7 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0(2, 3);
 		},
+		() => 800,
 		() => 3,
 		() => "player_damaged",
 		p => {
@@ -2685,6 +2684,13 @@ self.C3_ExpressionFuncs = [
 		},
 		() => "closer",
 		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			const n2 = p._GetNode(2);
+			const n3 = p._GetNode(3);
+			return () => C3.distanceTo(n0.ExpObject(), n1.ExpObject(), n2.ExpObject(), n3.ExpObject());
+		},
+		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			const n1 = p._GetNode(1);
 			const n2 = p._GetNode(2);
@@ -2888,6 +2894,28 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const n0 = p._GetNode(0);
 			const v1 = p._GetNode(1).GetVar();
+			return () => n0.ExpObject((v1.GetValue() + ".is_stackable"));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			return () => n0.ExpObject((v1.GetValue() + ".base_duration"));
+		},
+		() => "RemoveStatus",
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => n0.ExpObject((n1.ExpInstVar() + ".damage_interval"));
+		},
+		() => "BurnDamage",
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => n0.ExpObject((n1.ExpInstVar() + ".base_damage"));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
 			const n2 = p._GetNode(2);
 			return () => C3.clamp((n0.ExpInstVar_Family() + v1.GetValue()), 0, n2.ExpInstVar_Family());
 		},
@@ -2912,14 +2940,9 @@ self.C3_ExpressionFuncs = [
 			return () => (n0.ExpObject() - 100);
 		},
 		() => "--- GETTING MECH STAT ---",
-		() => "------ STAT NAME IS DAMAGE -------",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpObject(("stats" + ".damage_type"));
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => ("Damage type: " + v0.GetValue());
 		},
 		() => "bullet",
 		p => {
@@ -3326,6 +3349,7 @@ self.C3_ExpressionFuncs = [
 		() => "upgrade_definitions",
 		() => "player_definitions",
 		() => "player_upgrade_definitions",
+		() => "status_definitions",
 		() => "PlayerDefinitionsLoaded",
 		() => "follow_player",
 		p => {

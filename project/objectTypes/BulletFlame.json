@@ -25,6 +25,13 @@
 			"desc": "",
 			"show": true,
 			"sid": 414102683379790
+		},
+		{
+			"name": "BurnChance",
+			"type": "number",
+			"desc": "",
+			"show": true,
+			"sid": 103429859766792
 		}
 	],
 	"behaviorTypes": [

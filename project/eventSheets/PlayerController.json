@@ -1160,6 +1160,14 @@
 										"variable": "CanShake",
 										"value": "true"
 									}
+								},
+								{
+									"customAction": "PauseMovement",
+									"objectClass": "MechBase",
+									"sid": 706795863510344,
+									"parameters": [
+										"1"
+									]
 								}
 							],
 							"sid": 423204986372608

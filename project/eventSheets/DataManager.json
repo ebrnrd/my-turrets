@@ -69,6 +69,22 @@
 							"path": "player_upgrade_definitions.json"
 						}
 					}
+				},
+				{
+					"id": "wait-for-previous-actions",
+					"objectClass": "System",
+					"sid": 541696787539541
+				},
+				{
+					"id": "request-project-file",
+					"objectClass": "AJAX",
+					"sid": 791742477933272,
+					"parameters": {
+						"tag": "\"status_definitions\"",
+						"file": {
+							"path": "status_definitions.json"
+						}
+					}
 				}
 			],
 			"sid": 465641204770641
@@ -184,6 +200,30 @@
 				}
 			],
 			"sid": 747918450310614
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-completed",
+					"objectClass": "AJAX",
+					"sid": 211652411439021,
+					"parameters": {
+						"tag": "\"status_definitions\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "parse",
+					"objectClass": "StatusDefinitions",
+					"sid": 183176838575689,
+					"parameters": {
+						"data": "AJAX.LastData"
+					}
+				}
+			],
+			"sid": 476117292398462
 		}
 	],
 	"sid": 363367969661520

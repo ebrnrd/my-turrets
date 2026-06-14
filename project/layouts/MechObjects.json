@@ -683,7 +683,8 @@
 						"OwnerUID": 0,
 						"bulletDamage": 0,
 						"BulletLifetime": 0,
-						"BulletCurrentTime": 0
+						"BulletCurrentTime": 0,
+						"BurnChance": 0
 					},
 					"behaviors": {
 						"Bullet": {
@@ -976,7 +977,8 @@
 						"state": "default",
 						"IsDestroyed": false,
 						"MaxMoveSpeed": 0,
-						"BusyMoveSpeed": 0
+						"BusyMoveSpeed": 0,
+						"IsMovementPaused": false
 					},
 					"behaviors": {
 						"Timer2": {

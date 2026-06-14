@@ -1,0 +1,8 @@
+{
+	"name": "StatusDefinitions",
+	"plugin-id": "Json",
+	"sid": 499236528540771,
+	"isGlobal": true,
+	"editorNewInstanceIsReplica": true,
+	"instanceVariables": []
+}

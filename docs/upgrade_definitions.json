@@ -147,14 +147,14 @@
 
   "active_sustain": {
     "label": "Active Sustain",
-    "description": "On Repaired, for 5 seconds:",
+    "description": "On Repaired, for 10 seconds:",
     "modifiers": [
-      { "stat": "mag_size", "op": "add", "value": 50, "on_hook": "true" },
+      { "stat": "damage", "op": "multiply", "value": 1.5, "on_hook": "true" },
       { "stat": "fire_rate", "op": "multiply", "value": 1.5, "on_hook": "true" }
     ],
     "behavior_tags": [],
     "hooks": [
-      { "tag": "on_repair", "duration": 5, "actions": ["activate_modifier:0", "activate_modifier:1"] }
+      { "tag": "on_repair", "duration": 10, "actions": ["activate_modifier:0", "activate_modifier:1"] }
     ],
     "mech_type": "ballistic"
   },
@@ -331,6 +331,17 @@
     "description": "",
     "modifiers": [
       { "stat": "mag_size", "op": "add", "value": 20 }
+    ],
+    "behavior_tags": [],
+    "hooks": [],
+    "mech_type": "flamethrower"
+  },
+
+  "ignition_core": {
+    "label": "Ignition Core",
+    "description": "",
+    "modifiers": [
+      { "stat": "burn_chance", "op": "add", "value": 0.05 }
     ],
     "behavior_tags": [],
     "hooks": [],

@@ -463,7 +463,8 @@
 			"FlameThrowerGadget",
 			"BulletFlame",
 			"ArrayTemp4",
-			"MechDestroyedIcon"
+			"MechDestroyedIcon",
+			"BurnParticles"
 		],
 		"subfolders": [
 			{
@@ -472,7 +473,8 @@
 					"UpgradeDefinitions",
 					"AJAX",
 					"PlayerDefinitions",
-					"PlayerUpgradeDefinitions"
+					"PlayerUpgradeDefinitions",
+					"StatusDefinitions"
 				],
 				"subfolders": [
 					{
@@ -522,7 +524,8 @@
 			},
 			{
 				"items": [
-					"DamageableAttackersUIDs"
+					"DamageableAttackersUIDs",
+					"DamageableStatusObject"
 				],
 				"subfolders": [],
 				"name": "Damageables"
@@ -580,7 +583,7 @@
 			"reflections",
 			"ZOrder",
 			"ui",
-			"damageables",
+			"Damageables",
 			"visual_fx",
 			"debug",
 			"UpgradesSystem",
@@ -735,6 +738,14 @@
 					"name": "player_upgrade_definitions.json",
 					"type": "application/json",
 					"sid": 937640116315080,
+					"file-info": {
+						"purpose": "none"
+					}
+				},
+				{
+					"name": "status_definitions.json",
+					"type": "application/json",
+					"sid": 532199250061411,
 					"file-info": {
 						"purpose": "none"
 					}

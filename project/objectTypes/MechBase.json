@@ -67,6 +67,13 @@
 			"desc": "",
 			"show": true,
 			"sid": 811168366831740
+		},
+		{
+			"name": "IsMovementPaused",
+			"type": "boolean",
+			"desc": "",
+			"show": true,
+			"sid": 831947411812776
 		}
 	],
 	"behaviorTypes": [

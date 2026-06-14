@@ -43,7 +43,7 @@
     "label": "Mechs Max Health",
     "description": "+ Max Health to all your Mechs",
     "modifiers": [
-      { "stat": "mech_max_health", "op": "add", "value":10 }
+      { "stat": "mech_max_health", "op": "add", "value": 10 }
     ],
     "behavior_tags": [],
     "hooks": []
@@ -68,7 +68,6 @@
     "behavior_tags": [],
     "hooks": []
   },
-
 
   "mine_trapper": {
     "label": "Mine Trapper",

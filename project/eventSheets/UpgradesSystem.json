@@ -158,32 +158,12 @@
 									}
 								},
 								{
-									"id": "log",
-									"objectClass": "Browser",
-									"sid": 604482971387647,
-									"disabled": true,
-									"parameters": {
-										"type": "log",
-										"message": "\"stat name :\" & StatName"
-									}
-								},
-								{
 									"id": "set-eventvar-value",
 									"objectClass": "System",
 									"sid": 810856916981085,
 									"parameters": {
 										"variable": "NewValue",
 										"value": "BaseValue"
-									}
-								},
-								{
-									"id": "log",
-									"objectClass": "Browser",
-									"sid": 766894522970419,
-									"disabled": true,
-									"parameters": {
-										"type": "log",
-										"message": "\"base value :\" & BaseValue"
 									}
 								}
 							],
@@ -215,30 +195,12 @@
 									],
 									"actions": [
 										{
-											"id": "log",
-											"objectClass": "Browser",
-											"sid": 205816607468423,
-											"parameters": {
-												"type": "log",
-												"message": "\"------ STAT NAME IS DAMAGE -------\""
-											}
-										},
-										{
 											"id": "set-eventvar-value",
 											"objectClass": "System",
 											"sid": 361151034374100,
 											"parameters": {
 												"variable": "DamageType",
 												"value": "MechObject.Get(\"stats\" & \".damage_type\")"
-											}
-										},
-										{
-											"id": "log",
-											"objectClass": "Browser",
-											"sid": 227170052137356,
-											"parameters": {
-												"type": "log",
-												"message": "\"Damage type: \" & DamageType"
 											}
 										}
 									],
@@ -303,6 +265,11 @@
 								{
 									"eventType": "block",
 									"conditions": [
+										{
+											"id": "else",
+											"objectClass": "System",
+											"sid": 708058738143613
+										},
 										{
 											"id": "compare-two-values",
 											"objectClass": "System",

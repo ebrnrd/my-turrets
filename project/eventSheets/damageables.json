@@ -1,5 +1,5 @@
 {
-	"name": "damageables",
+	"name": "Damageables",
 	"events": [
 		{
 			"eventType": "block",
@@ -525,6 +525,518 @@
 					"sid": 517510296757393
 				}
 			]
+		},
+		{
+			"aceType": "action",
+			"aceName": "ApplyStatus",
+			"objectClass": "Damageables",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [
+				{
+					"name": "StatusName",
+					"type": "string",
+					"initialValue": "",
+					"comment": "",
+					"sid": 278577443062521
+				}
+			],
+			"eventType": "custom-ace-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 630297016702981,
+			"children": [
+				{
+					"eventType": "variable",
+					"name": "Duration",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 894620996910095
+				},
+				{
+					"eventType": "variable",
+					"name": "IsStackable",
+					"type": "number",
+					"initialValue": "0",
+					"comment": "",
+					"isStatic": false,
+					"isConstant": false,
+					"sid": 965238960178749
+				},
+				{
+					"eventType": "block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 184764700599355,
+							"parameters": {
+								"variable": "IsStackable",
+								"value": "StatusDefinitions.Get(StatusName & \".is_stackable\")"
+							}
+						},
+						{
+							"id": "set-eventvar-value",
+							"objectClass": "System",
+							"sid": 669159561938252,
+							"parameters": {
+								"variable": "Duration",
+								"value": "StatusDefinitions.Get(StatusName & \".base_duration\")"
+							}
+						}
+					],
+					"sid": 545290561916386
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 902534702387705,
+							"parameters": {
+								"first-value": "IsStackable",
+								"comparison": 0,
+								"second-value": "0"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 268846476898061,
+					"children": [
+						{
+							"eventType": "variable",
+							"name": "HasStatusAlready",
+							"type": "boolean",
+							"initialValue": "false",
+							"comment": "",
+							"isStatic": false,
+							"isConstant": false,
+							"sid": 936483744437255
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-children",
+									"objectClass": "Damageables",
+									"sid": 547398181340659,
+									"parameters": {
+										"child": "DamageableStatusObject",
+										"which": "own"
+									}
+								},
+								{
+									"id": "compare-instance-variable",
+									"objectClass": "DamageableStatusObject",
+									"sid": 538802910858304,
+									"parameters": {
+										"instance-variable": "Status",
+										"comparison": 0,
+										"value": "StatusName"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 585207995412045,
+									"parameters": {
+										"variable": "HasStatusAlready",
+										"value": "true"
+									}
+								}
+							],
+							"sid": 338056609236231
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-boolean-eventvar",
+									"objectClass": "System",
+									"sid": 304677057887280,
+									"parameters": {
+										"variable": "HasStatusAlready"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 893147154212502,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "pick-children",
+											"objectClass": "Damageables",
+											"sid": 351193418132522,
+											"parameters": {
+												"child": "DamageableStatusObject",
+												"which": "own"
+											}
+										},
+										{
+											"id": "compare-instance-variable",
+											"objectClass": "DamageableStatusObject",
+											"sid": 555991431699235,
+											"parameters": {
+												"instance-variable": "Status",
+												"comparison": 0,
+												"value": "StatusName"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "stop-timer",
+											"objectClass": "DamageableStatusObject",
+											"sid": 430967209068216,
+											"behaviorType": "Timer",
+											"parameters": {
+												"tag": "\"RemoveStatus\""
+											}
+										},
+										{
+											"id": "start-timer",
+											"objectClass": "DamageableStatusObject",
+											"sid": 555734311061228,
+											"behaviorType": "Timer",
+											"parameters": {
+												"duration": "Duration",
+												"type": "once",
+												"tag": "\"RemoveStatus\""
+											}
+										}
+									],
+									"sid": 884458726388715
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "else",
+									"objectClass": "System",
+									"sid": 270599205749564
+								}
+							],
+							"actions": [
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 408177812982194,
+									"parameters": {
+										"object-to-create": "DamageableStatusObject",
+										"layer": "0",
+										"x": "0",
+										"y": "0",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								},
+								{
+									"id": "set-instvar-value",
+									"objectClass": "DamageableStatusObject",
+									"sid": 835278514902472,
+									"parameters": {
+										"instance-variable": "Status",
+										"value": "StatusName"
+									}
+								},
+								{
+									"id": "add-child",
+									"objectClass": "Damageables",
+									"sid": 578956446270377,
+									"parameters": {
+										"child": "DamageableStatusObject",
+										"transform-x": true,
+										"transform-y": true,
+										"transform-z-elevation": false,
+										"transform-w": false,
+										"transform-h": false,
+										"transform-a": false,
+										"transform-o": false,
+										"transform-visibility": false,
+										"destroy-with-parent": true
+									}
+								},
+								{
+									"id": "start-timer",
+									"objectClass": "DamageableStatusObject",
+									"sid": 988909205803511,
+									"behaviorType": "Timer",
+									"parameters": {
+										"duration": "Duration",
+										"type": "once",
+										"tag": "\"RemoveStatus\""
+									}
+								},
+								{
+									"customAction": "SetUpStatusBehaviour",
+									"objectClass": "DamageableStatusObject",
+									"sid": 588810206265333
+								}
+							],
+							"sid": 601579995645295
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "else",
+							"objectClass": "System",
+							"sid": 362454796397820
+						}
+					],
+					"actions": [
+						{
+							"id": "create-object",
+							"objectClass": "System",
+							"sid": 449147977772663,
+							"parameters": {
+								"object-to-create": "DamageableStatusObject",
+								"layer": "0",
+								"x": "0",
+								"y": "0",
+								"create-hierarchy": false,
+								"template-name": "\"\""
+							}
+						},
+						{
+							"id": "set-instvar-value",
+							"objectClass": "DamageableStatusObject",
+							"sid": 689004841233040,
+							"parameters": {
+								"instance-variable": "Status",
+								"value": "StatusName"
+							}
+						},
+						{
+							"id": "add-child",
+							"objectClass": "Damageables",
+							"sid": 873912478355235,
+							"parameters": {
+								"child": "DamageableStatusObject",
+								"transform-x": true,
+								"transform-y": true,
+								"transform-z-elevation": false,
+								"transform-w": false,
+								"transform-h": false,
+								"transform-a": false,
+								"transform-o": false,
+								"transform-visibility": false,
+								"destroy-with-parent": true
+							}
+						},
+						{
+							"id": "start-timer",
+							"objectClass": "DamageableStatusObject",
+							"sid": 297788278706404,
+							"behaviorType": "Timer",
+							"parameters": {
+								"duration": "Duration",
+								"type": "once",
+								"tag": "\"RemoveStatus\""
+							}
+						},
+						{
+							"customAction": "SetUpStatusBehaviour",
+							"objectClass": "DamageableStatusObject",
+							"sid": 802317150966298
+						}
+					],
+					"sid": 517021880539062
+				}
+			]
+		},
+		{
+			"aceType": "action",
+			"aceName": "SetUpStatusBehaviour",
+			"objectClass": "DamageableStatusObject",
+			"functionDescription": "",
+			"functionCategory": "",
+			"functionReturnType": "none",
+			"functionCopyPicked": false,
+			"functionIsAsync": false,
+			"functionParameters": [],
+			"eventType": "custom-ace-block",
+			"conditions": [],
+			"actions": [],
+			"sid": 110972526830293,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 467034139570027,
+							"parameters": {
+								"first-value": "DamageableStatusObject.Status",
+								"comparison": 0,
+								"second-value": "\"burn\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "start-timer",
+							"objectClass": "DamageableStatusObject",
+							"sid": 462119283456444,
+							"behaviorType": "Timer",
+							"parameters": {
+								"duration": "StatusDefinitions.Get(Self.Status & \".damage_interval\")",
+								"type": "regular",
+								"tag": "\"BurnDamage\""
+							}
+						}
+					],
+					"sid": 686888074957895,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "pick-parent",
+									"objectClass": "DamageableStatusObject",
+									"sid": 982858858143868,
+									"parameters": {
+										"parent": "Damageables",
+										"which": "own"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "create-object",
+									"objectClass": "System",
+									"sid": 195535892449285,
+									"parameters": {
+										"object-to-create": "BurnParticles",
+										"layer": "\"Fire\"",
+										"x": "Damageables.BBoxMidX",
+										"y": "Damageables.BBoxMidY",
+										"create-hierarchy": false,
+										"template-name": "\"\""
+									}
+								},
+								{
+									"id": "add-child",
+									"objectClass": "DamageableStatusObject",
+									"sid": 555906583466214,
+									"parameters": {
+										"child": "BurnParticles",
+										"transform-x": true,
+										"transform-y": true,
+										"transform-z-elevation": false,
+										"transform-w": false,
+										"transform-h": false,
+										"transform-a": false,
+										"transform-o": false,
+										"transform-visibility": false,
+										"destroy-with-parent": true
+									}
+								},
+								{
+									"id": "set-x-randomiser",
+									"objectClass": "BurnParticles",
+									"sid": 350661241113799,
+									"parameters": {
+										"x-randomiser": "Damageables.Width"
+									}
+								},
+								{
+									"id": "set-y-randomiser",
+									"objectClass": "BurnParticles",
+									"sid": 138720059392923,
+									"parameters": {
+										"y-randomiser": "Damageables.Height"
+									}
+								}
+							],
+							"sid": 180806567068301
+						}
+					]
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-timer",
+					"objectClass": "DamageableStatusObject",
+					"sid": 299875206080913,
+					"behaviorType": "Timer",
+					"parameters": {
+						"tag": "\"BurnDamage\""
+					}
+				}
+			],
+			"actions": [],
+			"sid": 231025766012700,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "pick-parent",
+							"objectClass": "DamageableStatusObject",
+							"sid": 134784406074067,
+							"parameters": {
+								"parent": "Damageables",
+								"which": "own"
+							}
+						}
+					],
+					"actions": [
+						{
+							"callFunction": "SendDamage",
+							"sid": 791658113322462,
+							"parameters": [
+								"Damageables.UID",
+								"Damageables.UID",
+								"StatusDefinitions.Get(DamageableStatusObject.Status & \".base_damage\")"
+							]
+						}
+					],
+					"sid": 124324417758394
+				}
+			]
+		},
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-timer",
+					"objectClass": "DamageableStatusObject",
+					"sid": 899112222766092,
+					"behaviorType": "Timer",
+					"parameters": {
+						"tag": "\"RemoveStatus\""
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "destroy",
+					"objectClass": "DamageableStatusObject",
+					"sid": 650307769942727
+				}
+			],
+			"sid": 788749682253575
 		},
 		{
 			"aceType": "action",

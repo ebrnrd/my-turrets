@@ -1245,11 +1245,21 @@
 							"id": "compare-two-values",
 							"objectClass": "System",
 							"sid": 640172725858223,
+							"disabled": true,
 							"parameters": {
 								"first-value": "distance(MechBase.X, MechBase.Y, playerCharacter.X, playerCharacter.Y)",
 								"comparison": 2,
 								"second-value": "800"
 							}
+						},
+						{
+							"id": "is-boolean-instance-variable-set",
+							"objectClass": "MechBase",
+							"sid": 805963490354246,
+							"parameters": {
+								"instance-variable": "IsMovementPaused"
+							},
+							"isInverted": true
 						}
 					],
 					"actions": [
@@ -2314,6 +2324,15 @@
 									}
 								},
 								{
+									"id": "set-instvar-value",
+									"objectClass": "BulletFlame",
+									"sid": 947609563381206,
+									"parameters": {
+										"instance-variable": "BurnChance",
+										"value": "MechStatsCache.Get(\"burn_chance\")"
+									}
+								},
+								{
 									"id": "start-timer",
 									"objectClass": "BulletFlame",
 									"sid": 642766275986808,
@@ -2493,7 +2512,43 @@
 							]
 						}
 					],
-					"sid": 726583514431940
+					"sid": 726583514431940,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 943360525407701,
+									"parameters": {
+										"first-value": "random(0,1)",
+										"comparison": 3,
+										"second-value": "BulletFlame.BurnChance"
+									}
+								},
+								{
+									"id": "pick-by-unique-id",
+									"objectClass": "Damageables",
+									"sid": 441857125191482,
+									"parameters": {
+										"unique-id": "enemies.UID"
+									}
+								}
+							],
+							"actions": [
+								{
+									"customAction": "ApplyStatus",
+									"objectClass": "Damageables",
+									"sid": 382957295186497,
+									"parameters": [
+										"\"burn\""
+									]
+								}
+							],
+							"sid": 535027050208545
+						}
+					]
 				},
 				{
 					"eventType": "block",
@@ -3095,7 +3150,6 @@
 					"sid": 585019388213042
 				}
 			],
-			"bookmark": true,
 			"eventType": "function-block",
 			"conditions": [],
 			"actions": [
@@ -4119,6 +4173,82 @@
 			"isActiveOnStart": true,
 			"children": [
 				{
+					"aceType": "action",
+					"aceName": "PauseMovement",
+					"objectClass": "MechBase",
+					"functionDescription": "",
+					"functionCategory": "",
+					"functionReturnType": "none",
+					"functionCopyPicked": false,
+					"functionIsAsync": false,
+					"functionParameters": [
+						{
+							"name": "PauseTime",
+							"type": "number",
+							"initialValue": "0",
+							"comment": "",
+							"sid": 300682623465330
+						}
+					],
+					"eventType": "custom-ace-block",
+					"conditions": [],
+					"actions": [
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "MechBase",
+							"sid": 586507873879166,
+							"parameters": {
+								"instance-variable": "IsMovementPaused",
+								"value": "true"
+							}
+						},
+						{
+							"id": "start-timer",
+							"objectClass": "MechBase",
+							"sid": 744436892066118,
+							"behaviorType": "Timer2",
+							"parameters": {
+								"duration": "PauseTime",
+								"type": "once",
+								"tag": "\"ResumeMovement\""
+							}
+						},
+						{
+							"id": "stop",
+							"objectClass": "MechBase",
+							"sid": 146998015387688,
+							"behaviorType": "MoveTo"
+						}
+					],
+					"sid": 814276109437748
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-timer",
+							"objectClass": "MechBase",
+							"sid": 743417808439427,
+							"behaviorType": "Timer2",
+							"parameters": {
+								"tag": "\"ResumeMovement\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-boolean-instvar",
+							"objectClass": "MechBase",
+							"sid": 794692671089945,
+							"parameters": {
+								"instance-variable": "IsMovementPaused",
+								"value": "false"
+							}
+						}
+					],
+					"sid": 359315754132419
+				},
+				{
 					"eventType": "block",
 					"conditions": [
 						{
@@ -4383,11 +4513,21 @@
 									"id": "compare-two-values",
 									"objectClass": "System",
 									"sid": 103057964821551,
+									"disabled": true,
 									"parameters": {
 										"first-value": "distance(MechBase.X, MechBase.Y, playerCharacter.X, playerCharacter.Y)",
 										"comparison": 4,
 										"second-value": "stop_move_near_player_distance"
 									}
+								},
+								{
+									"id": "is-boolean-instance-variable-set",
+									"objectClass": "MechBase",
+									"sid": 308118606944480,
+									"parameters": {
+										"instance-variable": "IsMovementPaused"
+									},
+									"isInverted": true
 								},
 								{
 									"id": "compare-instance-variable",
@@ -4990,7 +5130,7 @@
 							"eventType": "variable",
 							"name": "ExponentMult",
 							"type": "number",
-							"initialValue": "2",
+							"initialValue": "1",
 							"comment": "",
 							"isStatic": false,
 							"isConstant": false,

@@ -1,0 +1,8 @@
+{
+  "burn": {
+    "is_stackable": 0,
+    "base_duration": 3,
+    "base_damage": 0.5,
+    "damage_interval": 0.5
+  }
+}
